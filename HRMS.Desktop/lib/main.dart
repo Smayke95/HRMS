@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
+import 'screens/dashboard_screen.dart';
 import 'widgets/master_screen.dart';
 
 void main() {
@@ -15,9 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'HRMS',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        useMaterial3: true,
       ),
-      home: MasterScreen(),
+      home: MasterScreen("Početna", DashboardScreen()),
     );
   }
 }

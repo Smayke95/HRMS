@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hrms/screens/dashboard_screen.dart';
-import 'package:hrms/widgets/responsive.dart';
-
+import 'footer.dart';
+import 'header.dart';
+import 'responsive.dart';
 import 'side_menu.dart';
 
 class MasterScreen extends StatefulWidget {
-  String? title;
-  Widget? child;
+  final String title;
+  final Widget child;
 
-  MasterScreen({this.title, this.child, super.key});
+  const MasterScreen(this.title, this.child, {super.key});
 
   @override
   State<MasterScreen> createState() => _MasterScreenState();
@@ -21,43 +21,29 @@ class _MasterScreenState extends State<MasterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
           children: [
             if (Responsive.isDesktop(context))
-              Expanded(
+              const Expanded(
                 child: SideMenu(),
               ),
             Expanded(
               flex: 5,
               child: Column(
                 children: [
+                  Header(widget.title, _key),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          if (!Responsive.isDesktop(context))
-                            ElevatedButton(
-                                onPressed: () =>
-                                    _key.currentState!.openDrawer(),
-                                child: Text("Open")),
-                          Text("Pocetna"),
-                          Icon(Icons.chat_bubble),
-                          Icon(Icons.notifications),
-                          Icon(Icons.person)
-                        ],
+                    flex: 10,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: widget.child,
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 10,
-                    child: DashboardScreen(),
-                  ),
-                  Expanded(
-                    child: Text("© 2023 - HRMS"),
-                  ),
+                  const Footer(),
                 ],
               ),
             )
