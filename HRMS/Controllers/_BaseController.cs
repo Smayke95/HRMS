@@ -2,12 +2,13 @@
 using HRMS.Core.Models.Responses;
 using HRMS.Core.Models.Searches;
 using HRMS.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace HRMS.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [ExceptionFilter]
 [Route("[controller]")]

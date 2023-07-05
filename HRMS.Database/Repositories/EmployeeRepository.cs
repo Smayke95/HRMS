@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HRMS.Core.Helpers;
 using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models.Searches;
 using HRMS.Database.Models;
@@ -28,5 +29,17 @@ public class EmployeeRepository : BaseRepository<Employee, Core.Models.Employee,
             query = query.Include(x => x.Education);
 
         return query;
+    }
+
+    public async Task<Core.Models.Employee> GetByEmailAndPasswordAsync(string email, string password)
+    {
+        var employee = await Context
+            .Employees
+            .FirstOrDefaultAsync(x =>
+                x.Email == email &&
+                x.Password == EncryptionHelpers.Hash(password)
+            );
+
+        return Mapper.Map<Core.Models.Employee>(employee);
     }
 }

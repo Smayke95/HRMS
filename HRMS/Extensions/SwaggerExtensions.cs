@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace HRMS.Extensions;
@@ -18,31 +19,31 @@ public static class SwaggerExtensions
 
             options.CustomSchemaIds(type => type.ToString());
 
-            options.AddSecurityDefinition("Api-Key", new OpenApiSecurityScheme
+            options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
             {
-                Name = "Api-Key",
-                Description = "Please insert Api key.",
+                Name = JwtBearerDefaults.AuthenticationScheme,
+                Description = "Please insert JWT token.",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Api-Key"
+                Type = SecuritySchemeType.Http,
+                Scheme = JwtBearerDefaults.AuthenticationScheme
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
                 {
+                    new OpenApiSecurityScheme
                     {
-                        new OpenApiSecurityScheme
+                        Reference = new OpenApiReference
                         {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Api-Key"
-                            },
-                            Name = "Api-Key",
-                            In = ParameterLocation.Header
+                            Type = ReferenceType.SecurityScheme,
+                            Id = JwtBearerDefaults.AuthenticationScheme
                         },
-                        new string[] { }
-                    }
-                });
+                        Name = JwtBearerDefaults.AuthenticationScheme,
+                        In = ParameterLocation.Header
+                    },
+                    new string[] { }
+                }
+            });
         });
     }
 
