@@ -34,6 +34,7 @@ Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.co
 	1.) Open folder HRMS.Desktop with Visual Studio Code
 	2.) Get all packages
 	3.) Run application with F5 (Web Api must be running)
+	4.) To generate models run: flutter pub run build_runner build --delete-conflicting-outputs
 
 
 ## Testing

@@ -38,7 +38,7 @@ class _MasterScreenState extends State<MasterScreen> {
                     flex: 10,
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(20),
                         child: widget.child,
                       ),
                     ),

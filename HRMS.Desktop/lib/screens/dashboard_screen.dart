@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hrms/providers/employee_provider.dart';
 
 class DashboardScreen extends StatelessWidget {
-  DashboardScreen({super.key}){
-    var test = EmployeeProvider();
-    test.getAll();
-  }
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
