@@ -4,6 +4,7 @@ using HRMS.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230707192244_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1014,21 +1017,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4697),
+                            Date = new DateTime(2023, 7, 7, 21, 22, 43, 943, DateTimeKind.Local).AddTicks(7699),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4756),
+                            Date = new DateTime(2023, 7, 7, 21, 22, 43, 943, DateTimeKind.Local).AddTicks(7749),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4759),
+                            Date = new DateTime(2023, 7, 7, 21, 22, 43, 943, DateTimeKind.Local).AddTicks(7752),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1498,7 +1501,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(5734)
+                            Time = new DateTime(2023, 7, 7, 21, 22, 43, 943, DateTimeKind.Local).AddTicks(8568)
                         },
                         new
                         {
@@ -1506,7 +1509,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(5743)
+                            Time = new DateTime(2023, 7, 7, 21, 22, 43, 943, DateTimeKind.Local).AddTicks(8578)
                         });
                 });
 

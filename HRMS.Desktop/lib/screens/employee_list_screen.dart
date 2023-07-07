@@ -3,7 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../models/employee.dart';
 import '../models/paged_result.dart';
+import '../models/searches/employee_search.dart';
 import '../providers/employee_provider.dart';
+import '../widgets/master_screen.dart';
+import 'dashboard_screen.dart';
+import 'search.dart';
 
 class EmployeeListScreen extends StatefulWidget {
   const EmployeeListScreen({super.key});
@@ -23,34 +27,49 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
     super.initState();
 
     _employeeProvider = context.read<EmployeeProvider>();
-    _loadData();
+    _loadData(null);
   }
 
-  Future _loadData() async {
+  Future _loadData(String? name) async {
     isLoading = true;
-    _employees = await _employeeProvider.getAll();
+
+    var employeeSearch = EmployeeSearch();
+    employeeSearch.name = name;
+
+    _employees = await _employeeProvider.getAll(search: employeeSearch);
     setState(() => isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: DataTable(
-        showCheckboxColumn: false,
-        columns: [
-          _buildTableHeader("Id"),
-          _buildTableHeader("Ime"),
-          _buildTableHeader("Prezime"),
-          _buildTableHeader("Spol"),
-          _buildTableHeader("Adresa"),
-          _buildTableHeader("Grad"),
-          _buildTableHeader("Email"),
-          _buildTableHeader(""),
-        ],
-        rows: _employees.result
-            .map(
-                (e) => DataRow(onSelectChanged: (e) => {print('test')}, cells: [
+    return Column(
+      children: [
+        Search(
+          "Dodaj zaposlenika",
+          () => {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) =>
+                    const MasterScreen("Projekti", DashboardScreen())))
+          },
+          onSearch: (text) => _loadData(text),
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: DataTable(
+            showCheckboxColumn: false,
+            columns: [
+              _buildTableHeader("Id"),
+              _buildTableHeader("Ime"),
+              _buildTableHeader("Prezime"),
+              _buildTableHeader("Spol"),
+              _buildTableHeader("Adresa"),
+              _buildTableHeader("Grad"),
+              _buildTableHeader("Email"),
+              _buildTableHeader(""),
+            ],
+            rows: _employees.result
+                .map((e) =>
+                    DataRow(onSelectChanged: (e) => {print('test')}, cells: [
                       DataCell(Text(e.id.toString())),
                       DataCell(Text(e.firstName)),
                       DataCell(Text(e.lastName)),
@@ -85,8 +104,10 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                         },
                       ))
                     ]))
-            .toList(),
-      ),
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 

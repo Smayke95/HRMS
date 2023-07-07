@@ -4,22 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/paged_result.dart';
+import '../models/searches/base_search.dart';
 import '../models/user.dart';
 
-abstract class BaseProvider<T> with ChangeNotifier {
+abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   late String _baseUrl;
+  late String _endpoint;
 
   BaseProvider({String? endpoint}) {
     _baseUrl = const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "https://localhost:44378/",
+      defaultValue: "localhost:44378",
     );
 
-    _baseUrl += endpoint ?? T.toString();
+    _endpoint = endpoint ?? T.toString();
   }
 
   Future<T> get(int id) async {
-    var uri = Uri.parse('$_baseUrl/$id');
+    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
 
     var response = await http.get(uri, headers: _getHeaders());
 
@@ -31,8 +33,18 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Future<PagedResult<T>> getAll() async {
-    var uri = Uri.parse(_baseUrl);
+  Future<PagedResult<T>> getAll({TSearch? search}) async {
+    final Map<String, String> queryParameters = {};
+
+    if (search != null) {
+      search.toJson().forEach((key, value) {
+        queryParameters.addAll(<String, String>{key: value.toString()});
+      });
+
+      queryParameters.removeWhere((key, value) => value == "null");
+    }
+
+    var uri = Uri.https(_baseUrl, _endpoint, queryParameters);
 
     var response = await http.get(uri, headers: _getHeaders());
 
