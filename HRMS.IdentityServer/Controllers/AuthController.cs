@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 
@@ -27,7 +28,11 @@ public class AuthController : ControllerBase
     {
         var employee = await EmployeeRepository.GetByEmailAndPasswordAsync(email, password);
 
-        if (employee is null) return String.Empty;
+        if (employee is null)
+        {
+            Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            return String.Empty;
+        }
 
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecret")!));
 

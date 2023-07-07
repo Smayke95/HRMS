@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../models/user.dart';
 import '../screens/calendar_screen.dart';
 import '../screens/chat_screen.dart';
 import '../screens/dashboard_screen.dart';
@@ -55,9 +57,9 @@ class SideMenu extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            const Text(
-              "Anes Smajić",
-              style: TextStyle(
+            Text(
+              User.name ?? "Korisnik",
+              style: const TextStyle(
                   fontFamily: "Roboto",
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF3C4858),

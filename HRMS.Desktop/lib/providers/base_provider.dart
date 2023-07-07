@@ -1,7 +1,10 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import '../models/paged_result.dart';
+import '../models/user.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   late String _baseUrl;
@@ -53,7 +56,10 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Map<String, String> _getHeaders() => {"Content-Type": "application/json"};
+  Map<String, String> _getHeaders() => {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${User.token ?? ""}"
+      };
 
   bool _isValidResponse(http.Response response) {
     if (response.statusCode < 299) {

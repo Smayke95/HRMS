@@ -1,5 +1,5 @@
-import 'base_provider.dart';
 import '../models/employee.dart';
+import 'base_provider.dart';
 
 class EmployeeProvider extends BaseProvider<Employee> {
   @override

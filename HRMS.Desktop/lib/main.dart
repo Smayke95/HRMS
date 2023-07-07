@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'providers/auth_provider.dart';
 import 'providers/department_provider.dart';
 import 'providers/employee_provider.dart';
-import 'screens/dashboard_screen.dart';
-import 'widgets/master_screen.dart';
+import 'screens/login_screen.dart';
 
-void main() {
+void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => DepartmentProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
       ],
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MasterScreen("Početna", DashboardScreen()),
+      home: const LoginScreen(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hrms/models/employee.dart';
-import 'package:hrms/models/paged_result.dart';
-import 'package:hrms/providers/employee_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../models/employee.dart';
+import '../models/paged_result.dart';
+import '../providers/employee_provider.dart';
 
 class EmployeeListScreen extends StatefulWidget {
   const EmployeeListScreen({super.key});

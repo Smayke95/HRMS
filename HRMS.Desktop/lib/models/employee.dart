@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'city.dart';
 import 'country.dart';
 import 'education.dart';
