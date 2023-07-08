@@ -5,6 +5,7 @@ import '../models/employee.dart';
 import '../models/paged_result.dart';
 import '../models/searches/employee_search.dart';
 import '../providers/employee_provider.dart';
+import '../providers/notification_provider.dart';
 import '../widgets/master_screen.dart';
 import 'dashboard_screen.dart';
 import 'search.dart';
@@ -18,6 +19,7 @@ class EmployeeListScreen extends StatefulWidget {
 
 class _EmployeeListScreenState extends State<EmployeeListScreen> {
   late EmployeeProvider _employeeProvider;
+  late NotificationProvider _notificationProvider;
 
   bool isLoading = false;
   PagedResult<Employee> _employees = PagedResult();
@@ -27,6 +29,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
     super.initState();
 
     _employeeProvider = context.read<EmployeeProvider>();
+    _notificationProvider = context.read<NotificationProvider>();
+    _notificationProvider.listen();
     _loadData(null);
   }
 

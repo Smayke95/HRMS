@@ -38,6 +38,7 @@ dependencies:
   http: ^1.1.0
   provider: ^6.0.5
   json_annotation: ^4.8.1
+  dart_amqp: ^0.2.5
 
 dev_dependencies:
   flutter_test:

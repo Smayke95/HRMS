@@ -1,16 +1,26 @@
 ﻿using HRMS.Core.Interfaces.Repositories;
+using HRMS.Core.Interfaces.Services;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Requests;
 using HRMS.Core.Models.Searches;
 using Microsoft.AspNetCore.Mvc;
+using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.Controllers;
 
 public class DepartmentController : BaseController<Department, DepartmentSearch>
 {
-    public DepartmentController(IDepartmentRepository departmentRepository) : base(departmentRepository) { }
+    private readonly INotificationService NotificationService;
+
+    public DepartmentController(
+        IDepartmentRepository departmentRepository,
+        INotificationService notificationService
+        ) : base(departmentRepository)
+    {
+        NotificationService = notificationService;
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Insert([FromBody] DepartmentInsertRequest department)
-        => Ok(department);
+    public async Task Insert([FromBody] DepartmentInsertRequest department)
+        => NotificationService.SendNotification();
 }

@@ -1,6 +1,7 @@
 # HRMS
 <h3>Human Resource Management Software</h3>
 <i>Seminar work - Software development 2 - Faculty of Information Technologies</i> </br>
+<i>Made by: Anes Smajiæ & Irena Viliæ</i> </br>
 
 
 ## About
@@ -20,6 +21,13 @@ Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.co
 
 
 ## Development
+
+### Requirements
+	- Visual Studio 2022
+	- Visual Studio Code (with Flutter extension)
+	- MS SQL Server 2022 (Database Engine with Full-Text Extractions for Search)
+	- Flutter SDK (version 3.0.5 - 4.0.0)
+	- Docker Desktop
 
 ### Docker:
 	1.) Run docker run
@@ -42,7 +50,7 @@ Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.co
 Web Api: <a href="https://localhost:44378/">https://localhost:44378/</a> </br>
 Swagger: <a href="https://localhost:44378/swagger">https://localhost:44378/swagger</a> </br>
 Hangfire: <a href="https://localhost:44378/hangfire">https://localhost:44378/hangfire</a> </br>
-
+RabitMQ: <a href="http://localhost:15672/">http://localhost:15672/</a> </br>
 
 ## Credentials
 

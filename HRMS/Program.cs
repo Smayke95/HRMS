@@ -2,6 +2,7 @@ using HRMS.Core.Extensions;
 using HRMS.Core.Models.Configurations;
 using HRMS.Database.Extensions;
 using HRMS.Extensions;
+using HRMS.RabbitMQ.Extensions;
 using SenseOfUrgency.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddScopedRepositories();
 builder.Services.AddScopedServices();
+builder.Services.AddScopedNotificationServices();
 
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddControllers();
