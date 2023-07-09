@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "62.0.0"
+  advanced_datatable:
+    dependency: "direct main"
+    description:
+      name: advanced_datatable
+      sha256: "516d8e7b54398db798009f906d01df1f65285b762beb3631bb1d0c3de6bd6592"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   analyzer:
     dependency: transitive
     description:

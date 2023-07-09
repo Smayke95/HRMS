@@ -1,11 +1,9 @@
+import 'package:advanced_datatable/datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/employee.dart';
-import '../models/paged_result.dart';
-import '../models/searches/employee_search.dart';
+import '../data_table_sources/employee_data_table_source.dart';
 import '../providers/employee_provider.dart';
-import '../providers/notification_provider.dart';
 import '../widgets/master_screen.dart';
 import 'dashboard_screen.dart';
 import 'search.dart';
@@ -18,30 +16,14 @@ class EmployeeListScreen extends StatefulWidget {
 }
 
 class _EmployeeListScreenState extends State<EmployeeListScreen> {
-  late EmployeeProvider _employeeProvider;
-  late NotificationProvider _notificationProvider;
-
-  bool isLoading = false;
-  PagedResult<Employee> _employees = PagedResult();
+  late EmployeeDataTableSource employeeDataTableSource;
 
   @override
   void initState() {
     super.initState();
 
-    _employeeProvider = context.read<EmployeeProvider>();
-    _notificationProvider = context.read<NotificationProvider>();
-    _notificationProvider.listen();
-    _loadData(null);
-  }
-
-  Future _loadData(String? name) async {
-    isLoading = true;
-
-    var employeeSearch = EmployeeSearch();
-    employeeSearch.name = name;
-
-    _employees = await _employeeProvider.getAll(search: employeeSearch);
-    setState(() => isLoading = false);
+    var employeeProvider = context.read<EmployeeProvider>();
+    employeeDataTableSource = EmployeeDataTableSource(employeeProvider);
   }
 
   @override
@@ -55,12 +37,15 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 builder: (context) =>
                     const MasterScreen("Projekti", DashboardScreen())))
           },
-          onSearch: (text) => _loadData(text),
+          onSearch: (text) => employeeDataTableSource.filterData(text),
         ),
         SizedBox(
           width: double.infinity,
-          child: DataTable(
+          child: AdvancedPaginatedDataTable(
+            addEmptyRows: false,
             showCheckboxColumn: false,
+            source: employeeDataTableSource,
+            rowsPerPage: 7,
             columns: [
               _buildTableHeader("Id"),
               _buildTableHeader("Ime"),
@@ -69,46 +54,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
               _buildTableHeader("Adresa"),
               _buildTableHeader("Grad"),
               _buildTableHeader("Email"),
-              _buildTableHeader(""),
             ],
-            rows: _employees.result
-                .map((e) =>
-                    DataRow(onSelectChanged: (e) => {print('test')}, cells: [
-                      DataCell(Text(e.id.toString())),
-                      DataCell(Text(e.firstName)),
-                      DataCell(Text(e.lastName)),
-                      DataCell(Text(e.firstName)),
-                      DataCell(Text(e.address)),
-                      DataCell(Text(e.firstName)),
-                      DataCell(Text(e.email)),
-                      DataCell(TextButton(
-                        child: const Icon(Icons.delete),
-                        onPressed: () => {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              icon: const Icon(Icons.delete),
-                              title: const Text("Obriši zaposlenika"),
-                              content: const Text(
-                                  "Da li ste sigurni da želite obrisati zaposlenika?"),
-                              actionsPadding: const EdgeInsets.all(20),
-                              buttonPadding: const EdgeInsets.all(20),
-                              actions: [
-                                ElevatedButton(
-                                  child: const Text("NAZAD"),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                ElevatedButton(
-                                  child: const Text("OBRIŠI"),
-                                  onPressed: () => Navigator.pop(context),
-                                )
-                              ],
-                            ),
-                          )
-                        },
-                      ))
-                    ]))
-                .toList(),
           ),
         ),
       ],
