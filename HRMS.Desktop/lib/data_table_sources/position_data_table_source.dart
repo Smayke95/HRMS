@@ -23,9 +23,9 @@ class PositionDataTableSource extends AdvancedDataTableSource<Position> {
     positionSearch.includePayGrade = true;
     positionSearch.includeEducation = true;
 
-    var _positions = await _positionProvider.getAll(search: positionSearch);
+    var positions = await _positionProvider.getAll(search: positionSearch);
 
-    return RemoteDataSourceDetails(_positions.totalCount, _positions.result);
+    return RemoteDataSourceDetails(positions.totalCount, positions.result);
   }
 
   @override
@@ -34,7 +34,6 @@ class PositionDataTableSource extends AdvancedDataTableSource<Position> {
     return DataRow(
       onSelectChanged: (e) => {print('test')},
       cells: [
-        DataCell(Text(currentRowData.id.toString())),
         DataCell(Text(currentRowData.name)),
         DataCell(Text(currentRowData.department?.name ?? "")),
         DataCell(Text(currentRowData.payGrade?.name ?? "")),

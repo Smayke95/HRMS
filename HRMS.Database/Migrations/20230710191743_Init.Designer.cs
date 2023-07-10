@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230710092221_Employee_Full_Text_Search")]
-    partial class Employee_Full_Text_Search
+    [Migration("20230710191743_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -486,8 +486,9 @@ namespace HRMS.Database.Migrations
                             Address = "4. Muslimanske brigade 20",
                             BankAccount = "",
                             BirthDate = new DateTime(1995, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CitizenshipId = 1,
+                            CityId = 3,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "anes@hrms.com",
                             FirstName = "Anes",
@@ -514,8 +515,8 @@ namespace HRMS.Database.Migrations
                             Address = "Dobrinja",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "irena@hrms.com",
                             FirstName = "Irena",
@@ -539,11 +540,11 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 3,
-                            Address = "Dobrinja",
+                            Address = "Hrasnica",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "meliha.k@hrms.com",
                             FirstName = "Meliha",
@@ -567,11 +568,11 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 4,
-                            Address = "Dobrinja",
+                            Address = "Centar b.b.",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mislava.s@hrms.com",
                             FirstName = "Mislava",
@@ -595,11 +596,11 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 5,
-                            Address = "Dobrinja",
+                            Address = "Aleja lipa 6",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mileta.p@hrms.com",
                             FirstName = "Mileta",
@@ -623,15 +624,15 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 6,
-                            Address = "Dobrinja",
+                            Address = "Dr. Silvane Rizvanbegović",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "arsenije.m@hrms.com",
                             FirstName = "Arsenije",
-                            Gender = "Female",
+                            Gender = "Male",
                             Image = "/img/avatars/default.png",
                             LastName = "Murljačić",
                             MaidenName = "",
@@ -651,15 +652,15 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 7,
-                            Address = "Dobrinja",
+                            Address = "Željeznička",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "stijepo.z@hrms.com",
                             FirstName = "Stijepo",
-                            Gender = "Female",
+                            Gender = "Male",
                             Image = "/img/avatars/default.png",
                             LastName = "Željeznik",
                             MaidenName = "",
@@ -679,11 +680,11 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 8,
-                            Address = "Dobrinja",
+                            Address = "Hrasno",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ana.r@hrms.com",
                             FirstName = "Ana",
@@ -707,15 +708,15 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 9,
-                            Address = "Dobrinja",
+                            Address = "Hrasno",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "dagmar.j@hrms.com",
                             FirstName = "Dagmar",
-                            Gender = "Female",
+                            Gender = "Male",
                             Image = "/img/avatars/default.png",
                             LastName = "Jurić",
                             MaidenName = "",
@@ -735,11 +736,11 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 10,
-                            Address = "Dobrinja",
+                            Address = "Centar",
                             BankAccount = "",
                             BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            BirthPlaceId = 1,
-                            CityId = 1,
+                            BirthPlaceId = 7,
+                            CityId = 7,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ira.k@hrms.com",
                             FirstName = "Ira",
@@ -988,21 +989,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5133),
+                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8417),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5181),
+                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8471),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5184),
+                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8473),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1472,7 +1473,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5985)
+                            Time = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9274)
                         },
                         new
                         {
@@ -1480,7 +1481,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5995)
+                            Time = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9282)
                         });
                 });
 

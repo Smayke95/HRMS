@@ -46,24 +46,18 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             showCheckboxColumn: false,
             source: employeeDataTableSource,
             rowsPerPage: 7,
-            columns: [
-              _buildTableHeader("Id"),
-              _buildTableHeader("Ime"),
-              _buildTableHeader("Prezime"),
-              _buildTableHeader("Spol"),
-              _buildTableHeader("Adresa"),
-              _buildTableHeader("Grad"),
-              _buildTableHeader("Email"),
+            columns: const [
+              DataColumn(label: Text("Šifra")),
+              DataColumn(label: Text("Ime")),
+              DataColumn(label: Text("Prezime")),
+              DataColumn(label: Text("Email")),
+              DataColumn(label: Text("Spol")),
+              DataColumn(label: Text("Adresa")),
+              DataColumn(label: Text("Grad")),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  DataColumn _buildTableHeader(String text) {
-    return DataColumn(
-      label: Text(text),
     );
   }
 }

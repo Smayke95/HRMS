@@ -6,9 +6,9 @@ public class Department
 
     public string Name { get; set; } = string.Empty;
 
-    //public Department ParentDepartment { get; set; } = new();
+    public Department? ParentDepartment { get; set; }
 
     public int Level { get; set; }
 
-    public Employee Supervisor { get; set; } = new();
+    public Employee? Supervisor { get; set; }
 }

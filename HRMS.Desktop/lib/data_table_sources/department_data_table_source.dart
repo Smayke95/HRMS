@@ -19,13 +19,13 @@ class DepartmentDataTableSource extends AdvancedDataTableSource<Department> {
 
     departmentSearch.page = page + 1;
     departmentSearch.pageSize = pageRequest.pageSize;
+    departmentSearch.includeParentDepartment = true;
     departmentSearch.includeSupervisor = true;
 
-    var _departments =
+    var departments =
         await _departmentProvider.getAll(search: departmentSearch);
 
-    return RemoteDataSourceDetails(
-        _departments.totalCount, _departments.result);
+    return RemoteDataSourceDetails(departments.totalCount, departments.result);
   }
 
   @override
@@ -34,10 +34,11 @@ class DepartmentDataTableSource extends AdvancedDataTableSource<Department> {
     return DataRow(
       onSelectChanged: (e) => {print('test')},
       cells: [
-        DataCell(Text(currentRowData.id.toString())),
         DataCell(Text(currentRowData.name)),
-        DataCell(Text("")),
-        DataCell(Text("")),
+        DataCell(Text(currentRowData.level.toString())),
+        DataCell(Text(currentRowData.parentDepartment?.name ?? "")),
+        DataCell(Text(
+            "${currentRowData.supervisor?.firstName ?? ""} ${currentRowData.supervisor?.lastName ?? ""}")),
       ],
     );
   }

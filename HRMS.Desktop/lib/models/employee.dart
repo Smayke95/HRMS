@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'city.dart';
 import 'country.dart';
 import 'education.dart';
+import 'enums/gender.dart';
 
 part 'employee.g.dart';
 
@@ -13,6 +14,7 @@ class Employee {
   String lastName;
   String maidenName;
   String parentName;
+  Gender gender;
   String registrationNumber;
   String personalIdentificationNumber;
   String workerCode;
@@ -40,6 +42,7 @@ class Employee {
     this.lastName,
     this.maidenName,
     this.parentName,
+    this.gender,
     this.registrationNumber,
     this.personalIdentificationNumber,
     this.workerCode,

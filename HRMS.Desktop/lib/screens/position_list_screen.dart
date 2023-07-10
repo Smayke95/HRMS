@@ -46,23 +46,16 @@ class _PositionListScreenState extends State<PositionListScreen> {
             showCheckboxColumn: false,
             source: positionDataTableSource,
             rowsPerPage: 7,
-            columns: [
-              _buildTableHeader("Id"),
-              _buildTableHeader("Naziv"),
-              _buildTableHeader("Odjel"),
-              _buildTableHeader("Platni razred"),
-              _buildTableHeader("Potrebno obrazovanje"),
-              _buildTableHeader("Potrebno radno iskustvo"),
+            columns: const [
+              DataColumn(label: Text("Naziv")),
+              DataColumn(label: Text("Odjel")),
+              DataColumn(label: Text("Platni razred")),
+              DataColumn(label: Text("Potrebno obrazovanje")),
+              DataColumn(label: Text("Potrebno radno iskustvo")),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  DataColumn _buildTableHeader(String text) {
-    return DataColumn(
-      label: Text(text),
     );
   }
 }

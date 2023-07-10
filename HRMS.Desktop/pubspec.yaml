@@ -1,5 +1,5 @@
-name: hrms
-description: A new Flutter project.
+name: HRMS
+description: Human Resource Management Software
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -40,6 +40,7 @@ dependencies:
   json_annotation: ^4.8.1
   dart_amqp: ^0.2.5
   advanced_datatable: ^0.0.8
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

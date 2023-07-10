@@ -46,21 +46,15 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
             showCheckboxColumn: false,
             source: departmentDataTableSource,
             rowsPerPage: 7,
-            columns: [
-              _buildTableHeader("Id"),
-              _buildTableHeader("Naziv"),
-              _buildTableHeader("Test"),
-              _buildTableHeader("Test"),
+            columns: const [
+              DataColumn(label: Text("Naziv")),
+              DataColumn(label: Text("Nivo")),
+              DataColumn(label: Text("Krovni odjel")),
+              DataColumn(label: Text("Nadležna osoba")),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  DataColumn _buildTableHeader(String text) {
-    return DataColumn(
-      label: Text(text),
     );
   }
 }

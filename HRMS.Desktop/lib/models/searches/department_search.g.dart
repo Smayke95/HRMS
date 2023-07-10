@@ -11,6 +11,7 @@ DepartmentSearch _$DepartmentSearchFromJson(Map<String, dynamic> json) =>
       ..page = json['page'] as int
       ..pageSize = json['pageSize'] as int
       ..name = json['name'] as String?
+      ..includeParentDepartment = json['includeParentDepartment'] as bool
       ..includeSupervisor = json['includeSupervisor'] as bool;
 
 Map<String, dynamic> _$DepartmentSearchToJson(DepartmentSearch instance) =>
@@ -18,5 +19,6 @@ Map<String, dynamic> _$DepartmentSearchToJson(DepartmentSearch instance) =>
       'page': instance.page,
       'pageSize': instance.pageSize,
       'name': instance.name,
+      'includeParentDepartment': instance.includeParentDepartment,
       'includeSupervisor': instance.includeSupervisor,
     };

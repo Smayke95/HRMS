@@ -18,6 +18,9 @@ public class DepartmentRepository : BaseRepository<Department, Core.Models.Depar
         if (!string.IsNullOrWhiteSpace(search.Name))
             query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
 
+        if (search.IncludeParentDepartment)
+            query = query.Include(x => x.ParentDepartment);
+
         if (search.IncludeSupervisor)
             query = query.Include(x => x.Supervisor);
 

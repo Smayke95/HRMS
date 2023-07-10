@@ -21,7 +21,7 @@ EmployeePosition _$EmployeePositionFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['endDate'] as String),
       (json['salary'] as num).toDouble(),
       json['vacationDays'] as int,
-      json['employmentType'] as int,
+      $enumDecode(_$EmploymentTypeEnumMap, json['employmentType']),
       json['workingHours'] as String,
     );
 
@@ -34,6 +34,11 @@ Map<String, dynamic> _$EmployeePositionToJson(EmployeePosition instance) =>
       'endDate': instance.endDate?.toIso8601String(),
       'salary': instance.salary,
       'vacationDays': instance.vacationDays,
-      'employmentType': instance.employmentType,
+      'employmentType': _$EmploymentTypeEnumMap[instance.employmentType]!,
       'workingHours': instance.workingHours,
     };
+
+const _$EmploymentTypeEnumMap = {
+  EmploymentType.permanent: 0,
+  EmploymentType.fixed: 1,
+};

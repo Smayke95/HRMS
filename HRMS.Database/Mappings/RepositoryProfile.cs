@@ -13,7 +13,8 @@ public class RepositoryProfile : Profile
 
         CreateMap<Country, Core.Models.Country>();
 
-        CreateMap<Department, Core.Models.Department>();
+        CreateMap<Department, Core.Models.Department>()
+            .MaxDepth(2);
 
         CreateMap<Employee, Core.Models.Employee>();
 

@@ -7,6 +7,7 @@ part 'department_search.g.dart';
 @JsonSerializable()
 class DepartmentSearch extends BaseSearch {
   String? name;
+  bool includeParentDepartment = false;
   bool includeSupervisor = false;
 
   DepartmentSearch();

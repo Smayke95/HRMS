@@ -49,22 +49,16 @@ class _EmployeePositionListScreenState
             showCheckboxColumn: false,
             source: employeePositionDataTableSource,
             rowsPerPage: 7,
-            columns: [
-              _buildTableHeader("Zaposlenik"),
-              _buildTableHeader("Pozicija"),
-              _buildTableHeader("Datum početka"),
-              _buildTableHeader("Datum kraja"),
-              _buildTableHeader("Vrsta zaposlenja"),
+            columns: const [
+              DataColumn(label: Text("Zaposlenik")),
+              DataColumn(label: Text("Pozicija")),
+              DataColumn(label: Text("Datum početka")),
+              DataColumn(label: Text("Datum kraja")),
+              DataColumn(label: Text("Vrsta zaposlenja")),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  DataColumn _buildTableHeader(String text) {
-    return DataColumn(
-      label: Text(text),
     );
   }
 }

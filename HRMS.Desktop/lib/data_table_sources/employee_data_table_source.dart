@@ -2,6 +2,7 @@ import 'package:advanced_datatable/advanced_datatable_source.dart';
 import 'package:flutter/material.dart';
 
 import '../models/employee.dart';
+import '../models/enums/gender.dart';
 import '../models/searches/employee_search.dart';
 import '../providers/employee_provider.dart';
 
@@ -21,9 +22,9 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
     employeeSearch.pageSize = pageRequest.pageSize;
     employeeSearch.includeCity = true;
 
-    var _employees = await _employeeProvider.getAll(search: employeeSearch);
+    var employees = await _employeeProvider.getAll(search: employeeSearch);
 
-    return RemoteDataSourceDetails(_employees.totalCount, _employees.result);
+    return RemoteDataSourceDetails(employees.totalCount, employees.result);
   }
 
   @override
@@ -32,13 +33,14 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
     return DataRow(
       onSelectChanged: (e) => {print('test')},
       cells: [
-        DataCell(Text(currentRowData.id.toString())),
+        DataCell(Text("000${currentRowData.id}")),
         DataCell(Text(currentRowData.firstName)),
         DataCell(Text(currentRowData.lastName)),
-        DataCell(Text(currentRowData.firstName)),
+        DataCell(Text(currentRowData.email)),
+        DataCell(
+            Text(currentRowData.gender == Gender.male ? "Muško" : "Žensko")),
         DataCell(Text(currentRowData.address)),
         DataCell(Text(currentRowData.city?.name ?? "")),
-        DataCell(Text(currentRowData.email)),
       ],
     );
   }

@@ -12,6 +12,7 @@ Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
       json['lastName'] as String,
       json['maidenName'] as String,
       json['parentName'] as String,
+      $enumDecode(_$GenderEnumMap, json['gender']),
       json['registrationNumber'] as String,
       json['personalIdentificationNumber'] as String,
       json['workerCode'] as String,
@@ -48,6 +49,7 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'maidenName': instance.maidenName,
       'parentName': instance.parentName,
+      'gender': _$GenderEnumMap[instance.gender]!,
       'registrationNumber': instance.registrationNumber,
       'personalIdentificationNumber': instance.personalIdentificationNumber,
       'workerCode': instance.workerCode,
@@ -69,3 +71,8 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'note': instance.note,
       'createDate': instance.createDate.toIso8601String(),
     };
+
+const _$GenderEnumMap = {
+  Gender.male: 0,
+  Gender.female: 1,
+};
