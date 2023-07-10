@@ -15,7 +15,6 @@ public class Context : DbContext
     public DbSet<Education> Educations { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<EmployeePosition> EmployeePositions { get; set; }
-    public DbSet<EmploymentType> EmploymentTypes { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<EventType> EventTypes { get; set; }
     public DbSet<Log> Logs { get; set; }
@@ -54,8 +53,6 @@ public class Context : DbContext
         modelBuilder.Entity<Notification>().SeedData();
         modelBuilder.Entity<EventType>().SeedData();
         modelBuilder.Entity<Event>().SeedData();
-        modelBuilder.Entity<EmploymentType>().SeedData();
-        modelBuilder.Entity<EmployeePosition>().SeedData();
         modelBuilder.Entity<Project>().SeedData();
         modelBuilder.Entity<Task>().SeedData();
         modelBuilder.Entity<TaskStatus>().SeedData();

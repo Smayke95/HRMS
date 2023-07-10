@@ -1,4 +1,4 @@
-﻿using HRMS.Core.Enums.Model;
+﻿using HRMS.Core.Models.Enums;
 
 namespace HRMS.Core.Models;
 

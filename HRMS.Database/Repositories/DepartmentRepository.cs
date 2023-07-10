@@ -12,6 +12,15 @@ public class DepartmentRepository : BaseRepository<Department, Core.Models.Depar
 
     protected override IQueryable<Department> AddInclude(IQueryable<Department> query, DepartmentSearch? search = null)
     {
-        return query.Include(x => x.Supervisor);
+        if (search is null)
+            return base.AddInclude(query, search);
+
+        if (!string.IsNullOrWhiteSpace(search.Name))
+            query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
+
+        if (search.IncludeSupervisor)
+            query = query.Include(x => x.Supervisor);
+
+        return query;
     }
 }

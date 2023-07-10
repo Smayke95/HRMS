@@ -4,7 +4,6 @@ using HRMS.Core.Models;
 using HRMS.Core.Models.Requests;
 using HRMS.Core.Models.Searches;
 using Microsoft.AspNetCore.Mvc;
-using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.Controllers;
 
@@ -21,6 +20,6 @@ public class DepartmentController : BaseController<Department, DepartmentSearch>
     }
 
     [HttpPost]
-    public async Task Insert([FromBody] DepartmentInsertRequest department)
+    public void Insert([FromBody] DepartmentInsertRequest department)
         => NotificationService.SendNotification();
 }

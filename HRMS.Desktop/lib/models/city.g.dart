@@ -10,7 +10,9 @@ City _$CityFromJson(Map<String, dynamic> json) => City(
       json['id'] as int,
       json['name'] as String,
       json['zipCode'] as String,
-      Country.fromJson(json['country'] as Map<String, dynamic>),
+      json['country'] == null
+          ? null
+          : Country.fromJson(json['country'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{

@@ -18,7 +18,13 @@ public class EmployeeRepository : BaseRepository<Employee, Core.Models.Employee,
             return base.AddInclude(query, search);
 
         if (!string.IsNullOrWhiteSpace(search.Name))
-            query = query.Where(x => x.FirstName.Contains(search.Name) || x.LastName.Contains(search.Name));
+            query = query.Where(x =>
+                x.FirstName.ToLower().Contains(search.Name.ToLower()) ||
+                x.LastName.ToLower().Contains(search.Name.ToLower()) ||
+                x.RegistrationNumber.ToLower().Contains(search.Name.ToLower()) ||
+                x.WorkerCode.ToLower().Contains(search.Name.ToLower()) ||
+                x.Email.ToLower().Contains(search.Name.ToLower())
+            );
 
         if (search.IncludeCity)
             query = query.Include(x => x.City);
@@ -56,8 +62,8 @@ public class EmployeeRepository : BaseRepository<Employee, Core.Models.Employee,
 
         var employees = await Context
             .Employees
-            .Where(x => 
-                EF.Functions.Contains(x.FirstName, $"\"{search.Name}\"")
+            .Where(x =>
+                EF.Functions.Contains(x.FirstName, $"\"{search!.Name}\"")
             )
             .ToListAsync();
 

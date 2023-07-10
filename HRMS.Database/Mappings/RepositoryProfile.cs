@@ -19,9 +19,9 @@ public class RepositoryProfile : Profile
 
         CreateMap<EmployeePosition, Core.Models.EmployeePosition>();
 
-        CreateMap<EmploymentType, Core.Models.EmploymentType>();
-
         CreateMap<Education, Core.Models.Education>();
+
+        CreateMap<PayGrade, Core.Models.PayGrade>();
 
         CreateMap<Position, Core.Models.Position>();
 

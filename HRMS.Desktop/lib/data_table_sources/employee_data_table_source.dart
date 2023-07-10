@@ -2,15 +2,12 @@ import 'package:advanced_datatable/advanced_datatable_source.dart';
 import 'package:flutter/material.dart';
 
 import '../models/employee.dart';
-import '../models/paged_result.dart';
 import '../models/searches/employee_search.dart';
 import '../providers/employee_provider.dart';
 
 class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
   final EmployeeProvider _employeeProvider;
   var employeeSearch = EmployeeSearch();
-
-  PagedResult<Employee> _employees = PagedResult();
 
   EmployeeDataTableSource(this._employeeProvider);
 
@@ -22,8 +19,9 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
 
     employeeSearch.page = page + 1;
     employeeSearch.pageSize = pageRequest.pageSize;
+    employeeSearch.includeCity = true;
 
-    _employees = await _employeeProvider.getAll(search: employeeSearch);
+    var _employees = await _employeeProvider.getAll(search: employeeSearch);
 
     return RemoteDataSourceDetails(_employees.totalCount, _employees.result);
   }
@@ -39,7 +37,7 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
         DataCell(Text(currentRowData.lastName)),
         DataCell(Text(currentRowData.firstName)),
         DataCell(Text(currentRowData.address)),
-        DataCell(Text(currentRowData.firstName)),
+        DataCell(Text(currentRowData.city?.name ?? "")),
         DataCell(Text(currentRowData.email)),
       ],
     );

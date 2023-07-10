@@ -1,4 +1,4 @@
-﻿namespace HRMS.Core.Enums.Model;
+﻿namespace HRMS.Core.Models.Enums;
 
 public enum Gender
 {

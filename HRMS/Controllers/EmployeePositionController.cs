@@ -4,7 +4,7 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Controllers;
 
-public class EmployeePositionController : BaseController<EmployeePosition, BaseSearch>
+public class EmployeePositionController : BaseController<EmployeePosition, EmployeePositionSearch>
 {
     public EmployeePositionController(IEmployeePositionRepository employeePositionRepository) : base(employeePositionRepository) { }
 }

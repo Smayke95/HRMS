@@ -9,7 +9,7 @@ class City {
   int id;
   String name;
   String zipCode;
-  Country country;
+  Country? country;
 
   City(
     this.id,

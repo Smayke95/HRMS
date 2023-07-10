@@ -4,7 +4,10 @@ import '../models/user.dart';
 import '../screens/calendar_screen.dart';
 import '../screens/chat_screen.dart';
 import '../screens/dashboard_screen.dart';
+import '../screens/department_list_screen.dart';
 import '../screens/employee_list_screen.dart';
+import '../screens/employee_position_list_screen.dart';
+import '../screens/position_list_screen.dart';
 import '../screens/projects_screen.dart';
 import '../screens/settings_screen.dart';
 import 'master_screen.dart';
@@ -115,14 +118,47 @@ class SideMenu extends StatelessWidget {
                       const MasterScreen("Kalendar", CalendarScreen())));
             },
           ),
-          ListTile(
+          ExpansionTile(
             leading: const Icon(Icons.groups),
             title: const Text("Zaposlenici"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Zaposlenici", EmployeeListScreen())));
-            },
+            children: [
+              ListTile(
+                leading: const Icon(Icons.groups),
+                title: const Text("Zaposlenici"),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const MasterScreen(
+                          "Zaposlenici", EmployeeListScreen())));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.content_copy),
+                title: const Text("Zaposlenje"),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const MasterScreen(
+                          "Zaposlenje", EmployeePositionListScreen())));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.storage),
+                title: const Text("Pozicije"),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const MasterScreen(
+                          "Pozicije", PositionListScreen())));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.location_city),
+                title: const Text("Kompanija"),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const MasterScreen(
+                          "Kompanija", DepartmentListScreen())));
+                },
+              ),
+            ],
           ),
           SizedBox(height: spaceHeight),
           ListTile(

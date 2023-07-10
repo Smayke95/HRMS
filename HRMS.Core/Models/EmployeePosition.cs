@@ -1,4 +1,6 @@
-﻿namespace HRMS.Core.Models;
+﻿using HRMS.Core.Models.Enums;
+
+namespace HRMS.Core.Models;
 
 public class EmployeePosition
 {

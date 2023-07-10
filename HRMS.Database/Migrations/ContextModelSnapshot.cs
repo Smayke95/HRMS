@@ -402,8 +402,9 @@ namespace HRMS.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -487,7 +488,7 @@ namespace HRMS.Database.Migrations
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "anes@hrms.com",
                             FirstName = "Anes",
-                            Gender = 0,
+                            Gender = "Male",
                             Image = "/img/avatars/default.png",
                             LastName = "Smajić",
                             MaidenName = "",
@@ -515,7 +516,7 @@ namespace HRMS.Database.Migrations
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "irena@hrms.com",
                             FirstName = "Irena",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Vilić",
                             MaidenName = "",
@@ -541,9 +542,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "meliha.k@hrms.com",
                             FirstName = "Meliha",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Kosnica",
                             MaidenName = "",
@@ -569,9 +570,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "mislava.s@hrms.com",
                             FirstName = "Mislava",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Šepović",
                             MaidenName = "",
@@ -597,9 +598,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "mileta.p@hrms.com",
                             FirstName = "Mileta",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Puček",
                             MaidenName = "",
@@ -625,9 +626,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "arsenije.m@hrms.com",
                             FirstName = "Arsenije",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Murljačić",
                             MaidenName = "",
@@ -653,9 +654,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "stijepo.z@hrms.com",
                             FirstName = "Stijepo",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Željeznik",
                             MaidenName = "",
@@ -681,9 +682,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "ana.r@hrms.com",
                             FirstName = "Ana",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Risojević",
                             MaidenName = "",
@@ -709,9 +710,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "dagmar.j@hrms.com",
                             FirstName = "Dagmar",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Jurić",
                             MaidenName = "",
@@ -737,9 +738,9 @@ namespace HRMS.Database.Migrations
                             BirthPlaceId = 1,
                             CityId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "irena@hrms.com",
+                            Email = "ira.k@hrms.com",
                             FirstName = "Ira",
-                            Gender = 1,
+                            Gender = "Female",
                             Image = "/img/avatars/default.png",
                             LastName = "Kerežija",
                             MaidenName = "",
@@ -769,8 +770,9 @@ namespace HRMS.Database.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmploymentTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("EmploymentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("Date");
@@ -795,8 +797,6 @@ namespace HRMS.Database.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("EmploymentTypeId");
-
                     b.HasIndex("PositionId");
 
                     b.ToTable("EmployeePositions");
@@ -806,7 +806,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            EmploymentTypeId = 1,
+                            EmploymentType = "Fixed",
                             EndDate = new DateTime(2022, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PositionId = 6,
                             Salary = 0m,
@@ -818,42 +818,13 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 2,
                             EmployeeId = 2,
-                            EmploymentTypeId = 1,
+                            EmploymentType = "Fixed",
                             EndDate = new DateTime(2021, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PositionId = 5,
                             Salary = 0m,
                             StartDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             VacationDays = 30,
                             WorkingHours = "09:00-17:00"
-                        });
-                });
-
-            modelBuilder.Entity("HRMS.Database.Models.EmploymentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmploymentTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Određeno"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Neodređeno"
                         });
                 });
 
@@ -1014,21 +985,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4697),
+                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5133),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4756),
+                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5181),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(4759),
+                            Date = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5184),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1498,7 +1469,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(5734)
+                            Time = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5985)
                         },
                         new
                         {
@@ -1506,7 +1477,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 7, 21, 23, 12, 563, DateTimeKind.Local).AddTicks(5743)
+                            Time = new DateTime(2023, 7, 10, 11, 22, 21, 368, DateTimeKind.Local).AddTicks(5995)
                         });
                 });
 
@@ -1639,12 +1610,6 @@ namespace HRMS.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HRMS.Database.Models.EmploymentType", "EmploymentType")
-                        .WithMany("EmployeePositions")
-                        .HasForeignKey("EmploymentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HRMS.Database.Models.Position", "Position")
                         .WithMany("EmployeePositions")
                         .HasForeignKey("PositionId")
@@ -1652,8 +1617,6 @@ namespace HRMS.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
-
-                    b.Navigation("EmploymentType");
 
                     b.Navigation("Position");
                 });
@@ -1806,11 +1769,6 @@ namespace HRMS.Database.Migrations
                     b.Navigation("TaskComments");
 
                     b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("HRMS.Database.Models.EmploymentType", b =>
-                {
-                    b.Navigation("EmployeePositions");
                 });
 
             modelBuilder.Entity("HRMS.Database.Models.EventType", b =>

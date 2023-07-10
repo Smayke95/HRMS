@@ -1,4 +1,5 @@
 ﻿using HRMS.Database.Models;
+using HRMS.Database.Models.Enums;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HRMS.Database.Seed;
@@ -16,7 +17,7 @@ public static class EmployeePositionData
                 StartDate = new DateTime(2021, 3, 1),
                 EndDate = new DateTime(2022, 2, 28),
                 VacationDays = 30,
-                EmploymentTypeId = 1,
+                EmploymentType = EmploymentType.Fixed,
                 WorkingHours = "09:00-17:00"
             },
             new EmployeePosition
@@ -27,7 +28,7 @@ public static class EmployeePositionData
                 StartDate = new DateTime(2021, 6, 1),
                 EndDate = new DateTime(2021, 11, 30),
                 VacationDays = 30,
-                EmploymentTypeId = 1,
+                EmploymentType = EmploymentType.Fixed,
                 WorkingHours = "09:00-17:00"
             }
         );
