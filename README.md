@@ -54,3 +54,18 @@ RabitMQ: <a href="http://localhost:15672/">http://localhost:15672/</a> </br>
 
 ## Credentials
 
+
+## Code hygiene
+
+
+<h4>Visual Studio</h4>
+
+Format code: ```CTRL + K + D``` </br>
+Sort usings: ```CTRL + R + G```
+
+<h4>Visual Studio Code</h4>
+
+Format code: ```SHIFT + ALT + F``` </br>
+Sort imports: ```SHIFT + ALT + O```
+
+<i>*Use relative import paths.</i>

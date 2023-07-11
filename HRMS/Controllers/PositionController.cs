@@ -6,5 +6,5 @@ namespace HRMS.Controllers;
 
 public class PositionController : BaseController<Position, PositionSearch>
 {
-    public PositionController(IPositionRepository positioRepository) : base(positioRepository) { }
+    public PositionController(IPositionRepository positionRepository) : base(positionRepository) { }
 }
