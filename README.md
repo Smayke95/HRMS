@@ -1,7 +1,7 @@
 # HRMS
 <h3>Human Resource Management Software</h3>
 <i>Seminar work - Software development 2 - Faculty of Information Technologies</i> </br>
-<i>Made by: Anes Smajiæ & Irena Viliæ</i> </br>
+<i>Made by: Anes Smajic & Irena Vilic</i> </br>
 
 
 ## About
@@ -52,11 +52,23 @@ Swagger: <a href="https://localhost:44378/swagger">https://localhost:44378/swagg
 Hangfire: <a href="https://localhost:44378/hangfire">https://localhost:44378/hangfire</a> </br>
 RabitMQ: <a href="http://localhost:15672/">http://localhost:15672/</a> </br>
 
+
 ## Credentials
+
+#### Administrator:
+	Email: anes@hrms.com
+	Pass:  admin
+
+#### HR manager:
+	Email: irena@hrms.com
+	Pass:  admin
+
+#### Employee:
+	Email: meliha@hrms.com
+	Pass:  admin
 
 
 ## Code hygiene
-
 
 <h4>Visual Studio</h4>
 
