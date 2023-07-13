@@ -44,21 +44,35 @@ class _PositionListScreenState extends State<PositionListScreen> {
     _payGradeProvider = context.read<PayGradeProvider>();
     _educationProvider = context.read<EducationProvider>();
 
-    positionDataTableSource = PositionDataTableSource(_positionProvider);
-    _loadData();
+    positionDataTableSource =
+        PositionDataTableSource(_positionProvider, openDialog);
+
+    _loadData(null);
   }
 
-  Future _loadData() async {
+  Future _loadData(int? id) async {
     _departments = await _departmentProvider.getAll();
     _payGrades = await _payGradeProvider.getAll();
     _educations = await _educationProvider.getAll();
 
-    var position = await _positionProvider.get(2);
+    if (id != null) {
+      var position = await _positionProvider.get(id);
 
-    _formKey.currentState?.patchValue({
-      "name": position?.name ?? "",
-      "isWorkExperienceRequired": position?.isWorkExperienceRequired ?? false,
-    });
+      _formKey.currentState?.patchValue({
+        "name": position.name,
+        "departmentId": position.department?.id.toString() ?? "0",
+        "payGradeId": position.payGrade?.id.toString() ?? "0",
+        "requiredEducationId": position.requiredEducation?.id.toString() ?? "0",
+        "isWorkExperienceRequired": position.isWorkExperienceRequired,
+      });
+    }
+  }
+
+  void openDialog(int? id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => _buildDialog(context, id),
+    );
   }
 
   @override
@@ -67,12 +81,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
       children: [
         Search(
           "Dodaj poziciju",
-          () => {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => _buildDialog(context),
-            )
-          },
+          () => openDialog(null),
           onSearch: (text) => positionDataTableSource.filterData(text),
         ),
         SizedBox(
@@ -81,7 +90,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: positionDataTableSource,
-            rowsPerPage: 7,
+            rowsPerPage: 10,
             columns: const [
               DataColumn(label: Text("Naziv")),
               DataColumn(label: Text("Odjel")),
@@ -95,10 +104,12 @@ class _PositionListScreenState extends State<PositionListScreen> {
     );
   }
 
-  Widget _buildDialog(BuildContext context) {
+  Widget _buildDialog(BuildContext context, int? id) {
+    _loadData(id);
+
     return AlertDialog(
-      icon: const Icon(Icons.add),
-      title: const Text("Dodaj poziciju"),
+      icon: Icon(id == null ? Icons.add : Icons.edit),
+      title: Text(id == null ? "Dodaj poziciju" : "Uredi poziciju"),
       content: FormBuilder(
         key: _formKey,
         child: SizedBox(
@@ -112,7 +123,8 @@ class _PositionListScreenState extends State<PositionListScreen> {
                     child: FormBuilderTextField(
                       name: "name",
                       decoration: const InputDecoration(labelText: "Naziv *"),
-                      validator: FormBuilderValidators.required(),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Naziv je obavezan."),
                     ),
                   )
                 ],
@@ -123,8 +135,10 @@ class _PositionListScreenState extends State<PositionListScreen> {
                   SizedBox(
                     width: 300,
                     child: FormBuilderDropdown(
-                      name: "department",
-                      decoration: const InputDecoration(labelText: "Odjel"),
+                      name: "departmentId",
+                      decoration: const InputDecoration(labelText: "Odjel *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Odjel je obavezan."),
                       items: _departments.result
                           .map((department) => DropdownMenuItem(
                                 value: department.id.toString(),
@@ -137,9 +151,11 @@ class _PositionListScreenState extends State<PositionListScreen> {
                   SizedBox(
                     width: 300,
                     child: FormBuilderDropdown(
-                      name: "payGrade",
+                      name: "payGradeId",
                       decoration:
-                          const InputDecoration(labelText: "Platni razred"),
+                          const InputDecoration(labelText: "Platni razred *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Platni razred je obavezan."),
                       items: _payGrades.result
                           .map((payGrade) => DropdownMenuItem(
                                 value: payGrade.id.toString(),
@@ -157,9 +173,11 @@ class _PositionListScreenState extends State<PositionListScreen> {
                   SizedBox(
                     width: 300,
                     child: FormBuilderDropdown(
-                      name: "education",
+                      name: "requiredEducationId",
                       decoration: const InputDecoration(
                           labelText: "Potrebno obrazovanje"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Potrebno obrazovanje je obavezno."),
                       items: _educations.result
                           .map((education) => DropdownMenuItem(
                                 value: education.id.toString(),
@@ -174,6 +192,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
                     child: FormBuilderCheckbox(
                       name: "isWorkExperienceRequired",
                       title: const Text("Potrebno radno iskustvo"),
+                      initialValue: false,
                     ),
                   ),
                 ],
@@ -182,6 +201,60 @@ class _PositionListScreenState extends State<PositionListScreen> {
           ),
         ),
       ),
+      actionsPadding: const EdgeInsets.all(20),
+      buttonPadding: const EdgeInsets.all(20),
+      actions: [
+        if (id != null)
+          OutlinedButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(Colors.red),
+              padding: const MaterialStatePropertyAll(
+                EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+              ),
+            ),
+            child: const Text("OBRIŠI"),
+            onPressed: () async {
+              if (id != null) {
+                await _positionProvider.delete(id);
+              }
+
+              positionDataTableSource.filterData(null);
+              if (context.mounted) Navigator.pop(context);
+            },
+          ),
+        const SizedBox(width: 185),
+        OutlinedButton(
+          style: const ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+            ),
+          ),
+          child: const Text("NAZAD"),
+          onPressed: () => Navigator.pop(context),
+        ),
+        OutlinedButton(
+          style: const ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+            ),
+          ),
+          child: const Text("SPREMI"),
+          onPressed: () async {
+            var isValid = _formKey.currentState?.saveAndValidate();
+
+            if (isValid!) {
+              var request = Map.from(_formKey.currentState!.value);
+
+              id == null
+                  ? await _positionProvider.insert(request)
+                  : await _positionProvider.update(id, request);
+
+              positionDataTableSource.filterData(null);
+              if (context.mounted) Navigator.pop(context);
+            }
+          },
+        ),
+      ],
     );
   }
 }

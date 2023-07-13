@@ -68,6 +68,50 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
     }
   }
 
+  Future<T> insert(dynamic request) async {
+    var uri = Uri.https(_baseUrl, _endpoint);
+
+    var jsonRequest = jsonEncode(request);
+
+    var response =
+        await http.post(uri, headers: _getHeaders(), body: jsonRequest);
+
+    if (_isValidResponse(response)) {
+      var data = jsonDecode(response.body);
+      return fromJson(data);
+    } else {
+      throw Exception("Response is not valid");
+    }
+  }
+
+  Future<T> update(int id, dynamic request) async {
+    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
+
+    var jsonRequest = jsonEncode(request);
+
+    var response =
+        await http.put(uri, headers: _getHeaders(), body: jsonRequest);
+
+    if (_isValidResponse(response)) {
+      var data = jsonDecode(response.body);
+      return fromJson(data);
+    } else {
+      throw Exception("Response is not valid");
+    }
+  }
+
+  Future<bool> delete(int id) async {
+    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
+
+    var response = await http.delete(uri, headers: _getHeaders());
+
+    if (_isValidResponse(response)) {
+      return true;
+    } else {
+      throw Exception("Response is not valid");
+    }
+  }
+
   Map<String, String> _getHeaders() => {
         "Content-Type": "application/json",
         "Authorization": "Bearer ${User.token ?? ""}"

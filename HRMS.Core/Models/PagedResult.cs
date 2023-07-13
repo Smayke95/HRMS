@@ -1,4 +1,4 @@
-﻿namespace HRMS.Core.Models.Responses;
+﻿namespace HRMS.Core.Models;
 
 public class PagedResult<T>
 {

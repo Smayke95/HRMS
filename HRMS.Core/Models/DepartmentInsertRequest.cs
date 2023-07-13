@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HRMS.Core.Models.Requests;
+namespace HRMS.Core.Models;
 
 public class DepartmentInsertRequest
 {

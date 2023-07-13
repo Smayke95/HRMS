@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HRMS.Core.Helpers;
 using HRMS.Core.Interfaces.Repositories;
-using HRMS.Core.Models.Responses;
+using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
 using HRMS.Database.Models;
 using Microsoft.EntityFrameworkCore;

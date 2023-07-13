@@ -25,6 +25,13 @@ public class RepositoryProfile : Profile
         CreateMap<PayGrade, Core.Models.PayGrade>();
 
         CreateMap<Position, Core.Models.Position>();
+        CreateMap<Core.Models.Position, Position>()
+            .ForMember(x => x.DepartmentId, opt => opt.MapFrom(y => y.Department.Id))
+            .ForMember(x => x.Department, opt => opt.Ignore())
+            .ForMember(x => x.PayGradeId, opt => opt.MapFrom(y => y.PayGrade.Id))
+            .ForMember(x => x.PayGrade, opt => opt.Ignore())
+            .ForMember(x => x.RequiredEducationId, opt => opt.MapFrom(y => y.RequiredEducation.Id))
+            .ForMember(x => x.RequiredEducation, opt => opt.Ignore());
 
         CreateMap<Project, Core.Models.Project>();
 

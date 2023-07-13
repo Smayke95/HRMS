@@ -7,9 +7,11 @@ import '../providers/position_provider.dart';
 
 class PositionDataTableSource extends AdvancedDataTableSource<Position> {
   final PositionProvider _positionProvider;
+  final Function(int) _onSelectChanged;
+
   var positionSearch = PositionSearch();
 
-  PositionDataTableSource(this._positionProvider);
+  PositionDataTableSource(this._positionProvider, this._onSelectChanged);
 
   @override
   Future<RemoteDataSourceDetails<Position>> getNextPage(
@@ -30,16 +32,15 @@ class PositionDataTableSource extends AdvancedDataTableSource<Position> {
 
   @override
   DataRow? getRow(int index) {
-    final currentRowData = lastDetails!.rows[index];
+    final currentRow = lastDetails!.rows[index];
     return DataRow(
-      onSelectChanged: (e) => {print('test')},
+      onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text(currentRowData.name)),
-        DataCell(Text(currentRowData.department?.name ?? "")),
-        DataCell(Text(currentRowData.payGrade?.name ?? "")),
-        DataCell(
-            Text(currentRowData.requiredEducation?.qualificationOld ?? "")),
-        DataCell(Text(currentRowData.isWorkExperienceRequired ? "Da" : "Ne")),
+        DataCell(Text(currentRow.name)),
+        DataCell(Text(currentRow.department?.name ?? "")),
+        DataCell(Text(currentRow.payGrade?.name ?? "")),
+        DataCell(Text(currentRow.requiredEducation?.qualificationOld ?? "")),
+        DataCell(Text(currentRow.isWorkExperienceRequired ? "Da" : "Ne")),
       ],
     );
   }

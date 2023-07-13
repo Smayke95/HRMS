@@ -1,4 +1,4 @@
-﻿using HRMS.Core.Models.Responses;
+﻿using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
 
 namespace HRMS.Core.Interfaces.Repositories;

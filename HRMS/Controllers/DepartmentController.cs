@@ -1,7 +1,6 @@
 ﻿using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Interfaces.Services;
 using HRMS.Core.Models;
-using HRMS.Core.Models.Requests;
 using HRMS.Core.Models.Searches;
 using Microsoft.AspNetCore.Mvc;
 
