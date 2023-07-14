@@ -1,9 +1,7 @@
 ﻿namespace HRMS.Core.Models;
 
-public class Department
+public class Department : Base
 {
-    public int Id { get; set; }
-
     public string Name { get; set; } = string.Empty;
 
     public Department? ParentDepartment { get; set; }

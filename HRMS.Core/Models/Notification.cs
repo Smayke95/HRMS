@@ -1,9 +1,7 @@
 ﻿namespace HRMS.Core.Models;
 
-public class Notification
+public class Notification : Base
 {
-    public int Id { get; set; }
-
     public Employee Employee { get; set; } = new();
 
     public string Text { get; set; } = string.Empty;

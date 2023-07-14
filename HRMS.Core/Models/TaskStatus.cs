@@ -1,8 +1,6 @@
 ﻿namespace HRMS.Core.Models;
 
-public class TaskStatus
+public class TaskStatus : Base
 {
-    public int Id { get; set; }
-
     public string Name { get; set; } = string.Empty;
 }

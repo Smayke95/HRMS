@@ -17,6 +17,9 @@ public static class SwaggerExtensions
                 Description = "An API to perform operations for HRMS services.\r\n For recurring jobs open <a href=\"/hangfire\">Hangfire</a>.",
             });
 
+            var filePath = Path.Combine(AppContext.BaseDirectory, "HRMS.xml");
+            options.IncludeXmlComments(filePath);
+
             options.CustomSchemaIds(type => type.ToString());
 
             options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme

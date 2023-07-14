@@ -1,9 +1,7 @@
 ﻿namespace HRMS.Core.Models;
 
-public class Position
+public class Position : Base
 {
-    public int Id { get; set; }
-
     public string Name { get; set; } = string.Empty;
 
     public Department Department { get; set; } = new();

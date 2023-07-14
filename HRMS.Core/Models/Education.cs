@@ -1,9 +1,7 @@
 ﻿namespace HRMS.Core.Models;
 
-public class Education
+public class Education : Base
 {
-    public int Id { get; set; }
-
     public string ISCED { get; set; } = string.Empty;
 
     public int EQF { get; set; }

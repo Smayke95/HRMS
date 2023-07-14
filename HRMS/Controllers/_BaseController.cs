@@ -13,7 +13,7 @@ namespace HRMS.Controllers;
 [ExceptionFilter]
 [Route("[controller]")]
 public abstract class BaseController<T, TSearch> : ControllerBase
-    where T : class
+    where T : Base
     where TSearch : BaseSearch
 {
     private readonly IBaseRepository<T, TSearch> BaseRepository;
@@ -23,10 +23,12 @@ public abstract class BaseController<T, TSearch> : ControllerBase
         BaseRepository = baseRepository;
     }
 
+    /// <remarks>Get object by Id</remarks>
     [HttpGet("{id}")]
     public virtual async Task<T> Get(int id)
         => await BaseRepository.GetAsync(id);
 
+    /// <remarks>Get list of objects using search</remarks>
     [HttpGet]
     public virtual async Task<PagedResult<T>> GetAll([FromQuery] TSearch search)
         => await BaseRepository.GetAllAsync(search);

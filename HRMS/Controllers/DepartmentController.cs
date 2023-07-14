@@ -1,24 +1,12 @@
-﻿using HRMS.Core.Interfaces.Repositories;
-using HRMS.Core.Interfaces.Services;
+﻿using AutoMapper;
+using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
-using Microsoft.AspNetCore.Mvc;
+using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class DepartmentController : BaseController<Department, DepartmentSearch>
+public class DepartmentController : BaseCrudController<Department, DepartmentSearch, DepartmentInsert, DepartmentUpdate>
 {
-    private readonly INotificationService NotificationService;
-
-    public DepartmentController(
-        IDepartmentRepository departmentRepository,
-        INotificationService notificationService
-        ) : base(departmentRepository)
-    {
-        NotificationService = notificationService;
-    }
-
-    [HttpPost]
-    public void Insert([FromBody] DepartmentInsertRequest department)
-        => NotificationService.SendNotification();
+    public DepartmentController(IMapper mapper, IDepartmentRepository departmentRepository) : base(mapper, departmentRepository) { }
 }

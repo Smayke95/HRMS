@@ -1,8 +1,8 @@
 ﻿using HRMS.Core.Models.Enums;
 
-namespace HRMS.Core.Models;
+namespace HRMS.Models;
 
-public class Employee : Base
+public class EmployeeInsert
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -22,13 +22,13 @@ public class Employee : Base
 
     public DateTime BirthDate { get; set; }
 
-    public City BirthPlace { get; set; } = new();
+    public int? BirthPlaceId { get; set; }
 
     public string Address { get; set; } = string.Empty;
 
-    public City City { get; set; } = new();
+    public int? CityId { get; set; }
 
-    public Country Citizenship { get; set; } = new();
+    public int? CitizenshipId { get; set; }
 
     public string Image { get; set; } = string.Empty;
 
@@ -42,7 +42,7 @@ public class Employee : Base
 
     public string Profession { get; set; } = string.Empty;
 
-    public Education Education { get; set; } = new();
+    public int? EducationId { get; set; }
 
     public int PreviousLOSYears { get; set; }
 
@@ -51,6 +51,4 @@ public class Employee : Base
     public string BankAccount { get; set; } = string.Empty;
 
     public string Note { get; set; } = string.Empty;
-
-    public DateTime CreateDate { get; set; }
 }

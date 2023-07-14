@@ -1,5 +1,6 @@
 ﻿using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
+using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.Core.Interfaces.Repositories;
 

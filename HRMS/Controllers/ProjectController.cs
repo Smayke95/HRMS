@@ -1,10 +1,12 @@
-﻿using HRMS.Core.Interfaces.Repositories;
+﻿using AutoMapper;
+using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
+using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class ProjectController : BaseController<Project, BaseSearch>
+public class ProjectController : BaseCrudController<Project, BaseSearch, ProjectInsert, ProjectUpdate>
 {
-    public ProjectController(IProjectRepository projectRepository) : base(projectRepository) { }
+    public ProjectController(IMapper mapper, IProjectRepository projectRepository) : base(mapper, projectRepository) { }
 }

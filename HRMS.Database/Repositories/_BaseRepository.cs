@@ -3,6 +3,7 @@ using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
 using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.Database.Repositories;
 

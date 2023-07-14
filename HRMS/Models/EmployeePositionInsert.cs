@@ -1,12 +1,15 @@
 ﻿using HRMS.Core.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
-namespace HRMS.Core.Models;
+namespace HRMS.Models;
 
-public class EmployeePosition : Base
+public class EmployeePositionInsert
 {
-    public Employee Employee { get; set; } = new();
+    [Required]
+    public int EmployeeId { get; set; }
 
-    public Position Position { get; set; } = new();
+    [Required]
+    public int PositionId { get; set; }
 
     public DateTime StartDate { get; set; }
 

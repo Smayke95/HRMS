@@ -1,10 +1,12 @@
-﻿using HRMS.Core.Interfaces.Repositories;
+﻿using AutoMapper;
+using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
+using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class EmployeePositionController : BaseController<EmployeePosition, EmployeePositionSearch>
+public class EmployeePositionController : BaseCrudController<EmployeePosition, EmployeePositionSearch, EmployeePositionInsert, EmployeePositionUpdate>
 {
-    public EmployeePositionController(IEmployeePositionRepository employeePositionRepository) : base(employeePositionRepository) { }
+    public EmployeePositionController(IMapper mapper, IEmployeePositionRepository employeePositionRepository) : base(mapper, employeePositionRepository) { }
 }

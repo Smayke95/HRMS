@@ -2,10 +2,8 @@
 
 namespace HRMS.Core.Models;
 
-public class Log
+public class Log : Base
 {
-    public int Id { get; set; }
-
     public DateTime Date { get; set; }
 
     public LogType Type { get; set; }

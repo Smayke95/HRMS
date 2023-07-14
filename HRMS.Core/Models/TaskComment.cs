@@ -1,9 +1,7 @@
 ﻿namespace HRMS.Core.Models;
 
-public class TaskComment
+public class TaskComment : Base
 {
-    public int Id { get; set; }
-
     public string Name { get; set; } = string.Empty;
 
     public virtual Department ParentDepartment { get; set; } = new();

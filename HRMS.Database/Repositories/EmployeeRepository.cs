@@ -3,8 +3,8 @@ using HRMS.Core.Helpers;
 using HRMS.Core.Interfaces.Repositories;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
-using HRMS.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Employee = HRMS.Database.Models.Employee;
 
 namespace HRMS.Database.Repositories;
 
