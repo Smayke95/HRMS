@@ -1,3 +1,8 @@
-﻿namespace HRMS.Core.Interfaces.Services;
+﻿using HRMS.Core.Models;
 
-public interface IEmployeeService { }
+namespace HRMS.Core.Interfaces.Services;
+
+public interface IEmployeeService
+{
+    Task<Employee> InsertAsync(Employee employee);
+}

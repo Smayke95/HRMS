@@ -1,8 +1,9 @@
 ﻿using Hangfire;
 using Hangfire.SqlServer;
+using HRMS.Extensions;
 using HRMS.Filters;
 
-namespace SenseOfUrgency.Extensions;
+namespace HRMS.Extensions;
 
 public static class HangfireExtensions
 {

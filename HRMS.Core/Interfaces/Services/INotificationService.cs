@@ -1,6 +1,9 @@
-﻿namespace HRMS.Core.Interfaces.Services;
+﻿using HRMS.Core.Models;
+using Task = System.Threading.Tasks.Task;
+
+namespace HRMS.Core.Interfaces.Services;
 
 public interface INotificationService
 {
-    void SendNotification();
+    Task SendNotification(Notification notification);
 }

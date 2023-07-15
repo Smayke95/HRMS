@@ -34,6 +34,14 @@ class AuthProvider with ChangeNotifier {
     User.name = decodedToken[ClaimType.name] as String?;
     User.email = decodedToken[ClaimType.email] as String?;
     User.token = token;
+
+    var role = decodedToken[ClaimType.role];
+
+    if (role is List<dynamic>) {
+      User.roles = List<String>.from(decodedToken[ClaimType.role]);
+    } else {
+      User.roles.add(role);
+    }
   }
 
   bool _isValidResponse(http.Response response) {

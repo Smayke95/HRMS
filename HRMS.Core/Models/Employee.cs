@@ -53,4 +53,6 @@ public class Employee : Base
     public string Note { get; set; } = string.Empty;
 
     public DateTime CreateDate { get; set; }
+
+    public List<Role> Roles { get; set; } = new();
 }

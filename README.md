@@ -61,11 +61,11 @@ RabitMQ: <a href="http://localhost:15672/">http://localhost:15672/</a> </br>
 
 #### HR manager:
 	Email: irena@hrms.com
-	Pass:  admin
+	Pass:  manager
 
 #### Employee:
-	Email: meliha@hrms.com
-	Pass:  admin
+	Email: meliha.k@hrms.com
+	Pass:  employee
 
 
 ## Code hygiene

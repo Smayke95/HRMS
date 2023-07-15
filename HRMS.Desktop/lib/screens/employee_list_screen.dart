@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../data_table_sources/employee_data_table_source.dart';
 import '../providers/employee_provider.dart';
+import '../providers/notification_provider.dart';
 import '../widgets/master_screen.dart';
 import 'dashboard_screen.dart';
 import 'search.dart';
@@ -16,6 +17,8 @@ class EmployeeListScreen extends StatefulWidget {
 }
 
 class _EmployeeListScreenState extends State<EmployeeListScreen> {
+  late NotificationProvider _notificationProvider;
+  
   late EmployeeDataTableSource employeeDataTableSource;
 
   @override
@@ -24,6 +27,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
 
     var employeeProvider = context.read<EmployeeProvider>();
     employeeDataTableSource = EmployeeDataTableSource(employeeProvider);
+
+    _notificationProvider = context.read<NotificationProvider>();
   }
 
   @override
@@ -33,9 +38,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
         Search(
           "Dodaj zaposlenika",
           () => {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) =>
-                    const MasterScreen("Projekti", DashboardScreen())))
+            //_notificationProvider.listen()
           },
           onSearch: (text) => employeeDataTableSource.filterData(text),
         ),

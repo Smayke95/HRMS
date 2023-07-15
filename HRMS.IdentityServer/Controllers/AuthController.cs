@@ -45,6 +45,8 @@ public class AuthController : ControllerBase
             new Claim(ClaimTypes.Email, employee.Email)
         };
 
+        employee.Roles.ForEach(x => claims.Add(new Claim(ClaimTypes.Role, x.ToString())));
+
         var token = new JwtSecurityToken(
             issuer: null,
             audience: null,

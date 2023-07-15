@@ -1,6 +1,7 @@
 using HRMS.Core.Extensions;
 using HRMS.Database.Extensions;
 using HRMS.IdentityServer.Extensions;
+using HRMS.RabbitMQ.Extensions;
 using IdentityServer4.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddScopedRepositories();
 builder.Services.AddScopedServices();
+builder.Services.AddScopedNotificationServices();
 
 builder.Services.AddControllers();
 

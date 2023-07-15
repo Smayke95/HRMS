@@ -1,10 +1,18 @@
-﻿namespace HRMS.Core.Models;
+﻿using HRMS.Core.Models.Enums;
+using System.Text.Json;
 
-public class Notification : Base
+namespace HRMS.Core.Models;
+
+public class Notification
 {
-    public Employee Employee { get; set; } = new();
+    public NotificationType Type { get; set; } = NotificationType.Info;
+
+    public Role Group { get; set; } = Role.Admin;
 
     public string Text { get; set; } = string.Empty;
 
-    public bool IsReaded { get; set; }
+
+
+    public string ToJson()
+        => JsonSerializer.Serialize(this, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 }

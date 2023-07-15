@@ -16,9 +16,12 @@ public class RepositoryProfile : Profile
         CreateMap<Department, Core.Models.Department>()
             .MaxDepth(2);
 
-        CreateMap<Employee, Core.Models.Employee>();
+        CreateMap<Employee, Core.Models.Employee>()
+            .ForMember(x => x.Roles, opt => opt.MapFrom(y => y.Roles.Select(z => z.Role)));
 
         CreateMap<EmployeePosition, Core.Models.EmployeePosition>();
+
+        CreateMap<EmployeeRole, Core.Models.EmployeeRole>();
 
         CreateMap<Education, Core.Models.Education>();
 

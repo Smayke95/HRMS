@@ -235,6 +235,26 @@ namespace HRMS.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeRoles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeRoles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeeRoles_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
                 {
@@ -490,9 +510,9 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Date", "Message", "Type" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8417), "", "INFO" },
-                    { 2, new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8471), "", "WARNING" },
-                    { 3, new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8473), "", "ERROR" }
+                    { 1, new DateTime(2023, 7, 15, 11, 34, 53, 313, DateTimeKind.Local).AddTicks(7296), "", "INFO" },
+                    { 2, new DateTime(2023, 7, 15, 11, 34, 53, 313, DateTimeKind.Local).AddTicks(7347), "", "WARNING" },
+                    { 3, new DateTime(2023, 7, 15, 11, 34, 53, 313, DateTimeKind.Local).AddTicks(7350), "", "ERROR" }
                 });
 
             migrationBuilder.InsertData(
@@ -611,6 +631,26 @@ namespace HRMS.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "EmployeeRoles",
+                columns: new[] { "Id", "EmployeeId", "Role" },
+                values: new object[,]
+                {
+                    { 1, 1, "Admin" },
+                    { 2, 1, "Manager" },
+                    { 3, 1, "Employee" },
+                    { 4, 2, "Manager" },
+                    { 5, 2, "Employee" },
+                    { 6, 3, "Employee" },
+                    { 7, 4, "Employee" },
+                    { 8, 5, "Employee" },
+                    { 9, 6, "Employee" },
+                    { 10, 7, "Employee" },
+                    { 11, 8, "Employee" },
+                    { 12, 9, "Employee" },
+                    { 13, 10, "Employee" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Description", "EmployeeId", "EndDate", "EventTypeId", "Name", "StartDate" },
                 values: new object[,]
@@ -668,8 +708,8 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9274) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9282) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 15, 11, 34, 53, 313, DateTimeKind.Local).AddTicks(8262) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 15, 11, 34, 53, 313, DateTimeKind.Local).AddTicks(8269) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -696,6 +736,11 @@ namespace HRMS.Database.Migrations
                 name: "IX_EmployeePositions_PositionId",
                 table: "EmployeePositions",
                 column: "PositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeRoles_EmployeeId",
+                table: "EmployeeRoles",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_BirthPlaceId",
@@ -788,6 +833,9 @@ namespace HRMS.Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "EmployeePositions");
+
+            migrationBuilder.DropTable(
+                name: "EmployeeRoles");
 
             migrationBuilder.DropTable(
                 name: "Events");

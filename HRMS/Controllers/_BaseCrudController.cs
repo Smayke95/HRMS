@@ -26,16 +26,16 @@ public abstract class BaseCrudController<T, TSearch, TInsert, TUpdate> : BaseCon
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]
-    public async Task<T> Insert([FromBody] TInsert insert)
+    public virtual async Task<T> Insert([FromBody] TInsert insert)
          => await BaseRepository.InsertAsync(Mapper.Map<T>(insert));
 
     /// <remarks>Update object by Id</remarks>
     [HttpPut("{id}")]
-    public async Task<T> Update(int id, [FromBody] TUpdate update)
+    public virtual async Task<T> Update(int id, [FromBody] TUpdate update)
         => await BaseRepository.UpdateAsync(Mapper.Map<T>(update, opt => opt.AfterMap((src, dest) => dest.Id = id)));
 
     /// <remarks>Delete object by Id</remarks>
     [HttpDelete("{id}")]
-    public async Task<bool> Delete(int id)
+    public virtual async Task<bool> Delete(int id)
         => await BaseRepository.DeleteAsync(id);
 }

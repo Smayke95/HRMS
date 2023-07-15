@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230710191743_Init")]
-    partial class Init
+    [Migration("20230715093512_Employee_Full_Text_Search")]
+    partial class Employee_Full_Text_Search
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -832,6 +832,108 @@ namespace HRMS.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HRMS.Database.Models.EmployeeRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EmployeeId = 1,
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EmployeeId = 1,
+                            Role = "Manager"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EmployeeId = 1,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EmployeeId = 2,
+                            Role = "Manager"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EmployeeId = 2,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EmployeeId = 3,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EmployeeId = 4,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EmployeeId = 5,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EmployeeId = 6,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EmployeeId = 7,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EmployeeId = 8,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EmployeeId = 9,
+                            Role = "Employee"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            EmployeeId = 10,
+                            Role = "Employee"
+                        });
+                });
+
             modelBuilder.Entity("HRMS.Database.Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -989,21 +1091,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8417),
+                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5116),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8471),
+                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5168),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(8473),
+                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5171),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1473,7 +1575,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9274)
+                            Time = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(6089)
                         },
                         new
                         {
@@ -1481,7 +1583,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 10, 21, 17, 42, 841, DateTimeKind.Local).AddTicks(9282)
+                            Time = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(6097)
                         });
                 });
 
@@ -1623,6 +1725,17 @@ namespace HRMS.Database.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Position");
+                });
+
+            modelBuilder.Entity("HRMS.Database.Models.EmployeeRole", b =>
+                {
+                    b.HasOne("HRMS.Database.Models.Employee", "Employee")
+                        .WithMany("Roles")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HRMS.Database.Models.Event", b =>
@@ -1769,6 +1882,8 @@ namespace HRMS.Database.Migrations
                     b.Navigation("Events");
 
                     b.Navigation("Notifications");
+
+                    b.Navigation("Roles");
 
                     b.Navigation("TaskComments");
 

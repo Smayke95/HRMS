@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj" />
     <ProjectReference Include="..\HRMS.Database\HRMS.Database.csproj" />
+    <ProjectReference Include="..\HRMS.RabbitMQ\HRMS.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

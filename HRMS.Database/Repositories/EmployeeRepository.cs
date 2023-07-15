@@ -42,6 +42,7 @@ public class EmployeeRepository : BaseRepository<Employee, Core.Models.Employee,
     {
         var employee = await Context
             .Employees
+            .Include(x => x.Roles)
             .FirstOrDefaultAsync(x =>
                 x.Email == email &&
                 x.Password == EncryptionHelpers.Hash(password)

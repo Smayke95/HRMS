@@ -3,7 +3,6 @@ using HRMS.Core.Models.Configurations;
 using HRMS.Database.Extensions;
 using HRMS.Extensions;
 using HRMS.RabbitMQ.Extensions;
-using SenseOfUrgency.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
