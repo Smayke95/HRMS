@@ -21,34 +21,34 @@ class SideMenu extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            buildHeader(context),
+            _buildHeader(context),
             const Divider(
               color: Colors.black,
               indent: 10,
               endIndent: 10,
               thickness: 0.1,
             ),
-            buildUser(context),
+            _buildUser(context),
             const Divider(
               color: Colors.black,
               indent: 10,
               endIndent: 10,
               thickness: 0.1,
             ),
-            buildItems(context)
+            _buildItems(context)
           ],
         ),
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(top: 15, bottom: 10),
         child: Image.asset("assets/images/logo.png", width: 180));
   }
 
-  Widget buildUser(BuildContext context) {
+  Widget _buildUser(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
@@ -72,7 +72,7 @@ class SideMenu extends StatelessWidget {
         ));
   }
 
-  Widget buildItems(BuildContext context) {
+  Widget _buildItems(BuildContext context) {
     double spaceHeight = MediaQuery.of(context).size.height > 545
         ? MediaQuery.of(context).size.height - 545
         : 0;
@@ -82,96 +82,96 @@ class SideMenu extends StatelessWidget {
       child: Wrap(
         runSpacing: 16,
         children: [
-          ListTile(
-            leading: const Icon(Icons.dashboard),
-            title: const Text("Početna"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Početna", DashboardScreen())));
-            },
+          _buildListTile(
+            context,
+            "Početna",
+            Icons.dashboard,
+            const DashboardScreen(),
+            true,
           ),
-          ListTile(
-            leading: const Icon(Icons.content_paste),
-            title: const Text("Zadaci"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Projekti", ProjectsScreen())));
-            },
+          _buildListTile(
+            context,
+            "Zadaci",
+            Icons.content_paste,
+            const ProjectsScreen(),
+            false,
           ),
-          ListTile(
-            leading: const Icon(Icons.chat),
-            title: const Text("Razgovor"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Razgovor", ChatScreen())));
-            },
+          _buildListTile(
+            context,
+            "Razgovor",
+            Icons.chat,
+            const ChatScreen(),
+            true,
           ),
-          ListTile(
-            leading: const Icon(Icons.date_range),
-            title: const Text("Kalendar"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Kalendar", CalendarScreen())));
-            },
+          _buildListTile(
+            context,
+            "Kalendar",
+            Icons.date_range,
+            const CalendarScreen(),
+            false,
           ),
           ExpansionTile(
             leading: const Icon(Icons.groups),
             title: const Text("Zaposlenici"),
             children: [
-              ListTile(
-                leading: const Icon(Icons.groups),
-                title: const Text("Zaposlenici"),
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MasterScreen(
-                          "Zaposlenici", EmployeeListScreen())));
-                },
+              _buildListTile(
+                context,
+                "Zaposlenici",
+                Icons.groups,
+                const EmployeeListScreen(),
+                true,
               ),
-              ListTile(
-                leading: const Icon(Icons.content_copy),
-                title: const Text("Zaposlenje"),
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MasterScreen(
-                          "Zaposlenje", EmployeePositionListScreen())));
-                },
+              _buildListTile(
+                context,
+                "Zaposlenje",
+                Icons.content_copy,
+                const EmployeePositionListScreen(),
+                true,
               ),
-              ListTile(
-                leading: const Icon(Icons.storage),
-                title: const Text("Pozicije"),
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MasterScreen(
-                          "Pozicije", PositionListScreen())));
-                },
+              _buildListTile(
+                context,
+                "Pozicije",
+                Icons.storage,
+                const PositionListScreen(),
+                true,
               ),
-              ListTile(
-                leading: const Icon(Icons.location_city),
-                title: const Text("Kompanija"),
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const MasterScreen(
-                          "Kompanija", DepartmentListScreen())));
-                },
+              _buildListTile(
+                context,
+                "Kompanija",
+                Icons.location_city,
+                const DepartmentListScreen(),
+                true,
               ),
             ],
           ),
           SizedBox(height: spaceHeight),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text("Postavke"),
-            onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) =>
-                      const MasterScreen("Postavke", SettingsScreen())));
-            },
-          )
+          _buildListTile(
+            context,
+            "Postavke",
+            Icons.settings,
+            const SettingsScreen(),
+            true,
+          ),
         ],
       ),
+    );
+  }
+
+  ListTile _buildListTile(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Widget screen,
+    bool enabled,
+  ) {
+    return ListTile(
+      enabled: enabled,
+      leading: Icon(icon),
+      title: Text(title),
+      onTap: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MasterScreen(title, screen)));
+      },
     );
   }
 }

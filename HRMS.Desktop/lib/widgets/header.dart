@@ -25,10 +25,10 @@ class _HeaderState extends State<Header> {
     super.initState();
 
     _notificationProvider = context.read<NotificationProvider>();
-    _notificationProvider.listen(addNotification);
+    //_notificationProvider.listen(_addNotification);
   }
 
-  void addNotification(hrms.Notification notification) {
+  void _addNotification(hrms.Notification notification) {
     _notifications.add(notification);
     setState(() {});
   }

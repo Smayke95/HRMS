@@ -7,9 +7,11 @@ import '../providers/department_provider.dart';
 
 class DepartmentDataTableSource extends AdvancedDataTableSource<Department> {
   final DepartmentProvider _departmentProvider;
+  final Function(int) _onSelectChanged;
+
   var departmentSearch = DepartmentSearch();
 
-  DepartmentDataTableSource(this._departmentProvider);
+  DepartmentDataTableSource(this._departmentProvider, this._onSelectChanged);
 
   @override
   Future<RemoteDataSourceDetails<Department>> getNextPage(
@@ -30,15 +32,15 @@ class DepartmentDataTableSource extends AdvancedDataTableSource<Department> {
 
   @override
   DataRow? getRow(int index) {
-    final currentRowData = lastDetails!.rows[index];
+    final currentRow = lastDetails!.rows[index];
     return DataRow(
-      onSelectChanged: (e) => {print('test')},
+      onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text(currentRowData.name)),
-        DataCell(Text(currentRowData.level.toString())),
-        DataCell(Text(currentRowData.parentDepartment?.name ?? "")),
+        DataCell(Text(currentRow.name)),
+        DataCell(Text(currentRow.level.toString())),
+        DataCell(Text(currentRow.parentDepartment?.name ?? "")),
         DataCell(Text(
-            "${currentRowData.supervisor?.firstName ?? ""} ${currentRowData.supervisor?.lastName ?? ""}")),
+            "${currentRow.supervisor?.firstName ?? ""} ${currentRow.supervisor?.lastName ?? ""}")),
       ],
     );
   }

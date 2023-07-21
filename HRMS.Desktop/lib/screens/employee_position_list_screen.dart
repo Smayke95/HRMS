@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/employee_position_data_table_source.dart';
 import '../providers/employee_position_provider.dart';
 import '../widgets/master_screen.dart';
-import 'dashboard_screen.dart';
-import 'search.dart';
+import '../widgets/search.dart';
+import 'employee_position_details_screen.dart';
 
 class EmployeePositionListScreen extends StatefulWidget {
   const EmployeePositionListScreen({super.key});
@@ -26,7 +26,13 @@ class _EmployeePositionListScreenState
 
     var employeePositionProvider = context.read<EmployeePositionProvider>();
     employeePositionDataTableSource =
-        EmployeePositionDataTableSource(employeePositionProvider);
+        EmployeePositionDataTableSource(employeePositionProvider, _openDetails);
+  }
+
+  void _openDetails(int? id) {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const MasterScreen(
+            "Detalji o zaposlenju", EmployeePositionDetailsScreen())));
   }
 
   @override
@@ -35,11 +41,7 @@ class _EmployeePositionListScreenState
       children: [
         Search(
           "Dodaj zaposlenje",
-          () => {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) =>
-                    const MasterScreen("Projekti", DashboardScreen())))
-          },
+          () => _openDetails(null),
           onSearch: (text) => employeePositionDataTableSource.filterData(text),
         ),
         SizedBox(

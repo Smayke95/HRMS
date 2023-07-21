@@ -20,12 +20,11 @@ class Search extends StatelessWidget {
           SizedBox(
             width: 300,
             child: TextField(
-              decoration: const InputDecoration(
-                labelText: "Pretraga",
-                prefixIcon: Icon(Icons.search),
-              ),
-              onChanged: onSearch
-            ),
+                decoration: const InputDecoration(
+                  labelText: "Pretraga",
+                  prefixIcon: Icon(Icons.search),
+                ),
+                onChanged: onSearch),
           ),
         Expanded(
           child: Container(),

@@ -8,9 +8,11 @@ import '../providers/employee_provider.dart';
 
 class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
   final EmployeeProvider _employeeProvider;
+  final Function(int) _onSelectChanged;
+
   var employeeSearch = EmployeeSearch();
 
-  EmployeeDataTableSource(this._employeeProvider);
+  EmployeeDataTableSource(this._employeeProvider, this._onSelectChanged);
 
   @override
   Future<RemoteDataSourceDetails<Employee>> getNextPage(
@@ -29,18 +31,17 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
 
   @override
   DataRow? getRow(int index) {
-    final currentRowData = lastDetails!.rows[index];
+    final currentRow = lastDetails!.rows[index];
     return DataRow(
-      onSelectChanged: (e) => {print('test')},
+      onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text("000${currentRowData.id}")),
-        DataCell(Text(currentRowData.firstName)),
-        DataCell(Text(currentRowData.lastName)),
-        DataCell(Text(currentRowData.email)),
-        DataCell(
-            Text(currentRowData.gender == Gender.male ? "Muško" : "Žensko")),
-        DataCell(Text(currentRowData.address)),
-        DataCell(Text(currentRowData.city?.name ?? "")),
+        DataCell(Text("000${currentRow.id}")),
+        DataCell(Text(currentRow.firstName)),
+        DataCell(Text(currentRow.lastName)),
+        DataCell(Text(currentRow.email)),
+        DataCell(Text(currentRow.gender == Gender.male ? "Muško" : "Žensko")),
+        DataCell(Text(currentRow.address)),
+        DataCell(Text(currentRow.city?.name ?? "")),
       ],
     );
   }

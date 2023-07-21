@@ -10,6 +10,24 @@ public class DepartmentRepository : BaseRepository<Department, Core.Models.Depar
 {
     public DepartmentRepository(Context context, IMapper mapper) : base(context, mapper) { }
 
+    public override async Task<Core.Models.Department> GetAsync(int id)
+    {
+        var isNew = id == 0;
+
+        if (!isNew)
+        {
+            var entity = await Context
+                .Departments
+                .Include(x => x.ParentDepartment)
+                .Include(x => x.Supervisor)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            return Mapper.Map<Core.Models.Department>(entity);
+        }
+
+        return new Core.Models.Department();
+    }
+
     protected override IQueryable<Department> AddInclude(IQueryable<Department> query, DepartmentSearch? search = null)
     {
         if (search is null)

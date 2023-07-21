@@ -10,10 +10,12 @@ import '../providers/employee_position_provider.dart';
 class EmployeePositionDataTableSource
     extends AdvancedDataTableSource<EmployeePosition> {
   final EmployeePositionProvider _employeePositionProvider;
-  var employeePositionSearch = EmployeePositionSearch();
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+  final Function(int) _onSelectChanged;
 
-  EmployeePositionDataTableSource(this._employeePositionProvider);
+  var employeePositionSearch = EmployeePositionSearch();
+
+  EmployeePositionDataTableSource(
+      this._employeePositionProvider, this._onSelectChanged);
 
   @override
   Future<RemoteDataSourceDetails<EmployeePosition>> getNextPage(
@@ -33,19 +35,18 @@ class EmployeePositionDataTableSource
 
   @override
   DataRow? getRow(int index) {
-    final currentRowData = lastDetails!.rows[index];
+    final currentRow = lastDetails!.rows[index];
     return DataRow(
-      onSelectChanged: (e) => {print('test')},
+      onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
         DataCell(Text(
-            "${currentRowData.employee?.firstName ?? ""} ${currentRowData.employee?.lastName ?? ""}")),
-        DataCell(Text(currentRowData.position?.name ?? "")),
-        DataCell(
-            Text(DateFormat("dd.MM.yyyy.").format(currentRowData.startDate))),
-        DataCell(Text(currentRowData.endDate != null
-            ? DateFormat("dd.MM.yyyy.").format(currentRowData.endDate!)
+            "${currentRow.employee?.firstName ?? ""} ${currentRow.employee?.lastName ?? ""}")),
+        DataCell(Text(currentRow.position?.name ?? "")),
+        DataCell(Text(DateFormat("dd.MM.yyyy.").format(currentRow.startDate))),
+        DataCell(Text(currentRow.endDate != null
+            ? DateFormat("dd.MM.yyyy.").format(currentRow.endDate!)
             : "")),
-        DataCell(Text(currentRowData.employmentType == EmploymentType.permanent
+        DataCell(Text(currentRow.employmentType == EmploymentType.permanent
             ? "Neodređeno"
             : "Određeno")),
       ],

@@ -13,7 +13,7 @@ import '../providers/department_provider.dart';
 import '../providers/education_provider.dart';
 import '../providers/pay_grade_provider.dart';
 import '../providers/position_provider.dart';
-import 'search.dart';
+import '../widgets/search.dart';
 
 class PositionListScreen extends StatefulWidget {
   const PositionListScreen({super.key});
@@ -45,7 +45,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
     _educationProvider = context.read<EducationProvider>();
 
     positionDataTableSource =
-        PositionDataTableSource(_positionProvider, openDialog);
+        PositionDataTableSource(_positionProvider, _openDialog);
 
     _loadData(null);
   }
@@ -68,7 +68,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
     }
   }
 
-  void openDialog(int? id) {
+  void _openDialog(int? id) {
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -81,7 +81,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
       children: [
         Search(
           "Dodaj poziciju",
-          () => openDialog(null),
+          () => _openDialog(null),
           onSearch: (text) => positionDataTableSource.filterData(text),
         ),
         SizedBox(
@@ -214,10 +214,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              if (id != null) {
-                await _positionProvider.delete(id);
-              }
-
+              await _positionProvider.delete(id);
               positionDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             },

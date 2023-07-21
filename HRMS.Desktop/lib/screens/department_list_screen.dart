@@ -1,12 +1,16 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../data_table_sources/department_data_table_source.dart';
+import '../models/department.dart';
+import '../models/employee.dart';
+import '../models/paged_result.dart';
 import '../providers/department_provider.dart';
-import '../widgets/master_screen.dart';
-import 'dashboard_screen.dart';
-import 'search.dart';
+import '../providers/employee_provider.dart';
+import '../widgets/search.dart';
 
 class DepartmentListScreen extends StatefulWidget {
   const DepartmentListScreen({super.key});
@@ -16,14 +20,48 @@ class DepartmentListScreen extends StatefulWidget {
 }
 
 class _DepartmentListScreenState extends State<DepartmentListScreen> {
+  late DepartmentProvider _departmentProvider;
+  late EmployeeProvider _employeeProvider;
+
   late DepartmentDataTableSource departmentDataTableSource;
+
+  final _formKey = GlobalKey<FormBuilderState>();
+  var _departments = PagedResult<Department>();
+  var _employees = PagedResult<Employee>();
 
   @override
   void initState() {
     super.initState();
 
-    var departmentProvider = context.read<DepartmentProvider>();
-    departmentDataTableSource = DepartmentDataTableSource(departmentProvider);
+    _departmentProvider = context.read<DepartmentProvider>();
+    _employeeProvider = context.read<EmployeeProvider>();
+
+    departmentDataTableSource =
+        DepartmentDataTableSource(_departmentProvider, _openDialog);
+
+    _loadData(null);
+  }
+
+  Future _loadData(int? id) async {
+    _departments = await _departmentProvider.getAll();
+    _employees = await _employeeProvider.getAll();
+
+    if (id != null) {
+      var department = await _departmentProvider.get(id);
+
+      _formKey.currentState?.patchValue({
+        "name": department.name,
+        "parentDepartmentId": department.parentDepartment?.id.toString() ?? "0",
+        "supervisorId": department.supervisor?.id.toString() ?? "0",
+      });
+    }
+  }
+
+  void _openDialog(int? id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => _buildDialog(context, id),
+    );
   }
 
   @override
@@ -32,11 +70,7 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
       children: [
         Search(
           "Dodaj odjel",
-          () => {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) =>
-                    const MasterScreen("Projekti", DashboardScreen())))
-          },
+          () => _openDialog(null),
           onSearch: (text) => departmentDataTableSource.filterData(text),
         ),
         SizedBox(
@@ -53,6 +87,128 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
               DataColumn(label: Text("Nadležna osoba")),
             ],
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialog(BuildContext context, int? id) {
+    _loadData(id);
+
+    return AlertDialog(
+      icon: Icon(id == null ? Icons.add : Icons.edit),
+      title: Text(id == null ? "Dodaj odjel" : "Uredi odjel"),
+      content: FormBuilder(
+        key: _formKey,
+        child: SizedBox(
+          height: 300,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 400,
+                    child: FormBuilderTextField(
+                      name: "name",
+                      decoration: const InputDecoration(labelText: "Naziv *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Naziv je obavezan."),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 300,
+                    child: FormBuilderDropdown(
+                      name: "parentDepartmentId",
+                      decoration:
+                          const InputDecoration(labelText: "Bazni odjel *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Bazni odjel je obavezan."),
+                      items: _departments.result
+                          .map((department) => DropdownMenuItem(
+                                value: department.id.toString(),
+                                child: Text(department.name),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: 300,
+                    child: FormBuilderDropdown(
+                      name: "supervisorId",
+                      decoration:
+                          const InputDecoration(labelText: "Supervizor *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Supervizor je obavezan."),
+                      items: _employees.result
+                          .map((employee) => DropdownMenuItem(
+                                value: employee.id.toString(),
+                                child: Text(
+                                    "${employee.firstName} ${employee.lastName}"),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      actionsPadding: const EdgeInsets.all(20),
+      buttonPadding: const EdgeInsets.all(20),
+      actions: [
+        if (id != null)
+          OutlinedButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(Colors.red),
+              padding: const MaterialStatePropertyAll(
+                EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+              ),
+            ),
+            child: const Text("OBRIŠI"),
+            onPressed: () async {
+              await _departmentProvider.delete(id);
+              departmentDataTableSource.filterData(null);
+              if (context.mounted) Navigator.pop(context);
+            },
+          ),
+        const SizedBox(width: 185),
+        OutlinedButton(
+          style: const ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+            ),
+          ),
+          child: const Text("NAZAD"),
+          onPressed: () => Navigator.pop(context),
+        ),
+        OutlinedButton(
+          style: const ButtonStyle(
+            padding: MaterialStatePropertyAll(
+              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+            ),
+          ),
+          child: const Text("SPREMI"),
+          onPressed: () async {
+            var isValid = _formKey.currentState?.saveAndValidate();
+
+            if (isValid!) {
+              var request = Map.from(_formKey.currentState!.value);
+
+              id == null
+                  ? await _departmentProvider.insert(request)
+                  : await _departmentProvider.update(id, request);
+
+              departmentDataTableSource.filterData(null);
+              if (context.mounted) Navigator.pop(context);
+            }
+          },
         ),
       ],
     );

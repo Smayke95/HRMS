@@ -41,9 +41,5 @@ public class ApiProfile : Profile
             .ForMember(x => x.Department, opt => opt.MapFrom(y => new Department { Id = y.DepartmentId ?? 0 }))
             .ForMember(x => x.PayGrade, opt => opt.MapFrom(y => new PayGrade { Id = y.PayGradeId ?? 0 }))
             .ForMember(x => x.RequiredEducation, opt => opt.MapFrom(y => new Education { Id = y.RequiredEducationId ?? 0 }));
-
-        CreateMap<ProjectInsert, Project>();
-
-        CreateMap<ProjectUpdate, Project>();
     }
 }
