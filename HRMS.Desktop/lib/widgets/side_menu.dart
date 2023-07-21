@@ -8,8 +8,9 @@ import '../screens/department_list_screen.dart';
 import '../screens/employee_list_screen.dart';
 import '../screens/employee_position_list_screen.dart';
 import '../screens/position_list_screen.dart';
-import '../screens/projects_screen.dart';
+import '../screens/project_list_screen.dart';
 import '../screens/settings_screen.dart';
+import '../screens/task_list_screen.dart';
 import 'master_screen.dart';
 
 class SideMenu extends StatelessWidget {
@@ -89,13 +90,26 @@ class SideMenu extends StatelessWidget {
             const DashboardScreen(),
             true,
           ),
-          _buildListTile(
-            context,
-            "Zadaci",
-            Icons.content_paste,
-            const ProjectsScreen(),
-            false,
-          ),
+          ExpansionTile(
+            leading: const Icon(Icons.content_paste),
+            title: const Text("Projekti i zadaci"),
+            children: [
+              _buildListTile(
+                context,
+                "Projekti",
+                Icons.folder,
+                const ProjectListScreen(),
+                true,
+              ),
+              _buildListTile(
+                context,
+                "Zadaci",
+                Icons.format_list_bulleted,
+                const TaskListScreen(),
+                true,
+              )
+            ],
+          ),         
           _buildListTile(
             context,
             "Razgovor",

@@ -64,14 +64,19 @@ public class RepositoryProfile : Profile
             .ForMember(x => x.RequiredEducationId, opt => opt.MapFrom(y => y.RequiredEducation.Id))
             .ForMember(x => x.RequiredEducation, opt => opt.Ignore());
 
-        CreateMap<Project, Core.Models.Project>();
+        CreateMap<Project, Core.Models.Project>()
+            .ReverseMap();
 
-        CreateMap<Task, Core.Models.Task>();
+        CreateMap<Task, Core.Models.Task>()
+            .ReverseMap();
 
-        CreateMap<TaskComment, Core.Models.TaskComment>();
+        CreateMap<TaskComment, Core.Models.TaskComment>()
+            .ReverseMap();
 
-        CreateMap<TaskStatus, Core.Models.TaskStatus>();
+        CreateMap<TaskStatus, Core.Models.TaskStatus>()
+            .ReverseMap();
 
-        CreateMap<TaskType, Core.Models.TaskType>();
+        CreateMap<TaskType, Core.Models.TaskType>()
+            .ReverseMap();
     }
 }

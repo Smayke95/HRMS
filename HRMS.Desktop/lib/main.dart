@@ -1,3 +1,5 @@
+import 'package:HRMS/providers/project_provider.dart';
+import 'package:HRMS/providers/task_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => PayGradeProvider()),
         ChangeNotifierProvider(create: (_) => PositionProvider()),
+        ChangeNotifierProvider(create: (_) => ProjectProvider()),
+        ChangeNotifierProvider(create: (_) => TaskProvider()),
       ],
       child: const MyApp(),
     ),
