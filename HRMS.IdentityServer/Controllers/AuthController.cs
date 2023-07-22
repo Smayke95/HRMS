@@ -40,6 +40,7 @@ public class AuthController : ControllerBase
 
         var claims = new List<Claim>
         {
+            new Claim(ClaimTypes.Sid, employee.Id.ToString()),
             new Claim(ClaimTypes.NameIdentifier, employee.Email),
             new Claim(ClaimTypes.Name, employee.FirstName + ' ' + employee.LastName),
             new Claim(ClaimTypes.Email, employee.Email)

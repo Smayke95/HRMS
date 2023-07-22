@@ -31,6 +31,7 @@ class AuthProvider with ChangeNotifier {
   void getUser(String token) {
     final decodedToken = _decode(token);
 
+    User.id = int.parse(decodedToken[ClaimType.sid] as String);
     User.name = decodedToken[ClaimType.name] as String?;
     User.email = decodedToken[ClaimType.email] as String?;
     User.token = token;

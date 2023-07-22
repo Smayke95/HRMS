@@ -33,6 +33,9 @@ public class ApiProfile : Profile
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new City { Id = y.EmployeeId }))
             .ForMember(x => x.Position, opt => opt.MapFrom(y => new City { Id = y.PositionId }));
 
+        CreateMap<MessageInsert, Message>()
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }));
+
         CreateMap<PositionInsert, Position>()
             .ForMember(x => x.Department, opt => opt.MapFrom(y => new Department { Id = y.DepartmentId ?? 0 }))
             .ForMember(x => x.PayGrade, opt => opt.MapFrom(y => new PayGrade { Id = y.PayGradeId ?? 0 }))
