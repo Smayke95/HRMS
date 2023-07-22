@@ -6,11 +6,10 @@ part of 'task_search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TaskSearch _$TaskSearchFromJson(Map<String, dynamic> json) => 
-    TaskSearch()
-      ..page = json['page'] as int
-      ..pageSize = json['pageSize'] as int
-      ..name = json['name'] as String?;
+TaskSearch _$TaskSearchFromJson(Map<String, dynamic> json) => TaskSearch()
+  ..page = json['page'] as int
+  ..pageSize = json['pageSize'] as int
+  ..name = json['name'] as String?;
 
 Map<String, dynamic> _$TaskSearchToJson(TaskSearch instance) =>
     <String, dynamic>{

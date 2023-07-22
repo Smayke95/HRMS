@@ -1088,21 +1088,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5116),
+                            Date = new DateTime(2023, 7, 22, 22, 58, 11, 213, DateTimeKind.Local).AddTicks(9769),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5168),
+                            Date = new DateTime(2023, 7, 22, 22, 58, 11, 213, DateTimeKind.Local).AddTicks(9817),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(5171),
+                            Date = new DateTime(2023, 7, 22, 22, 58, 11, 213, DateTimeKind.Local).AddTicks(9820),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1135,53 +1135,263 @@ namespace HRMS.Database.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("HRMS.Database.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsReaded")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Notifications");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            IsReaded = false,
-                            Text = "Dobili ste novog kolegu"
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Dobro jutro Irena",
+                            Time = new DateTime(2023, 7, 22, 12, 1, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             EmployeeId = 1,
-                            IsReaded = false,
-                            Text = "Dodani ste na projekat"
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Kako si danas?",
+                            Time = new DateTime(2023, 7, 22, 12, 2, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Jutro Anese",
+                            Time = new DateTime(2023, 7, 22, 12, 3, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Odlično sam, hvala. Kako si ti?",
+                            Time = new DateTime(2023, 7, 22, 12, 4, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
                             EmployeeId = 1,
-                            IsReaded = false,
-                            Text = "Imate novi komentar"
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Također dobro, hvala. Imaš li neki plan za danas?",
+                            Time = new DateTime(2023, 7, 22, 12, 5, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Da, imam par sastanaka i trebam završiti taj novi izvještaj do kraja dana",
+                            Time = new DateTime(2023, 7, 22, 12, 6, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "A ti?",
+                            Time = new DateTime(2023, 7, 22, 12, 7, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Također imam sastanak ujutro",
+                            Time = new DateTime(2023, 7, 22, 12, 8, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "ali popodne imam nekoliko sati slobodno",
+                            Time = new DateTime(2023, 7, 22, 12, 9, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Planiram završiti projekt koji radim",
+                            Time = new DateTime(2023, 7, 22, 12, 10, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Zvuči kao da ćeš imati produktivan dan. Treba li ti ikakva pomoć s tim projektom?",
+                            Time = new DateTime(2023, 7, 22, 12, 11, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Hvala na ponudi. Možda ću morati provjeriti neke podatke, pa ako imam pitanja, sigurno ću ti se obratiti",
+                            Time = new DateTime(2023, 7, 22, 12, 12, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Svakako, uvijek sam tu da pomognem",
+                            Time = new DateTime(2023, 7, 22, 12, 13, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Inače",
+                            Time = new DateTime(2023, 7, 22, 12, 14, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "što misliš o novom uređenju ureda?",
+                            Time = new DateTime(2023, 7, 22, 12, 15, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Meni se sviđa! Osjećam se puno udobnije u ovom novom okruženju",
+                            Time = new DateTime(2023, 7, 22, 12, 16, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "A tebi?",
+                            Time = new DateTime(2023, 7, 22, 12, 17, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Potpuno se slažem",
+                            Time = new DateTime(2023, 7, 22, 12, 18, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Ovo je puno svjetlije i prostranije",
+                            Time = new DateTime(2023, 7, 22, 12, 19, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Nekako mi daje više inspiracije za rad",
+                            Time = new DateTime(2023, 7, 22, 12, 20, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Da, baš tako! Volim kako je timski duh u ovom uredu, svi surađujemo tako dobro",
+                            Time = new DateTime(2023, 7, 22, 12, 21, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Upravo tako!",
+                            Time = new DateTime(2023, 7, 22, 12, 22, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Baš zbog toga nam i ide ovako dobro",
+                            Time = new DateTime(2023, 7, 22, 12, 23, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Tako je. Sve u svemu, zadovoljan sam kako stvari idu na poslu",
+                            Time = new DateTime(2023, 7, 22, 12, 24, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "I ja isto! Ako ikada trebaš razgovarati o bilo čemu ili trebaš pomoć, slobodno mi se obrati",
+                            Time = new DateTime(2023, 7, 22, 12, 25, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Hvala Irena",
+                            Time = new DateTime(2023, 7, 22, 12, 26, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Cijenim to",
+                            Time = new DateTime(2023, 7, 22, 12, 27, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Nema na čemu. Sada se moram vratiti radu, ali ako želiš, možemo se kasnije ponovno čuti.",
+                            Time = new DateTime(2023, 7, 22, 12, 28, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "U redu, zvuči dobro. Sretno s tvojim sastancima i projektom!",
+                            Time = new DateTime(2023, 7, 22, 12, 29, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Hvala! I tebi želim uspješan dan",
+                            Time = new DateTime(2023, 7, 22, 12, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            EmployeeId = 2,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Čujemo se kasnije",
+                            Time = new DateTime(2023, 7, 22, 12, 31, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            EmployeeId = 1,
+                            Room = "AnesSmajicIrenaVilic",
+                            Text = "Čujemo se",
+                            Time = new DateTime(2023, 7, 22, 12, 32, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1572,7 +1782,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(6089)
+                            Time = new DateTime(2023, 7, 22, 22, 58, 11, 214, DateTimeKind.Local).AddTicks(884)
                         },
                         new
                         {
@@ -1580,7 +1790,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 15, 11, 35, 12, 92, DateTimeKind.Local).AddTicks(6097)
+                            Time = new DateTime(2023, 7, 22, 22, 58, 11, 214, DateTimeKind.Local).AddTicks(888)
                         });
                 });
 
@@ -1757,18 +1967,7 @@ namespace HRMS.Database.Migrations
             modelBuilder.Entity("HRMS.Database.Models.Message", b =>
                 {
                     b.HasOne("HRMS.Database.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("HRMS.Database.Models.Notification", b =>
-                {
-                    b.HasOne("HRMS.Database.Models.Employee", "Employee")
-                        .WithMany("Notifications")
+                        .WithMany("Messages")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1878,7 +2077,7 @@ namespace HRMS.Database.Migrations
 
                     b.Navigation("Events");
 
-                    b.Navigation("Notifications");
+                    b.Navigation("Messages");
 
                     b.Navigation("Roles");
 

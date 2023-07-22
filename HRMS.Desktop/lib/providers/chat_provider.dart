@@ -1,6 +1,7 @@
 import 'package:signalr_netcore/signalr_client.dart';
 
 import '../models/message.dart';
+import '../models/requests/message_insert.dart';
 import '../models/searches/message_search.dart';
 import 'base_provider.dart';
 
@@ -12,7 +13,7 @@ class ChatProvider extends BaseProvider<Message, MessageSearch> {
     _baseUrl = "${const String.fromEnvironment(
       "ApiUrl",
       defaultValue: "https://localhost:44378/",
-    )}chathub";
+    )}chatHub";
   }
 
   @override
@@ -25,8 +26,13 @@ class ChatProvider extends BaseProvider<Message, MessageSearch> {
     hubConnection.start();
   }
 
-  void sendMessage(Message message) =>
+  void sendMessage(MessageInsert message) {
+    if (hubConnection.state == HubConnectionState.Connected) {
       hubConnection.invoke('SendMessage', args: [message]);
+    } else {
+      hubConnection.start();
+    }
+  }
 
   void disconnect() => hubConnection.stop();
 }

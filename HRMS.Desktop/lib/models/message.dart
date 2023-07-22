@@ -9,14 +9,12 @@ class Message {
   String text;
   DateTime time;
   String room;
-  int? employeeId;
   Employee? employee;
 
   Message(
     this.text,
     this.time,
     this.room,
-    this.employeeId,
     this.employee,
   );
 

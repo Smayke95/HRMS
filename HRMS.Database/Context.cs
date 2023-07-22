@@ -1,5 +1,4 @@
 ﻿using HRMS.Database.Models;
-using HRMS.Database.Models.Enums;
 using HRMS.Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using Task = HRMS.Database.Models.Task;
@@ -20,7 +19,6 @@ public class Context : DbContext
     public DbSet<EventType> EventTypes { get; set; }
     public DbSet<Log> Logs { get; set; }
     public DbSet<Message> Messages { get; set; }
-    public DbSet<Notification> Notifications { get; set; }
     public DbSet<PayGrade> PayGrades { get; set; }
     public DbSet<Position> Positions { get; set; }
     public DbSet<Project> Projects { get; set; }
@@ -49,9 +47,9 @@ public class Context : DbContext
         modelBuilder.Entity<City>().SeedData();
         modelBuilder.Entity<Department>().SeedData();
         modelBuilder.Entity<Education>().SeedData();
+        modelBuilder.Entity<Message>().SeedData();
         modelBuilder.Entity<PayGrade>().SeedData();
         modelBuilder.Entity<Position>().SeedData();
-        modelBuilder.Entity<Notification>().SeedData();
         modelBuilder.Entity<EventType>().SeedData();
         modelBuilder.Entity<Event>().SeedData();
         modelBuilder.Entity<Project>().SeedData();

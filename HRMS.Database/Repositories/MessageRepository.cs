@@ -10,6 +10,23 @@ public class MessageRepository : BaseRepository<Message, Core.Models.Message, Me
 {
     public MessageRepository(Context context, IMapper mapper) : base(context, mapper) { }
 
+    public override async Task<Core.Models.Message> GetAsync(int id)
+    {
+        var isNew = id == 0;
+
+        if (!isNew)
+        {
+            var entity = await Context
+                .Messages
+                .Include(x => x.Employee)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            return Mapper.Map<Core.Models.Message>(entity);
+        }
+
+        return new Core.Models.Message();
+    }
+
     protected override IQueryable<Message> AddInclude(IQueryable<Message> query, MessageSearch? search = null)
     {
         if (search is null)

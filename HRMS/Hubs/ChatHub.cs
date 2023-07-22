@@ -26,10 +26,11 @@ public class ChatHub : Hub
         Console.WriteLine("Connection received");
     }
 
-    public async Task SendMessage(MessageInsert message)
+    public async Task SendMessage(MessageInsert messageInsert)
     {
-        var insertedMessage = await MessageRepository.InsertAsync(Mapper.Map<Message>(message));
+        var insertedMessage = await MessageRepository.InsertAsync(Mapper.Map<Message>(messageInsert));
+        var message = await MessageRepository.GetAsync(insertedMessage.Id);
 
-        //await Clients.Group(message.Room).SendAsync("ReceiveMessage", sender, message, time, image);
+        await Clients.All.SendAsync("ReceiveMessage", message);
     }
 }

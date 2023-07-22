@@ -77,7 +77,6 @@ public class Employee
     public virtual ICollection<EmployeePosition> EmployeePositions { get; set; } = new List<EmployeePosition>();
     public virtual ICollection<Event> Events { get; set; } = new List<Event>();
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
-    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
     public virtual ICollection<EmployeeRole> Roles { get; set; } = new List<EmployeeRole>();
     public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
