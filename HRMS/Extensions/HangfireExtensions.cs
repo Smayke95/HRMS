@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using Hangfire.SqlServer;
+using HRMS.Core.Interfaces.Services;
 using HRMS.Extensions;
 using HRMS.Filters;
 
@@ -46,5 +47,7 @@ public static class HangfireExtensions
     private static void AddHangfireRecurringJobs()
     {
         GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 1 });
+
+        RecurringJob.AddOrUpdate<INotificationService>("Take a break", x => x.TakeBreak(), Cron.Hourly);
     }
 }

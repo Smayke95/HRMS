@@ -1,14 +1,14 @@
 ﻿using HRMS.Core.Interfaces.Services;
 using HRMS.Core.Models;
+using HRMS.Core.Models.Enums;
 using RabbitMQ.Client;
 using System.Text;
-using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.RabbitMQ;
 
 public class NotificationService : INotificationService
 {
-    public async Task SendNotification(Notification notification)
+    public void SendNotification(Notification notification)
     {
         try
         {
@@ -33,5 +33,17 @@ public class NotificationService : INotificationService
         {
             var test = ex;
         }
+    }
+
+    public void TakeBreak()
+    {
+        var notification = new Notification
+        {
+            Type = NotificationType.Info,
+            Group = Role.Employee,
+            Text = "Molimo napravite pauzu"
+        };
+
+        SendNotification(notification);
     }
 }

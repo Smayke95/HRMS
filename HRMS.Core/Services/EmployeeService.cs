@@ -29,7 +29,7 @@ public class EmployeeService : IEmployeeService
             Text = $"{insertedEmployee.FirstName} {insertedEmployee.LastName} je dodan kao novi zaposlenik."
         };
 
-        await NotificationService.SendNotification(notification);
+        NotificationService.SendNotification(notification);
 
         return insertedEmployee;
     }
