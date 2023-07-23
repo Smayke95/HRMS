@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230722205749_Init")]
+    [Migration("20230723165542_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -528,7 +528,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "c99629a9aa107c23fe53e97433ea6b90",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -556,7 +556,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -584,7 +584,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -612,7 +612,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -640,7 +640,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -668,7 +668,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -696,7 +696,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -724,7 +724,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -752,7 +752,7 @@ namespace HRMS.Database.Migrations
                             Note = "",
                             OfficePhone = "",
                             ParentName = "",
-                            Password = "19a2854144b63a8f7617a6f225019b12",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
                             PersonalIdentificationNumber = "",
                             Phone = "",
                             PreviousLOSMonths = 0,
@@ -1091,21 +1091,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2273),
+                            Date = new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8065),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2326),
+                            Date = new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8112),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2329),
+                            Date = new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8115),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1785,7 +1785,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(3351)
+                            Time = new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9105)
                         },
                         new
                         {
@@ -1793,7 +1793,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(3356)
+                            Time = new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9110)
                         });
                 });
 

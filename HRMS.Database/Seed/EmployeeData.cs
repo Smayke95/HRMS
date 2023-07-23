@@ -42,7 +42,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "irena@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "c99629a9aa107c23fe53e97433ea6b90"
             },
             new Employee
             {
@@ -57,7 +57,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "meliha.k@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -72,7 +72,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "mislava.s@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -87,7 +87,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "mileta.p@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -102,7 +102,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "arsenije.m@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -117,7 +117,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "stijepo.z@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -132,7 +132,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "ana.r@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -147,7 +147,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "dagmar.j@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             },
             new Employee
             {
@@ -162,7 +162,7 @@ public static class EmployeeData
                 CityId = 7,
                 Image = "/img/avatars/default.png",
                 Email = "ira.k@hrms.com",
-                Password = "19a2854144b63a8f7617a6f225019b12"
+                Password = "827ef6760e76932136c9e529169ecb9b"
             }
         );
     }

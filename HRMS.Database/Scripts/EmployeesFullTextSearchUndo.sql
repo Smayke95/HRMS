@@ -1,2 +1,0 @@
-﻿DROP FULLTEXT INDEX ON [dbo].[Employees];
-DROP FULLTEXT CATALOG [FTCEmployees];

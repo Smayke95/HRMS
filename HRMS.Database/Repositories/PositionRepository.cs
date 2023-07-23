@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using HRMS.Core.Interfaces.Repositories;
+using HRMS.Core.Models;
 using HRMS.Core.Models.Searches;
-using HRMS.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Position = HRMS.Database.Models.Position;
 
 namespace HRMS.Database.Repositories;
 
@@ -47,5 +48,24 @@ public class PositionRepository : BaseRepository<Position, Core.Models.Position,
             query = query.Include(x => x.RequiredEducation);
 
         return query;
+    }
+
+    public async Task<PagedResult<Core.Models.Position>> SearchAsync(PositionSearch search)
+    {
+        var result = new PagedResult<Core.Models.Position>();
+
+        if (search is null)
+            return result;
+
+        result.Page = search?.Page ?? 1;
+        result.PageSize = search?.PageSize ?? 10;
+
+        var positions = await Context
+            .Positions
+            .Where(x => EF.Functions.Contains(x.Name, $"\"{search!.Name}\""))
+            .ToListAsync();
+
+        result.Result = Mapper.Map<List<Core.Models.Position>>(positions);
+        return result;
     }
 }

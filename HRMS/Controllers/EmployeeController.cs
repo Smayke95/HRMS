@@ -10,7 +10,6 @@ namespace HRMS.Controllers;
 
 public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, EmployeeInsert, EmployeeUpdate>
 {
-    private readonly IEmployeeRepository EmployeeRepository;
     private readonly IEmployeeService EmployeeService;
 
     public EmployeeController(
@@ -19,14 +18,8 @@ public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, E
         IEmployeeService employeeService)
         : base(mapper, employeeRepository)
     {
-        EmployeeRepository = employeeRepository;
         EmployeeService = employeeService;
     }
-
-    /// <remarks>Get list of objects using full text search</remarks>
-    [HttpGet("search")]
-    public async Task<PagedResult<Employee>> Search([FromQuery] EmployeeSearch search)
-        => await EmployeeRepository.SearchAsync(search);
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]

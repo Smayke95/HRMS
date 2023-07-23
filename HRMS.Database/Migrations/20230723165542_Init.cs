@@ -489,9 +489,9 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Date", "Message", "Type" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2273), "", "INFO" },
-                    { 2, new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2326), "", "WARNING" },
-                    { 3, new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(2329), "", "ERROR" }
+                    { 1, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8065), "", "INFO" },
+                    { 2, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8112), "", "WARNING" },
+                    { 3, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8115), "", "ERROR" }
                 });
 
             migrationBuilder.InsertData(
@@ -585,15 +585,15 @@ namespace HRMS.Database.Migrations
                 values: new object[,]
                 {
                     { 1, "4. Muslimanske brigade 20", "", new DateTime(1995, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 1, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "anes@hrms.com", "Anes", "Male", "/img/avatars/default.png", "Smajić", "", "38761234567", "", "38761234567", "", "19a2854144b63a8f7617a6f225019b12", "", "38761234567", 0, 0, "Ekonomski tehničar", "1234567890123", "" },
-                    { 2, "Dobrinja", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "irena@hrms.com", "Irena", "Female", "/img/avatars/default.png", "Vilić", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 3, "Hrasnica", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meliha.k@hrms.com", "Meliha", "Female", "/img/avatars/default.png", "Kosnica", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 4, "Centar b.b.", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "mislava.s@hrms.com", "Mislava", "Female", "/img/avatars/default.png", "Šepović", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 5, "Aleja lipa 6", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "mileta.p@hrms.com", "Mileta", "Female", "/img/avatars/default.png", "Puček", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 6, "Dr. Silvane Rizvanbegović", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "arsenije.m@hrms.com", "Arsenije", "Male", "/img/avatars/default.png", "Murljačić", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 7, "Željeznička", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "stijepo.z@hrms.com", "Stijepo", "Male", "/img/avatars/default.png", "Željeznik", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 8, "Hrasno", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ana.r@hrms.com", "Ana", "Female", "/img/avatars/default.png", "Risojević", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 9, "Hrasno", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "dagmar.j@hrms.com", "Dagmar", "Male", "/img/avatars/default.png", "Jurić", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" },
-                    { 10, "Centar", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ira.k@hrms.com", "Ira", "Female", "/img/avatars/default.png", "Kerežija", "", "", "", "", "", "19a2854144b63a8f7617a6f225019b12", "", "", 0, 0, "", "1234567890123", "" }
+                    { 2, "Dobrinja", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "irena@hrms.com", "Irena", "Female", "/img/avatars/default.png", "Vilić", "", "", "", "", "", "c99629a9aa107c23fe53e97433ea6b90", "", "", 0, 0, "", "1234567890123", "" },
+                    { 3, "Hrasnica", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "meliha.k@hrms.com", "Meliha", "Female", "/img/avatars/default.png", "Kosnica", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 4, "Centar b.b.", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "mislava.s@hrms.com", "Mislava", "Female", "/img/avatars/default.png", "Šepović", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 5, "Aleja lipa 6", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "mileta.p@hrms.com", "Mileta", "Female", "/img/avatars/default.png", "Puček", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 6, "Dr. Silvane Rizvanbegović", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "arsenije.m@hrms.com", "Arsenije", "Male", "/img/avatars/default.png", "Murljačić", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 7, "Željeznička", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "stijepo.z@hrms.com", "Stijepo", "Male", "/img/avatars/default.png", "Željeznik", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 8, "Hrasno", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ana.r@hrms.com", "Ana", "Female", "/img/avatars/default.png", "Risojević", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 9, "Hrasno", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "dagmar.j@hrms.com", "Dagmar", "Male", "/img/avatars/default.png", "Jurić", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" },
+                    { 10, "Centar", "", new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ira.k@hrms.com", "Ira", "Female", "/img/avatars/default.png", "Kerežija", "", "", "", "", "", "827ef6760e76932136c9e529169ecb9b", "", "", 0, 0, "", "1234567890123", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -716,8 +716,8 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(3351) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 22, 22, 57, 49, 645, DateTimeKind.Local).AddTicks(3356) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9105) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9110) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,0 +1,2 @@
+﻿DROP FULLTEXT INDEX ON [dbo].[Positions];
+DROP FULLTEXT CATALOG [FTCPositions];
