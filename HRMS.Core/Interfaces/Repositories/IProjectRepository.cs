@@ -3,4 +3,4 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Core.Interfaces.Repositories;
 
-public interface IProjectRepository : IBaseRepository<Project, BaseSearch> { }
+public interface IProjectRepository : IBaseRepository<Project, ProjectSearch> { }

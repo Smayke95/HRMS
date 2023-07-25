@@ -59,7 +59,11 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search("Dodaj projekat", () => _openDialog(null)),
+        Search(
+          "Dodaj projekat", 
+          () => _openDialog(null),
+          onSearch: (text) => projectDataTableSource.filterData(text)
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(

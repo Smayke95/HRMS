@@ -7,6 +7,11 @@ part 'task_search.g.dart';
 @JsonSerializable()
 class TaskSearch extends BaseSearch {
   String? name;
+  bool includeProject = false;
+  bool includeStatus = false;
+  bool includeType = false;
+  bool includeEmployee = false;
+
   TaskSearch();
 
   factory TaskSearch.fromJson(Map<String, dynamic> json) =>

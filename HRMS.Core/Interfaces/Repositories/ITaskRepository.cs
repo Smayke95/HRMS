@@ -4,4 +4,4 @@ using Task = HRMS.Core.Models.Task;
 
 namespace HRMS.Core.Interfaces.Repositories;
 
-public interface ITaskRepository : IBaseRepository<Task, BaseSearch> { }
+public interface ITaskRepository : IBaseRepository<Task, TaskSearch> { }
