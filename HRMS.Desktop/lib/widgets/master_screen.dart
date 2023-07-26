@@ -37,11 +37,9 @@ class _MasterScreenState extends State<MasterScreen> {
                   Header(widget.title, _key),
                   Expanded(
                     flex: 10,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: widget.child,
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: widget.child,
                     ),
                   ),
                   const Footer(),
