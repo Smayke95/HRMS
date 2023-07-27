@@ -1,4 +1,3 @@
-import 'package:HRMS/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +12,7 @@ import '../models/searches/message_search.dart';
 import '../models/user.dart';
 import '../providers/chat_provider.dart';
 import '../providers/employee_provider.dart';
+import '../widgets/responsive.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -26,8 +26,9 @@ class _ChatScreenState extends State<ChatScreen> {
   late EmployeeProvider _employeeProvider;
 
   var _room = "";
+  var _employeeId = 0;
   var _typing = "";
-  var _messageFocusNode = FocusNode();
+  final _messageFocusNode = FocusNode();
   var _messages = PagedResult<Message>();
   var _employees = PagedResult<Employee>();
 
@@ -37,6 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
 
+    _employeeId = 2;
     _room = "Anes Smajić & Irena Vilić";
 
     _chatProvider = context.read<ChatProvider>();
@@ -70,6 +72,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   changeRoom(Employee selectedEmployee) {
+    _employeeId = selectedEmployee.id;
+
     if (selectedEmployee.id > User.id!) {
       _room =
           "${User.name!} & ${selectedEmployee.firstName} ${selectedEmployee.lastName}";
@@ -286,7 +290,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: _employees.result
               .map(
                 (employee) => ListTile(
-                  selected: true,
+                  selected: employee.id == _employeeId,
                   title: Text("${employee.firstName} ${employee.lastName}"),
                   onTap: () => changeRoom(employee),
                 ),

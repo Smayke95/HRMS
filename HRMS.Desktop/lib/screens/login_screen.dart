@@ -26,6 +26,28 @@ class _LoginScreenState extends State<LoginScreen> {
     _authProvider = context.read<AuthProvider>();
   }
 
+  Future _loginSubmit() async {
+    try {
+      var token = await _authProvider.login(
+        _emailController.text,
+        _passwordController.text,
+      );
+
+      _authProvider.getUser(token);
+
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) =>
+              const MasterScreen("Početna", DashboardScreen())));
+    } on Exception catch (e) {
+      final snackBar = SnackBar(
+        content: Text(e.toString()),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: OutlineInputBorder()),
                   controller: _passwordController,
                   obscureText: true,
+                  onSubmitted: (value) => _loginSubmit(),
                 ),
               ],
             ),
@@ -79,27 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
             style: const ButtonStyle(
                 padding: MaterialStatePropertyAll(
                     EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20))),
-            onPressed: () async {
-              try {
-                var token = await _authProvider.login(
-                  _emailController.text,
-                  _passwordController.text,
-                );
-
-                _authProvider.getUser(token);
-
-                if (!mounted) return;
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) =>
-                        const MasterScreen("Početna", DashboardScreen())));
-              } on Exception catch (e) {
-                final snackBar = SnackBar(
-                  content: Text(e.toString()),
-                );
-
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            },
+            onPressed: _loginSubmit,
             child: const Text("PRIJAVA"),
           )
         ],

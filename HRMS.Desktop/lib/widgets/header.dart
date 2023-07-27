@@ -1,9 +1,14 @@
-import 'package:HRMS/models/enums/notification_type.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/enums/notification_type.dart';
 import '../models/notification.dart' as hrms;
+import '../models/user.dart';
 import '../providers/notification_provider.dart';
+import '../screens/chat_screen.dart';
+import '../screens/login_screen.dart';
+import '../screens/settings_screen.dart';
+import 'master_screen.dart';
 import 'responsive.dart';
 
 class Header extends StatefulWidget {
@@ -66,11 +71,23 @@ class _HeaderState extends State<Header> {
           ),
           SizedBox(
             width: 60,
-            child: TextButton(
-              onPressed: () => print("Open chat"),
-              child: Badge.count(
-                count: 4,
-                child: const Icon(
+            child: PopupMenuButton(
+              tooltip: "Razgovor",
+              itemBuilder: (context) => <PopupMenuEntry>[
+                PopupMenuItem(
+                  child: ListTile(
+                    leading: const Icon(Icons.open_in_new),
+                    title: const Text("Otvori razgovor"),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              const MasterScreen("Razgovor", ChatScreen())));
+                    },
+                  ),
+                ),
+              ],
+              child: const Center(
+                child: Icon(
                   Icons.chat_bubble,
                   color: Colors.grey,
                 ),
@@ -113,11 +130,46 @@ class _HeaderState extends State<Header> {
           ),
           SizedBox(
             width: 60,
-            child: TextButton(
-              onPressed: () => print("Open user"),
-              child: const Icon(
-                Icons.person,
-                color: Colors.grey,
+            child: PopupMenuButton(
+              tooltip: "Korisnik",
+              itemBuilder: (context) => <PopupMenuEntry>[
+                PopupMenuItem(
+                  enabled: false,
+                  child: ListTile(
+                    title: Text(
+                      User.name ?? "",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem(
+                  child: ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text("Postavke"),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const MasterScreen(
+                              "Postavke", SettingsScreen())));
+                    },
+                  ),
+                ),
+                PopupMenuItem(
+                  child: ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text("Odjava"),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                    },
+                  ),
+                ),
+              ],
+              child: const Center(
+                child: Icon(
+                  Icons.person,
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),
