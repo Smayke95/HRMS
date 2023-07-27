@@ -13,6 +13,7 @@ import '../providers/department_provider.dart';
 import '../providers/education_provider.dart';
 import '../providers/pay_grade_provider.dart';
 import '../providers/position_provider.dart';
+import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
 class PositionListScreen extends StatefulWidget {
@@ -69,6 +70,8 @@ class _PositionListScreenState extends State<PositionListScreen> {
   }
 
   void _openDialog(int? id) {
+    if (Responsive.isMobile(context)) return;
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -90,7 +93,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: positionDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Naziv")),
               DataColumn(label: Text("Odjel")),

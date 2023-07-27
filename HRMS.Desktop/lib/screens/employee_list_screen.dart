@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/employee_data_table_source.dart';
 import '../providers/employee_provider.dart';
 import '../widgets/master_screen.dart';
+import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 import 'employee_details_screen.dart';
 
@@ -28,6 +29,8 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
   }
 
   void _openDetails(int? id) {
+    if (Responsive.isMobile(context)) return;
+
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) =>
             MasterScreen("Detalji o zaposleniku", EmployeeDetailsScreen(id))));

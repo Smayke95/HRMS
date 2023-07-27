@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/employee_position_data_table_source.dart';
 import '../providers/employee_position_provider.dart';
 import '../widgets/master_screen.dart';
+import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 import 'employee_position_details_screen.dart';
 
@@ -30,6 +31,8 @@ class _EmployeePositionListScreenState
   }
 
   void _openDetails(int? id) {
+    if (Responsive.isMobile(context)) return;
+
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const MasterScreen(
             "Detalji o zaposlenju", EmployeePositionDetailsScreen())));

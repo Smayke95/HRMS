@@ -1,5 +1,5 @@
-import 'package:HRMS/providers/project_provider.dart';
-import 'package:HRMS/providers/task_provider.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,9 +12,13 @@ import 'providers/employee_provider.dart';
 import 'providers/notification_provider.dart';
 import 'providers/pay_grade_provider.dart';
 import 'providers/position_provider.dart';
+import 'providers/project_provider.dart';
+import 'providers/task_provider.dart';
 import 'screens/login_screen.dart';
 
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(
     MultiProvider(
       providers: [
@@ -47,5 +51,14 @@ class MyApp extends StatelessWidget {
       ),
       home: const LoginScreen(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

@@ -12,6 +12,7 @@ import '../screens/project_list_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/task_list_screen.dart';
 import 'master_screen.dart';
+import 'responsive.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});
@@ -45,7 +46,8 @@ class SideMenu extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 15, bottom: 10),
+        padding: EdgeInsets.only(
+            top: Responsive.isMobile(context) ? 50 : 15, bottom: 10),
         child: Image.asset("assets/images/logo.png", width: 180));
   }
 
@@ -109,7 +111,7 @@ class SideMenu extends StatelessWidget {
                 true,
               )
             ],
-          ),         
+          ),
           _buildListTile(
             context,
             "Razgovor",

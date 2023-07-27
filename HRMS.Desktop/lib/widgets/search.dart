@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'responsive.dart';
+
 class Search extends StatelessWidget {
   final String buttonText;
   final Function()? buttonOnPressed;
@@ -29,15 +31,16 @@ class Search extends StatelessWidget {
         Expanded(
           child: Container(),
         ),
-        ElevatedButton.icon(
-          icon: const Icon(Icons.add),
-          style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
-                EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20)),
+        if (!Responsive.isMobile(context))
+          ElevatedButton.icon(
+            icon: const Icon(Icons.add),
+            style: const ButtonStyle(
+              padding: MaterialStatePropertyAll(
+                  EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20)),
+            ),
+            label: Text(buttonText),
+            onPressed: buttonOnPressed,
           ),
-          label: Text(buttonText),
-          onPressed: buttonOnPressed,
-        ),
       ]),
     );
   }

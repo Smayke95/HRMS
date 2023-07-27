@@ -61,8 +61,8 @@ class _HeaderState extends State<Header> {
           Expanded(
             child: Text(
               widget._title,
-              style: const TextStyle(
-                fontSize: 24,
+              style: TextStyle(
+                fontSize: Responsive.isMobile(context) ? 18 : 24,
                 height: 1,
                 fontWeight: FontWeight.w100,
                 color: Colors.grey,

@@ -10,6 +10,7 @@ import '../models/employee.dart';
 import '../models/paged_result.dart';
 import '../providers/department_provider.dart';
 import '../providers/employee_provider.dart';
+import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
 class DepartmentListScreen extends StatefulWidget {
@@ -58,6 +59,8 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
   }
 
   void _openDialog(int? id) {
+    if (Responsive.isMobile(context)) return;
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
