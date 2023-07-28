@@ -12,6 +12,7 @@ builder.Services.AddDbContext(builder.Configuration.GetConnectionString("HRMS_Da
 builder.Services.AddHangfire(builder.Configuration.GetConnectionString("HRMS_Database")!);
 builder.Services.Configure<SmtpConfiguration>(builder.Configuration.GetSection("SmtpConfiguration"));
 
+builder.UseSerilog();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddScopedRepositories();
@@ -23,7 +24,6 @@ builder.Services.AddControllers();
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 

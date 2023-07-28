@@ -20,11 +20,13 @@ Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.co
 ### HRMS - Web
 Defines all API endpoints, also security and error handling for that endpoints. It uses .NET 7.</br>
 
+[Serilog](https://serilog.net) is used for logging. Logs are saved in folder Logs separated for each day. </br>
+
 [SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr) is used for chat between employees. </br>
 
-[**Swagger**](https://swagger.io/) is used for documenting and testing API endpoints. To open Swagger UI go to /swagger. </br>
+[Swagger](https://swagger.io/) is used for documenting and testing API endpoints. To open Swagger UI go to /swagger. </br>
 
-[**Hangfire**](https://www.hangfire.io/) is used as worker and handles _Recurring Jobs_ and _Fire-and-Forget Jobs_. 
+[Hangfire](https://www.hangfire.io/) is used as worker and handles _Recurring Jobs_ and _Fire-and-Forget Jobs_. 
 Recurring Jobs will execute every night between 00:00 - 04:00, while Fire-and-Forget Jobs will be triggered by some action (ex. sending email). </br>
 To open Hangfire Dashboard go to /hangfire.
 
