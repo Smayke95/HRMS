@@ -15,6 +15,8 @@ public static class ServiceExtensions
                          .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                          {
                              options.Authority = configuration.GetValue<string>("IdentityServerUrl")!;
+                             options.MetadataAddress = configuration.GetValue<string>("IdentityServerMetaDataUrl")!;
+                             options.RequireHttpsMetadata = false;
 
                              var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("IdentityServerJWTSecret")!));
 

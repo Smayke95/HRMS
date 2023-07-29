@@ -36,7 +36,7 @@ public static class HangfireExtensions
         {
             AppPath = "/swagger",
             DashboardTitle = "HRMS Hangfire",
-            Authorization = new[] { new HangfireAuthorizationFilter { ApiKey = configuration.GetSection("ApiKey").Value! } }
+            Authorization = new[] { new HangfireAuthorizationFilter { ApiKey = configuration.GetSection("HangfireKey").Value! } }
         };
 
         app.UseHangfireDashboard("/hangfire", options);

@@ -12,6 +12,13 @@ public static class ServiceExtensions
                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
         );
 
+    public static void DatabaseMigrate(this IServiceProvider service)
+    {
+        using var scope = service.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<Context>();
+        context.Database.Migrate();
+    }
+
     public static void AddScopedRepositories(this IServiceCollection serviceCollection)
     {
         var repositories = Assembly

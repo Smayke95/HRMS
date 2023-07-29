@@ -26,8 +26,7 @@ Defines all API endpoints, also security and error handling for that endpoints. 
 
 [Swagger](https://swagger.io/) is used for documenting and testing API endpoints. To open Swagger UI go to /swagger. </br>
 
-[Hangfire](https://www.hangfire.io/) is used as worker and handles _Recurring Jobs_ and _Fire-and-Forget Jobs_. 
-Recurring Jobs will execute every night between 00:00 - 04:00, while Fire-and-Forget Jobs will be triggered by some action (ex. sending email). </br>
+[Hangfire](https://www.hangfire.io/) is used as worker and handles _Recurring Jobs_ and _Fire-and-Forget Jobs_. </br>
 To open Hangfire Dashboard go to /hangfire.
 
 All Recurring Jobs are defined in `HRMS.Extensions.HangfireExtensions.AddHangfireRecurringJobs()`.
@@ -50,7 +49,7 @@ Defines database (tables, views, procedures) and access to that database. </br>
 	Create database: update-database
 
 ### HRMS.Desktop - Desktop and Mobile
-Uses [Flutter](https://flutter.dev) for desktop and mobile app development. </br>
+Use [Flutter](https://flutter.dev) for desktop and mobile app development. </br>
 To generate models run:
 ```
 flutter pub run build_runner build --delete-conflicting-outputs
@@ -74,28 +73,51 @@ Integration with [RabbitMQ](https://www.rabbitmq.com/) which is used for notific
 	- Android Studio
 	- Docker Desktop
 
-### Docker:
-	1.) Run docker run
-
-### ISS Express:
+### ISS Express (Development):
 	1.) Open solution HRMS.sln with Visual Studio
-	2.) Change connection string inside appsettings.Development.json
-	3.) Change Startup item to IIS Express
-	4.) Run application with F5
+	2.) Update appsettings.Development.json in project HRMS
+	3.) Update appsettings.Development.json in project HRMS.IdentityServer
+	4.) Configure multiple startup projects: HRMS and HRMS.IdentityServer
+	5.) Click Start to run application
+	6.) Run docker image rabbitmq to enable notifications
 
-### Flutter:
+### Docker (Production):
+	1.) Update .env file in root folder
+	2.) Run 'docker compose up'
+
+### Flutter (Development & Production):
 	1.) Open folder HRMS.Desktop with Visual Studio Code
 	2.) Get all packages
-	3.) Run application with F5 (Web Api must be running)
+	3.) Update configuration to match development or production urls
+	4.) Choose desktop, mobile or web build
+	5.) Run application with F5 (HRMS and HRMS.IdentityServer must be running)
+	6.) For notifications RabbitMQ must be running
 
 </br>
 
 ## Testing
 
-Web Api: <a href="https://localhost:44378/">https://localhost:44378/</a> </br>
-Swagger: <a href="https://localhost:44378/swagger">https://localhost:44378/swagger</a> </br>
-Hangfire: <a href="https://localhost:44378/hangfire">https://localhost:44378/hangfire</a> </br>
-RabitMQ: <a href="http://localhost:15672/">http://localhost:15672/</a> </br>
+### Development:
+[WebApi HTTP](http://localhost:40300/) &emsp; &emsp; &nbsp;[WebApi HTTPS](https://localhost:44300/) </br>
+[Swagger HTTP](http://localhost:40300/swagger/index.html) &emsp; &emsp; [Swagger HTTPS](https://localhost:44300/swagger/index.html) </br>
+[Hangfire HTTP](http://localhost:40300/hangfire) &emsp; &emsp; [Hangfire HTTPS](https://localhost:44300/hangfire) </br>
+[Identity HTTP](http://localhost:40301/) &emsp; &emsp; &nbsp; [Identity HTTPS](https://localhost:44301/) </br>
+[RabitMQ HTTP](http://localhost:15672/)&emsp; &emsp; &nbsp;[RabitMQ HTTPS](https://localhost:15672/) </br>
+
+To test HRMS.IdentityServer use: </br>
+[https://localhost:44301/login?email=anes@hrms.com&password=admin](https://localhost:44301/login?email=anes@hrms.com&password=admin)
+
+To test mobile application on real device use Dev Tunnels.
+
+### Production:
+[WebApi HTTP](http://localhost:50080/) &emsp; &emsp; &nbsp;[WebApi HTTPS](https://localhost:50443/) </br>
+[Swagger HTTP](http://localhost:50080/swagger/index.html) &emsp; &emsp; [Swagger HTTPS](https://localhost:50443/swagger/index.html) </br>
+[Hangfire HTTP](http://localhost:50080/hangfire) &emsp; &emsp; [Hangfire HTTPS](https://localhost:50443/hangfire) </br>
+[Identity HTTP](http://localhost:51080/) &emsp; &emsp; &nbsp; [Identity HTTPS](https://localhost:51443/) </br>
+[RabitMQ HTTP](http://localhost:15672/)&emsp; &emsp; &nbsp;[RabitMQ HTTPS](https://localhost:15672/) </br>
+
+To test HRMS.IdentityServer use: </br>
+[https://localhost:51443/login?email=anes@hrms.com&password=admin](https://localhost:51443/login?email=anes@hrms.com&password=admin)
 
 </br>
 
@@ -128,3 +150,9 @@ Format code: ```SHIFT + ALT + F``` </br>
 Sort imports: ```SHIFT + ALT + O```
 
 <i>*Use relative import paths.</i>
+
+</br>
+
+## Licence
+
+Project is licensed under the [GNU General Public License v3.0](https://github.com/Smayke95/HRMS/blob/master/LICENSE)

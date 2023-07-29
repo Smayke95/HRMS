@@ -11,12 +11,19 @@
   <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="4.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj" />
     <ProjectReference Include="..\HRMS.Database\HRMS.Database.csproj" />
     <ProjectReference Include="..\HRMS.RabbitMQ\HRMS.RabbitMQ.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="certificate.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -27,6 +27,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.Services.DatabaseMigrate();
 app.UseHangfireDashboard(builder.Configuration);
 app.UseSwaggerUI();
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

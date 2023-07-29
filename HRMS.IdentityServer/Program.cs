@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper();
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("HRMS_Database")!);
 
+builder.UseSerilog();
+
 builder.Services.AddIdentityServer()
     .AddDeveloperSigningCredential()
     .AddInMemoryApiScopes(new List<ApiScope> { new ApiScope() })
@@ -23,7 +25,6 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-app.UseHttpsRedirection();
 
 app.UseIdentityServer();
 app.MapControllers();

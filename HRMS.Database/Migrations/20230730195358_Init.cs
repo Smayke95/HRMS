@@ -489,9 +489,9 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Date", "Message", "Type" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8065), "", "INFO" },
-                    { 2, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8112), "", "WARNING" },
-                    { 3, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(8115), "", "ERROR" }
+                    { 1, new DateTime(2023, 7, 30, 21, 53, 58, 468, DateTimeKind.Local).AddTicks(9291), "", "INFO" },
+                    { 2, new DateTime(2023, 7, 30, 21, 53, 58, 468, DateTimeKind.Local).AddTicks(9346), "", "WARNING" },
+                    { 3, new DateTime(2023, 7, 30, 21, 53, 58, 468, DateTimeKind.Local).AddTicks(9349), "", "ERROR" }
                 });
 
             migrationBuilder.InsertData(
@@ -644,38 +644,38 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "EmployeeId", "Room", "Text", "Time" },
                 values: new object[,]
                 {
-                    { 1, 1, "AnesSmajicIrenaVilic", "Dobro jutro Irena", new DateTime(2023, 7, 22, 12, 1, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, "AnesSmajicIrenaVilic", "Kako si danas?", new DateTime(2023, 7, 22, 12, 2, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 2, "AnesSmajicIrenaVilic", "Jutro Anese", new DateTime(2023, 7, 22, 12, 3, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 2, "AnesSmajicIrenaVilic", "Odlično sam, hvala. Kako si ti?", new DateTime(2023, 7, 22, 12, 4, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 1, "AnesSmajicIrenaVilic", "Također dobro, hvala. Imaš li neki plan za danas?", new DateTime(2023, 7, 22, 12, 5, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 2, "AnesSmajicIrenaVilic", "Da, imam par sastanaka i trebam završiti taj novi izvještaj do kraja dana", new DateTime(2023, 7, 22, 12, 6, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 2, "AnesSmajicIrenaVilic", "A ti?", new DateTime(2023, 7, 22, 12, 7, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 1, "AnesSmajicIrenaVilic", "Također imam sastanak ujutro", new DateTime(2023, 7, 22, 12, 8, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, 1, "AnesSmajicIrenaVilic", "ali popodne imam nekoliko sati slobodno", new DateTime(2023, 7, 22, 12, 9, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, 1, "AnesSmajicIrenaVilic", "Planiram završiti projekt koji radim", new DateTime(2023, 7, 22, 12, 10, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, 2, "AnesSmajicIrenaVilic", "Zvuči kao da ćeš imati produktivan dan. Treba li ti ikakva pomoć s tim projektom?", new DateTime(2023, 7, 22, 12, 11, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, 1, "AnesSmajicIrenaVilic", "Hvala na ponudi. Možda ću morati provjeriti neke podatke, pa ako imam pitanja, sigurno ću ti se obratiti", new DateTime(2023, 7, 22, 12, 12, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, 2, "AnesSmajicIrenaVilic", "Svakako, uvijek sam tu da pomognem", new DateTime(2023, 7, 22, 12, 13, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, 2, "AnesSmajicIrenaVilic", "Inače", new DateTime(2023, 7, 22, 12, 14, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, 2, "AnesSmajicIrenaVilic", "što misliš o novom uređenju ureda?", new DateTime(2023, 7, 22, 12, 15, 0, 0, DateTimeKind.Unspecified) },
-                    { 16, 1, "AnesSmajicIrenaVilic", "Meni se sviđa! Osjećam se puno udobnije u ovom novom okruženju", new DateTime(2023, 7, 22, 12, 16, 0, 0, DateTimeKind.Unspecified) },
-                    { 17, 1, "AnesSmajicIrenaVilic", "A tebi?", new DateTime(2023, 7, 22, 12, 17, 0, 0, DateTimeKind.Unspecified) },
-                    { 18, 2, "AnesSmajicIrenaVilic", "Potpuno se slažem", new DateTime(2023, 7, 22, 12, 18, 0, 0, DateTimeKind.Unspecified) },
-                    { 19, 2, "AnesSmajicIrenaVilic", "Ovo je puno svjetlije i prostranije", new DateTime(2023, 7, 22, 12, 19, 0, 0, DateTimeKind.Unspecified) },
-                    { 20, 2, "AnesSmajicIrenaVilic", "Nekako mi daje više inspiracije za rad", new DateTime(2023, 7, 22, 12, 20, 0, 0, DateTimeKind.Unspecified) },
-                    { 21, 1, "AnesSmajicIrenaVilic", "Da, baš tako! Volim kako je timski duh u ovom uredu, svi surađujemo tako dobro", new DateTime(2023, 7, 22, 12, 21, 0, 0, DateTimeKind.Unspecified) },
-                    { 22, 2, "AnesSmajicIrenaVilic", "Upravo tako!", new DateTime(2023, 7, 22, 12, 22, 0, 0, DateTimeKind.Unspecified) },
-                    { 23, 2, "AnesSmajicIrenaVilic", "Baš zbog toga nam i ide ovako dobro", new DateTime(2023, 7, 22, 12, 23, 0, 0, DateTimeKind.Unspecified) },
-                    { 24, 1, "AnesSmajicIrenaVilic", "Tako je. Sve u svemu, zadovoljan sam kako stvari idu na poslu", new DateTime(2023, 7, 22, 12, 24, 0, 0, DateTimeKind.Unspecified) },
-                    { 25, 2, "AnesSmajicIrenaVilic", "I ja isto! Ako ikada trebaš razgovarati o bilo čemu ili trebaš pomoć, slobodno mi se obrati", new DateTime(2023, 7, 22, 12, 25, 0, 0, DateTimeKind.Unspecified) },
-                    { 26, 1, "AnesSmajicIrenaVilic", "Hvala Irena", new DateTime(2023, 7, 22, 12, 26, 0, 0, DateTimeKind.Unspecified) },
-                    { 27, 1, "AnesSmajicIrenaVilic", "Cijenim to", new DateTime(2023, 7, 22, 12, 27, 0, 0, DateTimeKind.Unspecified) },
-                    { 28, 2, "AnesSmajicIrenaVilic", "Nema na čemu. Sada se moram vratiti radu, ali ako želiš, možemo se kasnije ponovno čuti.", new DateTime(2023, 7, 22, 12, 28, 0, 0, DateTimeKind.Unspecified) },
-                    { 29, 1, "AnesSmajicIrenaVilic", "U redu, zvuči dobro. Sretno s tvojim sastancima i projektom!", new DateTime(2023, 7, 22, 12, 29, 0, 0, DateTimeKind.Unspecified) },
-                    { 30, 2, "AnesSmajicIrenaVilic", "Hvala! I tebi želim uspješan dan", new DateTime(2023, 7, 22, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 31, 2, "AnesSmajicIrenaVilic", "Čujemo se kasnije", new DateTime(2023, 7, 22, 12, 31, 0, 0, DateTimeKind.Unspecified) },
-                    { 32, 1, "AnesSmajicIrenaVilic", "Čujemo se", new DateTime(2023, 7, 22, 12, 32, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, "Anes Smajić & Irena Vilić", "Dobro jutro Irena", new DateTime(2023, 7, 22, 12, 1, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1, "Anes Smajić & Irena Vilić", "Kako si danas?", new DateTime(2023, 7, 22, 12, 2, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 2, "Anes Smajić & Irena Vilić", "Jutro Anese", new DateTime(2023, 7, 22, 12, 3, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 2, "Anes Smajić & Irena Vilić", "Odlično sam, hvala. Kako si ti?", new DateTime(2023, 7, 22, 12, 4, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 1, "Anes Smajić & Irena Vilić", "Također dobro, hvala. Imaš li neki plan za danas?", new DateTime(2023, 7, 22, 12, 5, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 2, "Anes Smajić & Irena Vilić", "Da, imam par sastanaka i trebam završiti taj novi izvještaj do kraja dana", new DateTime(2023, 7, 22, 12, 6, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 2, "Anes Smajić & Irena Vilić", "A ti?", new DateTime(2023, 7, 22, 12, 7, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 1, "Anes Smajić & Irena Vilić", "Također imam sastanak ujutro", new DateTime(2023, 7, 22, 12, 8, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, 1, "Anes Smajić & Irena Vilić", "ali popodne imam nekoliko sati slobodno", new DateTime(2023, 7, 22, 12, 9, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, 1, "Anes Smajić & Irena Vilić", "Planiram završiti projekt koji radim", new DateTime(2023, 7, 22, 12, 10, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, 2, "Anes Smajić & Irena Vilić", "Zvuči kao da ćeš imati produktivan dan. Treba li ti ikakva pomoć s tim projektom?", new DateTime(2023, 7, 22, 12, 11, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, 1, "Anes Smajić & Irena Vilić", "Hvala na ponudi. Možda ću morati provjeriti neke podatke, pa ako imam pitanja, sigurno ću ti se obratiti", new DateTime(2023, 7, 22, 12, 12, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, 2, "Anes Smajić & Irena Vilić", "Svakako, uvijek sam tu da pomognem", new DateTime(2023, 7, 22, 12, 13, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, 2, "Anes Smajić & Irena Vilić", "Inače", new DateTime(2023, 7, 22, 12, 14, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, 2, "Anes Smajić & Irena Vilić", "što misliš o novom uređenju ureda?", new DateTime(2023, 7, 22, 12, 15, 0, 0, DateTimeKind.Unspecified) },
+                    { 16, 1, "Anes Smajić & Irena Vilić", "Meni se sviđa! Osjećam se puno udobnije u ovom novom okruženju", new DateTime(2023, 7, 22, 12, 16, 0, 0, DateTimeKind.Unspecified) },
+                    { 17, 1, "Anes Smajić & Irena Vilić", "A tebi?", new DateTime(2023, 7, 22, 12, 17, 0, 0, DateTimeKind.Unspecified) },
+                    { 18, 2, "Anes Smajić & Irena Vilić", "Potpuno se slažem", new DateTime(2023, 7, 22, 12, 18, 0, 0, DateTimeKind.Unspecified) },
+                    { 19, 2, "Anes Smajić & Irena Vilić", "Ovo je puno svjetlije i prostranije", new DateTime(2023, 7, 22, 12, 19, 0, 0, DateTimeKind.Unspecified) },
+                    { 20, 2, "Anes Smajić & Irena Vilić", "Nekako mi daje više inspiracije za rad", new DateTime(2023, 7, 22, 12, 20, 0, 0, DateTimeKind.Unspecified) },
+                    { 21, 1, "Anes Smajić & Irena Vilić", "Da, baš tako! Volim kako je timski duh u ovom uredu, svi surađujemo tako dobro", new DateTime(2023, 7, 22, 12, 21, 0, 0, DateTimeKind.Unspecified) },
+                    { 22, 2, "Anes Smajić & Irena Vilić", "Upravo tako!", new DateTime(2023, 7, 22, 12, 22, 0, 0, DateTimeKind.Unspecified) },
+                    { 23, 2, "Anes Smajić & Irena Vilić", "Baš zbog toga nam i ide ovako dobro", new DateTime(2023, 7, 22, 12, 23, 0, 0, DateTimeKind.Unspecified) },
+                    { 24, 1, "Anes Smajić & Irena Vilić", "Tako je. Sve u svemu, zadovoljan sam kako stvari idu na poslu", new DateTime(2023, 7, 22, 12, 24, 0, 0, DateTimeKind.Unspecified) },
+                    { 25, 2, "Anes Smajić & Irena Vilić", "I ja isto! Ako ikada trebaš razgovarati o bilo čemu ili trebaš pomoć, slobodno mi se obrati", new DateTime(2023, 7, 22, 12, 25, 0, 0, DateTimeKind.Unspecified) },
+                    { 26, 1, "Anes Smajić & Irena Vilić", "Hvala Irena", new DateTime(2023, 7, 22, 12, 26, 0, 0, DateTimeKind.Unspecified) },
+                    { 27, 1, "Anes Smajić & Irena Vilić", "Cijenim to", new DateTime(2023, 7, 22, 12, 27, 0, 0, DateTimeKind.Unspecified) },
+                    { 28, 2, "Anes Smajić & Irena Vilić", "Nema na čemu. Sada se moram vratiti radu, ali ako želiš, možemo se kasnije ponovno čuti.", new DateTime(2023, 7, 22, 12, 28, 0, 0, DateTimeKind.Unspecified) },
+                    { 29, 1, "Anes Smajić & Irena Vilić", "U redu, zvuči dobro. Sretno s tvojim sastancima i projektom!", new DateTime(2023, 7, 22, 12, 29, 0, 0, DateTimeKind.Unspecified) },
+                    { 30, 2, "Anes Smajić & Irena Vilić", "Hvala! I tebi želim uspješan dan", new DateTime(2023, 7, 22, 12, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 31, 2, "Anes Smajić & Irena Vilić", "Čujemo se kasnije", new DateTime(2023, 7, 22, 12, 31, 0, 0, DateTimeKind.Unspecified) },
+                    { 32, 1, "Anes Smajić & Irena Vilić", "Čujemo se", new DateTime(2023, 7, 22, 12, 32, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -716,8 +716,8 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9105) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 23, 18, 55, 41, 811, DateTimeKind.Local).AddTicks(9110) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 7, 30, 21, 53, 58, 469, DateTimeKind.Local).AddTicks(427) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 7, 30, 21, 53, 58, 469, DateTimeKind.Local).AddTicks(432) }
                 });
 
             migrationBuilder.CreateIndex(

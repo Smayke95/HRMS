@@ -17,7 +17,7 @@ namespace HRMS.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -1088,21 +1088,21 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 7, 23, 18, 56, 0, 580, DateTimeKind.Local).AddTicks(8359),
+                            Date = new DateTime(2023, 7, 30, 21, 54, 13, 0, DateTimeKind.Local).AddTicks(8327),
                             Message = "",
                             Type = "INFO"
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 7, 23, 18, 56, 0, 580, DateTimeKind.Local).AddTicks(8410),
+                            Date = new DateTime(2023, 7, 30, 21, 54, 13, 0, DateTimeKind.Local).AddTicks(8381),
                             Message = "",
                             Type = "WARNING"
                         },
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 7, 23, 18, 56, 0, 580, DateTimeKind.Local).AddTicks(8412),
+                            Date = new DateTime(2023, 7, 30, 21, 54, 13, 0, DateTimeKind.Local).AddTicks(8384),
                             Message = "",
                             Type = "ERROR"
                         });
@@ -1141,7 +1141,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Dobro jutro Irena",
                             Time = new DateTime(2023, 7, 22, 12, 1, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1149,7 +1149,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 2,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Kako si danas?",
                             Time = new DateTime(2023, 7, 22, 12, 2, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1157,7 +1157,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 3,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Jutro Anese",
                             Time = new DateTime(2023, 7, 22, 12, 3, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1165,7 +1165,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 4,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Odlično sam, hvala. Kako si ti?",
                             Time = new DateTime(2023, 7, 22, 12, 4, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1173,7 +1173,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 5,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Također dobro, hvala. Imaš li neki plan za danas?",
                             Time = new DateTime(2023, 7, 22, 12, 5, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1181,7 +1181,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 6,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Da, imam par sastanaka i trebam završiti taj novi izvještaj do kraja dana",
                             Time = new DateTime(2023, 7, 22, 12, 6, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1189,7 +1189,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 7,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "A ti?",
                             Time = new DateTime(2023, 7, 22, 12, 7, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1197,7 +1197,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 8,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Također imam sastanak ujutro",
                             Time = new DateTime(2023, 7, 22, 12, 8, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1205,7 +1205,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 9,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "ali popodne imam nekoliko sati slobodno",
                             Time = new DateTime(2023, 7, 22, 12, 9, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1213,7 +1213,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 10,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Planiram završiti projekt koji radim",
                             Time = new DateTime(2023, 7, 22, 12, 10, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1221,7 +1221,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 11,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Zvuči kao da ćeš imati produktivan dan. Treba li ti ikakva pomoć s tim projektom?",
                             Time = new DateTime(2023, 7, 22, 12, 11, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1229,7 +1229,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 12,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Hvala na ponudi. Možda ću morati provjeriti neke podatke, pa ako imam pitanja, sigurno ću ti se obratiti",
                             Time = new DateTime(2023, 7, 22, 12, 12, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1237,7 +1237,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 13,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Svakako, uvijek sam tu da pomognem",
                             Time = new DateTime(2023, 7, 22, 12, 13, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1245,7 +1245,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 14,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Inače",
                             Time = new DateTime(2023, 7, 22, 12, 14, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1253,7 +1253,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 15,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "što misliš o novom uređenju ureda?",
                             Time = new DateTime(2023, 7, 22, 12, 15, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1261,7 +1261,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 16,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Meni se sviđa! Osjećam se puno udobnije u ovom novom okruženju",
                             Time = new DateTime(2023, 7, 22, 12, 16, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1269,7 +1269,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 17,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "A tebi?",
                             Time = new DateTime(2023, 7, 22, 12, 17, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1277,7 +1277,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 18,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Potpuno se slažem",
                             Time = new DateTime(2023, 7, 22, 12, 18, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1285,7 +1285,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 19,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Ovo je puno svjetlije i prostranije",
                             Time = new DateTime(2023, 7, 22, 12, 19, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1293,7 +1293,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 20,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Nekako mi daje više inspiracije za rad",
                             Time = new DateTime(2023, 7, 22, 12, 20, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1301,7 +1301,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 21,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Da, baš tako! Volim kako je timski duh u ovom uredu, svi surađujemo tako dobro",
                             Time = new DateTime(2023, 7, 22, 12, 21, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1309,7 +1309,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 22,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Upravo tako!",
                             Time = new DateTime(2023, 7, 22, 12, 22, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1317,7 +1317,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 23,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Baš zbog toga nam i ide ovako dobro",
                             Time = new DateTime(2023, 7, 22, 12, 23, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1325,7 +1325,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 24,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Tako je. Sve u svemu, zadovoljan sam kako stvari idu na poslu",
                             Time = new DateTime(2023, 7, 22, 12, 24, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1333,7 +1333,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 25,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "I ja isto! Ako ikada trebaš razgovarati o bilo čemu ili trebaš pomoć, slobodno mi se obrati",
                             Time = new DateTime(2023, 7, 22, 12, 25, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1341,7 +1341,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 26,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Hvala Irena",
                             Time = new DateTime(2023, 7, 22, 12, 26, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1349,7 +1349,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 27,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Cijenim to",
                             Time = new DateTime(2023, 7, 22, 12, 27, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1357,7 +1357,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 28,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Nema na čemu. Sada se moram vratiti radu, ali ako želiš, možemo se kasnije ponovno čuti.",
                             Time = new DateTime(2023, 7, 22, 12, 28, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1365,7 +1365,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 29,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "U redu, zvuči dobro. Sretno s tvojim sastancima i projektom!",
                             Time = new DateTime(2023, 7, 22, 12, 29, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1373,7 +1373,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 30,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Hvala! I tebi želim uspješan dan",
                             Time = new DateTime(2023, 7, 22, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1381,7 +1381,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 31,
                             EmployeeId = 2,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Čujemo se kasnije",
                             Time = new DateTime(2023, 7, 22, 12, 31, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1389,7 +1389,7 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 32,
                             EmployeeId = 1,
-                            Room = "AnesSmajicIrenaVilic",
+                            Room = "Anes Smajić & Irena Vilić",
                             Text = "Čujemo se",
                             Time = new DateTime(2023, 7, 22, 12, 32, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1782,7 +1782,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 7, 23, 18, 56, 0, 580, DateTimeKind.Local).AddTicks(9401)
+                            Time = new DateTime(2023, 7, 30, 21, 54, 13, 0, DateTimeKind.Local).AddTicks(9568)
                         },
                         new
                         {
@@ -1790,7 +1790,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 7, 23, 18, 56, 0, 580, DateTimeKind.Local).AddTicks(9405)
+                            Time = new DateTime(2023, 7, 30, 21, 54, 13, 0, DateTimeKind.Local).AddTicks(9572)
                         });
                 });
 

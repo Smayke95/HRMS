@@ -14,7 +14,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   BaseProvider({String? endpoint}) {
     _baseUrl = const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "localhost:44378",
+      defaultValue: "localhost:44300",
     );
 
     _endpoint = endpoint ?? T.toString();
