@@ -4,48 +4,57 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
-import '../data_table_sources/project_data_table_source.dart';
+import '../data_table_sources/city_data_table_source.dart';
+import '../models/country.dart';
 import '../models/paged_result.dart';
-import '../models/project.dart';
-import '../providers/project_provider.dart';
+import '../models/city.dart';
+import '../providers/city_provider.dart';
+import '../providers/country_provider.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
-class ProjectListScreen extends StatefulWidget {
-  const ProjectListScreen({super.key});
+class CityListScreen extends StatefulWidget {
+  const CityListScreen({super.key});
 
   @override
-  State<ProjectListScreen> createState() => _ProjectListScreenState();
+  State<CityListScreen> createState() => _CityListScreenState();
 }
 
-class _ProjectListScreenState extends State<ProjectListScreen> {
-  late ProjectProvider _projectProvider;
+class _CityListScreenState extends State<CityListScreen> {
+  late CityProvider _cityProvider;
+  late CountryProvider _countryProvider;
 
-  late ProjectDataTableSource projectDataTableSource;
+  late CityDataTableSource cityDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _projects = PagedResult<Project>();
+  var _cities = PagedResult<City>();
+  var _countries = PagedResult<Country>();
 
   @override
   void initState() {
     super.initState();
 
-    _projectProvider = context.read<ProjectProvider>();
+    _cityProvider = context.read<CityProvider>();
+    _countryProvider = context.read<CountryProvider>();
 
-    projectDataTableSource =
-        ProjectDataTableSource(_projectProvider, _openDialog);
+    cityDataTableSource =
+        CityDataTableSource(_cityProvider, _openDialog);
 
     _loadData(null);
   }
 
   Future _loadData(int? id) async {
-    _projects = await _projectProvider.getAll();
+    _cities = await _cityProvider.getAll();
+    _countries = await _countryProvider.getAll();
 
     if (id != null) {
-      var project = await _projectProvider.get(id);
+      var city = await _cityProvider.get(id);
 
-      _formKey.currentState?.patchValue(
-          {"name": project.name, "description": project.description});
+      _formKey.currentState?.patchValue({
+        "name": city.name, 
+        "zipCode": city.zipCode, 
+        "countryId": city.country?.id.toString() ?? "0"
+      });
     }
   }
 
@@ -63,20 +72,21 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
     return Column(
       children: [
         Search(
-          "Dodaj projekat", 
+          "Dodaj grad", 
           () => _openDialog(null),
-          onSearch: (text) => projectDataTableSource.filterData(text)
+          onSearch: (text) => cityDataTableSource.filterData(text)
         ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
             addEmptyRows: false,
             showCheckboxColumn: false,
-            source: projectDataTableSource,
+            source: cityDataTableSource,
             rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Naziv")),
-              DataColumn(label: Text("Opis"))
+              DataColumn(label: Text("Poštanski broj")),
+              DataColumn(label: Text("Država"))
             ],
           ),
         ),
@@ -95,7 +105,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
           children: [
             Icon(id == null ? Icons.add : Icons.edit),
             const SizedBox(width: 10),
-            Text(id == null ? "Dodaj projekat" : "Uredi projekat"),
+            Text(id == null ? "Dodaj grad" : "Uredi grad"),
           ],
         ),
       ),
@@ -124,12 +134,32 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                   SizedBox(
                     width: 500,
                     child: FormBuilderTextField(
-                      name: "description",
+                      name: "zipCode",
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      decoration: const InputDecoration(labelText: "Opis *"),
+                      decoration: const InputDecoration(labelText: "Poštanski broj	 *"),
                       validator: FormBuilderValidators.required(
-                          errorText: "Opis je obavezan."),
+                          errorText: "Poštanski broj je obavezan."),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 500,
+                    child: FormBuilderDropdown(
+                      name: "countryId",
+                      decoration: const InputDecoration(labelText: "Država *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Država je obavezna."),
+                      items: _countries.result
+                          .map((country) => DropdownMenuItem(
+                                value: country.id.toString(),
+                                child: Text(country.name),
+                              ))
+                          .toList(),
                     ),
                   ),
                 ],
@@ -151,8 +181,8 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _projectProvider.delete(id);
-              projectDataTableSource.filterData(null);
+              await _cityProvider.delete(id);
+              cityDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             },
           ),
@@ -180,10 +210,10 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
               var request = Map.from(_formKey.currentState!.value);
 
               id == null
-                  ? await _projectProvider.insert(request)
-                  : await _projectProvider.update(id, request);
+                  ? await _cityProvider.insert(request)
+                  : await _cityProvider.update(id, request);
 
-              projectDataTableSource.filterData(null);
+              cityDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             }
           },

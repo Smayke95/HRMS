@@ -14,6 +14,7 @@ import '../models/task_type.dart';
 import '../providers/employee_provider.dart';
 import '../providers/project_provider.dart';
 import '../providers/task_provider.dart';
+import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
 class TaskListScreen extends StatefulWidget {
@@ -70,6 +71,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
   }
 
   void _openDialog(int? id) {
+    if (Responsive.isMobile(context)) return;
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -180,8 +183,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     width: 300,
                     child: FormBuilderDropdown(
                       name: "statusId",
-                      decoration:
-                          const InputDecoration(labelText: "Status *"),
+                      decoration: const InputDecoration(labelText: "Status *"),
                       validator: FormBuilderValidators.required(
                           errorText: "Status zadatka je obavezan."),
                       items: _statuses.result
@@ -201,8 +203,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     width: 300,
                     child: FormBuilderDropdown(
                       name: "typeId",
-                      decoration:
-                          const InputDecoration(labelText: "Tip *"),
+                      decoration: const InputDecoration(labelText: "Tip *"),
                       validator: FormBuilderValidators.required(
                           errorText: "Tip zadatka je obavezan."),
                       items: _types.result
@@ -282,7 +283,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   ? await _taskProvider.insert(request)
                   : await _taskProvider.update(id, request);
 
-             taskDataTableSource.filterData(null);
+              taskDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             }
           },

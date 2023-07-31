@@ -9,6 +9,16 @@ public class ApiProfile : Profile
 {
     public ApiProfile()
     {
+        CreateMap<CityInsert, City>()
+            .ForMember(x => x.Country, opt => opt.MapFrom(y => new Country { Id = y.CountryId ?? 0 }));
+
+        CreateMap<CityUpdate, City>()
+            .ForMember(x => x.Country, opt => opt.MapFrom(y => new Country { Id = y.CountryId ?? 0 }));
+
+        CreateMap<CountryInsert, Country>();
+
+        CreateMap<CountryUpdate, Country>();
+
         CreateMap<DepartmentInsert, Department>()
             .ForMember(x => x.ParentDepartment, opt => opt.MapFrom(y => new Department { Id = y.ParentDepartmentId ?? 0 }))
             .ForMember(x => x.Supervisor, opt => opt.MapFrom(y => new Employee { Id = y.SupervisorId ?? 0 }));
