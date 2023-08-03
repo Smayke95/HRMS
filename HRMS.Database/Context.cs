@@ -36,7 +36,7 @@ public class Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseSqlServer("Server=localhost; Database=IB210295; Trusted_Connection=False; Encrypt=False; User ID=sa; Password=inetdesign;");
+            optionsBuilder.UseSqlServer("Server=localhost; Database=210295; Trusted_Connection=False; Encrypt=False; User ID=sa; Password=inetdesign;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
