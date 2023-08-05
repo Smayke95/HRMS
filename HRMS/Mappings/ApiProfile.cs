@@ -2,6 +2,7 @@
 using HRMS.Core.Models;
 using HRMS.Models;
 using Task = HRMS.Core.Models.Task;
+using TaskStatus = HRMS.Core.Models.TaskStatus;
 
 namespace HRMS.Mappings;
 
@@ -60,8 +61,24 @@ public class ApiProfile : Profile
 
         CreateMap<ProjectUpdate, Project>();
 
-        CreateMap<TaskInsert, Task>();
+        CreateMap<TaskInsert, Task>()
+            .ForMember(x => x.Project, opt => opt.MapFrom(y => new Project { Id = y.ProjectId ?? 0 }))
+            .ForMember(x => x.Status, opt => opt.MapFrom(y => new TaskStatus { Id = y.StatusId ?? 0 }))
+            .ForMember(x => x.Type, opt => opt.MapFrom(y => new TaskType { Id = y.TypeId ?? 0 }))
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
 
-        CreateMap<TaskUpdate, Task>();
+        CreateMap<TaskUpdate, Task>()
+            .ForMember(x => x.Project, opt => opt.MapFrom(y => new Project { Id = y.ProjectId ?? 0 }))
+            .ForMember(x => x.Status, opt => opt.MapFrom(y => new TaskStatus { Id = y.TaskStatusId ?? 0 }))
+            .ForMember(x => x.Type, opt => opt.MapFrom(y => new TaskType { Id = y.TaskTypeId ?? 0 }))
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+
+        CreateMap<TaskStatusInsert, TaskStatus>();
+
+        CreateMap<TaskStatusUpdate, TaskStatus>();
+
+        CreateMap<TaskTypeInsert, TaskType>();
+
+        CreateMap<TaskTypeUpdate, TaskType>();
     }
 }

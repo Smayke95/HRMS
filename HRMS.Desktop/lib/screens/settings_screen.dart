@@ -1,11 +1,17 @@
+import 'package:HRMS/screens/task_status_list_screen.dart';
+import 'package:HRMS/screens/task_type_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/city.dart';
 import '../models/country.dart';
 import '../models/paged_result.dart';
+import '../models/task_status.dart';
+import '../models/task_type.dart';
 import '../providers/city_provider.dart';
 import '../providers/country_provider.dart';
+import '../providers/task_status_provider.dart';
+import '../providers/task_type_provider.dart';
 import '../widgets/master_screen.dart';
 import 'city_list_screen.dart';
 import 'country_list_screen.dart';
@@ -20,9 +26,13 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   late CityProvider _cityProvider;
   late CountryProvider _countryProvider;
+  late TaskStatusProvider _taskStatusProvider;
+  late TaskTypeProvider _taskTypeProvider;
 
   var _cities = PagedResult<City>();
   var _countries = PagedResult<Country>();
+  var _taskStatuses = PagedResult<TaskStatus>();
+  var _taskTypes = PagedResult<TaskType>();
 
  @override
   void initState() {
@@ -30,6 +40,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     _cityProvider = context.read<CityProvider>();
     _countryProvider = context.read<CountryProvider>(); 
+    _taskStatusProvider = context.read<TaskStatusProvider>(); 
+    _taskTypeProvider = context.read<TaskTypeProvider>(); 
    
     _loadData(null);
   }
@@ -37,6 +49,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future _loadData(int? id) async {
     _cities = await _cityProvider.getAll();
     _countries = await _countryProvider.getAll();
+    _taskStatuses = await _taskStatusProvider.getAll();
+    _taskTypes = await _taskTypeProvider.getAll();
   }
 
   @override
@@ -71,6 +85,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _countries.totalCount.toString(),
                     const CountryListScreen(),
                   ),
+                  const SizedBox(width: 16),
+                  _buildSettingsBoxContainer(
+                    context,
+                    "Statusi na zadacima",
+                    _taskStatuses.totalCount.toString(),
+                    const TaskStatusListScreen(),
+                  ),
+                  const SizedBox(width: 16),
+                  _buildSettingsBoxContainer(
+                    context,
+                    "Tipovi zadataka",
+                    _taskTypes.totalCount.toString(),
+                    const TaskTypeListScreen(),
+                  ),
+                  /*const SizedBox(width: 16),
+                  _buildSettingsBoxContainer(
+                    context,
+                    "Tipovi događaja",
+                    _countries.totalCount.toString(),
+                    const CountryListScreen(),
+                  ),*/
                 ],
               ),
             );

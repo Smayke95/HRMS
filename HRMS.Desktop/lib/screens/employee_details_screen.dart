@@ -244,15 +244,15 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                 errorText: "E-mail je obavezan."),
           ),
           ElevatedButton(
-            child: Text("Potvrdi email"),
+            child: const Text("Potvrdi email"),
             onPressed: () => {},
           ),
           ElevatedButton(
-            child: Text("Otključaj"),
+            child: const Text("Otključaj"),
             onPressed: () => {},
           ),
           ElevatedButton(
-            child: Text("Resetuj lozinku"),
+            child: const Text("Resetuj lozinku"),
             onPressed: () => {},
           ),
         ],

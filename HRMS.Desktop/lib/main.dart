@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:HRMS/providers/city_provider.dart';
 import 'package:HRMS/providers/country_provider.dart';
+import 'package:HRMS/providers/task_status_provider.dart';
+import 'package:HRMS/providers/task_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +39,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PositionProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
         ChangeNotifierProvider(create: (_) => TaskProvider()),
+        ChangeNotifierProvider(create: (_) => TaskStatusProvider()),
+        ChangeNotifierProvider(create: (_) => TaskTypeProvider()),
       ],
       child: const MyApp(),
     ),

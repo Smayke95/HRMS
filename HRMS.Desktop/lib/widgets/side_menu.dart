@@ -124,7 +124,7 @@ class SideMenu extends StatelessWidget {
             "Kalendar",
             Icons.date_range,
             const CalendarScreen(),
-            false,
+            true,
           ),
           ExpansionTile(
             leading: const Icon(Icons.groups),

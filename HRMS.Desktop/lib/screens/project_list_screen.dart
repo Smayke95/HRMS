@@ -5,8 +5,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../data_table_sources/project_data_table_source.dart';
-import '../models/paged_result.dart';
-import '../models/project.dart';
 import '../providers/project_provider.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
@@ -24,7 +22,6 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   late ProjectDataTableSource projectDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _projects = PagedResult<Project>();
 
   @override
   void initState() {
@@ -39,7 +36,6 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   }
 
   Future _loadData(int? id) async {
-    _projects = await _projectProvider.getAll();
 
     if (id != null) {
       var project = await _projectProvider.get(id);

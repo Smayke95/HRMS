@@ -75,6 +75,12 @@ public class RepositoryProfile : Profile
         CreateMap<Task, Core.Models.Task>()
             .ReverseMap();
 
+        CreateMap<Core.Models.Task, Task>()
+            .ForMember(x => x.TaskStatusId, opt => opt.MapFrom(y => y.Status.Id))
+            .ForMember(x => x.TaskTypeId, opt => opt.MapFrom(y => y.Type.Id))
+            .ForMember(x => x.ProjectId, opt => opt.MapFrom(y => y.Project.Id))
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id));
+
         CreateMap<TaskComment, Core.Models.TaskComment>()
             .ReverseMap();
 

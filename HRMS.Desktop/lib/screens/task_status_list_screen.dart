@@ -4,54 +4,43 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
-import '../data_table_sources/city_data_table_source.dart';
-import '../models/country.dart';
-import '../models/paged_result.dart';
-import '../providers/city_provider.dart';
-import '../providers/country_provider.dart';
+import '../data_table_sources/task_status_data_table_source.dart';
+import '../providers/task_status_provider.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
-class CityListScreen extends StatefulWidget {
-  const CityListScreen({super.key});
+class TaskStatusListScreen extends StatefulWidget {
+  const TaskStatusListScreen({super.key});
 
   @override
-  State<CityListScreen> createState() => _CityListScreenState();
+  State<TaskStatusListScreen> createState() => _TaskStatusListScreenState();
 }
 
-class _CityListScreenState extends State<CityListScreen> {
-  late CityProvider _cityProvider;
-  late CountryProvider _countryProvider;
+class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
+  late TaskStatusProvider _taskStatusProvider;
 
-  late CityDataTableSource cityDataTableSource;
+  late TaskStatusDataTableSource taskStatusDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _countries = PagedResult<Country>();
 
   @override
   void initState() {
     super.initState();
 
-    _cityProvider = context.read<CityProvider>();
-    _countryProvider = context.read<CountryProvider>();
+    _taskStatusProvider = context.read<TaskStatusProvider>();
 
-    cityDataTableSource =
-        CityDataTableSource(_cityProvider, _openDialog);
+    taskStatusDataTableSource =
+        TaskStatusDataTableSource(_taskStatusProvider, _openDialog);
 
     _loadData(null);
   }
 
-  Future _loadData(int? id) async {
-    _countries = await _countryProvider.getAll();
+  Future _loadData(int? id) async {    
 
     if (id != null) {
-      var city = await _cityProvider.get(id);
+      var taskStatus = await _taskStatusProvider.get(id);
 
-      _formKey.currentState?.patchValue({
-        "name": city.name, 
-        "zipCode": city.zipCode, 
-        "countryId": city.country?.id.toString() ?? "0"
-      });
+      _formKey.currentState?.patchValue({"name": taskStatus.name});
     }
   }
 
@@ -69,21 +58,19 @@ class _CityListScreenState extends State<CityListScreen> {
     return Column(
       children: [
         Search(
-          "Dodaj grad", 
+          "Dodaj status", 
           () => _openDialog(null),
-          onSearch: (text) => cityDataTableSource.filterData(text)
+          onSearch: (text) => taskStatusDataTableSource.filterData(text)
         ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
             addEmptyRows: false,
             showCheckboxColumn: false,
-            source: cityDataTableSource,
+            source: taskStatusDataTableSource,
             rowsPerPage: 7,
             columns: const [
-              DataColumn(label: Text("Naziv")),
-              DataColumn(label: Text("Poštanski broj")),
-              DataColumn(label: Text("Država"))
+              DataColumn(label: Text("Naziv"))            
             ],
           ),
         ),
@@ -102,7 +89,7 @@ class _CityListScreenState extends State<CityListScreen> {
           children: [
             Icon(id == null ? Icons.add : Icons.edit),
             const SizedBox(width: 10),
-            Text(id == null ? "Dodaj grad" : "Uredi grad"),
+            Text(id == null ? "Dodaj status" : "Uredi status"),
           ],
         ),
       ),
@@ -124,43 +111,7 @@ class _CityListScreenState extends State<CityListScreen> {
                     ),
                   )
                 ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 500,
-                    child: FormBuilderTextField(
-                      name: "zipCode",
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: const InputDecoration(labelText: "Poštanski broj	 *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Poštanski broj je obavezan."),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 500,
-                    child: FormBuilderDropdown(
-                      name: "countryId",
-                      decoration: const InputDecoration(labelText: "Država *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Država je obavezna."),
-                      items: _countries.result
-                          .map((country) => DropdownMenuItem(
-                                value: country.id.toString(),
-                                child: Text(country.name),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ],
-              ),
+              ),              
             ],
           ),
         ),
@@ -178,8 +129,8 @@ class _CityListScreenState extends State<CityListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _cityProvider.delete(id);
-              cityDataTableSource.filterData(null);
+              await _taskStatusProvider.delete(id);
+              taskStatusDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             },
           ),
@@ -207,10 +158,10 @@ class _CityListScreenState extends State<CityListScreen> {
               var request = Map.from(_formKey.currentState!.value);
 
               id == null
-                  ? await _cityProvider.insert(request)
-                  : await _cityProvider.update(id, request);
+                  ? await _taskStatusProvider.insert(request)
+                  : await _taskStatusProvider.update(id, request);
 
-              cityDataTableSource.filterData(null);
+              taskStatusDataTableSource.filterData(null);
               if (context.mounted) Navigator.pop(context);
             }
           },

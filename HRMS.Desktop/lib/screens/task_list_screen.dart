@@ -8,12 +8,13 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/task_data_table_source.dart';
 import '../models/paged_result.dart';
 import '../models/project.dart';
-import '../models/task.dart';
 import '../models/task_status.dart';
 import '../models/task_type.dart';
 import '../providers/employee_provider.dart';
 import '../providers/project_provider.dart';
 import '../providers/task_provider.dart';
+import '../providers/task_status_provider.dart';
+import '../providers/task_type_provider.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
@@ -28,11 +29,12 @@ class _TaskListScreenState extends State<TaskListScreen> {
   late EmployeeProvider _employeeProvider;
   late ProjectProvider _projectProvider;
   late TaskProvider _taskProvider;
+  late TaskStatusProvider _taskStatusProvider;
+  late TaskTypeProvider _taskTypeProvider;
 
   late TaskDataTableSource taskDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _tasks = PagedResult<Task>();
   var _projects = PagedResult<Project>();
   var _statuses = PagedResult<TaskStatus>();
   var _types = PagedResult<TaskType>();
@@ -45,6 +47,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
     _employeeProvider = context.read<EmployeeProvider>();
     _projectProvider = context.read<ProjectProvider>();
     _taskProvider = context.read<TaskProvider>();
+    _taskStatusProvider = context.read<TaskStatusProvider>();
+    _taskTypeProvider = context.read<TaskTypeProvider>();
 
     taskDataTableSource = TaskDataTableSource(_taskProvider, _openDialog);
 
@@ -53,8 +57,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
 
   Future _loadData(int? id) async {
     _employees = await _employeeProvider.getAll();
-    _tasks = await _taskProvider.getAll();
     _projects = await _projectProvider.getAll();
+    _statuses = await _taskStatusProvider.getAll();
+    _types = await _taskTypeProvider.getAll();
 
     if (id != null) {
       var task = await _taskProvider.get(id);
@@ -84,7 +89,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
     return Column(
       children: [
         Search(
-          "Dodaj odjel",
+          "Dodaj zadatak",
           () => _openDialog(null),
           onSearch: (text) => taskDataTableSource.filterData(text),
         ),

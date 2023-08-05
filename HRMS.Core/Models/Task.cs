@@ -6,11 +6,11 @@ public class Task : Base
 
     public string Description { get; set; } = string.Empty;
 
-    public virtual Project Project { get; set; } = new();
+    public Project? Project { get; set; }
 
-    public virtual TaskStatus Status { get; set; } = new();
+    public TaskStatus? Status { get; set; }
 
-    public virtual TaskType Type { get; set; } = new();
+    public TaskType? Type { get; set; }
 
-    public virtual Employee Employee { get; set; } = new();
+    public Employee? Employee { get; set; }
 }

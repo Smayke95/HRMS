@@ -5,8 +5,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../data_table_sources/country_data_table_source.dart';
-import '../models/country.dart';
-import '../models/paged_result.dart';
 import '../providers/country_provider.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
@@ -24,13 +22,11 @@ class _CountryListScreenState extends State<CountryListScreen> {
   late CountryDataTableSource countryDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _countries = PagedResult<Country>();
 
   @override
   void initState() {
     super.initState();
 
-    _countryProvider = context.read<CountryProvider>();
     _countryProvider = context.read<CountryProvider>();
 
     countryDataTableSource =
@@ -40,7 +36,6 @@ class _CountryListScreenState extends State<CountryListScreen> {
   }
 
   Future _loadData(int? id) async {    
-    _countries = await _countryProvider.getAll();
 
     if (id != null) {
       var country = await _countryProvider.get(id);
