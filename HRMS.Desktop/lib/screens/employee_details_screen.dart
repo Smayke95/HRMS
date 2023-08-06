@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 import '../models/city.dart';
 import '../models/country.dart';
 import '../models/education.dart';
+import '../models/employee.dart';
 import '../models/paged_result.dart';
 import '../providers/city_provider.dart';
 import '../providers/country_provider.dart';
 import '../providers/education_provider.dart';
 import '../providers/employee_provider.dart';
+import '../widgets/responsive.dart';
 
 class EmployeeDetailsScreen extends StatefulWidget {
   final int? id;
@@ -26,6 +28,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
   late CityProvider _cityProvider;
   late CountryProvider _countryProvider;
   late EducationProvider _educationProvider;
+  late Employee? _employee;
 
   final _formKey = GlobalKey<FormBuilderState>();
   var _cities = PagedResult<City>();
@@ -57,21 +60,21 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
         "lastName": employee.lastName,
         "maidenName": employee.maidenName,
         "parentName": employee.parentName,
-        "gender": 0,
+        "gender": employee.gender.index,
         "registrationNumber": employee.registrationNumber,
         "personalIdentificationNumber": employee.personalIdentificationNumber,
         "workerCode": employee.workerCode,
         "birthDate": employee.birthDate,
-        "birthPlace": employee.birthPlace?.id ?? 0,
+        "birthPlaceId": employee.city?.id ?? 0,
         "address": employee.address,
-        "city": employee.city?.id ?? 0,
-        "citizenship": employee.citizenship?.id ?? 0,
+        "cityId": employee.city?.id.toString() ?? "0",
+        "citizenshipId": employee.citizenship?.id.toString() ?? "0",
         "email": employee.email,
         "phone": employee.phone,
         "mobile": employee.mobile,
         "officePhone": employee.officePhone,
         "profession": employee.profession,
-        "education": employee.education?.id ?? 0,
+        "education": employee.education?.id.toString() ?? "0",
         "bankAccount": employee.bankAccount,
         "note": employee.note,
       });
@@ -86,12 +89,23 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
       child: FormBuilder(
         key: _formKey,
         child: SizedBox(
-          child: Column(
+          child: Row(
             children: [
-              _basicInfo(context),
-              _accountInfo(context),
-              _contactInfo(context),
-              _otherInfo(context),
+              Expanded(
+                child: Column(
+                  children: [
+                    _basicInfo(context),
+                    if (Responsive.isMobile(context)) _accountInfo(context),
+                    _contactInfo(context),
+                    _otherInfo(context),
+                  ],
+                ),
+              ),
+              if (!Responsive.isMobile(context))
+                SizedBox(
+                  width: 400,
+                  child: _accountInfo(context),
+                )
             ],
           ),
         ),
@@ -117,103 +131,139 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
               ),
             ),
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    FormBuilderTextField(
-                      name: "workerCode",
-                      decoration:
-                          const InputDecoration(labelText: "Šifra radnika"),
-                    ),
-                    FormBuilderTextField(
-                      name: "firstName",
-                      decoration: const InputDecoration(labelText: "Ime *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Ime je obavezno."),
-                    ),
-                    FormBuilderTextField(
-                      name: "parentName",
-                      decoration:
-                          const InputDecoration(labelText: "Ime roditelja"),
-                    ),
-                    FormBuilderTextField(
-                      name: "registrationNumber",
-                      decoration:
-                          const InputDecoration(labelText: "Matični broj *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Matični broj je obavezan."),
-                    ),
-                    FormBuilderDateTimePicker(
-                      name: "birthDate",
-                      inputType: InputType.date,
-                      decoration:
-                          const InputDecoration(labelText: "Datum rođenja *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Datum rođenja je obavezan."),
-                    ),
-                    FormBuilderTextField(
-                      name: "bankAccount",
-                      decoration:
-                          const InputDecoration(labelText: "Žiro račun"),
-                    ),
-                  ],
+          SizedBox(
+            height: 500,
+            child: GridView.count(
+              crossAxisCount: Responsive.isDesktop(context)
+                  ? 3
+                  : Responsive.isTablet(context)
+                      ? 2
+                      : 1,
+              padding: const EdgeInsets.all(20),
+              childAspectRatio: 4,
+              crossAxisSpacing: 20,
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "workerCode",
+                    decoration:
+                        const InputDecoration(labelText: "Šifra radnika"),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    FormBuilderTextField(
-                      name: "lastName",
-                      decoration: const InputDecoration(labelText: "Prezime *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Prezime je obavezno."),
-                    ),
-                    FormBuilderTextField(
-                      name: "maidenName",
-                      decoration: const InputDecoration(
-                          labelText: "Djevojačko prezime"),
-                    ),
-                    FormBuilderTextField(
-                      name: "personalIdentificationNumber",
-                      decoration: const InputDecoration(labelText: "LIB/OIB"),
-                    ),
-                    FormBuilderDropdown(
-                      name: "birthPlaceId",
-                      decoration:
-                          const InputDecoration(labelText: "Mjesto rođenja *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Mjesto rođenja je obavezno."),
-                      items: _cities.result
-                          .map((city) => DropdownMenuItem(
-                                value: city.id.toString(),
-                                child: Text(city.name),
-                              ))
-                          .toList(),
-                    ),
-                    FormBuilderDropdown(
-                      name: "gender",
-                      decoration: const InputDecoration(labelText: "Spol *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Spol je obavezan."),
-                      items: const [
-                        DropdownMenuItem(
-                          value: 0,
-                          child: Text("Muško"),
-                        ),
-                        DropdownMenuItem(
-                          value: 1,
-                          child: Text("Žensko"),
-                        ),
-                      ],
-                    ),
-                  ],
+                if (Responsive.isTablet(context) ||
+                    Responsive.isDesktop(context))
+                  const SizedBox(),
+                if (Responsive.isDesktop(context)) const SizedBox(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "firstName",
+                    decoration: const InputDecoration(labelText: "Ime *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Ime je obavezno."),
+                  ),
                 ),
-              )
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "lastName",
+                    decoration: const InputDecoration(labelText: "Prezime *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Prezime je obavezno."),
+                  ),
+                ),
+                if (Responsive.isDesktop(context)) const SizedBox(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "parentName",
+                    decoration:
+                        const InputDecoration(labelText: "Ime roditelja"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "maidenName",
+                    decoration:
+                        const InputDecoration(labelText: "Djevojačko prezime"),
+                  ),
+                ),
+                if (Responsive.isDesktop(context)) const SizedBox(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "registrationNumber",
+                    decoration:
+                        const InputDecoration(labelText: "Matični broj *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Matični broj je obavezan."),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "personalIdentificationNumber",
+                    decoration: const InputDecoration(labelText: "LIB/OIB"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderDropdown(
+                    name: "gender",
+                    decoration: const InputDecoration(labelText: "Spol *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Spol je obavezan."),
+                    items: const [
+                      DropdownMenuItem(
+                        value: 0,
+                        child: Text("Muško"),
+                      ),
+                      DropdownMenuItem(
+                        value: 1,
+                        child: Text("Žensko"),
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderDateTimePicker(
+                    name: "birthDate",
+                    inputType: InputType.date,
+                    decoration:
+                        const InputDecoration(labelText: "Datum rođenja *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Datum rođenja je obavezan."),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderDropdown(
+                    name: "birthPlaceId",
+                    decoration:
+                        const InputDecoration(labelText: "Mjesto rođenja *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Mjesto rođenja je obavezno."),
+                    items: _cities.result
+                        .map((city) => DropdownMenuItem(
+                              value: city.id,
+                              child: Text(city.name),
+                            ))
+                        .toList(),
+                  ),
+                ),
+                if (Responsive.isDesktop(context)) const SizedBox(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "bankAccount",
+                    decoration: const InputDecoration(labelText: "Žiro račun"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -222,6 +272,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
 
   Widget _accountInfo(BuildContext context) {
     return Card(
+      elevation: 2,
       child: Column(
         children: [
           Card(
@@ -245,7 +296,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
           ),
           ElevatedButton(
             child: const Text("Potvrdi email"),
-            onPressed: () => {},
+            onPressed: () => {setState(() {})},
           ),
           ElevatedButton(
             child: const Text("Otključaj"),
@@ -262,6 +313,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
 
   Widget _contactInfo(BuildContext context) {
     return Card(
+      elevation: 2,
       child: Column(
         children: [
           Card(
@@ -277,68 +329,76 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
               ),
             ),
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    FormBuilderTextField(
-                      name: "address",
-                      decoration: const InputDecoration(labelText: "Adresa"),
-                    ),
-                    FormBuilderTextField(
-                      name: "phone",
-                      decoration: const InputDecoration(labelText: "Telefon"),
-                    ),
-                  ],
+          SizedBox(
+            height: 200,
+            child: GridView.count(
+              crossAxisCount: Responsive.isDesktop(context)
+                  ? 3
+                  : Responsive.isTablet(context)
+                      ? 2
+                      : 1,
+              padding: const EdgeInsets.all(20),
+              childAspectRatio: 4,
+              crossAxisSpacing: 20,
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "address",
+                    decoration: const InputDecoration(labelText: "Adresa"),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    FormBuilderDropdown(
-                      name: "cityId",
-                      decoration: const InputDecoration(labelText: "Grad"),
-                      items: _cities.result
-                          .map((city) => DropdownMenuItem(
-                                value: city.id.toString(),
-                                child: Text(city.name),
-                              ))
-                          .toList(),
-                    ),
-                    FormBuilderTextField(
-                      name: "mobile",
-                      decoration: const InputDecoration(labelText: "Mobitel"),
-                    ),
-                  ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderDropdown(
+                    name: "cityId",
+                    decoration: const InputDecoration(labelText: "Grad"),
+                    items: _cities.result
+                        .map((city) => DropdownMenuItem(
+                              value: city.id.toString(),
+                              child: Text(city.name),
+                            ))
+                        .toList(),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 200,
-                child: Column(
-                  children: [
-                    FormBuilderDropdown(
-                      name: "citizenshipId",
-                      decoration:
-                          const InputDecoration(labelText: "Državljanstvo"),
-                      items: _countries.result
-                          .map((country) => DropdownMenuItem(
-                                value: country.id.toString(),
-                                child: Text(country.name),
-                              ))
-                          .toList(),
-                    ),
-                    FormBuilderTextField(
-                      name: "officePhone",
-                      decoration:
-                          const InputDecoration(labelText: "Službeni telefon"),
-                    ),
-                  ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderDropdown(
+                    name: "citizenshipId",
+                    decoration:
+                        const InputDecoration(labelText: "Državljanstvo"),
+                    items: _countries.result
+                        .map((country) => DropdownMenuItem(
+                              value: country.id.toString(),
+                              child: Text(country.name),
+                            ))
+                        .toList(),
+                  ),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "phone",
+                    decoration: const InputDecoration(labelText: "Telefon"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "mobile",
+                    decoration: const InputDecoration(labelText: "Mobitel"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "officePhone",
+                    decoration:
+                        const InputDecoration(labelText: "Službeni telefon"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -347,6 +407,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
 
   Widget _otherInfo(BuildContext context) {
     return Card(
+      elevation: 2,
       child: Column(
         children: [
           Card(
@@ -363,16 +424,26 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
             ),
           ),
           SizedBox(
-            width: 500,
-            child: Row(
+            height: 130,
+            child: GridView.count(
+              crossAxisCount: Responsive.isDesktop(context)
+                  ? 3
+                  : Responsive.isTablet(context)
+                      ? 2
+                      : 1,
+              padding: const EdgeInsets.all(20),
+              childAspectRatio: 4,
+              crossAxisSpacing: 20,
               children: [
-                Expanded(
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: FormBuilderTextField(
                     name: "profession",
                     decoration: const InputDecoration(labelText: "Zanimanje"),
                   ),
                 ),
-                Expanded(
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: FormBuilderDropdown(
                     name: "educationId",
                     decoration: const InputDecoration(labelText: "Obrazovanje"),
@@ -382,6 +453,13 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                               child: Text(education.qualificationOld),
                             ))
                         .toList(),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "note",
+                    decoration: const InputDecoration(labelText: "Bilješka"),
                   ),
                 ),
               ],
