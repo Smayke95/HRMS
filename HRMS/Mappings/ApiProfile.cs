@@ -44,6 +44,12 @@ public class ApiProfile : Profile
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new City { Id = y.EmployeeId }))
             .ForMember(x => x.Position, opt => opt.MapFrom(y => new City { Id = y.PositionId }));
 
+        CreateMap<EventInsert, Event>()
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+
+        CreateMap<EventUpdate, Event>()
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+
         CreateMap<MessageInsert, Message>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }));
 
@@ -69,8 +75,8 @@ public class ApiProfile : Profile
 
         CreateMap<TaskUpdate, Task>()
             .ForMember(x => x.Project, opt => opt.MapFrom(y => new Project { Id = y.ProjectId ?? 0 }))
-            .ForMember(x => x.Status, opt => opt.MapFrom(y => new TaskStatus { Id = y.TaskStatusId ?? 0 }))
-            .ForMember(x => x.Type, opt => opt.MapFrom(y => new TaskType { Id = y.TaskTypeId ?? 0 }))
+            .ForMember(x => x.Status, opt => opt.MapFrom(y => new TaskStatus { Id = y.StatusId ?? 0 }))
+            .ForMember(x => x.Type, opt => opt.MapFrom(y => new TaskType { Id = y.TypeId ?? 0 }))
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
 
         CreateMap<TaskStatusInsert, TaskStatus>();

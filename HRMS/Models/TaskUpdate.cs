@@ -8,9 +8,9 @@ public class TaskUpdate
 
     public int? ProjectId { get; set; }
 
-    public int? TaskStatusId { get; set; }
+    public int? StatusId { get; set; }
 
-    public int? TaskTypeId { get; set; }
+    public int? TypeId { get; set; }
 
     public int? EmployeeId { get; set; }
 }

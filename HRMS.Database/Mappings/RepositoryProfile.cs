@@ -52,6 +52,11 @@ public class RepositoryProfile : Profile
         CreateMap<Education, Core.Models.Education>()
             .ReverseMap();
 
+        CreateMap<Event, Core.Models.Event>();
+        CreateMap<Core.Models.Event, Event>()
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore());
+
         CreateMap<Message, Core.Models.Message>();
         CreateMap<Core.Models.Message, Message>()
             .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
@@ -77,9 +82,13 @@ public class RepositoryProfile : Profile
 
         CreateMap<Core.Models.Task, Task>()
             .ForMember(x => x.TaskStatusId, opt => opt.MapFrom(y => y.Status.Id))
+            .ForMember(x => x.Status, opt => opt.Ignore())
             .ForMember(x => x.TaskTypeId, opt => opt.MapFrom(y => y.Type.Id))
+            .ForMember(x => x.Type, opt => opt.Ignore())
             .ForMember(x => x.ProjectId, opt => opt.MapFrom(y => y.Project.Id))
-            .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id));
+            .ForMember(x => x.Project, opt => opt.Ignore())
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore());
 
         CreateMap<TaskComment, Core.Models.TaskComment>()
             .ReverseMap();
