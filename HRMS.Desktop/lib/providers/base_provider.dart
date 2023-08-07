@@ -87,7 +87,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Future<T> update(int id, dynamic request) async {
     var uri = Uri.https(_baseUrl, '$_endpoint/$id');
 
-    var jsonRequest = jsonEncode(request);
+    var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
     var response =
         await http.put(uri, headers: _getHeaders(), body: jsonRequest);
@@ -125,6 +125,13 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
     } else {
       throw Exception("Something bad happened");
     }
+  }
+
+  dynamic myDateSerializer(dynamic object) {
+    if (object is DateTime) {
+      return object.toIso8601String();
+    }
+    return object;
   }
 
   T fromJson(data) => throw Exception("Method not implemented");

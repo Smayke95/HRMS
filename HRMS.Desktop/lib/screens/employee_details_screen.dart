@@ -1,12 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../models/city.dart';
 import '../models/country.dart';
 import '../models/education.dart';
-import '../models/employee.dart';
 import '../models/paged_result.dart';
 import '../providers/city_provider.dart';
 import '../providers/country_provider.dart';
@@ -28,9 +32,11 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
   late CityProvider _cityProvider;
   late CountryProvider _countryProvider;
   late EducationProvider _educationProvider;
-  late Employee? _employee;
 
+  bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
+  Map<String, dynamic> _initialValue = {};
+
   var _cities = PagedResult<City>();
   var _countries = PagedResult<Country>();
   var _educations = PagedResult<Education>();
@@ -55,7 +61,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
     if (id != null) {
       var employee = await _employeeProvider.get(id);
 
-      _formKey.currentState?.patchValue({
+      _initialValue = {
         "firstName": employee.firstName,
         "lastName": employee.lastName,
         "maidenName": employee.maidenName,
@@ -65,51 +71,69 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
         "personalIdentificationNumber": employee.personalIdentificationNumber,
         "workerCode": employee.workerCode,
         "birthDate": employee.birthDate,
-        "birthPlaceId": employee.city?.id ?? 0,
+        "birthPlaceId": employee.birthPlace?.id ?? 0,
         "address": employee.address,
-        "cityId": employee.city?.id.toString() ?? "0",
-        "citizenshipId": employee.citizenship?.id.toString() ?? "0",
+        "cityId": employee.city?.id ?? 0,
+        "citizenshipId": employee.citizenship?.id ?? 0,
+        "image": employee.image,
         "email": employee.email,
         "phone": employee.phone,
         "mobile": employee.mobile,
         "officePhone": employee.officePhone,
         "profession": employee.profession,
-        "education": employee.education?.id.toString() ?? "0",
+        "educationId": employee.education?.id ?? 0,
         "bankAccount": employee.bankAccount,
         "note": employee.note,
-      });
+      };
     }
 
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future _uploadImage() async {
+    var result = await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null && result.files.single.path != null) {
+      var _image = File(result.files.single.path!);
+      _initialValue["image"] = base64Encode(_image!.readAsBytesSync());
+      _formKey.currentState!.fields["image"]!.didChange(_initialValue["image"]);
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: FormBuilder(
-        key: _formKey,
-        child: SizedBox(
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
+      child: isLoading
+          ? Container()
+          : FormBuilder(
+              key: _formKey,
+              initialValue: _initialValue,
+              child: SizedBox(
+                child: Row(
                   children: [
-                    _basicInfo(context),
-                    if (Responsive.isMobile(context)) _accountInfo(context),
-                    _contactInfo(context),
-                    _otherInfo(context),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          _basicInfo(context),
+                          if (Responsive.isMobile(context))
+                            _accountInfo(context),
+                          _contactInfo(context),
+                          _otherInfo(context),
+                        ],
+                      ),
+                    ),
+                    if (!Responsive.isMobile(context))
+                      SizedBox(
+                        width: 400,
+                        child: _accountInfo(context),
+                      )
                   ],
                 ),
               ),
-              if (!Responsive.isMobile(context))
-                SizedBox(
-                  width: 400,
-                  child: _accountInfo(context),
-                )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -232,6 +256,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                   child: FormBuilderDateTimePicker(
                     name: "birthDate",
                     inputType: InputType.date,
+                    format: DateFormat('dd.MM.yyyy.'),
                     decoration:
                         const InputDecoration(labelText: "Datum rođenja *"),
                     validator: FormBuilderValidators.required(
@@ -288,23 +313,104 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
               ),
             ),
           ),
-          FormBuilderTextField(
-            name: "email",
-            decoration: const InputDecoration(labelText: "E-mail *"),
-            validator: FormBuilderValidators.required(
-                errorText: "E-mail je obavezan."),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(150),
+              child: SizedBox.fromSize(
+                size: const Size.fromRadius(150),
+                child: _initialValue["image"] != ""
+                    ? Image.memory(
+                        base64Decode(_initialValue["image"]),
+                        width: 300,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        "assets/images/default-avatar.png",
+                        width: 300,
+                        height: 300,
+                      ),
+              ),
+            ),
           ),
-          ElevatedButton(
-            child: const Text("Potvrdi email"),
-            onPressed: () => {setState(() {})},
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: FormBuilderField(
+              name: 'image',
+              builder: ((field) {
+                return InputDecorator(
+                  decoration: InputDecoration(errorText: field.errorText),
+                  child: ListTile(
+                    leading: const Icon(Icons.photo),
+                    title: const Text("Odaberite sliku"),
+                    trailing: const Icon(Icons.file_upload),
+                    onTap: _uploadImage,
+                  ),
+                );
+              }),
+            ),
           ),
-          ElevatedButton(
-            child: const Text("Otključaj"),
-            onPressed: () => {},
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: FormBuilderTextField(
+              name: "email",
+              decoration: const InputDecoration(labelText: "E-mail *"),
+              validator: FormBuilderValidators.required(
+                  errorText: "E-mail je obavezan."),
+            ),
           ),
-          ElevatedButton(
-            child: const Text("Resetuj lozinku"),
-            onPressed: () => {},
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    child: const Text("Potvrdi email",
+                        textAlign: TextAlign.center),
+                    onPressed: () => {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    child: const Text("Otključaj profil",
+                        textAlign: TextAlign.center),
+                    onPressed: () => {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    child: const Text("Resetuj lozinku",
+                        textAlign: TextAlign.center),
+                    onPressed: () => {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: ElevatedButton(
+              child: const Text("SPREMI", textAlign: TextAlign.center),
+              onPressed: () async {
+                var isValid = _formKey.currentState?.saveAndValidate();
+
+                if (isValid!) {
+                  var request = Map.from(_formKey.currentState!.value);
+
+                  widget.id == null
+                      ? await _employeeProvider.insert(request)
+                      : await _employeeProvider.update(widget.id!, request);
+
+                  if (context.mounted) Navigator.pop(context);
+                }
+              },
+            ),
           ),
         ],
       ),
@@ -355,7 +461,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                     decoration: const InputDecoration(labelText: "Grad"),
                     items: _cities.result
                         .map((city) => DropdownMenuItem(
-                              value: city.id.toString(),
+                              value: city.id,
                               child: Text(city.name),
                             ))
                         .toList(),
@@ -369,7 +475,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                         const InputDecoration(labelText: "Državljanstvo"),
                     items: _countries.result
                         .map((country) => DropdownMenuItem(
-                              value: country.id.toString(),
+                              value: country.id,
                               child: Text(country.name),
                             ))
                         .toList(),
@@ -449,7 +555,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                     decoration: const InputDecoration(labelText: "Obrazovanje"),
                     items: _educations.result
                         .map((education) => DropdownMenuItem(
-                              value: education.id.toString(),
+                              value: education.id,
                               child: Text(education.qualificationOld),
                             ))
                         .toList(),

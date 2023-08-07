@@ -31,7 +31,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
   void _openDetails(int? id) {
     if (Responsive.isMobile(context)) return;
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
+    Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
             MasterScreen("Detalji o zaposleniku", EmployeeDetailsScreen(id))));
   }
