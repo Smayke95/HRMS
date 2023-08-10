@@ -10,6 +10,24 @@ public class EmployeePositionRepository : BaseRepository<EmployeePosition, Core.
 {
     public EmployeePositionRepository(Context context, IMapper mapper) : base(context, mapper) { }
 
+    public override async Task<Core.Models.EmployeePosition> GetAsync(int id)
+    {
+        var isNew = id == 0;
+
+        if (!isNew)
+        {
+            var entity = await Context
+                .EmployeePositions
+                .Include(x => x.Employee)
+                .Include(x => x.Position)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            return Mapper.Map<Core.Models.EmployeePosition>(entity);
+        }
+
+        return new Core.Models.EmployeePosition();
+    }
+
     protected override IQueryable<EmployeePosition> AddInclude(IQueryable<EmployeePosition> query, EmployeePositionSearch? search = null)
     {
         query = query.Include(x => x.Employee);

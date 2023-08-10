@@ -1,5 +1,5 @@
-﻿using HRMS.Database.Models;
-using HRMS.Database.Models.Enums;
+﻿using HRMS.Core.Models.Enums;
+using HRMS.Database.Models;
 using HRMS.Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,10 +10,16 @@ public class EmployeePositionConfiguration : IEntityTypeConfiguration<EmployeePo
 {
     public void Configure(EntityTypeBuilder<EmployeePosition> builder)
     {
-        builder.Property(x => x.EmploymentType)
+        builder.Property(x => x.Type)
                .HasConversion(
                     x => x.ToString(),
                     x => (EmploymentType)Enum.Parse(typeof(EmploymentType), x)
+               );
+
+        builder.Property(x => x.Status)
+               .HasConversion(
+                    x => x.ToString(),
+                    x => (EmploymentStatus)Enum.Parse(typeof(EmploymentStatus), x)
                );
 
         builder.SeedData();

@@ -60,21 +60,6 @@ namespace HRMS.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Logs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PayGrades",
                 columns: table => new
                 {
@@ -419,7 +404,8 @@ namespace HRMS.Database.Migrations
                     EndDate = table.Column<DateTime>(type: "Date", nullable: true),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     VacationDays = table.Column<int>(type: "int", nullable: false),
-                    EmploymentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WorkingHours = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -482,16 +468,6 @@ namespace HRMS.Database.Migrations
                     { 3, "#ff9800", true, "Bolovanje" },
                     { 4, "#3a87ad", true, "Plaćeno odsustvo" },
                     { 5, "#fb1b1b", true, "Neplaćeno odsustvo" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Logs",
-                columns: new[] { "Id", "Date", "Message", "Type" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1086), "", "INFO" },
-                    { 2, new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1136), "", "WARNING" },
-                    { 3, new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1139), "", "ERROR" }
                 });
 
             migrationBuilder.InsertData(
@@ -704,11 +680,11 @@ namespace HRMS.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "EmployeePositions",
-                columns: new[] { "Id", "EmployeeId", "EmploymentType", "EndDate", "PositionId", "Salary", "StartDate", "VacationDays", "WorkingHours" },
+                columns: new[] { "Id", "EmployeeId", "EndDate", "PositionId", "Salary", "StartDate", "Status", "Type", "VacationDays", "WorkingHours" },
                 values: new object[,]
                 {
-                    { 1, 1, "Fixed", new DateTime(2022, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 0m, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 30, "09:00-17:00" },
-                    { 2, 2, "Fixed", new DateTime(2021, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 0m, new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 30, "09:00-17:00" }
+                    { 1, 1, new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 0m, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Active", "Fixed", 30, "09:00-17:00" },
+                    { 2, 2, new DateTime(2023, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 0m, new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Draft", "Fixed", 30, "09:00-17:00" }
                 });
 
             migrationBuilder.InsertData(
@@ -716,8 +692,8 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(2285) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(2290) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 10, 22, 10, 15, 41, DateTimeKind.Local).AddTicks(5170) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 10, 22, 10, 15, 41, DateTimeKind.Local).AddTicks(5175) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -842,9 +818,6 @@ namespace HRMS.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
-
-            migrationBuilder.DropTable(
-                name: "Logs");
 
             migrationBuilder.DropTable(
                 name: "Messages");

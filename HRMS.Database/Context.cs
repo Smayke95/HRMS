@@ -17,7 +17,6 @@ public class Context : DbContext
     public DbSet<EmployeeRole> EmployeeRoles { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<EventType> EventTypes { get; set; }
-    public DbSet<Log> Logs { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<PayGrade> PayGrades { get; set; }
     public DbSet<Position> Positions { get; set; }

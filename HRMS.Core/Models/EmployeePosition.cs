@@ -16,7 +16,9 @@ public class EmployeePosition : Base
 
     public int VacationDays { get; set; }
 
-    public EmploymentType EmploymentType { get; set; }
+    public EmploymentType Type { get; set; }
+
+    public EmploymentStatus Status { get; set; }
 
     public string WorkingHours { get; set; } = string.Empty;
 }

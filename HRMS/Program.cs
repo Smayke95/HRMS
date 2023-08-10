@@ -18,6 +18,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddScopedRepositories();
 builder.Services.AddScopedServices();
 builder.Services.AddScopedNotificationServices();
+builder.Services.AddScopedStates();
 
 builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddControllers();

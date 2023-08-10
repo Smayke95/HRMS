@@ -1,5 +1,5 @@
-﻿using HRMS.Database.Models;
-using HRMS.Database.Models.Enums;
+﻿using HRMS.Core.Models.Enums;
+using HRMS.Database.Models;
 using HRMS.Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -1,4 +1,4 @@
-﻿using HRMS.Database.Models.Enums;
+﻿using HRMS.Core.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

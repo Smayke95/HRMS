@@ -19,6 +19,7 @@ builder.Services.AddIdentityServer()
 builder.Services.AddScopedRepositories();
 builder.Services.AddScopedServices();
 builder.Services.AddScopedNotificationServices();
+builder.Services.AddScopedStates();
 
 builder.Services.AddControllers();
 

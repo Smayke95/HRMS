@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230807200517_Init")]
+    [Migration("20230810201015_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -774,10 +774,6 @@ namespace HRMS.Database.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmploymentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("Date");
 
@@ -789,6 +785,14 @@ namespace HRMS.Database.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("Date");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VacationDays")
                         .HasColumnType("int");
@@ -810,11 +814,12 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 1,
                             EmployeeId = 1,
-                            EmploymentType = "Fixed",
-                            EndDate = new DateTime(2022, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PositionId = 6,
                             Salary = 0m,
                             StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
                             VacationDays = 30,
                             WorkingHours = "09:00-17:00"
                         },
@@ -822,11 +827,12 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 2,
                             EmployeeId = 2,
-                            EmploymentType = "Fixed",
-                            EndDate = new DateTime(2021, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2023, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PositionId = 5,
                             Salary = 0m,
                             StartDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Draft",
+                            Type = "Fixed",
                             VacationDays = 30,
                             WorkingHours = "09:00-17:00"
                         });
@@ -1061,53 +1067,6 @@ namespace HRMS.Database.Migrations
                             Color = "#fb1b1b",
                             IsApprovalRequired = true,
                             Name = "Neplaćeno odsustvo"
-                        });
-                });
-
-            modelBuilder.Entity("HRMS.Database.Models.Log", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1086),
-                            Message = "",
-                            Type = "INFO"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1136),
-                            Message = "",
-                            Type = "WARNING"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(1139),
-                            Message = "",
-                            Type = "ERROR"
                         });
                 });
 
@@ -1785,7 +1744,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(2285)
+                            Time = new DateTime(2023, 8, 10, 22, 10, 15, 41, DateTimeKind.Local).AddTicks(5170)
                         },
                         new
                         {
@@ -1793,7 +1752,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 7, 22, 5, 16, 835, DateTimeKind.Local).AddTicks(2290)
+                            Time = new DateTime(2023, 8, 10, 22, 10, 15, 41, DateTimeKind.Local).AddTicks(5175)
                         });
                 });
 

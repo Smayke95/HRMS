@@ -1,4 +1,4 @@
-﻿using HRMS.Database.Models.Enums;
+﻿using HRMS.Core.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,7 +31,9 @@ public class EmployeePosition
 
     public int VacationDays { get; set; }
 
-    public EmploymentType EmploymentType { get; set; }
+    public EmploymentType Type { get; set; }
+
+    public EmploymentStatus Status { get; set; }
 
     public string WorkingHours { get; set; } = string.Empty;
 }
