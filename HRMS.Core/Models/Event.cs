@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HRMS.Core.Models;
+﻿namespace HRMS.Core.Models;
 
 public class Event : Base
 {
     public string Name { get; set; } = string.Empty;
 
-    //public EventType EventType { get; set; } = new();
+    public EventType EventType { get; set; } = new();
 
     public DateTime StartDate { get; set; }
 

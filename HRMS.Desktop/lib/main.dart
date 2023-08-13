@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:HRMS/providers/city_provider.dart';
 import 'package:HRMS/providers/country_provider.dart';
+import 'package:HRMS/providers/event_provider.dart';
+import 'package:HRMS/providers/event_type_provider.dart';
 import 'package:HRMS/providers/task_status_provider.dart';
 import 'package:HRMS/providers/task_type_provider.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EducationProvider()),
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
         ChangeNotifierProvider(create: (_) => EmployeePositionProvider()),
+        ChangeNotifierProvider(create: (_) => EventProvider()),
+        ChangeNotifierProvider(create: (_) => EventTypeProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => PayGradeProvider()),
         ChangeNotifierProvider(create: (_) => PositionProvider()),

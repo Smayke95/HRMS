@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class EventRepository : BaseRepository<Models.Event, Core.Models.Event, BaseSearch>, IEventRepository
+public class EventRepository : BaseRepository<Models.Event, Core.Models.Event, EventSearch>, IEventRepository
 {
     public EventRepository(Context context, IMapper mapper) : base(context, mapper) { }
 
@@ -25,5 +25,25 @@ public class EventRepository : BaseRepository<Models.Event, Core.Models.Event, B
         }
 
         return new Core.Models.Event();
+    }
+
+    protected override IQueryable<Models.Event> AddInclude(IQueryable<Models.Event> query, EventSearch? search = null)
+    {
+        if (search is null)
+            return base.AddInclude(query, search);
+
+        if (!string.IsNullOrWhiteSpace(search.Name))
+            query = query.Where(x => x.Name.ToLower().Contains(search.Name.ToLower()));
+
+        if (search.EmployeeId > 0)
+            query = query.Where(x => x.Employee!.Id == search.EmployeeId);
+
+        if (search.IncludeEventType)
+            query = query.Include(x => x.EventType);
+
+        if (search.IncludeEmployee)
+            query = query.Include(x => x.Employee);
+
+        return query;
     }
 }

@@ -3,4 +3,4 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Core.Interfaces.Repositories;
 
-public interface IEventRepository : IBaseRepository<Event, EventSearch> { }
+public interface IEventTypeRepository : IBaseRepository<EventType, EventTypeSearch> { }

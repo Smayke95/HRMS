@@ -50,6 +50,10 @@ public class ApiProfile : Profile
         CreateMap<EventUpdate, Event>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
 
+        CreateMap<EventTypeInsert, EventType>();
+           
+        CreateMap<EventTypeUpdate, EventType>();
+            
         CreateMap<MessageInsert, Message>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }));
 

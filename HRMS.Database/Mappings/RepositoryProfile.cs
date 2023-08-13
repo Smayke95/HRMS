@@ -57,6 +57,9 @@ public class RepositoryProfile : Profile
             .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
             .ForMember(x => x.Employee, opt => opt.Ignore());
 
+        CreateMap<EventType, Core.Models.EventType>()
+            .ReverseMap();
+
         CreateMap<Message, Core.Models.Message>();
         CreateMap<Core.Models.Message, Message>()
             .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
