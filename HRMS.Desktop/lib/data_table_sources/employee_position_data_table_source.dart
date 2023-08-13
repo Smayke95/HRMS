@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/employee_position.dart';
+import '../models/enums/employment_status.dart';
 import '../models/enums/employment_type.dart';
 import '../models/searches/employee_position_search.dart';
 import '../providers/employee_position_provider.dart';
@@ -46,9 +47,14 @@ class EmployeePositionDataTableSource
         DataCell(Text(currentRow.endDate != null
             ? DateFormat("dd.MM.yyyy.").format(currentRow.endDate!)
             : "")),
-        DataCell(Text(currentRow.employmentType == EmploymentType.permanent
+        DataCell(Text(currentRow.type == EmploymentType.permanent
             ? "Neodređeno"
             : "Određeno")),
+        DataCell(Text(currentRow.status == EmploymentStatus.active
+            ? "Aktivno"
+            : currentRow.status == EmploymentStatus.inactive
+                ? "Neaktivno"
+                : "Obrisano")),
       ],
     );
   }

@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "hrms" "\0"
+            VALUE "FileDescription", "HRMS" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hrms" "\0"
+            VALUE "InternalName", "HRMS" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "hrms.exe" "\0"
-            VALUE "ProductName", "hrms" "\0"
+            VALUE "OriginalFilename", "HRMS.exe" "\0"
+            VALUE "ProductName", "HRMS" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

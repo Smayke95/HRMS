@@ -8,24 +8,24 @@ import '../models/searches/base_search.dart';
 import '../models/user.dart';
 
 abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
-  late String _baseUrl;
-  late String _endpoint;
+  late String baseUrl;
+  late String endpoint;
 
-  BaseProvider({String? endpoint}) {
-    _baseUrl = const String.fromEnvironment(
+  BaseProvider({String? altEndpoint}) {
+    baseUrl = const String.fromEnvironment(
       "ApiUrl",
       defaultValue: "localhost:44300",
     );
 
-    _endpoint = endpoint ?? T.toString();
+    endpoint = altEndpoint ?? T.toString();
   }
 
   Future<T> get(int id) async {
-    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
+    var uri = Uri.https(baseUrl, '$endpoint/$id');
 
-    var response = await http.get(uri, headers: _getHeaders());
+    var response = await http.get(uri, headers: getHeaders());
 
-    if (_isValidResponse(response)) {
+    if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data);
     } else {
@@ -44,11 +44,11 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
       queryParameters.removeWhere((key, value) => value == "null");
     }
 
-    var uri = Uri.https(_baseUrl, _endpoint, queryParameters);
+    var uri = Uri.https(baseUrl, endpoint, queryParameters);
 
-    var response = await http.get(uri, headers: _getHeaders());
+    var response = await http.get(uri, headers: getHeaders());
 
-    if (_isValidResponse(response)) {
+    if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
 
       var result = PagedResult<T>();
@@ -69,14 +69,14 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<T> insert(dynamic request) async {
-    var uri = Uri.https(_baseUrl, _endpoint);
+    var uri = Uri.https(baseUrl, endpoint);
 
     var jsonRequest = jsonEncode(request);
 
     var response =
-        await http.post(uri, headers: _getHeaders(), body: jsonRequest);
+        await http.post(uri, headers: getHeaders(), body: jsonRequest);
 
-    if (_isValidResponse(response)) {
+    if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data);
     } else {
@@ -85,14 +85,14 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<T> update(int id, dynamic request) async {
-    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
+    var uri = Uri.https(baseUrl, '$endpoint/$id');
 
     var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
     var response =
-        await http.put(uri, headers: _getHeaders(), body: jsonRequest);
+        await http.put(uri, headers: getHeaders(), body: jsonRequest);
 
-    if (_isValidResponse(response)) {
+    if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data);
     } else {
@@ -101,23 +101,23 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<bool> delete(int id) async {
-    var uri = Uri.https(_baseUrl, '$_endpoint/$id');
+    var uri = Uri.https(baseUrl, '$endpoint/$id');
 
-    var response = await http.delete(uri, headers: _getHeaders());
+    var response = await http.delete(uri, headers: getHeaders());
 
-    if (_isValidResponse(response)) {
+    if (isValidResponse(response)) {
       return true;
     } else {
       throw Exception("Response is not valid");
     }
   }
 
-  Map<String, String> _getHeaders() => {
+  Map<String, String> getHeaders() => {
         "Content-Type": "application/json",
         "Authorization": "Bearer ${User.token ?? ""}"
       };
 
-  bool _isValidResponse(http.Response response) {
+  bool isValidResponse(http.Response response) {
     if (response.statusCode < 299) {
       return true;
     } else if (response.statusCode == 401) {

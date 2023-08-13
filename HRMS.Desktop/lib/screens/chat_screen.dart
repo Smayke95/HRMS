@@ -42,7 +42,6 @@ class _ChatScreenState extends State<ChatScreen> {
     _room = "Anes Smajić & Irena Vilić";
 
     _chatProvider = context.read<ChatProvider>();
-    _chatProvider.connect(receiveMessageHandler, receiveUserTypingHandler);
     _employeeProvider = context.read<EmployeeProvider>();
 
     _loadData();
@@ -66,7 +65,23 @@ class _ChatScreenState extends State<ChatScreen> {
     messageSearch.includeEmployee = true;
 
     _messages = await _chatProvider.getAll(search: messageSearch);
-    _chatProvider.joinRoom(_room);
+
+    try {
+      await _chatProvider.connect(
+          receiveMessageHandler, receiveUserTypingHandler);
+      await _chatProvider.joinRoom(_room);
+    } on Exception catch (e) {
+      e.toString();
+
+      const snackBar = SnackBar(
+        content:
+            Text("Failed to connect to SignalR. Chat will not work properly."),
+      );
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    }
 
     setState(() {});
   }

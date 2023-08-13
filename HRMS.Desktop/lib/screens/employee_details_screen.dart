@@ -96,8 +96,8 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
     var result = await FilePicker.platform.pickFiles(type: FileType.image);
 
     if (result != null && result.files.single.path != null) {
-      var _image = File(result.files.single.path!);
-      _initialValue["image"] = base64Encode(_image!.readAsBytesSync());
+      var image = File(result.files.single.path!);
+      _initialValue["image"] = base64Encode(image.readAsBytesSync());
       _formKey.currentState!.fields["image"]!.didChange(_initialValue["image"]);
       setState(() {});
     }

@@ -9,29 +9,29 @@ class ChatProvider extends BaseProvider<Message, MessageSearch> {
   late String _baseUrl;
   late HubConnection hubConnection;
 
-  ChatProvider() : super(endpoint: "chat") {
+  ChatProvider() : super(altEndpoint: "chat") {
     _baseUrl = "${const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "https://localhost:44378/",
+      defaultValue: "https://localhost:44300/",
     )}chatHub";
   }
 
   @override
   Message fromJson(data) => Message.fromJson(data);
 
-  void connect(receiveMessageHandler, receiveUserTypingHandler) {
+  Future connect(receiveMessageHandler, receiveUserTypingHandler) async {
     hubConnection = HubConnectionBuilder().withUrl(_baseUrl).build();
 
     hubConnection.on("ReceiveMessage", receiveMessageHandler);
     hubConnection.on("UserTyping", receiveUserTypingHandler);
-    hubConnection.start();
+    await hubConnection.start();
   }
 
-  void joinRoom(String room) {
+  Future joinRoom(String room) async {
     if (hubConnection.state == HubConnectionState.Connected) {
-      hubConnection.invoke('JoinRoom', args: [room]);
+      await hubConnection.invoke('JoinRoom', args: [room]);
     } else {
-      hubConnection.start();
+      await hubConnection.start();
     }
   }
 

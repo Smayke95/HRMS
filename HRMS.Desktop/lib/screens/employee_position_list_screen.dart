@@ -34,8 +34,8 @@ class _EmployeePositionListScreenState
     if (Responsive.isMobile(context)) return;
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const MasterScreen(
-            "Detalji o zaposlenju", EmployeePositionDetailsScreen())));
+        builder: (context) => MasterScreen(
+            "Detalji o zaposlenju", EmployeePositionDetailsScreen(id))));
   }
 
   @override
@@ -60,6 +60,7 @@ class _EmployeePositionListScreenState
               DataColumn(label: Text("Datum početka")),
               DataColumn(label: Text("Datum kraja")),
               DataColumn(label: Text("Vrsta zaposlenja")),
+              DataColumn(label: Text("Status")),
             ],
           ),
         ),

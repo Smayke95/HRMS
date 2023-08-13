@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'employee.dart';
+import 'enums/employment_status.dart';
 import 'enums/employment_type.dart';
 import 'position.dart';
 
@@ -15,7 +16,8 @@ class EmployeePosition {
   DateTime? endDate;
   double salary;
   int vacationDays;
-  EmploymentType employmentType;
+  EmploymentType type;
+  EmploymentStatus status;
   String workingHours;
 
   EmployeePosition(
@@ -26,7 +28,8 @@ class EmployeePosition {
     this.endDate,
     this.salary,
     this.vacationDays,
-    this.employmentType,
+    this.type,
+    this.status,
     this.workingHours,
   );
 
