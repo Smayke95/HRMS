@@ -30,4 +30,28 @@ class EmployeePositionProvider
       throw Exception("Response is not valid");
     }
   }
+
+  Future activate(int id) async {
+    var uri = Uri.https(baseUrl, '$endpoint/$id/Activate');
+
+    var response = await http.put(uri, headers: getHeaders());
+
+    if (isValidResponse(response)) {
+      return;
+    } else {
+      throw Exception("Response is not valid");
+    }
+  }
+
+  Future deactivate(int id) async {
+    var uri = Uri.https(baseUrl, '$endpoint/$id/Deactivate');
+
+    var response = await http.put(uri, headers: getHeaders());
+
+    if (isValidResponse(response)) {
+      return;
+    } else {
+      throw Exception("Response is not valid");
+    }
+  }
 }

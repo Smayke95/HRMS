@@ -11,6 +11,8 @@ import '../models/position.dart';
 import '../providers/employee_position_provider.dart';
 import '../providers/employee_provider.dart';
 import '../providers/position_provider.dart';
+import '../widgets/master_screen.dart';
+import 'employee_position_list_screen.dart';
 
 class EmployeePositionDetailsScreen extends StatefulWidget {
   final int? id;
@@ -34,6 +36,7 @@ class _EmployeePositionDetailsScreenState
 
   var _employees = PagedResult<Employee>();
   var _positions = PagedResult<Position>();
+  var _employeePositionStatus = EmploymentStatus.initial;
   List<EmploymentStatus> _allowedActions = [];
 
   @override
@@ -65,6 +68,7 @@ class _EmployeePositionDetailsScreenState
         "workingHours": employeePosition.workingHours,
       };
 
+      _employeePositionStatus = employeePosition.status;
       _allowedActions = await _employeePositionProvider.allowedActions(id);
     }
 
@@ -85,136 +89,269 @@ class _EmployeePositionDetailsScreenState
                 initialValue: _initialValue,
                 child: Column(
                   children: [
-                    FormBuilderDropdown(
-                      name: "employeeId",
-                      decoration:
-                          const InputDecoration(labelText: "Zaposlenik *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Zaposlenik je obavezan."),
-                      items: _employees.result
-                          .map((employee) => DropdownMenuItem(
-                                value: employee.id,
-                                child: Text(
-                                    '${employee.firstName} ${employee.lastName}'),
-                              ))
-                          .toList(),
-                    ),
-                    FormBuilderDropdown(
-                      name: "positionId",
-                      decoration:
-                          const InputDecoration(labelText: "Pozicija *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Pozicija je obavezna."),
-                      items: _positions.result
-                          .map((position) => DropdownMenuItem(
-                                value: position.id,
-                                child: Text(position.name),
-                              ))
-                          .toList(),
-                    ),
-                    FormBuilderDateTimePicker(
-                      name: "startDate",
-                      inputType: InputType.date,
-                      format: DateFormat('dd.MM.yyyy.'),
-                      decoration:
-                          const InputDecoration(labelText: "Datum početka *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Datum početka je obavezan."),
-                    ),
-                    FormBuilderDateTimePicker(
-                      name: "endDate",
-                      inputType: InputType.date,
-                      format: DateFormat('dd.MM.yyyy.'),
-                      decoration:
-                          const InputDecoration(labelText: "Datum kraja *"),
-                    ),
-                    FormBuilderTextField(
-                      name: "salary",
-                      decoration: const InputDecoration(labelText: "Plata *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Plata je obavezna."),
-                    ),
-                    FormBuilderTextField(
-                      name: "vacationDays",
-                      decoration: const InputDecoration(
-                          labelText: "Broj dana godišnjeg odmora *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Broj dana godišnjeg odmora je obavezan."),
-                    ),
-                    FormBuilderDropdown(
-                      name: "type",
-                      decoration: const InputDecoration(
-                          labelText: "Vrsta zaposlenja *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Vrsta zaposlenja je obavezna."),
-                      items: const [
-                        DropdownMenuItem(
-                          value: 0,
-                          child: Text("Neodređeno"),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderDropdown(
+                                    name: "employeeId",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Zaposlenik *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText: "Zaposlenik je obavezan."),
+                                    items: _employees.result
+                                        .map((employee) => DropdownMenuItem(
+                                              value: employee.id,
+                                              child: Text(
+                                                  '${employee.firstName} ${employee.lastName}'),
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderDateTimePicker(
+                                    name: "startDate",
+                                    inputType: InputType.date,
+                                    format: DateFormat('dd.MM.yyyy.'),
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Datum početka *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText:
+                                            "Datum početka je obavezan."),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderTextField(
+                                    name: "salary",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Plata *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText: "Plata je obavezna."),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderDropdown(
+                                    name: "type",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Vrsta zaposlenja *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText:
+                                            "Vrsta zaposlenja je obavezna."),
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: 0,
+                                        child: Text("Neodređeno"),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 1,
+                                        child: Text("Određeno"),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        DropdownMenuItem(
-                          value: 1,
-                          child: Text("Određeno"),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderDropdown(
+                                    name: "positionId",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Pozicija *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText: "Pozicija je obavezna."),
+                                    items: _positions.result
+                                        .map((position) => DropdownMenuItem(
+                                              value: position.id,
+                                              child: Text(position.name),
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderDateTimePicker(
+                                    name: "endDate",
+                                    inputType: InputType.date,
+                                    format: DateFormat('dd.MM.yyyy.'),
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Datum kraja"),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderTextField(
+                                    name: "vacationDays",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText:
+                                            "Broj dana godišnjeg odmora *"),
+                                    validator: FormBuilderValidators.required(
+                                        errorText:
+                                            "Broj dana godišnjeg odmora je obavezan."),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: FormBuilderTextField(
+                                    name: "workingHours",
+                                    enabled: _employeePositionStatus !=
+                                        EmploymentStatus.deleted,
+                                    decoration: const InputDecoration(
+                                        labelText: "Radno vrijeme"),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    FormBuilderTextField(
-                      name: "workingHours",
-                      decoration:
-                          const InputDecoration(labelText: "Radno vrijeme"),
-                    ),
-                    if (_allowedActions.contains(EmploymentStatus.active))
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ElevatedButton(
-                          child:
-                              const Text("SPREMI", textAlign: TextAlign.center),
-                          onPressed: () async {
-                            var isValid =
-                                _formKey.currentState?.saveAndValidate();
+                    SizedBox(
+                      width: 400,
+                      height: 100,
+                      child: Row(
+                        children: [
+                          if (_allowedActions
+                                  .contains(EmploymentStatus.active) ||
+                              widget.id == null)
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    minimumSize: MaterialStatePropertyAll(
+                                        Size.square(50))),
+                                child: const Text("SPREMI",
+                                    textAlign: TextAlign.center),
+                                onPressed: () async {
+                                  var isValid =
+                                      _formKey.currentState?.saveAndValidate();
 
-                            if (isValid!) {
-                              var request =
-                                  Map.from(_formKey.currentState!.value);
+                                  if (isValid!) {
+                                    var request =
+                                        Map.from(_formKey.currentState!.value);
 
-                              widget.id == null
-                                  ? await _employeePositionProvider
-                                      .insert(request)
-                                  : await _employeePositionProvider.update(
-                                      widget.id!, request);
+                                    widget.id == null
+                                        ? await _employeePositionProvider
+                                            .insert(request)
+                                        : await _employeePositionProvider
+                                            .update(widget.id!, request);
 
-                              if (context.mounted) Navigator.pop(context);
-                            }
-                          },
-                        ),
+                                    if (context.mounted) Navigator.pop(context);
+                                  }
+                                },
+                              ),
+                            ),
+                          if (_allowedActions.contains(EmploymentStatus.active))
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    minimumSize: MaterialStatePropertyAll(
+                                        Size.square(50))),
+                                child: const Text("AKTIVIRAJ",
+                                    textAlign: TextAlign.center),
+                                onPressed: () async {
+                                  await _employeePositionProvider
+                                      .activate(widget.id!);
+
+                                  await _loadData(widget.id);
+                                },
+                              ),
+                            ),
+                          if (_allowedActions
+                              .contains(EmploymentStatus.inactive))
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    minimumSize: MaterialStatePropertyAll(
+                                        Size.square(50))),
+                                child: const Text("DEAKTIVIRAJ",
+                                    textAlign: TextAlign.center),
+                                onPressed: () async {
+                                  await _employeePositionProvider
+                                      .deactivate(widget.id!);
+
+                                  await _loadData(widget.id);
+                                },
+                              ),
+                            ),
+                          if (_allowedActions
+                              .contains(EmploymentStatus.deleted))
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    minimumSize: MaterialStatePropertyAll(
+                                        Size.square(50)),
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.red)),
+                                child: const Text("OBRIŠI",
+                                    textAlign: TextAlign.center),
+                                onPressed: () async {
+                                  await _employeePositionProvider
+                                      .delete(widget.id!);
+
+                                  if (context.mounted) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MasterScreen(
+                                                    "Detalji o zaposlenju",
+                                                    EmployeePositionListScreen())));
+                                  }
+                                },
+                              ),
+                            ),
+                        ],
                       ),
-                    if (_allowedActions.contains(EmploymentStatus.active))
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ElevatedButton(
-                          child: const Text("AKTIVIRAJ",
-                              textAlign: TextAlign.center),
-                          onPressed: () async {},
-                        ),
-                      ),
-                    if (_allowedActions.contains(EmploymentStatus.inactive))
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ElevatedButton(
-                          child: const Text("DEAKTIVIRAJ",
-                              textAlign: TextAlign.center),
-                          onPressed: () async {},
-                        ),
-                      ),
-                    if (_allowedActions.contains(EmploymentStatus.deleted))
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ElevatedButton(
-                          child:
-                              const Text("OBRIŠI", textAlign: TextAlign.center),
-                          onPressed: () async {},
-                        ),
-                      ),
+                    )
                   ],
                 ),
               ),
