@@ -89,7 +89,7 @@ class SideMenu extends StatelessWidget {
             context,
             "Početna",
             Icons.dashboard,
-            const DashboardScreen(),
+            DashboardScreen(),
             true,
           ),
           ExpansionTile(

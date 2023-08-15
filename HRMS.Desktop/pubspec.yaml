@@ -24,6 +24,7 @@ dependencies:
   grouped_list: ^5.1.2
   file_picker: ^5.3.3
   syncfusion_flutter_calendar: ^22.2.8
+  syncfusion_flutter_charts: ^22.2.9
 
 dev_dependencies:
   flutter_test:

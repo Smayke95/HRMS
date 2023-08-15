@@ -71,7 +71,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Future<T> insert(dynamic request) async {
     var uri = Uri.https(baseUrl, endpoint);
 
-    var jsonRequest = jsonEncode(request);
+    var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
     var response =
         await http.post(uri, headers: getHeaders(), body: jsonRequest);

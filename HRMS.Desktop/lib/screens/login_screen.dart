@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) =>
-              const MasterScreen("Početna", DashboardScreen())));
+              MasterScreen("Početna", DashboardScreen())));
     } on Exception catch (e) {
       final snackBar = SnackBar(
         content: Text(e.toString()),

@@ -282,7 +282,14 @@ class _EmployeePositionDetailsScreenState
                                         : await _employeePositionProvider
                                             .update(widget.id!, request);
 
-                                    if (context.mounted) Navigator.pop(context);
+                                    if (context.mounted) {
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MasterScreen(
+                                                      "Zaposlenje",
+                                                      EmployeePositionListScreen())));
+                                    }
                                   }
                                 },
                               ),
@@ -342,8 +349,7 @@ class _EmployeePositionDetailsScreenState
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const MasterScreen(
-                                                    "Detalji o zaposlenju",
+                                                const MasterScreen("Zaposlenje",
                                                     EmployeePositionListScreen())));
                                   }
                                 },
