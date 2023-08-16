@@ -20,27 +20,18 @@ public class ApiProfile : Profile
 
         CreateMap<CountryUpdate, Country>();
 
-        CreateMap<DepartmentInsert, Department>()
+        CreateMap<DepartmentInsertUpdate, Department>()
             .ForMember(x => x.ParentDepartment, opt => opt.MapFrom(y => new Department { Id = y.ParentDepartmentId ?? 0 }))
-            .ForMember(x => x.Supervisor, opt => opt.MapFrom(y => new Employee { Id = y.SupervisorId ?? 0 }));
+            .ForMember(x => x.Supervisor, opt => opt.MapFrom(y => y.SupervisorId == null ? null : new Employee { Id = y.SupervisorId ?? 0 }));
 
-        CreateMap<DepartmentUpdate, Department>()
-            .ForMember(x => x.ParentDepartment, opt => opt.MapFrom(y => new Department { Id = y.ParentDepartmentId ?? 0 }))
-            .ForMember(x => x.Supervisor, opt => opt.MapFrom(y => new Employee { Id = y.SupervisorId ?? 0 }));
+        CreateMap<EmployeeInsertUpdate, Employee>()
+            .ForMember(x => x.BirthDate, opt => opt.MapFrom(y => y.BirthDate ?? DateTime.Now))
+            .ForMember(x => x.BirthPlace, opt => opt.MapFrom(y => y.BirthPlaceId == null ? null : new City { Id = y.BirthPlaceId ?? 0 }))
+            .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }))
+            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CitizenshipId == null ? null : new Country { Id = y.CitizenshipId ?? 0 }))
+            .ForMember(x => x.Education, opt => opt.MapFrom(y => y.EducationId == null ? null : new Education { Id = y.EducationId ?? 0 }));
 
-        CreateMap<EmployeeInsert, Employee>()
-            .ForMember(x => x.BirthPlace, opt => opt.MapFrom(y => new City { Id = y.BirthPlaceId ?? 0 }))
-            .ForMember(x => x.City, opt => opt.MapFrom(y => new City { Id = y.CityId ?? 0 }))
-            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => new Country { Id = y.CitizenshipId ?? 0 }))
-            .ForMember(x => x.Education, opt => opt.MapFrom(y => new Education { Id = y.EducationId ?? 0 }));
-
-        CreateMap<EmployeeUpdate, Employee>()
-            .ForMember(x => x.BirthPlace, opt => opt.MapFrom(y => new City { Id = y.BirthPlaceId ?? 0 }))
-            .ForMember(x => x.City, opt => opt.MapFrom(y => new City { Id = y.CityId ?? 0 }))
-            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => new Country { Id = y.CitizenshipId ?? 0 }))
-            .ForMember(x => x.Education, opt => opt.MapFrom(y => new Education { Id = y.EducationId ?? 0 }));
-
-        CreateMap<EmployeePositionInsert, EmployeePosition>()
+        CreateMap<EmployeePositionInsertUpdate, EmployeePosition>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }))
             .ForMember(x => x.Position, opt => opt.MapFrom(y => new Position { Id = y.PositionId }));
 
@@ -51,18 +42,13 @@ public class ApiProfile : Profile
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
 
         CreateMap<EventTypeInsert, EventType>();
-           
+
         CreateMap<EventTypeUpdate, EventType>();
-            
+
         CreateMap<MessageInsert, Message>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }));
 
-        CreateMap<PositionInsert, Position>()
-            .ForMember(x => x.Department, opt => opt.MapFrom(y => new Department { Id = y.DepartmentId ?? 0 }))
-            .ForMember(x => x.PayGrade, opt => opt.MapFrom(y => new PayGrade { Id = y.PayGradeId ?? 0 }))
-            .ForMember(x => x.RequiredEducation, opt => opt.MapFrom(y => new Education { Id = y.RequiredEducationId ?? 0 }));
-
-        CreateMap<PositionUpdate, Position>()
+        CreateMap<PositionInsertUpdate, Position>()
             .ForMember(x => x.Department, opt => opt.MapFrom(y => new Department { Id = y.DepartmentId ?? 0 }))
             .ForMember(x => x.PayGrade, opt => opt.MapFrom(y => new PayGrade { Id = y.PayGradeId ?? 0 }))
             .ForMember(x => x.RequiredEducation, opt => opt.MapFrom(y => new Education { Id = y.RequiredEducationId ?? 0 }));

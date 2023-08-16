@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class EmployeePositionController : BaseCrudController<EmployeePosition, EmployeePositionSearch, EmployeePositionInsert, EmployeePositionUpdate>
+public class EmployeePositionController : BaseCrudController<EmployeePosition, EmployeePositionSearch, EmployeePositionInsertUpdate, EmployeePositionInsertUpdate>
 {
     private readonly IEmployeePositionService EmployeePositionService;
 
@@ -29,12 +29,12 @@ public class EmployeePositionController : BaseCrudController<EmployeePosition, E
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]
-    public override async Task<EmployeePosition> Insert([FromBody] EmployeePositionInsert insert)
+    public override async Task<EmployeePosition> Insert([FromBody] EmployeePositionInsertUpdate insert)
         => await EmployeePositionService.InsertAsync(Mapper.Map<EmployeePosition>(insert));
 
     /// <remarks>Update object by Id</remarks>
     [HttpPut("{id}")]
-    public override async Task<EmployeePosition> Update(int id, [FromBody] EmployeePositionUpdate update)
+    public override async Task<EmployeePosition> Update(int id, [FromBody] EmployeePositionInsertUpdate update)
         => await EmployeePositionService.UpdateAsync(Mapper.Map<EmployeePosition>(update));
 
     /// <remarks>Activate object by Id</remarks>

@@ -8,6 +8,7 @@ import '../data_table_sources/department_data_table_source.dart';
 import '../models/department.dart';
 import '../models/employee.dart';
 import '../models/paged_result.dart';
+import '../models/requests/department_insert_update.dart';
 import '../providers/department_provider.dart';
 import '../providers/employee_provider.dart';
 import '../widgets/responsive.dart';
@@ -50,11 +51,13 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
     if (id != null) {
       var department = await _departmentProvider.get(id);
 
-      _formKey.currentState?.patchValue({
-        "name": department.name,
-        "parentDepartmentId": department.parentDepartment?.id.toString() ?? "0",
-        "supervisorId": department.supervisor?.id.toString() ?? "0",
-      });
+      var departmentInsertUpdate = DepartmentInsertUpdate(
+        department.name,
+        department.parentDepartment?.id ?? 0,
+        department.supervisor?.id ?? 0,
+      ).toJson();
+
+      _formKey.currentState?.patchValue(departmentInsertUpdate);
     }
   }
 
@@ -133,7 +136,7 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
                           errorText: "Bazni odjel je obavezan."),
                       items: _departments.result
                           .map((department) => DropdownMenuItem(
-                                value: department.id.toString(),
+                                value: department.id,
                                 child: Text(department.name),
                               ))
                           .toList(),
@@ -150,7 +153,7 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
                           errorText: "Supervizor je obavezan."),
                       items: _employees.result
                           .map((employee) => DropdownMenuItem(
-                                value: employee.id.toString(),
+                                value: employee.id,
                                 child: Text(
                                     "${employee.firstName} ${employee.lastName}"),
                               ))

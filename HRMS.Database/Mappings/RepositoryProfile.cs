@@ -20,21 +20,21 @@ public class RepositoryProfile : Profile
         CreateMap<Department, Core.Models.Department>()
             .MaxDepth(2);
         CreateMap<Core.Models.Department, Department>()
-            .ForMember(x => x.ParentDepartmentId, opt => opt.MapFrom(y => y.ParentDepartment.Id))
+            .ForMember(x => x.ParentDepartmentId, opt => opt.MapFrom((src, dest) => src.ParentDepartment?.Id))
             .ForMember(x => x.ParentDepartment, opt => opt.Ignore())
-            .ForMember(x => x.SupervisorId, opt => opt.MapFrom(y => y.Supervisor.Id))
+            .ForMember(x => x.SupervisorId, opt => opt.MapFrom((src, dest) => src.Supervisor?.Id))
             .ForMember(x => x.Supervisor, opt => opt.Ignore());
 
         CreateMap<Employee, Core.Models.Employee>()
             .ForMember(x => x.Roles, opt => opt.MapFrom(y => y.Roles.Select(z => z.Role)));
         CreateMap<Core.Models.Employee, Employee>()
-            .ForMember(x => x.BirthPlaceId, opt => opt.MapFrom(y => y.BirthPlace.Id))
+            .ForMember(x => x.BirthPlaceId, opt => opt.MapFrom((src, dest) => src.BirthPlace?.Id))
             .ForMember(x => x.BirthPlace, opt => opt.Ignore())
-            .ForMember(x => x.CityId, opt => opt.MapFrom(y => y.City.Id))
+            .ForMember(x => x.CityId, opt => opt.MapFrom((src, dest) => src.City?.Id))
             .ForMember(x => x.City, opt => opt.Ignore())
-            .ForMember(x => x.CitizenshipId, opt => opt.MapFrom(y => y.Citizenship.Id))
+            .ForMember(x => x.CitizenshipId, opt => opt.MapFrom((src, dest) => src.Citizenship?.Id))
             .ForMember(x => x.Citizenship, opt => opt.Ignore())
-            .ForMember(x => x.EducationId, opt => opt.MapFrom(y => y.Education.Id))
+            .ForMember(x => x.EducationId, opt => opt.MapFrom((src, dest) => src.Education?.Id))
             .ForMember(x => x.Education, opt => opt.Ignore());
 
         CreateMap<EmployeePosition, Core.Models.EmployeePosition>();

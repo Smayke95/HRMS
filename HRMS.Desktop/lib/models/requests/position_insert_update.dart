@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'position_update.g.dart';
+part 'position_insert_update.g.dart';
 
 @JsonSerializable()
-class PositionUpdate {
+class PositionInsertUpdate {
   String name;
   int? departmentId;
   int? payGradeId;
   int? requiredEducationId;
   bool isWorkExperienceRequired;
 
-  PositionUpdate(
+  PositionInsertUpdate(
     this.name,
     this.departmentId,
     this.payGradeId,
@@ -18,8 +18,8 @@ class PositionUpdate {
     this.isWorkExperienceRequired,
   );
 
-  factory PositionUpdate.fromJson(Map<String, dynamic> json) =>
-      _$PositionUpdateFromJson(json);
+  factory PositionInsertUpdate.fromJson(Map<String, dynamic> json) =>
+      _$PositionInsertUpdateFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PositionUpdateToJson(this);
+  Map<String, dynamic> toJson() => _$PositionInsertUpdateToJson(this);
 }

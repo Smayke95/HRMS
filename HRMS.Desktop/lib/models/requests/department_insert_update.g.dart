@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'department_update.dart';
+part of 'department_insert_update.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DepartmentUpdate _$DepartmentUpdateFromJson(Map<String, dynamic> json) =>
-    DepartmentUpdate(
+DepartmentInsertUpdate _$DepartmentInsertUpdateFromJson(
+        Map<String, dynamic> json) =>
+    DepartmentInsertUpdate(
       json['name'] as String,
       json['parentDepartmentId'] as int?,
       json['supervisorId'] as int?,
     );
 
-Map<String, dynamic> _$DepartmentUpdateToJson(DepartmentUpdate instance) =>
+Map<String, dynamic> _$DepartmentInsertUpdateToJson(
+        DepartmentInsertUpdate instance) =>
     <String, dynamic>{
       'name': instance.name,
       'parentDepartmentId': instance.parentDepartmentId,

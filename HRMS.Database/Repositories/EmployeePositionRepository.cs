@@ -31,7 +31,7 @@ public class EmployeePositionRepository : BaseRepository<EmployeePosition, Core.
     protected override IQueryable<EmployeePosition> AddInclude(IQueryable<EmployeePosition> query, EmployeePositionSearch? search = null)
     {
         query = query.Include(x => x.Employee);
-        query = query.Include(x => x.Position).ThenInclude(x => x.Department);
+        query = query.Include(x => x.Position).ThenInclude(y => y!.Department);
 
         if (search is null)
             return base.AddInclude(query, search);

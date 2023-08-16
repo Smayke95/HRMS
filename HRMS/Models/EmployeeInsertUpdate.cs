@@ -1,26 +1,32 @@
 ﻿using HRMS.Core.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRMS.Models;
 
-public class EmployeeUpdate
+public class EmployeeInsertUpdate
 {
+    [Required]
     public string FirstName { get; set; } = string.Empty;
 
+    [Required]
     public string LastName { get; set; } = string.Empty;
 
     public string MaidenName { get; set; } = string.Empty;
 
     public string ParentName { get; set; } = string.Empty;
 
+    [Required]
     public Gender Gender { get; set; }
 
+    [Required]
     public string RegistrationNumber { get; set; } = string.Empty;
 
     public string PersonalIdentificationNumber { get; set; } = string.Empty;
 
     public string WorkerCode { get; set; } = string.Empty;
 
-    public DateTime BirthDate { get; set; }
+    [Required]
+    public DateTime? BirthDate { get; set; }
 
     public int? BirthPlaceId { get; set; }
 
@@ -32,6 +38,7 @@ public class EmployeeUpdate
 
     public string Image { get; set; } = string.Empty;
 
+    [Required]
     public string Email { get; set; } = string.Empty;
 
     public string Phone { get; set; } = string.Empty;

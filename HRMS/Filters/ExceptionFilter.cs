@@ -7,6 +7,7 @@ using HRMS.Extensions;
 
 namespace HRMS.Filters;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S3376:Attribute, EventArgs, and Exception type names should end with the type being extended", Justification = "<Pending>")]
 public class ExceptionFilter : ExceptionFilterAttribute
 {
     public override void OnException(ExceptionContext context)

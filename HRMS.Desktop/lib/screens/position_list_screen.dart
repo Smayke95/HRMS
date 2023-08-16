@@ -9,6 +9,7 @@ import '../models/department.dart';
 import '../models/education.dart';
 import '../models/paged_result.dart';
 import '../models/pay_grade.dart';
+import '../models/requests/position_insert_update.dart';
 import '../providers/department_provider.dart';
 import '../providers/education_provider.dart';
 import '../providers/pay_grade_provider.dart';
@@ -59,13 +60,15 @@ class _PositionListScreenState extends State<PositionListScreen> {
     if (id != null) {
       var position = await _positionProvider.get(id);
 
-      _formKey.currentState?.patchValue({
-        "name": position.name,
-        "departmentId": position.department?.id.toString() ?? "0",
-        "payGradeId": position.payGrade?.id.toString() ?? "0",
-        "requiredEducationId": position.requiredEducation?.id.toString() ?? "0",
-        "isWorkExperienceRequired": position.isWorkExperienceRequired,
-      });
+      var positionInsertUpdate = PositionInsertUpdate(
+        position.name,
+        position.department?.id,
+        position.payGrade?.id,
+        position.requiredEducation?.id,
+        position.isWorkExperienceRequired,
+      ).toJson();
+
+      _formKey.currentState?.patchValue(positionInsertUpdate);
     }
   }
 
@@ -144,7 +147,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
                           errorText: "Odjel je obavezan."),
                       items: _departments.result
                           .map((department) => DropdownMenuItem(
-                                value: department.id.toString(),
+                                value: department.id,
                                 child: Text(department.name),
                               ))
                           .toList(),
@@ -161,7 +164,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
                           errorText: "Platni razred je obavezan."),
                       items: _payGrades.result
                           .map((payGrade) => DropdownMenuItem(
-                                value: payGrade.id.toString(),
+                                value: payGrade.id,
                                 child: Text(
                                     "${payGrade.name} (${payGrade.minAmount} - ${payGrade.maxAmount})"),
                               ))
@@ -183,7 +186,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
                           errorText: "Potrebno obrazovanje je obavezno."),
                       items: _educations.result
                           .map((education) => DropdownMenuItem(
-                                value: education.id.toString(),
+                                value: education.id,
                                 child: Text(education.qualificationOld),
                               ))
                           .toList(),

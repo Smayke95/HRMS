@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, EmployeeInsert, EmployeeUpdate>
+public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, EmployeeInsertUpdate, EmployeeInsertUpdate>
 {
     private readonly IEmployeeService EmployeeService;
 
@@ -23,6 +23,6 @@ public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, E
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]
-    public override async Task<Employee> Insert([FromBody] EmployeeInsert insert)
+    public override async Task<Employee> Insert([FromBody] EmployeeInsertUpdate insert)
         => await EmployeeService.InsertAsync(Mapper.Map<Employee>(insert));
 }

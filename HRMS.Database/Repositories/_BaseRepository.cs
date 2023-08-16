@@ -41,10 +41,11 @@ public abstract class BaseRepository<TDb, T, TSearch> : IBaseRepository<T, TSear
 
     public virtual async Task<PagedResult<T>> GetAllAsync(TSearch? search = null)
     {
-        var result = new PagedResult<T>();
-
-        result.Page = search?.Page ?? 1;
-        result.PageSize = search?.PageSize ?? 10;
+        var result = new PagedResult<T>
+        {
+            Page = search?.Page ?? 1,
+            PageSize = search?.PageSize ?? 10
+        };
 
         var query = Context
             .Set<TDb>()

@@ -29,7 +29,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   final _formKey = GlobalKey<FormBuilderState>();
   var _employees = PagedResult<Employee>();
-  var _events = PagedResult<Event>();
+  //var _events = PagedResult<Event>();
 
   @override
   void initState() {

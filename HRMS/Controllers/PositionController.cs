@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class PositionController : BaseCrudController<Position, PositionSearch, PositionInsert, PositionUpdate>
+public class PositionController : BaseCrudController<Position, PositionSearch, PositionInsertUpdate, PositionInsertUpdate>
 {
     private readonly IPositionRepository PositionRepository;
 

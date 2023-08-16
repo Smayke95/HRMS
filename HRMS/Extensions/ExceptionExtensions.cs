@@ -41,11 +41,9 @@ public static class ExceptionExtensions
         var className = exception.TargetSite?.DeclaringType?.Name ?? string.Empty;
         var methodName = exception.TargetSite?.Name ?? string.Empty;
 
-        var isAsync = exception
-            .TargetSite?
-            .DeclaringType?
-            .GetInterfaces()
-            .Any(i => i == typeof(IAsyncStateMachine)) ?? false;
+        var isAsync = Array.Exists(
+            exception.TargetSite?.DeclaringType?.GetInterfaces() ?? Array.Empty<Type>(),
+            i => i == typeof(IAsyncStateMachine));
 
         if (isAsync)
         {

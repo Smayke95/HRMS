@@ -2,7 +2,7 @@
 
 namespace HRMS.Models;
 
-public class PositionInsert
+public class PositionInsertUpdate
 {
     [Required]
     public string Name { get; set; } = string.Empty;
