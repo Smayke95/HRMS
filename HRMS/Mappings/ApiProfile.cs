@@ -36,10 +36,12 @@ public class ApiProfile : Profile
             .ForMember(x => x.Position, opt => opt.MapFrom(y => new Position { Id = y.PositionId }));
 
         CreateMap<EventInsert, Event>()
-            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }))
+            .ForMember(x => x.EventType, opt => opt.MapFrom(y => new EventType { Id = y.EventTypeId ?? 0 }));
 
         CreateMap<EventUpdate, Event>()
-            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }))
+            .ForMember(x => x.EventType, opt => opt.MapFrom(y => new EventType { Id = y.EventTypeId ?? 0 }));
 
         CreateMap<EventTypeInsert, EventType>();
 

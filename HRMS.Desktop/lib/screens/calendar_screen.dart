@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../data_table_sources/event_data_table_source.dart';
 import '../models/employee.dart';
 import '../models/event.dart';
+import '../models/event_type.dart';
 import '../models/paged_result.dart';
 import '../models/searches/event_search.dart';
 import '../models/user.dart';
 import '../providers/employee_provider.dart';
 import '../providers/event_provider.dart';
+import '../providers/event_type_provider.dart';
 import '../widgets/responsive.dart';
+import '../widgets/search.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -24,12 +28,13 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   late EmployeeProvider _employeeProvider;
   late EventProvider _eventProvider;
+  late EventTypeProvider _eventTypeProvider;
 
   late EventDataTableSource eventDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
   var _employees = PagedResult<Employee>();
-  //var _events = PagedResult<Event>();
+  var _eventTypes = PagedResult<EventType>();
 
   @override
   void initState() {
@@ -37,12 +42,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     _employeeProvider = context.read<EmployeeProvider>();
     _eventProvider = context.read<EventProvider>();
+    _eventTypeProvider = context.read<EventTypeProvider>();
 
     _loadData(null);
   }
 
   Future _loadData(int? id) async {
     _employees = await _employeeProvider.getAll();
+    _eventTypes = await _eventTypeProvider.getAll();
 
     if (id != null) {
       var event = await _eventProvider.get(id);
@@ -50,8 +57,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
       _formKey.currentState?.patchValue({
         "name": event.name,
         "description": event.description,
-        "startDate": event.startDate.toString(),
-        "endDate": event.endDate.toString(),
+        "startDate": event.startDate,
+        "endDate": event.endDate,
         "eventTypeId": event.eventType?.id.toString() ?? "0",
         "employeeId": event.employee?.id.toString() ?? "0",
       });
@@ -79,20 +86,98 @@ class _CalendarScreenState extends State<CalendarScreen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
-          return Text(
-              "Error: ${snapshot.error}");
+          return Text("Error: ${snapshot.error}");
         } else if (!snapshot.hasData || snapshot.data?.result == null) {
-          return const Text(
-              "Podaci nisu dostupni.");
+          return const Text("Podaci nisu dostupni.");
         } else {
-          return SfCalendar(
-            view: CalendarView.month,
-            firstDayOfWeek: 1,
-            dataSource: EventDataTableSource(
-                snapshot.data!.result), // Use fetched data.
-            monthViewSettings: const MonthViewSettings(
-              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-            ),
+          return Row(
+            children: [
+              SizedBox(
+                width: 900,
+                child: SfCalendar(
+                  view: CalendarView.month,
+                  firstDayOfWeek: 1,
+                  dataSource: EventDataTableSource(snapshot.data!.result),
+                  monthViewSettings: const MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment,
+                  ),
+                  onTap: (CalendarTapDetails details) {
+                    if (details.targetElement == CalendarElement.appointment) {
+                      int id = details.appointments?[0].id;
+                      _openDialog(id);
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(width: 50),
+              Container(
+                width: 200,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 185, 185, 185)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.add),
+                      style: const ButtonStyle(
+                        padding: MaterialStatePropertyAll(EdgeInsets.only(
+                            left: 15, top: 15, right: 20, bottom: 15)),
+                      ),
+                      label: const Text("Dodaj događaj"),
+                      onPressed: () => _openDialog(null),
+                    ),
+                    const SizedBox(height: 50),
+                    const Text(
+                      'Legenda',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 95, 95, 95),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _eventTypes.result.map((type) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 2),
+                                        blurRadius: 4.0,
+                                        spreadRadius: 0.0,
+                                      ),
+                                    ],
+                                    color: Color(int.parse(
+                                        type.color.replaceAll("#", "0xff"))),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(type.name),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           );
         }
       },
@@ -153,26 +238,27 @@ class _CalendarScreenState extends State<CalendarScreen> {
               Row(
                 children: [
                   SizedBox(
-                    width: 300,
-                    child: FormBuilderTextField(
-                      name: "startDate",
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: const InputDecoration(labelText: "Početak *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Datum početka događaja je obavezan."),
-                    ),
-                  ),
+                      width: 300,
+                      child: FormBuilderDateTimePicker(
+                        name: "startDate",
+                        inputType: InputType.date,
+                        format: DateFormat('dd.MM.yyyy.'),
+                        decoration:
+                            const InputDecoration(labelText: "Datum početka *"),
+                        validator: FormBuilderValidators.required(
+                            errorText: "Datum početka je obavezan."),
+                      )),
                   const SizedBox(width: 20),
                   SizedBox(
                     width: 300,
-                    child: FormBuilderTextField(
+                    child: FormBuilderDateTimePicker(
                       name: "endDate",
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: const InputDecoration(labelText: "Kraj *"),
+                      inputType: InputType.date,
+                      format: DateFormat('dd.MM.yyyy.'),
+                      decoration:
+                          const InputDecoration(labelText: "Datum kraja *"),
                       validator: FormBuilderValidators.required(
-                          errorText: "Datum kraja događaja je obavezan."),
+                          errorText: "Datum kraja je obavezan."),
                     ),
                   ),
                 ],
@@ -180,7 +266,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  /*SizedBox(
+                  SizedBox(
                     width: 300,
                     child: FormBuilderDropdown(
                       name: "eventTypeId",
@@ -194,7 +280,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               ))
                           .toList(),
                     ),
-                  ),*/
+                  ),
                   const SizedBox(width: 20),
                   SizedBox(
                     width: 300,
@@ -233,7 +319,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: const Text("OBRIŠI"),
             onPressed: () async {
               await _eventProvider.delete(id);
-              //eventDataTableSource.filterData(null);
+
+              await _loadData(null);
+              setState(() {});
+
               if (context.mounted) Navigator.pop(context);
             },
           ),
@@ -264,7 +353,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ? await _eventProvider.insert(request)
                   : await _eventProvider.update(id, request);
 
-              //eventDataTableSource.filterData(null);
+              await _loadData(null);
+              setState(() {});
               if (context.mounted) Navigator.pop(context);
             }
           },

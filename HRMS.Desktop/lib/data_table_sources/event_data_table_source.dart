@@ -25,7 +25,8 @@ class EventDataTableSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return const Color.fromRGBO(55, 92, 212, 0.671);//appointments![index].eventType.color;
+    var rgbColor = appointments![index].eventType.color.replaceFirst('#', '0xff');
+    return Color(int.parse(rgbColor));
   }
 
   @override

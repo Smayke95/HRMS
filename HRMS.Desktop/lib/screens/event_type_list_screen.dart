@@ -1,5 +1,6 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,10 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
   late EventTypeProvider _eventTypeProvider;
 
   late EventTypeDataTableSource eventTypeDataTableSource;
+  late FocusNode _focusNode;
 
   final _formKey = GlobalKey<FormBuilderState>();
+  Color currentColor = const Color(0xff0175C2);
 
   @override
   void initState() {
@@ -35,20 +38,28 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
     _loadData(null);
   }
 
-  Future _loadData(int? id) async {    
-
+  Future _loadData(int? id) async {
     if (id != null) {
       var eventType = await _eventTypeProvider.get(id);
 
+      var rgbColor = eventType.color.replaceFirst('#', '0xff');
+      currentColor = Color(int.parse(rgbColor != "" ? rgbColor : "0xfffff"));
+
       _formKey.currentState?.patchValue({"name": eventType.name});
-      _formKey.currentState?.patchValue({"isApprovalRequired": eventType.isApprovalRequired});
+      _formKey.currentState
+          ?.patchValue({"isApprovalRequired": eventType.isApprovalRequired});
       _formKey.currentState?.patchValue({"color": eventType.color});
     }
   }
 
   void _openDialog(int? id) {
     if (Responsive.isMobile(context)) return;
-    
+
+    _focusNode = FocusNode();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -59,11 +70,8 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj tip događaja", 
-          () => _openDialog(null),
-          onSearch: (text) => eventTypeDataTableSource.filterData(text)
-        ),
+        Search("Dodaj tip događaja", () => _openDialog(null),
+            onSearch: (text) => eventTypeDataTableSource.filterData(text)),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -73,7 +81,7 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
             rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Naziv")),
-              DataColumn(label: Text("Da li je potrebno odobrenje?")),  
+              DataColumn(label: Text("Da li je potrebno odobrenje?")),
               DataColumn(label: Text("Boja"))
             ],
           ),
@@ -84,6 +92,8 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
 
   Widget _buildDialog(BuildContext context, int? id) {
     _loadData(id);
+
+    if (id == null) currentColor = Colors.white;
 
     return AlertDialog(
       title: Align(
@@ -115,29 +125,68 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
                     ),
                   )
                 ],
-              ),  
-              const SizedBox(height: 20), 
+              ),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   SizedBox(
                     width: 250,
-                    child: FormBuilderCheckbox(
-                      name: "isApprovalRequired",
-                      title: const Text("Da li je potrebno odobrenje?")    ,
-                      initialValue: false,                 
+                    child: Column(
+                      children: [
+                        FormBuilderTextField(
+                          name: "color",
+                          focusNode: _focusNode,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefix: Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 2),
+                                        blurRadius: 4.0,
+                                        spreadRadius: 0.0,
+                                      ),
+                                    ],
+                                    color: currentColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        OutlinedButton(
+                          style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(
+                              EdgeInsets.only(
+                                  left: 20, top: 15, right: 20, bottom: 15),
+                            ),
+                          ),
+                          child: const Text("Izaberi boju *"),
+                          onPressed: () => pickColor(context, currentColor),
+                        ),
+                      ],
                     ),
                   ),
-                   SizedBox(
+                  const SizedBox(width: 20),
+                  SizedBox(
                     width: 250,
-                    child: FormBuilderTextField(
-                      name: "color",
-                      decoration: const InputDecoration(labelText: "Boja *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Boja je obavezna."),
+                    child: FormBuilderCheckbox(
+                      name: "isApprovalRequired",
+                      title: const Text("Da li je potrebno odobrenje?"),
+                      initialValue: false,
                     ),
-                  )
+                  ),
                 ],
-              ),             
+              ),
             ],
           ),
         ),
@@ -195,4 +244,31 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
       ],
     );
   }
+
+  void pickColor(BuildContext context, Color currentColor) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+          title: const Text("Izaberi boju"),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            buildColorPicker(currentColor),
+            const SizedBox(height: 20),
+            TextButton(
+              child: const Text("IZABERI"),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ])));
+
+  Widget buildColorPicker(Color color) => ColorPicker(
+      pickerColor: color,
+      enableAlpha: false,
+      labelTypes: const [],
+      onColorChanged: (color) => {
+            setState(() {
+              currentColor = color;
+              _formKey.currentState!.patchValue({
+                'color':
+                    '#${color.value.toRadixString(16).replaceAll("ff", "")}'
+              });
+            })
+          });
 }

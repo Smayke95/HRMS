@@ -31,13 +31,22 @@ class EventTypeDataTableSource extends AdvancedDataTableSource<EventType> {
   @override
   DataRow? getRow(int index) {
     final currentRow = lastDetails!.rows[index];
-   
+    var rgbColor = currentRow.color.replaceFirst('#', '0xff');
+    var currentColor = Color(int.parse(rgbColor != "" ? rgbColor : "0xfffff"));
+
     return DataRow(
       onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
         DataCell(Text(currentRow.name)),
         DataCell(Text(currentRow.isApprovalRequired ? "Da" : "Ne")),
-        DataCell(Text(currentRow.color)),
+        DataCell(Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            color: currentColor,
+            shape: BoxShape.circle,
+          ),
+        )),
       ],
     );
   }
@@ -48,5 +57,5 @@ class EventTypeDataTableSource extends AdvancedDataTableSource<EventType> {
   Future filterData(String? name) async {
     eventStatusSearch.name = name;
     setNextView();
-  }  
+  }
 }

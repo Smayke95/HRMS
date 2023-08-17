@@ -55,7 +55,9 @@ public class RepositoryProfile : Profile
         CreateMap<Event, Core.Models.Event>();
         CreateMap<Core.Models.Event, Event>()
             .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
-            .ForMember(x => x.Employee, opt => opt.Ignore());
+            .ForMember(x => x.Employee, opt => opt.Ignore())
+            .ForMember(x => x.EventTypeId, opt => opt.MapFrom(y => y.EventType.Id))
+            .ForMember(x => x.EventType, opt => opt.Ignore()); ;
 
         CreateMap<EventType, Core.Models.EventType>()
             .ReverseMap();

@@ -25,6 +25,7 @@ dependencies:
   file_picker: ^5.3.3
   syncfusion_flutter_calendar: ^22.2.8
   syncfusion_flutter_charts: ^22.2.9
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:

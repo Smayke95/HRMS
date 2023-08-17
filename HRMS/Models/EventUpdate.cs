@@ -10,9 +10,7 @@ public class EventUpdate
 
     public int? EmployeeId { get; set; }
 
-    public bool AllDay { get; set; }
+    public DateTime StartDate { get; set; }
 
-    public DateTime Start { get; set; }
-
-    public DateTime End { get; set; }
+    public DateTime EndDate { get; set; }
 }
