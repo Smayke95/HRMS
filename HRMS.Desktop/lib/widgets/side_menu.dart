@@ -89,7 +89,7 @@ class SideMenu extends StatelessWidget {
             context,
             "Početna",
             Icons.dashboard,
-            DashboardScreen(),
+            const DashboardScreen(),
             true,
           ),
           ExpansionTile(
@@ -126,48 +126,50 @@ class SideMenu extends StatelessWidget {
             const CalendarScreen(),
             true,
           ),
-          ExpansionTile(
-            leading: const Icon(Icons.groups),
-            title: const Text("Zaposlenici"),
-            children: [
-              _buildListTile(
-                context,
-                "Zaposlenici",
-                Icons.groups,
-                const EmployeeListScreen(),
-                true,
-              ),
-              _buildListTile(
-                context,
-                "Zaposlenje",
-                Icons.content_copy,
-                const EmployeePositionListScreen(),
-                true,
-              ),
-              _buildListTile(
-                context,
-                "Pozicije",
-                Icons.storage,
-                const PositionListScreen(),
-                true,
-              ),
-              _buildListTile(
-                context,
-                "Kompanija",
-                Icons.location_city,
-                const DepartmentListScreen(),
-                true,
-              ),
-            ],
-          ),
+          if (User.roles.contains("Manager"))
+            ExpansionTile(
+              leading: const Icon(Icons.groups),
+              title: const Text("Zaposlenici"),
+              children: [
+                _buildListTile(
+                  context,
+                  "Zaposlenici",
+                  Icons.groups,
+                  const EmployeeListScreen(),
+                  true,
+                ),
+                _buildListTile(
+                  context,
+                  "Zaposlenje",
+                  Icons.content_copy,
+                  const EmployeePositionListScreen(),
+                  true,
+                ),
+                _buildListTile(
+                  context,
+                  "Pozicije",
+                  Icons.storage,
+                  const PositionListScreen(),
+                  true,
+                ),
+                _buildListTile(
+                  context,
+                  "Kompanija",
+                  Icons.location_city,
+                  const DepartmentListScreen(),
+                  true,
+                ),
+              ],
+            ),
           SizedBox(height: spaceHeight),
-          _buildListTile(
-            context,
-            "Postavke",
-            Icons.settings,
-            const SettingsScreen(),
-            true,
-          ),
+          if (User.roles.contains("Admin"))
+            _buildListTile(
+              context,
+              "Postavke",
+              Icons.settings,
+              const SettingsScreen(),
+              true,
+            ),
         ],
       ),
     );

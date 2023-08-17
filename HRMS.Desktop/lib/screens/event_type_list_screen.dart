@@ -56,7 +56,7 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
     if (Responsive.isMobile(context)) return;
 
     _focusNode = FocusNode();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
 

@@ -1,25 +1,25 @@
 import 'dart:io';
 
-import 'package:HRMS/providers/city_provider.dart';
-import 'package:HRMS/providers/country_provider.dart';
-import 'package:HRMS/providers/event_provider.dart';
-import 'package:HRMS/providers/event_type_provider.dart';
-import 'package:HRMS/providers/task_status_provider.dart';
-import 'package:HRMS/providers/task_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/auth_provider.dart';
 import 'providers/chat_provider.dart';
+import 'providers/city_provider.dart';
+import 'providers/country_provider.dart';
 import 'providers/department_provider.dart';
 import 'providers/education_provider.dart';
 import 'providers/employee_position_provider.dart';
 import 'providers/employee_provider.dart';
+import 'providers/event_provider.dart';
+import 'providers/event_type_provider.dart';
 import 'providers/notification_provider.dart';
 import 'providers/pay_grade_provider.dart';
 import 'providers/position_provider.dart';
 import 'providers/project_provider.dart';
 import 'providers/task_provider.dart';
+import 'providers/task_status_provider.dart';
+import 'providers/task_type_provider.dart';
 import 'screens/login_screen.dart';
 
 void main() async {

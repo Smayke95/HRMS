@@ -143,17 +143,18 @@ class _HeaderState extends State<Header> {
                   ),
                 ),
                 const PopupMenuDivider(),
-                PopupMenuItem(
-                  child: ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text("Postavke"),
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const MasterScreen(
-                              "Postavke", SettingsScreen())));
-                    },
+                if (User.roles.contains("Admin"))
+                  PopupMenuItem(
+                    child: ListTile(
+                      leading: const Icon(Icons.settings),
+                      title: const Text("Postavke"),
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const MasterScreen(
+                                "Postavke", SettingsScreen())));
+                      },
+                    ),
                   ),
-                ),
                 PopupMenuItem(
                   child: ListTile(
                     leading: const Icon(Icons.logout),

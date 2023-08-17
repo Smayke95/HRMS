@@ -16,7 +16,6 @@ import '../providers/employee_provider.dart';
 import '../providers/event_provider.dart';
 import '../providers/event_type_provider.dart';
 import '../widgets/responsive.dart';
-import '../widgets/search.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
