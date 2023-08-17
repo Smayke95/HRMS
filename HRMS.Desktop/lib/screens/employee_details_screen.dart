@@ -16,7 +16,9 @@ import '../providers/city_provider.dart';
 import '../providers/country_provider.dart';
 import '../providers/education_provider.dart';
 import '../providers/employee_provider.dart';
+import '../widgets/master_screen.dart';
 import '../widgets/responsive.dart';
+import 'employee_list_screen.dart';
 
 class EmployeeDetailsScreen extends StatefulWidget {
   final int? id;
@@ -71,19 +73,34 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
         "personalIdentificationNumber": employee.personalIdentificationNumber,
         "workerCode": employee.workerCode,
         "birthDate": employee.birthDate,
-        "birthPlaceId": employee.birthPlace?.id ?? 0,
+        "birthPlaceId": employee.birthPlace?.id,
         "address": employee.address,
-        "cityId": employee.city?.id ?? 0,
-        "citizenshipId": employee.citizenship?.id ?? 0,
+        "cityId": employee.city?.id,
+        "citizenshipId": employee.citizenship?.id,
         "image": employee.image,
         "email": employee.email,
         "phone": employee.phone,
         "mobile": employee.mobile,
         "officePhone": employee.officePhone,
         "profession": employee.profession,
-        "educationId": employee.education?.id ?? 0,
+        "educationId": employee.education?.id,
         "bankAccount": employee.bankAccount,
         "note": employee.note,
+      };
+    } else {
+      _initialValue = {
+        "maidenName": "",
+        "parentName": "",
+        "personalIdentificationNumber": "",
+        "workerCode": "",
+        "address": "",
+        "image": "",
+        "phone": "",
+        "mobile": "",
+        "officePhone": "",
+        "profession": "",
+        "bankAccount": "",
+        "note": "",
       };
     }
 
@@ -156,7 +173,9 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
             ),
           ),
           SizedBox(
-            height: 500,
+            height: Responsive.isDesktop(context)
+                ? (MediaQuery.of(context).size.width / 3)
+                : 500,
             child: GridView.count(
               crossAxisCount: Responsive.isDesktop(context)
                   ? 3
@@ -268,9 +287,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                   child: FormBuilderDropdown(
                     name: "birthPlaceId",
                     decoration:
-                        const InputDecoration(labelText: "Mjesto rođenja *"),
-                    validator: FormBuilderValidators.required(
-                        errorText: "Mjesto rođenja je obavezno."),
+                        const InputDecoration(labelText: "Mjesto rođenja"),
                     items: _cities.result
                         .map((city) => DropdownMenuItem(
                               value: city.id,
@@ -359,43 +376,11 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                   errorText: "E-mail je obavezan."),
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    child: const Text("Potvrdi email",
-                        textAlign: TextAlign.center),
-                    onPressed: () => {},
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    child: const Text("Otključaj profil",
-                        textAlign: TextAlign.center),
-                    onPressed: () => {},
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    child: const Text("Resetuj lozinku",
-                        textAlign: TextAlign.center),
-                    onPressed: () => {},
-                  ),
-                ),
-              ),
-            ],
-          ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
+              style: const ButtonStyle(
+                  minimumSize: MaterialStatePropertyAll(Size.fromHeight(50))),
               child: const Text("SPREMI", textAlign: TextAlign.center),
               onPressed: () async {
                 var isValid = _formKey.currentState?.saveAndValidate();
@@ -407,7 +392,11 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                       ? await _employeeProvider.insert(request)
                       : await _employeeProvider.update(widget.id!, request);
 
-                  if (context.mounted) Navigator.pop(context);
+                  if (context.mounted) {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const MasterScreen(
+                            "Zaposlenici", EmployeeListScreen())));
+                  }
                 }
               },
             ),
@@ -436,7 +425,9 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
             ),
           ),
           SizedBox(
-            height: 200,
+            height: Responsive.isDesktop(context)
+                ? (MediaQuery.of(context).size.width / 7)
+                : 200,
             child: GridView.count(
               crossAxisCount: Responsive.isDesktop(context)
                   ? 3
@@ -530,7 +521,9 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
             ),
           ),
           SizedBox(
-            height: 130,
+            height: Responsive.isDesktop(context)
+                ? (MediaQuery.of(context).size.width / 11)
+                : 130,
             child: GridView.count(
               crossAxisCount: Responsive.isDesktop(context)
                   ? 3

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230810201022_Position_Full_Text_Search")]
+    [Migration("20230817194843_Position_Full_Text_Search")]
     partial class Position_Full_Text_Search
     {
         /// <inheritdoc />
@@ -507,7 +507,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "Ekonomski tehničar",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0001"
                         },
                         new
                         {
@@ -535,7 +535,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0002"
                         },
                         new
                         {
@@ -563,7 +563,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0003"
                         },
                         new
                         {
@@ -591,7 +591,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0004"
                         },
                         new
                         {
@@ -619,7 +619,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0005"
                         },
                         new
                         {
@@ -647,7 +647,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0006"
                         },
                         new
                         {
@@ -675,7 +675,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0007"
                         },
                         new
                         {
@@ -703,7 +703,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0008"
                         },
                         new
                         {
@@ -731,7 +731,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0009"
                         },
                         new
                         {
@@ -759,7 +759,63 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0010"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Address = "Centar",
+                            BankAccount = "",
+                            BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthPlaceId = 5,
+                            CityId = 5,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sanja.t@hrms.com",
+                            FirstName = "Sanja",
+                            Gender = "Female",
+                            Image = "",
+                            LastName = "Terzić",
+                            MaidenName = "",
+                            Mobile = "",
+                            Note = "",
+                            OfficePhone = "",
+                            ParentName = "",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
+                            PersonalIdentificationNumber = "",
+                            Phone = "",
+                            PreviousLOSMonths = 0,
+                            PreviousLOSYears = 0,
+                            Profession = "",
+                            RegistrationNumber = "1234567890123",
+                            WorkerCode = "SA0011"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Address = "Zalik",
+                            BankAccount = "",
+                            BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthPlaceId = 5,
+                            CityId = 5,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "josip.t@hrms.com",
+                            FirstName = "Josip",
+                            Gender = "Male",
+                            Image = "",
+                            LastName = "Tiro",
+                            MaidenName = "",
+                            Mobile = "",
+                            Note = "",
+                            OfficePhone = "",
+                            ParentName = "",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
+                            PersonalIdentificationNumber = "",
+                            Phone = "",
+                            PreviousLOSMonths = 0,
+                            PreviousLOSYears = 0,
+                            Profession = "",
+                            RegistrationNumber = "1234567890123",
+                            WorkerCode = "SA0012"
                         });
                 });
 
@@ -831,7 +887,111 @@ namespace HRMS.Database.Migrations
                             PositionId = 5,
                             Salary = 0m,
                             StartDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Draft",
+                            Status = "Inactive",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EmployeeId = 3,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EmployeeId = 4,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EmployeeId = 5,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 4,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EmployeeId = 6,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EmployeeId = 7,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EmployeeId = 8,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EmployeeId = 9,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EmployeeId = 10,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
                             Type = "Fixed",
                             VacationDays = 30,
                             WorkingHours = "09:00-17:00"
@@ -982,30 +1142,180 @@ namespace HRMS.Database.Migrations
                             Id = 1,
                             Description = "",
                             EmployeeId = 1,
-                            EndDate = new DateTime(2021, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Bolovanje",
-                            StartDate = new DateTime(2021, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             Description = "",
                             EmployeeId = 1,
-                            EndDate = new DateTime(2021, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 2,
                             Name = "Kurban Bajram",
-                            StartDate = new DateTime(2021, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             Description = "",
-                            EmployeeId = 2,
-                            EndDate = new DateTime(2021, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployeeId = 3,
+                            EndDate = new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Godišnji odmor",
-                            StartDate = new DateTime(2021, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Stručna obuka",
+                            StartDate = new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "",
+                            EmployeeId = 5,
+                            EndDate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 5,
+                            Name = "Sarajevski Film Festival",
+                            StartDate = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "",
+                            EmployeeId = 6,
+                            EndDate = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 2,
+                            Name = "Poslovni put - Zagreb",
+                            StartDate = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "",
+                            EmployeeId = 7,
+                            EndDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 3,
+                            Name = "Oproštajna večera za kolegu",
+                            StartDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Timski izlet na planinu",
+                            StartDate = new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "",
+                            EmployeeId = 9,
+                            EndDate = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Seminar o liderstvu",
+                            StartDate = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "",
+                            EmployeeId = 10,
+                            EndDate = new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 1,
+                            Name = "Sportski turnir - fudbal",
+                            StartDate = new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 3,
+                            Name = "Prezentacija novog proizvoda",
+                            StartDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 5,
+                            Name = "Radionica o stresu",
+                            StartDate = new DateTime(2023, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 2,
+                            Name = "Praznična proslava",
+                            StartDate = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 1,
+                            Name = "Timski sastanak",
+                            StartDate = new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "",
+                            EmployeeId = 5,
+                            EndDate = new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 5,
+                            Name = "Volonterska akcija - čišćenje parka",
+                            StartDate = new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Description = "",
+                            EmployeeId = 6,
+                            EndDate = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Rad od kuće - Remote Week",
+                            StartDate = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Description = "",
+                            EmployeeId = 7,
+                            EndDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 1,
+                            Name = "Prezentacija poslovnih rezultata",
+                            StartDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Description = "",
+                            EmployeeId = 1,
+                            EndDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 3,
+                            Name = "Timski izlet na jezero",
+                            StartDate = new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1489,7 +1799,7 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 4,
-                            DepartmentId = 2,
+                            DepartmentId = 4,
                             IsWorkExperienceRequired = true,
                             Name = "Direktor HR odjela",
                             PayGradeId = 3,
@@ -1744,7 +2054,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 10, 22, 10, 21, 856, DateTimeKind.Local).AddTicks(2692)
+                            Time = new DateTime(2023, 8, 17, 21, 48, 43, 190, DateTimeKind.Local).AddTicks(5606)
                         },
                         new
                         {
@@ -1752,7 +2062,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 10, 22, 10, 21, 856, DateTimeKind.Local).AddTicks(2697)
+                            Time = new DateTime(2023, 8, 17, 21, 48, 43, 190, DateTimeKind.Local).AddTicks(5611)
                         });
                 });
 

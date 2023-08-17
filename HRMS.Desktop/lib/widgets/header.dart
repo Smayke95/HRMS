@@ -30,7 +30,24 @@ class _HeaderState extends State<Header> {
     super.initState();
 
     _notificationProvider = context.read<NotificationProvider>();
-    //_notificationProvider.listen(_addNotification);
+    _loadData();
+  }
+
+  Future _loadData() async {
+    try {
+      await _notificationProvider.listen(_addNotification);
+    } on Exception catch (e) {
+      e.toString();
+
+      const snackBar = SnackBar(
+        content: Text(
+            "Failed to connect to RabbitMQ. Notifications will not work properly."),
+      );
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    }
   }
 
   void _addNotification(hrms.Notification notification) {

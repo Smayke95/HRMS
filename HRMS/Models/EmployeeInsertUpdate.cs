@@ -23,6 +23,7 @@ public class EmployeeInsertUpdate
 
     public string PersonalIdentificationNumber { get; set; } = string.Empty;
 
+    [Required]
     public string WorkerCode { get; set; } = string.Empty;
 
     [Required]

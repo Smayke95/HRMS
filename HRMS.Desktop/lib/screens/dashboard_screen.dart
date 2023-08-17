@@ -75,10 +75,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       columnChartData.add(ChartData(department.name, count));
     }
 
-    pieChartData
-        .add(ChartData("Broj zaposlenika", _employees.totalCount.toDouble()));
     pieChartData.add(
         ChartData("Broj zaposlenih", _employeePositions.totalCount.toDouble()));
+    pieChartData
+        .add(ChartData("Broj nezaposlenih", _employees.totalCount.toDouble() - _employeePositions.totalCount.toDouble()));
 
     setState(() {});
   }

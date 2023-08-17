@@ -39,7 +39,7 @@ public static class PositionData
             {
                 Id = 4,
                 Name = "Direktor HR odjela",
-                DepartmentId = 2,
+                DepartmentId = 4,
                 PayGradeId = 3,
                 RequiredEducationId = 6,
                 IsWorkExperienceRequired = true

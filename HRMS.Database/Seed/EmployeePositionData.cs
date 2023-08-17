@@ -32,6 +32,102 @@ public static class EmployeePositionData
                 Type = EmploymentType.Fixed,
                 Status = EmploymentStatus.Inactive,
                 WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 3,
+                EmployeeId = 3,
+                PositionId = 2,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 4,
+                EmployeeId = 4,
+                PositionId = 3,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 5,
+                EmployeeId = 5,
+                PositionId = 4,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 6,
+                EmployeeId = 6,
+                PositionId = 2,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 7,
+                EmployeeId = 7,
+                PositionId = 3,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 8,
+                EmployeeId = 8,
+                PositionId = 3,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 9,
+                EmployeeId = 9,
+                PositionId = 2,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
+            },
+            new EmployeePosition
+            {
+                Id = 10,
+                EmployeeId = 10,
+                PositionId = 2,
+                StartDate = new DateTime(2021, 3, 1),
+                EndDate = new DateTime(2024, 2, 28),
+                VacationDays = 30,
+                Type = EmploymentType.Fixed,
+                Status = EmploymentStatus.Active,
+                WorkingHours = "09:00-17:00"
             }
         );
     }

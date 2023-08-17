@@ -504,7 +504,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "Ekonomski tehničar",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0001"
                         },
                         new
                         {
@@ -532,7 +532,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0002"
                         },
                         new
                         {
@@ -560,7 +560,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0003"
                         },
                         new
                         {
@@ -588,7 +588,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0004"
                         },
                         new
                         {
@@ -616,7 +616,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0005"
                         },
                         new
                         {
@@ -644,7 +644,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0006"
                         },
                         new
                         {
@@ -672,7 +672,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0007"
                         },
                         new
                         {
@@ -700,7 +700,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0008"
                         },
                         new
                         {
@@ -728,7 +728,7 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0009"
                         },
                         new
                         {
@@ -756,7 +756,63 @@ namespace HRMS.Database.Migrations
                             PreviousLOSYears = 0,
                             Profession = "",
                             RegistrationNumber = "1234567890123",
-                            WorkerCode = ""
+                            WorkerCode = "SA0010"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Address = "Centar",
+                            BankAccount = "",
+                            BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthPlaceId = 5,
+                            CityId = 5,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "sanja.t@hrms.com",
+                            FirstName = "Sanja",
+                            Gender = "Female",
+                            Image = "",
+                            LastName = "Terzić",
+                            MaidenName = "",
+                            Mobile = "",
+                            Note = "",
+                            OfficePhone = "",
+                            ParentName = "",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
+                            PersonalIdentificationNumber = "",
+                            Phone = "",
+                            PreviousLOSMonths = 0,
+                            PreviousLOSYears = 0,
+                            Profession = "",
+                            RegistrationNumber = "1234567890123",
+                            WorkerCode = "SA0011"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Address = "Zalik",
+                            BankAccount = "",
+                            BirthDate = new DateTime(1998, 5, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthPlaceId = 5,
+                            CityId = 5,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "josip.t@hrms.com",
+                            FirstName = "Josip",
+                            Gender = "Male",
+                            Image = "",
+                            LastName = "Tiro",
+                            MaidenName = "",
+                            Mobile = "",
+                            Note = "",
+                            OfficePhone = "",
+                            ParentName = "",
+                            Password = "827ef6760e76932136c9e529169ecb9b",
+                            PersonalIdentificationNumber = "",
+                            Phone = "",
+                            PreviousLOSMonths = 0,
+                            PreviousLOSYears = 0,
+                            Profession = "",
+                            RegistrationNumber = "1234567890123",
+                            WorkerCode = "SA0012"
                         });
                 });
 
@@ -829,6 +885,110 @@ namespace HRMS.Database.Migrations
                             Salary = 0m,
                             StartDate = new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Inactive",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EmployeeId = 3,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EmployeeId = 4,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EmployeeId = 5,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 4,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EmployeeId = 6,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EmployeeId = 7,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EmployeeId = 8,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 3,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EmployeeId = 9,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            Type = "Fixed",
+                            VacationDays = 30,
+                            WorkingHours = "09:00-17:00"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EmployeeId = 10,
+                            EndDate = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PositionId = 2,
+                            Salary = 0m,
+                            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
                             Type = "Fixed",
                             VacationDays = 30,
                             WorkingHours = "09:00-17:00"
@@ -1636,7 +1796,7 @@ namespace HRMS.Database.Migrations
                         new
                         {
                             Id = 4,
-                            DepartmentId = 2,
+                            DepartmentId = 4,
                             IsWorkExperienceRequired = true,
                             Name = "Direktor HR odjela",
                             PayGradeId = 3,
@@ -1891,7 +2051,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 14, 0, 50, 13, 2, DateTimeKind.Local).AddTicks(536)
+                            Time = new DateTime(2023, 8, 17, 21, 48, 43, 190, DateTimeKind.Local).AddTicks(5606)
                         },
                         new
                         {
@@ -1899,7 +2059,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 14, 0, 50, 13, 2, DateTimeKind.Local).AddTicks(545)
+                            Time = new DateTime(2023, 8, 17, 21, 48, 43, 190, DateTimeKind.Local).AddTicks(5611)
                         });
                 });
 
