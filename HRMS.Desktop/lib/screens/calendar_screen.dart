@@ -43,10 +43,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _eventProvider = context.read<EventProvider>();
     _eventTypeProvider = context.read<EventTypeProvider>();
 
-    _loadData(null);
+    _loadData(null, null);
   }
 
-  Future _loadData(int? id) async {
+  Future _loadData(int? id, DateTime? selectedDate) async {
     _employees = await _employeeProvider.getAll();
     _eventTypes = await _eventTypeProvider.getAll();
 
@@ -61,15 +61,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
         "eventTypeId": event.eventType?.id.toString() ?? "0",
         "employeeId": event.employee?.id.toString() ?? "0",
       });
+    } else {
+      _formKey.currentState?.patchValue({
+        "startDate": selectedDate,
+        "endDate": selectedDate,
+      });
     }
   }
 
-  void _openDialog(int? id) {
+  void _openDialog(int? id, DateTime? selectedDate) {
     if (Responsive.isMobile(context)) return;
 
     showDialog(
       context: context,
-      builder: (BuildContext context) => _buildDialog(context, id),
+      builder: (BuildContext context) =>
+          _buildDialog(context, id, selectedDate),
     );
   }
 
@@ -89,102 +95,238 @@ class _CalendarScreenState extends State<CalendarScreen> {
         } else if (!snapshot.hasData || snapshot.data?.result == null) {
           return const Text("Podaci nisu dostupni.");
         } else {
-          return Row(
-            children: [
-              SizedBox(
-                width: 900,
-                child: SfCalendar(
-                  view: CalendarView.month,
-                  firstDayOfWeek: 1,
-                  dataSource: EventDataTableSource(snapshot.data!.result),
-                  monthViewSettings: const MonthViewSettings(
-                    appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment,
-                  ),
-                  onTap: (CalendarTapDetails details) {
-                    if (details.targetElement == CalendarElement.appointment) {
-                      int id = details.appointments?[0].id;
-                      _openDialog(id);
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(width: 50),
-              Container(
-                width: 200,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 185, 185, 185)),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.add),
-                      style: const ButtonStyle(
-                        padding: MaterialStatePropertyAll(EdgeInsets.only(
-                            left: 15, top: 15, right: 20, bottom: 15)),
+          return FutureBuilder<PagedResult<EventType>>(
+            future: _eventTypeProvider.getAll(),
+            builder: (context, snapshotEventTypes) {
+              if (snapshotEventTypes.connectionState ==
+                  ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshotEventTypes.hasError) {
+                return Text("Error: ${snapshotEventTypes.error}");
+              } else if (!snapshotEventTypes.hasData ||
+                  snapshotEventTypes.data?.result == null) {
+                return const Text("Podaci nisu dostupni");
+              } else {
+                bool isMobile = Responsive.isMobile(context);
+
+                if (isMobile) {
+                  return Column(
+                    children: [
+                      SizedBox(
+                        width: 900,
+                        height: 500,
+                        child: SfCalendar(
+                          view: CalendarView.month,
+                          firstDayOfWeek: 1,
+                          dataSource:
+                              EventDataTableSource(snapshot.data!.result),
+                          monthViewSettings: const MonthViewSettings(
+                            appointmentDisplayMode:
+                                MonthAppointmentDisplayMode.appointment,
+                          ),
+                          onTap: (CalendarTapDetails details) {
+                            if (details.targetElement ==
+                                CalendarElement.calendarCell) {
+                              var selectedDate = details.date!;
+                              _openDialog(null, selectedDate);
+                            }
+
+                            if (details.targetElement ==
+                                CalendarElement.appointment) {
+                              int id = details.appointments?[0].id;
+                              _openDialog(id, null);
+                            }
+                          },
+                        ),
                       ),
-                      label: const Text("Dodaj događaj"),
-                      onPressed: () => _openDialog(null),
-                    ),
-                    const SizedBox(height: 50),
-                    const Text(
-                      'Legenda',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 95, 95, 95),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _eventTypes.result.map((type) {
-                        return Column(
+                      const SizedBox(height: 30),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 185, 185, 185)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0, 2),
-                                        blurRadius: 4.0,
-                                        spreadRadius: 0.0,
-                                      ),
-                                    ],
-                                    color: Color(int.parse(
-                                        type.color.replaceAll("#", "0xff"))),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(type.name),
-                              ],
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.add),
+                              style: const ButtonStyle(
+                                padding: MaterialStatePropertyAll(
+                                    EdgeInsets.only(
+                                        left: 15,
+                                        top: 15,
+                                        right: 20,
+                                        bottom: 15)),
+                              ),
+                              label: const Text("Dodaj događaj"),
+                              onPressed: () => _openDialog(null, null),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 50),
+                            const Text(
+                              'Legenda',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 95, 95, 95),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  snapshotEventTypes.data!.result.map((type) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.grey,
+                                                offset: Offset(0, 2),
+                                                blurRadius: 4.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            color: Color(int.parse(type.color
+                                                .replaceAll("#", "0xff"))),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(type.name),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
                           ],
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Row(
+                    children: [
+                      SizedBox(
+                        width: 900,
+                        child: SfCalendar(
+                          view: CalendarView.month,
+                          firstDayOfWeek: 1,
+                          dataSource:
+                              EventDataTableSource(snapshot.data!.result),
+                          monthViewSettings: const MonthViewSettings(
+                            appointmentDisplayMode:
+                                MonthAppointmentDisplayMode.appointment,
+                          ),
+                          onTap: (CalendarTapDetails details) {
+                            if (details.targetElement ==
+                                CalendarElement.calendarCell) {
+                              var selectedDate = details.date!;
+                              _openDialog(null, selectedDate);
+                            }
+
+                            if (details.targetElement ==
+                                CalendarElement.appointment) {
+                              int id = details.appointments?[0].id;
+                              _openDialog(id, null);
+                            }
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 50),
+                      Container(
+                        width: 200,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 185, 185, 185)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.add),
+                              style: const ButtonStyle(
+                                padding: MaterialStatePropertyAll(
+                                    EdgeInsets.only(
+                                        left: 15,
+                                        top: 15,
+                                        right: 20,
+                                        bottom: 15)),
+                              ),
+                              label: const Text("Dodaj događaj"),
+                              onPressed: () => _openDialog(null, null),
+                            ),
+                            const SizedBox(height: 50),
+                            const Text(
+                              'Legenda',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 95, 95, 95),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  snapshotEventTypes.data!.result.map((type) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.grey,
+                                                offset: Offset(0, 2),
+                                                blurRadius: 4.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            color: Color(int.parse(type.color
+                                                .replaceAll("#", "0xff"))),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(type.name),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              }
+            },
           );
         }
       },
     );
   }
 
-  Widget _buildDialog(BuildContext context, int? id) {
-    _loadData(id);
+  Widget _buildDialog(BuildContext context, int? id, DateTime? selectedDate) {
+    _loadData(id, selectedDate);
 
     return AlertDialog(
       title: Align(
@@ -221,14 +363,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
               Row(
                 children: [
                   SizedBox(
-                    width: 600,
-                    child: FormBuilderTextField(
-                      name: "description",
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: const InputDecoration(labelText: "Opis")
-                    )
-                  ),
+                      width: 600,
+                      child: FormBuilderTextField(
+                          name: "description",
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          decoration:
+                              const InputDecoration(labelText: "Opis"))),
                 ],
               ),
               const SizedBox(height: 20),
@@ -317,7 +458,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             onPressed: () async {
               await _eventProvider.delete(id);
 
-              await _loadData(null);
+              await _loadData(null, null);
               setState(() {});
 
               if (context.mounted) Navigator.pop(context);
@@ -350,7 +491,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ? await _eventProvider.insert(request)
                   : await _eventProvider.update(id, request);
 
-              await _loadData(null);
+              await _loadData(null, null);
               setState(() {});
               if (context.mounted) Navigator.pop(context);
             }

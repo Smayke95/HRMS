@@ -724,8 +724,8 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 17, 21, 48, 19, 981, DateTimeKind.Local).AddTicks(2145) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 17, 21, 48, 19, 981, DateTimeKind.Local).AddTicks(2154) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8882) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8890) }
                 });
 
             migrationBuilder.CreateIndex(

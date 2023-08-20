@@ -1,0 +1,16 @@
+﻿IF EXISTS (SELECT * FROM sys.fulltext_indexes WHERE [object_id] = OBJECT_ID(N'[dbo].[Tasks]'))
+BEGIN
+	ALTER FULLTEXT INDEX ON [dbo].[Tasks] DISABLE
+	DROP FULLTEXT INDEX ON [dbo].[Tasks]
+END
+GO
+
+IF EXISTS (SELECT * FROM sys.fulltext_catalogs WHERE [name] = 'FTCTasks')
+	DROP FULLTEXT CATALOG [FTCTasks]
+GO
+
+CREATE FULLTEXT CATALOG [FTCTasks] AS DEFAULT;
+GO
+
+CREATE FULLTEXT INDEX ON [dbo].[Tasks]([Name]) KEY INDEX PK_Tasks ON [FTCTasks] WITH STOPLIST = OFF, CHANGE_TRACKING AUTO;
+GO

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230817194820_Init")]
+    [Migration("20230820010830_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -2054,7 +2054,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 17, 21, 48, 19, 981, DateTimeKind.Local).AddTicks(2145)
+                            Time = new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8882)
                         },
                         new
                         {
@@ -2062,7 +2062,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 17, 21, 48, 19, 981, DateTimeKind.Local).AddTicks(2154)
+                            Time = new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8890)
                         });
                 });
 
