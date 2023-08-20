@@ -36,18 +36,17 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   }
 
   Future _loadData(int? id) async {
-
     if (id != null) {
       var project = await _projectProvider.get(id);
 
       _formKey.currentState?.patchValue(
           {"name": project.name, "description": project.description});
-    }
+    } 
   }
 
   void _openDialog(int? id) {
     if (Responsive.isMobile(context)) return;
-    
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -58,11 +57,8 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj projekat", 
-          () => _openDialog(null),
-          onSearch: (text) => projectDataTableSource.filterData(text)
-        ),
+        Search("Dodaj projekat", () => _openDialog(null),
+            onSearch: (text) => projectDataTableSource.filterData(text)),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -123,9 +119,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                       name: "description",
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      decoration: const InputDecoration(labelText: "Opis *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Opis je obavezan."),
+                      decoration: const InputDecoration(labelText: "Opis"),
                     ),
                   ),
                 ],

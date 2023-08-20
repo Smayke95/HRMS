@@ -157,9 +157,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                       name: "description",
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      decoration: const InputDecoration(labelText: "Opis *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Opis je obavezan."),
+                      decoration: const InputDecoration(labelText: "Opis")
                     ),
                   ),
                 ],

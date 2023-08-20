@@ -134,9 +134,7 @@ class _CityListScreenState extends State<CityListScreen> {
                       name: "zipCode",
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      decoration: const InputDecoration(labelText: "Poštanski broj	 *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Poštanski broj je obavezan."),
+                      decoration: const InputDecoration(labelText: "Poštanski broj"),                      
                     ),
                   ),
                 ],

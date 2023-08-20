@@ -1,3 +1,6 @@
+import 'package:HRMS/models/searches/event_search.dart';
+import 'package:HRMS/models/searches/task_search.dart';
+import 'package:HRMS/providers/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -6,13 +9,19 @@ import '../models/chart_data.dart';
 import '../models/department.dart';
 import '../models/employee.dart';
 import '../models/employee_position.dart';
+import '../models/event.dart';
 import '../models/paged_result.dart';
 import '../models/searches/department_search.dart';
 import '../models/searches/employee_position_search.dart';
 import '../models/searches/employee_search.dart';
+import '../models/searches/task_status_search.dart';
+import '../models/task.dart';
+import '../models/task_status.dart';
 import '../providers/department_provider.dart';
 import '../providers/employee_position_provider.dart';
 import '../providers/employee_provider.dart';
+import '../providers/task_provider.dart';
+import '../providers/task_status_provider.dart';
 import '../widgets/master_screen.dart';
 import '../widgets/responsive.dart';
 import 'calendar_screen.dart';
@@ -32,13 +41,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late DepartmentProvider _departmentProvider;
   late EmployeeProvider _employeeProvider;
   late EmployeePositionProvider _employeePositionProvider;
+  late EventProvider _eventProvider;
+  late TaskProvider _taskProvider;
+  late TaskStatusProvider _taskStatusProvider;
 
   var _departments = PagedResult<Department>();
   var _employees = PagedResult<Employee>();
   var _employeePositions = PagedResult<EmployeePosition>();
+  var _events = PagedResult<Event>();
+  var _tasks = PagedResult<Task>();
+  var _taskStatuses = PagedResult<TaskStatus>();
 
   late List<ChartData> columnChartData = [];
   late List<ChartData> pieChartData = [];
+  late List<ChartData> radialChartData = [];
+  late List<ChartData> barChartData = [];
 
   @override
   void initState() {
@@ -47,6 +64,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _departmentProvider = context.read<DepartmentProvider>();
     _employeeProvider = context.read<EmployeeProvider>();
     _employeePositionProvider = context.read<EmployeePositionProvider>();
+    _eventProvider = context.read<EventProvider>();
+    _taskProvider = context.read<TaskProvider>();
+    _taskStatusProvider = context.read<TaskStatusProvider>();
 
     _loadData();
   }
@@ -65,6 +85,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _employeePositions =
         await _employeePositionProvider.getAll(search: employeePositionSearch);
 
+    var eventSearch = EventSearch();
+    eventSearch.pageSize = 50;
+    eventSearch.includeEmployee = true;
+    _events = await _eventProvider.getAll(search: eventSearch);
+
+    var taskSearch = TaskSearch();
+    taskSearch.pageSize = 50;
+    taskSearch.includeStatus = true;
+    _tasks = await _taskProvider.getAll(search: taskSearch);
+
+    var taskStatusSearch = TaskStatusSearch();
+    taskStatusSearch.pageSize = 50;
+    _taskStatuses = await _taskStatusProvider.getAll(search: taskStatusSearch);
+
     var mainDepartments = _departments.result.where((x) => x.level == 1);
     for (var department in mainDepartments) {
       var count = _employeePositions.result
@@ -77,8 +111,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     pieChartData.add(
         ChartData("Broj zaposlenih", _employeePositions.totalCount.toDouble()));
-    pieChartData
-        .add(ChartData("Broj nezaposlenih", _employees.totalCount.toDouble() - _employeePositions.totalCount.toDouble()));
+    pieChartData.add(ChartData(
+        "Broj nezaposlenih",
+        _employees.totalCount.toDouble() -
+            _employeePositions.totalCount.toDouble()));
+
+    for (var taskStatus in _taskStatuses.result) {
+      var count = _tasks.result
+          .where((x) => (x.status?.id ?? 1) == taskStatus.id)
+          .length
+          .toDouble();
+
+      radialChartData.add(ChartData(taskStatus.name, count));
+    }
+
+    for (var employee in _employees.result) {
+      var count = _events.result
+          .where((event) => event.employee?.id == employee.id)
+          .map((event) => event.endDate.difference(event.startDate).inDays)
+          .fold(0, (total, days) => total + days)
+          .toDouble();
+
+      barChartData
+          .add(ChartData("${employee.firstName} ${employee.lastName}", count));
+    }
 
     setState(() {});
   }
@@ -88,32 +144,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(30),
-        child: Wrap(
-          alignment: WrapAlignment.spaceAround,
-          spacing: 40,
-          runSpacing: 60,
-          children: [
-            ..._buildCards(context),
-            Padding(
-              padding: const EdgeInsets.only(top: 100.0),
-              child: Responsive.isMobile(context)
-                  ? SizedBox(
-                      height: 500,
-                      child: Column(
-                        children: [
-                          _buildColumnChart(context),
-                          _buildPieChart(context),
-                        ],
-                      ))
-                  : Row(
-                      children: [
-                        _buildColumnChart(context),
-                        _buildPieChart(context),
-                      ],
-                    ),
-            ),
-          ],
-        ),
+        child: Responsive.isMobile(context)
+            ? Wrap(
+                alignment: WrapAlignment.spaceAround,
+                spacing: 40,
+                runSpacing: 60,
+                children: [
+                    ..._buildCards(context),
+                    SizedBox(
+                        height: 1000,
+                        child: Column(
+                          children: [
+                            _buildColumnChart(context),
+                            _buildPieChart(context),
+                            _buildRadialChart(context),
+                            _buildBarChart(context)
+                          ],
+                        ))
+                  ])
+            : Column(
+                children: [
+                  Wrap(
+                    alignment: WrapAlignment.spaceAround,
+                    spacing: 40,
+                    runSpacing: 60,
+                    children: [
+                      ..._buildCards(context),
+                    ],
+                  ),
+                  const SizedBox(height: 100),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildColumnChart(context),
+                      _buildPieChart(context),
+                    ],
+                  ),
+                  const SizedBox(height: 100),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildRadialChart(context),
+                      _buildBarChart(context),
+                    ],
+                  ),
+                ],
+              ),
       ),
     );
   }
@@ -231,6 +307,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildRadialChart(BuildContext context) {
+    return Expanded(
+      child: SfCircularChart(
+        title: ChartTitle(text: 'Broj zadataka po statusima'),
+        legend: const Legend(isVisible: true),
+        series: <CircularSeries>[
+          RadialBarSeries<ChartData, String>(
+            dataSource: radialChartData,
+            xValueMapper: (ChartData data, _) => data.x,
+            yValueMapper: (ChartData data, _) => data.y,
+            dataLabelSettings: const DataLabelSettings(
+              isVisible: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBarChart(BuildContext context) {
+    return Expanded(
+      child: SfCartesianChart(
+          title: ChartTitle(
+            text: "Broj iskorištenih dana za događaje po zaposleniku",
+          ),
+          primaryXAxis: CategoryAxis(),
+          primaryYAxis: NumericAxis(minimum: 0, maximum: 40, interval: 10),
+          tooltipBehavior: TooltipBehavior(enable: true),
+          series: <ChartSeries<ChartData, String>>[
+            BarSeries<ChartData, String>(
+              dataSource: barChartData,
+              xValueMapper: (ChartData data, _) => data.x,
+              yValueMapper: (ChartData data, _) => data.y,
+            )
+          ]),
     );
   }
 }

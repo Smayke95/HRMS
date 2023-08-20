@@ -6,7 +6,7 @@ using TaskStatus = HRMS.Core.Models.TaskStatus;
 
 namespace HRMS.Controllers;
 
-public class TaskStatusController : BaseCrudController<TaskStatus, TaskStatusSearch, TaskStatusInsert, TaskStatusUpdate>
+public class TaskStatusController : BaseCrudController<TaskStatus, TaskStatusSearch, TaskStatusInsertUpdate, TaskStatusInsertUpdate>
 {
     public TaskStatusController(IMapper mapper, ITaskStatusRepository taskStatusRepository) : base(mapper, taskStatusRepository) { }
 }

@@ -6,7 +6,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class TaskTypeController : BaseCrudController<TaskType, TaskTypeSearch, TaskTypeInsert, TaskTypeUpdate>
+public class TaskTypeController : BaseCrudController<TaskType, TaskTypeSearch, TaskTypeInsertUpdate, TaskTypeInsertUpdate>
 {
     public TaskTypeController(IMapper mapper, ITaskTypeRepository taskTypeRepository) : base(mapper, taskTypeRepository) { }
 }

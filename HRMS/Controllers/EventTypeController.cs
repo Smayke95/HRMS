@@ -6,7 +6,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class EventTypeController : BaseCrudController<EventType, EventTypeSearch, EventTypeInsert, EventTypeUpdate>
+public class EventTypeController : BaseCrudController<EventType, EventTypeSearch, EventTypeInsertUpdate, EventTypeInsertUpdate>
 {
     public EventTypeController(IMapper mapper, IEventTypeRepository eventTypeRepository) : base(mapper, eventTypeRepository) { }
 }

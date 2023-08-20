@@ -1,10 +1,14 @@
-﻿namespace HRMS.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class EventTypeInsert
+namespace HRMS.Models;
+
+public class EventTypeInsertUpdate
 {
+    [Required]
     public string Name { get; set; } = string.Empty;
 
     public bool IsApprovalRequired { get; set; } = true;
 
+    [Required]
     public string Color { get; set; } = string.Empty;
 }

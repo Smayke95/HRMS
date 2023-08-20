@@ -30,6 +30,7 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
   void initState() {
     super.initState();
 
+    _focusNode = FocusNode();
     _eventTypeProvider = context.read<EventTypeProvider>();
 
     eventTypeDataTableSource =
@@ -54,16 +55,17 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
 
   void _openDialog(int? id) {
     if (Responsive.isMobile(context)) return;
-
-    _focusNode = FocusNode();
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => _buildDialog(context, id),
-    );
+    
+    _loadData(id).then((data) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildDialog(context, id),
+      );
+    });
   }
 
   @override
@@ -254,7 +256,7 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
             const SizedBox(height: 20),
             TextButton(
               child: const Text("IZABERI"),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.pop(context),
             )
           ])));
 
@@ -262,13 +264,13 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
       pickerColor: color,
       enableAlpha: false,
       labelTypes: const [],
-      onColorChanged: (color) => {
-            setState(() {
-              currentColor = color;
+      onColorChanged: (newColor) => {
+            setState(() {             
+              currentColor = newColor;
               _formKey.currentState!.patchValue({
                 'color':
-                    '#${color.value.toRadixString(16).replaceAll("ff", "")}'
-              });
+                    '#${newColor.value.toRadixString(16).replaceAll("ff", "")}'
+              });            
             })
           });
 }
