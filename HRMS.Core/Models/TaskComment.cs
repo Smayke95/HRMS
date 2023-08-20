@@ -2,11 +2,11 @@
 
 public class TaskComment : Base
 {
-    public string Name { get; set; } = string.Empty;
+    public DateTime Time { get; set; }
 
-    public virtual Department ParentDepartment { get; set; } = new();
+    public string Content { get; set; } = string.Empty;
 
-    public int Level { get; set; }
+    public Task Task { get; set; } = new();
 
-    public virtual Employee Supervisor { get; set; } = new();
+    public Employee Employee { get; set; } = new();
 }

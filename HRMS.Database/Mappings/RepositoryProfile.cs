@@ -98,6 +98,12 @@ public class RepositoryProfile : Profile
         CreateMap<TaskComment, Core.Models.TaskComment>()
             .ReverseMap();
 
+        CreateMap<Core.Models.TaskComment, TaskComment>()
+            .ForMember(x => x.TaskId, opt => opt.MapFrom(y => y.Task.Id))
+            .ForMember(x => x.Task, opt => opt.Ignore())
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom(y => y.Employee.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore());
+
         CreateMap<TaskStatus, Core.Models.TaskStatus>()
             .ReverseMap();
 

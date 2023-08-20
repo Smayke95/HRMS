@@ -56,6 +56,10 @@ public class ApiProfile : Profile
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }))
             .ForMember(x => x.Description, opt => opt.MapFrom(y => y.Description ?? ""));
 
+        CreateMap<TaskCommentInsertUpdate, TaskComment>()
+            .ForMember(x => x.Task, opt => opt.MapFrom(y => new Task { Id = y.TaskId ?? 0 }))
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }));
+
         CreateMap<TaskStatusInsertUpdate, TaskStatus>();
 
         CreateMap<TaskTypeInsertUpdate, TaskType>();
