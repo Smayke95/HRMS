@@ -14,7 +14,7 @@ public static class EventData
                 Name = "Bolovanje",
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 8, 16),
-                EndDate = new DateTime(2023, 10, 6),
+                EndDate = new DateTime(2023, 8, 28),
                 EmployeeId = 1
             },
             new Event
@@ -169,6 +169,51 @@ public static class EventData
                 StartDate = new DateTime(2023, 9, 29),
                 EndDate = new DateTime(2023, 10, 1),
                 EmployeeId = 1
+            },
+            new Event
+            {
+                Id = 19,
+                Name = "Trening radionica - Upravljanje vremenom",
+                EventTypeId = 4,
+                StartDate = new DateTime(2023, 10, 20),
+                EndDate = new DateTime(2023, 10, 21),
+                EmployeeId = 2
+            },
+            new Event
+            {
+                Id = 20,
+                Name = "Timski sastanak - Planiranje Q4 projekata",
+                EventTypeId = 1,
+                StartDate = new DateTime(2023, 11, 10),
+                EndDate = new DateTime(2023, 11, 10),
+                EmployeeId = 2
+            },
+            new Event
+            {
+                Id = 21,
+                Name = "Seminar o komunikaciji",
+                EventTypeId = 4,
+                StartDate = new DateTime(2023, 10, 5),
+                EndDate = new DateTime(2023, 10, 6),
+                EmployeeId = 2
+            },
+            new Event
+            {
+                Id = 22,
+                Name = "Poslovni ručak sa partnerima",
+                EventTypeId = 3,
+                StartDate = new DateTime(2023, 11, 18),
+                EndDate = new DateTime(2023, 11, 18),
+                EmployeeId = 2
+            },
+            new Event
+            {
+                Id = 23,
+                Name = "Sastanak sa klijentima",
+                EventTypeId = 3,
+                StartDate = new DateTime(2023, 12, 7),
+                EndDate = new DateTime(2023, 12, 7),
+                EmployeeId = 2
             }
         );
     }

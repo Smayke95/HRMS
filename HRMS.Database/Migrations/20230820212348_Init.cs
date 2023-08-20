@@ -467,7 +467,9 @@ namespace HRMS.Database.Migrations
                     { 2, "#1e88e5", true, "Vjerski praznik" },
                     { 3, "#ff9800", true, "Bolovanje" },
                     { 4, "#3a87ad", true, "Plaćeno odsustvo" },
-                    { 5, "#fb1b1b", true, "Neplaćeno odsustvo" }
+                    { 5, "#fb1b1b", true, "Neplaćeno odsustvo" },
+                    { 6, "#9c27b0", true, "Obuka" },
+                    { 7, "#795548", false, "Timski sastanak" }
                 });
 
             migrationBuilder.InsertData(
@@ -491,7 +493,13 @@ namespace HRMS.Database.Migrations
                     { 1, "Sanovo Group je kompanija sa sjedistem u Danskoj. Bave se proizvodnjom masina za preradu jaja.", "Sanovo Group" },
                     { 2, "Designa je kompanija sa sjedistem u Norveskoj. Bave se proizvodnjom elemenata za kuhinje, kupatila i spavace sobe.", "Designa" },
                     { 3, "Autokonzept je projekat napravljen za Danskog klijenta. Svrha sistema je iznajmljivanje automobila.", "Autokonzept" },
-                    { 4, "Vejers je sistem napravljen za iznajmljivanje kuca na jugu Danske, iznajmljivanje se vrsi preko Booking studija.", "Vejers" }
+                    { 4, "Vejers je sistem napravljen za iznajmljivanje kuca na jugu Danske, iznajmljivanje se vrsi preko Booking studija.", "Vejers" },
+                    { 5, "Medicinska Oprema BH je projekat usmjeren na prodaju medicinske opreme i potrošnih materijala u Bosni i Hercegovini.", "Medicinska Oprema BH" },
+                    { 6, "Art Galerija Sarajevo je online platforma za prodaju umjetničkih djela, sa fokusom na lokalne umjetnike iz Sarajeva.", "Art Galerija Sarajevo" },
+                    { 7, "Restoran GastroMIX je restoran specijaliziran za internacionalnu kuhinju sa naglaskom na fusion jelima.", "Restoran GastroMIX" },
+                    { 8, "IT Konsalting BH pruža IT konsultantske usluge za kompanije u Bosni i Hercegovini, sa ciljem optimizacije poslovnih procesa.", "IT Konsalting BH" },
+                    { 9, "Turistička Agencija Sarajevo Explorer se bavi organizacijom turističkih tura i putovanja u Sarajevu i okolini, promovišući kulturno i prirodno bogatstvo regije.", "Turistička Agencija Sarajevo Explorer" },
+                    { 10, "EduTech BH je projekat usmjeren na razvoj edukativnih tehnologija za bolje obrazovanje u Bosni i Hercegovini.", "EduTech BH" }
                 });
 
             migrationBuilder.InsertData(
@@ -511,7 +519,11 @@ namespace HRMS.Database.Migrations
                 values: new object[,]
                 {
                     { 1, "Bug" },
-                    { 2, "Feature" }
+                    { 2, "Feature" },
+                    { 3, "Poboljšanje" },
+                    { 4, "Održavanje" },
+                    { 5, "Dokumentovanje" },
+                    { 6, "Istraživanje" }
                 });
 
             migrationBuilder.InsertData(
@@ -527,7 +539,10 @@ namespace HRMS.Database.Migrations
                     { 6, 2, "Priština", "" },
                     { 7, 1, "Sarajevo", "71000" },
                     { 8, 4, "Skoplje", "" },
-                    { 9, 3, "Zagreb", "" }
+                    { 9, 3, "Zagreb", "" },
+                    { 10, 1, "Podgorica", "81000" },
+                    { 11, 4, "Bitola", "7000" },
+                    { 12, 3, "Split", "21000" }
                 });
 
             migrationBuilder.InsertData(
@@ -627,7 +642,7 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Description", "EmployeeId", "EndDate", "EventTypeId", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, "", 1, new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Bolovanje", new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "", 1, new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Bolovanje", new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, "", 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Kurban Bajram", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 3, "", 3, new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Godišnji odmor", new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 4, "", 1, new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Stručna obuka", new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified) },
@@ -644,7 +659,12 @@ namespace HRMS.Database.Migrations
                     { 15, "", 5, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Volonterska akcija - čišćenje parka", new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 16, "", 6, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Rad od kuće - Remote Week", new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 17, "", 7, new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Prezentacija poslovnih rezultata", new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 18, "", 1, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Timski izlet na jezero", new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 18, "", 1, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Timski izlet na jezero", new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 19, "", 2, new DateTime(2023, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Trening radionica - Upravljanje vremenom", new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 20, "", 2, new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Timski sastanak - Planiranje Q4 projekata", new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 21, "", 2, new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Seminar o komunikaciji", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 22, "", 2, new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Poslovni ručak sa partnerima", new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 23, "", 2, new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Sastanak sa klijentima", new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -707,7 +727,13 @@ namespace HRMS.Database.Migrations
                     { 1, "Napraviti markup po datom dizajnu.", 1, "Markup", 1, 1, 2 },
                     { 2, "Odraditi integraciju newsletter signup-a.", 2, "Mailchimp", 1, 2, 1 },
                     { 3, "Napraviti banner komponentu.", 2, "Banner komponenta", 3, 3, 1 },
-                    { 4, "Ispraviti footer prema dizajnu.", 1, "Popraviti bug u footer-u", 4, 4, 2 }
+                    { 4, "Ispraviti footer prema dizajnu.", 1, "Popraviti bug u footer-u", 4, 4, 2 },
+                    { 5, "Optimizirati upite u bazi podataka radi poboljšane performanse.", 3, "Optimizacija Baze Podataka", 2, 1, 3 },
+                    { 6, "Implementirati novu funkcionalnost prema zahtjevima klijenta.", 4, "Implementacija Nove Funkcionalnosti", 5, 2, 2 },
+                    { 7, "Unaprijediti korisničko sučelje radi boljeg korisničkog iskustva.", 5, "Unapređenje Korisničkog Sučelja", 7, 3, 3 },
+                    { 8, "Ažurirati dokumentaciju projekta s najnovijim promjenama.", 6, "Ažuriranje Dokumentacije", 9, 4, 5 },
+                    { 9, "Izvršiti istraživanje novih tehnologija za buduće projekte.", 7, "Istraživanje Novih Tehnologija", 10, 1, 6 },
+                    { 10, "Izvršiti sigurnosnu reviziju sustava kako bi se identificirale ranjivosti.", 8, "Sigurnosna Revizija", 8, 2, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -724,8 +750,16 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8882) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 20, 3, 8, 30, 406, DateTimeKind.Local).AddTicks(8890) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6203) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6207) },
+                    { 3, "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.", 3, 1, new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6209) },
+                    { 4, "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.", 1, 1, new DateTime(2023, 8, 20, 22, 23, 47, 877, DateTimeKind.Local).AddTicks(6214) },
+                    { 5, "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.", 4, 2, new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6216) },
+                    { 6, "Super! Javite ako naiđete na bilo kakve prepreke.", 2, 2, new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6217) },
+                    { 7, "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.", 5, 3, new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6219) },
+                    { 8, "Izgleda odlično! Samo malo promijenite nijanse boja.", 3, 3, new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6221) },
+                    { 9, "Bug u footer-u uspješno riješen.", 6, 4, new DateTime(2023, 8, 20, 18, 23, 47, 877, DateTimeKind.Local).AddTicks(6223) },
+                    { 10, "Savršeno! Zatvaram task.", 4, 4, new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6225) }
                 });
 
             migrationBuilder.CreateIndex(

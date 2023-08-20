@@ -42,6 +42,20 @@ public static class EventTypeData
                 Name = "Neplaćeno odsustvo",
                 IsApprovalRequired = true,
                 Color = "#fb1b1b"
+            },
+            new EventType
+            {
+                Id = 6,
+                Name = "Obuka",
+                IsApprovalRequired = true,
+                Color = "#9c27b0"
+            },
+            new EventType
+            {
+                Id = 7,
+                Name = "Timski sastanak",
+                IsApprovalRequired = false,
+                Color = "#795548"
             }
         );
     }

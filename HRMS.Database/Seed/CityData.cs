@@ -65,6 +65,27 @@ public static class CityData
                 Id = 9,
                 Name = "Zagreb",
                 CountryId = 3
+            },
+            new City
+            {
+                Id = 10,
+                Name = "Podgorica",
+                ZipCode = "81000",
+                CountryId = 1
+            },
+            new City
+            {
+                Id = 11,
+                Name = "Bitola",
+                ZipCode = "7000",
+                CountryId = 4
+            },
+            new City
+            {
+                Id = 12,
+                Name = "Split",
+                ZipCode = "21000",
+                CountryId = 3
             }
         );
     }

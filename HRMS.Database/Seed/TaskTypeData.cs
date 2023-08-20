@@ -17,6 +17,26 @@ public static class TaskTypeData
              {
                  Id = 2,
                  Name = "Feature"
+             },
+             new TaskType
+             {
+                 Id = 3,
+                 Name = "Poboljšanje"
+             },
+             new TaskType
+             {
+                 Id = 4,
+                 Name = "Održavanje"
+             },
+             new TaskType
+             {
+                 Id = 5,
+                 Name = "Dokumentovanje"
+             },
+             new TaskType
+             {
+                 Id = 6,
+                 Name = "Istraživanje"
              }
          );
     }
