@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class TaskCommentRepository : BaseRepository<Models.TaskComment, TaskComment, BaseSearch>, ITaskCommentRepository
+public class TaskCommentRepository : BaseRepository<Models.TaskComment, TaskComment, TaskCommentSearch>, ITaskCommentRepository
 {
     public TaskCommentRepository(Context context, IMapper mapper) : base(context, mapper) { }
 
@@ -28,6 +28,19 @@ public class TaskCommentRepository : BaseRepository<Models.TaskComment, TaskComm
         return new TaskComment();
     }
 
-    protected override IQueryable<Models.TaskComment> AddInclude(IQueryable<Models.TaskComment> query, BaseSearch? search = null)
-        => query.Include(x => x.Employee).Include(x => x.Task);
+    protected override IQueryable<Models.TaskComment> AddInclude(IQueryable<Models.TaskComment> query, TaskCommentSearch? search = null)       
+    {
+        if (search is null)
+            return base.AddInclude(query, search);
+
+        query = query
+            .Include(x => x.Employee)
+            .Include(x => x.Task)
+            .OrderBy(x=>x.Time);
+
+        if (search.TaskId != null)
+            query = query.Where(x => x.TaskId == search.TaskId);
+
+        return query;
+    }
 }

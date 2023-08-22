@@ -67,6 +67,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         "endDate": selectedDate,
       });
     }
+
+    if (!User.roles.contains("Admin")) {
+      _formKey.currentState?.patchValue({"employeeId": User.id.toString()});
+    }
   }
 
   void _openDialog(int? id, DateTime? selectedDate) {
@@ -376,7 +380,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               Row(
                 children: [
                   SizedBox(
-                      width: 300,
+                      width: 290,
                       child: FormBuilderDateTimePicker(
                         name: "startDate",
                         inputType: InputType.date,
@@ -388,7 +392,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       )),
                   const SizedBox(width: 20),
                   SizedBox(
-                    width: 300,
+                    width: 290,
                     child: FormBuilderDateTimePicker(
                       name: "endDate",
                       inputType: InputType.date,
@@ -424,6 +428,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     width: 300,
                     child: FormBuilderDropdown(
                       name: "employeeId",
+                      enabled: User.roles.contains("Admin"),
                       decoration:
                           const InputDecoration(labelText: "Zaposlenik *"),
                       validator: FormBuilderValidators.required(

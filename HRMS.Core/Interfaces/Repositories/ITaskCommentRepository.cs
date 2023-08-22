@@ -3,4 +3,4 @@ using TaskComment = HRMS.Core.Models.TaskComment;
 
 namespace HRMS.Core.Interfaces.Repositories;
 
-public interface ITaskCommentRepository : IBaseRepository<TaskComment, BaseSearch> { }
+public interface ITaskCommentRepository : IBaseRepository<TaskComment, TaskCommentSearch> { }

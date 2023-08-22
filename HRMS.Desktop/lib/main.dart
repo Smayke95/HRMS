@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:HRMS/providers/task_comment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PositionProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
         ChangeNotifierProvider(create: (_) => TaskProvider()),
+        ChangeNotifierProvider(create: (_) => TaskCommentProvider()),
         ChangeNotifierProvider(create: (_) => TaskStatusProvider()),
         ChangeNotifierProvider(create: (_) => TaskTypeProvider()),
       ],
