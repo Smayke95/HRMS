@@ -141,9 +141,40 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _projectProvider.delete(id);
-              projectDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              try {
+                await _projectProvider.delete(id);
+                projectDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ovaj projekat je referenciran od pojedinih zadataka, te zbog toga ne može biti obrisan. Molimo prvo obrišite zadatke koji referenciraju ovaj projekat.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),

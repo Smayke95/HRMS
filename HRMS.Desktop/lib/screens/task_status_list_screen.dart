@@ -35,7 +35,7 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
     _loadData(null);
   }
 
-  Future _loadData(int? id) async {    
+  Future _loadData(int? id) async {
 
     if (id != null) {
       var taskStatus = await _taskStatusProvider.get(id);
@@ -46,7 +46,7 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
 
   void _openDialog(int? id) {
     if (Responsive.isMobile(context)) return;
-    
+
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -57,11 +57,8 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj status", 
-          () => _openDialog(null),
-          onSearch: (text) => taskStatusDataTableSource.filterData(text)
-        ),
+        Search("Dodaj status", () => _openDialog(null),
+            onSearch: (text) => taskStatusDataTableSource.filterData(text)),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -69,9 +66,7 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
             showCheckboxColumn: false,
             source: taskStatusDataTableSource,
             rowsPerPage: 7,
-            columns: const [
-              DataColumn(label: Text("Naziv"))            
-            ],
+            columns: const [DataColumn(label: Text("Naziv"))],
           ),
         ),
       ],
@@ -111,7 +106,7 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
                     ),
                   )
                 ],
-              ),              
+              ),
             ],
           ),
         ),
@@ -129,9 +124,40 @@ class _TaskStatusListScreenState extends State<TaskStatusListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _taskStatusProvider.delete(id);
-              taskStatusDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              try {
+                await _taskStatusProvider.delete(id);
+                taskStatusDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ovaj status se nalazi na pojedinim zadacima, te zbog toga ne može biti obrisan. Molimo prvo obrišite zadatke koji su u ovom statusu.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),

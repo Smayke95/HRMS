@@ -206,9 +206,40 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _eventTypeProvider.delete(id);
-              eventTypeDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              try {
+                await _eventTypeProvider.delete(id);
+                eventTypeDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ne možete obrisati ovaj tip događaja.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),

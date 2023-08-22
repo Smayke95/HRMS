@@ -262,9 +262,13 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                Column(
-                  children: _buildCommentWidgets(),
-                ),
+                if (id != null)
+                  Column(
+                    children: _buildCommentWidgets(),
+                  ),
+                if (id == null)
+                  const Text("*Komentar možete dodati nakon kreiranja zadatka.",
+                      style: TextStyle(fontWeight: FontWeight.bold))
               ],
             ),
           ),
@@ -327,11 +331,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
   List<Widget> _buildCommentWidgets() {
     List<Widget> commentWidgets = [];
 
-    commentWidgets.add(const Text(
-      "Komentari",
-      style: TextStyle(fontWeight: FontWeight.bold),
-      textAlign: TextAlign.left,
-    ));
+    commentWidgets.add(
+        const Text("Komentari", style: TextStyle(fontWeight: FontWeight.bold)));
 
     for (var i = 0; i < _comments.totalCount; i++) {
       var comment = _comments.result[i];
@@ -374,13 +375,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     ),
                   ),
                   const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () async {
-                      await _taskCommentProvider.delete(comment.id);
-                      if (context.mounted) Navigator.pop(context);
-                    },
-                  ),
+                  if (User.id == comment.employee!.id)
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () async {
+                        await _taskCommentProvider.delete(comment.id);
+                        if (context.mounted) Navigator.pop(context);
+                      },
+                    ),
                 ],
               ),
               const SizedBox(height: 4.0),

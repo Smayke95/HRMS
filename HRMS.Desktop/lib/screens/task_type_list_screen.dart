@@ -129,9 +129,40 @@ class _TaskTypeListScreenState extends State<TaskTypeListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _taskTypeProvider.delete(id);
-              taskTypeDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              try {
+                await _taskTypeProvider.delete(id);
+                taskTypeDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ovaj tip se nalazi na pojedinim zadacima, te zbog toga ne može biti obrisan. Molimo prvo obrišite zadatke koji su u ovom statusu.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),
