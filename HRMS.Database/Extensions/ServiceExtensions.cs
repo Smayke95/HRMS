@@ -16,7 +16,9 @@ public static class ServiceExtensions
     {
         using var scope = service.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<Context>();
-        context.Database.Migrate();
+
+        if (!context.Database.CanConnect())
+            context.Database.Migrate();
     }
 
     public static void AddScopedRepositories(this IServiceCollection serviceCollection)
