@@ -26,7 +26,7 @@ class TaskDataTableSource extends AdvancedDataTableSource<Task> {
     taskSearch.includeStatus = true;
     taskSearch.includeType = true;
 
-    var tasks = await _taskProvider.getAll(search: taskSearch);
+    var tasks = await _taskProvider.search(search: taskSearch);
 
     return RemoteDataSourceDetails(tasks.totalCount, tasks.result);
   }

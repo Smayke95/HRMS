@@ -65,7 +65,10 @@ public class TaskRepository : BaseRepository<Models.Task, Core.Models.Task, Task
 
         var tasks = await Context
             .Tasks
-            .Where(x => EF.Functions.Contains(x.Name, $"\"{search!.Name}\""))
+            .Where(x =>
+                EF.Functions.Contains(x.Name, $"\"{search!.Name}\"") ||
+                EF.Functions.Contains(x.Description, $"\"{search!.Name}\"")
+            )
             .ToListAsync();
 
         result.Result = Mapper.Map<List<Core.Models.Task>>(tasks);

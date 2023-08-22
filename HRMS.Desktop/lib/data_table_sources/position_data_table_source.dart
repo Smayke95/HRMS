@@ -25,7 +25,7 @@ class PositionDataTableSource extends AdvancedDataTableSource<Position> {
     positionSearch.includePayGrade = true;
     positionSearch.includeEducation = true;
 
-    var positions = await _positionProvider.getAll(search: positionSearch);
+    var positions = await _positionProvider.search(search: positionSearch);
 
     return RemoteDataSourceDetails(positions.totalCount, positions.result);
   }
