@@ -1,6 +1,7 @@
 ﻿using HRMS.Core.Interfaces.Services;
 using HRMS.Core.Models;
 using HRMS.Core.Models.Enums;
+using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -8,6 +9,13 @@ namespace HRMS.RabbitMQ;
 
 public class NotificationService : INotificationService
 {
+    private readonly ILogger<NotificationService> Logger;
+
+    public NotificationService(ILogger<NotificationService> logger)
+    {
+        Logger = logger;
+    }
+
     public void SendNotification(Notification notification)
     {
         try
@@ -31,7 +39,7 @@ public class NotificationService : INotificationService
         }
         catch (Exception ex)
         {
-            var test = ex;
+            Logger.LogError(ex, "Send Notification exception");
         }
     }
 

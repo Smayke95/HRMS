@@ -35,7 +35,7 @@ class EmployeeDataTableSource extends AdvancedDataTableSource<Employee> {
     return DataRow(
       onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text("000${currentRow.id}")),
+        DataCell(Text(currentRow.workerCode)),
         DataCell(Text(currentRow.firstName)),
         DataCell(Text(currentRow.lastName)),
         DataCell(Text(currentRow.email)),

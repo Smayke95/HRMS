@@ -53,7 +53,7 @@ public class EmailService : IEmailService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "Email exception");
+            Logger.LogError(ex, "Send Error Mail exception");
         }
     }
 }

@@ -191,7 +191,9 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                   child: FormBuilderTextField(
                     name: "workerCode",
                     decoration:
-                        const InputDecoration(labelText: "Šifra radnika"),
+                        const InputDecoration(labelText: "Šifra radnika *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Šifra radnika je obavezna."),
                   ),
                 ),
                 if (Responsive.isTablet(context) ||
