@@ -2232,7 +2232,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6203)
+                            Time = new DateTime(2023, 8, 22, 19, 55, 1, 227, DateTimeKind.Local).AddTicks(995)
                         },
                         new
                         {
@@ -2240,7 +2240,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6207)
+                            Time = new DateTime(2023, 8, 22, 19, 55, 1, 227, DateTimeKind.Local).AddTicks(1001)
                         },
                         new
                         {
@@ -2248,7 +2248,7 @@ namespace HRMS.Database.Migrations
                             Content = "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.",
                             EmployeeId = 3,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6209)
+                            Time = new DateTime(2023, 8, 22, 17, 55, 1, 227, DateTimeKind.Local).AddTicks(1004)
                         },
                         new
                         {
@@ -2256,7 +2256,7 @@ namespace HRMS.Database.Migrations
                             Content = "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 20, 22, 23, 47, 877, DateTimeKind.Local).AddTicks(6214)
+                            Time = new DateTime(2023, 8, 22, 18, 55, 1, 227, DateTimeKind.Local).AddTicks(1008)
                         },
                         new
                         {
@@ -2264,7 +2264,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.",
                             EmployeeId = 4,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6216)
+                            Time = new DateTime(2023, 8, 22, 16, 55, 1, 227, DateTimeKind.Local).AddTicks(1011)
                         },
                         new
                         {
@@ -2272,7 +2272,7 @@ namespace HRMS.Database.Migrations
                             Content = "Super! Javite ako naiđete na bilo kakve prepreke.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6217)
+                            Time = new DateTime(2023, 8, 22, 17, 55, 1, 227, DateTimeKind.Local).AddTicks(1014)
                         },
                         new
                         {
@@ -2280,7 +2280,7 @@ namespace HRMS.Database.Migrations
                             Content = "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.",
                             EmployeeId = 5,
                             TaskId = 3,
-                            Time = new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6219)
+                            Time = new DateTime(2023, 8, 22, 15, 55, 1, 227, DateTimeKind.Local).AddTicks(1016)
                         },
                         new
                         {
@@ -2288,7 +2288,7 @@ namespace HRMS.Database.Migrations
                             Content = "Izgleda odlično! Samo malo promijenite nijanse boja.",
                             EmployeeId = 3,
                             TaskId = 3,
-                            Time = new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6221)
+                            Time = new DateTime(2023, 8, 22, 16, 55, 1, 227, DateTimeKind.Local).AddTicks(1019)
                         },
                         new
                         {
@@ -2296,7 +2296,7 @@ namespace HRMS.Database.Migrations
                             Content = "Bug u footer-u uspješno riješen.",
                             EmployeeId = 6,
                             TaskId = 4,
-                            Time = new DateTime(2023, 8, 20, 18, 23, 47, 877, DateTimeKind.Local).AddTicks(6223)
+                            Time = new DateTime(2023, 8, 22, 14, 55, 1, 227, DateTimeKind.Local).AddTicks(1022)
                         },
                         new
                         {
@@ -2304,7 +2304,7 @@ namespace HRMS.Database.Migrations
                             Content = "Savršeno! Zatvaram task.",
                             EmployeeId = 4,
                             TaskId = 4,
-                            Time = new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6225)
+                            Time = new DateTime(2023, 8, 22, 15, 55, 1, 227, DateTimeKind.Local).AddTicks(1025)
                         });
                 });
 

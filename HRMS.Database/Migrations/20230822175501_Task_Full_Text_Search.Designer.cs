@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230820201815_Task_Full_Text_Search")]
+    [Migration("20230822175501_Task_Full_Text_Search")]
     partial class Task_Full_Text_Search
     {
         /// <inheritdoc />
@@ -113,6 +113,27 @@ namespace HRMS.Database.Migrations
                             CountryId = 3,
                             Name = "Zagreb",
                             ZipCode = ""
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CountryId = 1,
+                            Name = "Podgorica",
+                            ZipCode = "81000"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CountryId = 4,
+                            Name = "Bitola",
+                            ZipCode = "7000"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CountryId = 3,
+                            Name = "Split",
+                            ZipCode = "21000"
                         });
                 });
 
@@ -1142,7 +1163,7 @@ namespace HRMS.Database.Migrations
                             Id = 1,
                             Description = "",
                             EmployeeId = 1,
-                            EndDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Bolovanje",
                             StartDate = new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1316,6 +1337,56 @@ namespace HRMS.Database.Migrations
                             EventTypeId = 3,
                             Name = "Timski izlet na jezero",
                             StartDate = new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Trening radionica - Upravljanje vremenom",
+                            StartDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 1,
+                            Name = "Timski sastanak - Planiranje Q4 projekata",
+                            StartDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 4,
+                            Name = "Seminar o komunikaciji",
+                            StartDate = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 3,
+                            Name = "Poslovni ručak sa partnerima",
+                            StartDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Description = "",
+                            EmployeeId = 2,
+                            EndDate = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EventTypeId = 3,
+                            Name = "Sastanak sa klijentima",
+                            StartDate = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1377,6 +1448,20 @@ namespace HRMS.Database.Migrations
                             Color = "#fb1b1b",
                             IsApprovalRequired = true,
                             Name = "Neplaćeno odsustvo"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Color = "#9c27b0",
+                            IsApprovalRequired = true,
+                            Name = "Obuka"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Color = "#795548",
+                            IsApprovalRequired = false,
+                            Name = "Timski sastanak"
                         });
                 });
 
@@ -1932,6 +2017,42 @@ namespace HRMS.Database.Migrations
                             Id = 4,
                             Description = "Vejers je sistem napravljen za iznajmljivanje kuca na jugu Danske, iznajmljivanje se vrsi preko Booking studija.",
                             Name = "Vejers"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Medicinska Oprema BH je projekat usmjeren na prodaju medicinske opreme i potrošnih materijala u Bosni i Hercegovini.",
+                            Name = "Medicinska Oprema BH"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Art Galerija Sarajevo je online platforma za prodaju umjetničkih djela, sa fokusom na lokalne umjetnike iz Sarajeva.",
+                            Name = "Art Galerija Sarajevo"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Restoran GastroMIX je restoran specijaliziran za internacionalnu kuhinju sa naglaskom na fusion jelima.",
+                            Name = "Restoran GastroMIX"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "IT Konsalting BH pruža IT konsultantske usluge za kompanije u Bosni i Hercegovini, sa ciljem optimizacije poslovnih procesa.",
+                            Name = "IT Konsalting BH"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Turistička Agencija Sarajevo Explorer se bavi organizacijom turističkih tura i putovanja u Sarajevu i okolini, promovišući kulturno i prirodno bogatstvo regije.",
+                            Name = "Turistička Agencija Sarajevo Explorer"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "EduTech BH je projekat usmjeren na razvoj edukativnih tehnologija za bolje obrazovanje u Bosni i Hercegovini.",
+                            Name = "EduTech BH"
                         });
                 });
 
@@ -2015,6 +2136,66 @@ namespace HRMS.Database.Migrations
                             ProjectId = 4,
                             TaskStatusId = 4,
                             TaskTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Optimizirati upite u bazi podataka radi poboljšane performanse.",
+                            EmployeeId = 3,
+                            Name = "Optimizacija Baze Podataka",
+                            ProjectId = 2,
+                            TaskStatusId = 1,
+                            TaskTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Implementirati novu funkcionalnost prema zahtjevima klijenta.",
+                            EmployeeId = 4,
+                            Name = "Implementacija Nove Funkcionalnosti",
+                            ProjectId = 5,
+                            TaskStatusId = 2,
+                            TaskTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Unaprijediti korisničko sučelje radi boljeg korisničkog iskustva.",
+                            EmployeeId = 5,
+                            Name = "Unapređenje Korisničkog Sučelja",
+                            ProjectId = 7,
+                            TaskStatusId = 3,
+                            TaskTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Ažurirati dokumentaciju projekta s najnovijim promjenama.",
+                            EmployeeId = 6,
+                            Name = "Ažuriranje Dokumentacije",
+                            ProjectId = 9,
+                            TaskStatusId = 4,
+                            TaskTypeId = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Izvršiti istraživanje novih tehnologija za buduće projekte.",
+                            EmployeeId = 7,
+                            Name = "Istraživanje Novih Tehnologija",
+                            ProjectId = 10,
+                            TaskStatusId = 1,
+                            TaskTypeId = 6
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "Izvršiti sigurnosnu reviziju sustava kako bi se identificirale ranjivosti.",
+                            EmployeeId = 8,
+                            Name = "Sigurnosna Revizija",
+                            ProjectId = 8,
+                            TaskStatusId = 2,
+                            TaskTypeId = 6
                         });
                 });
 
@@ -2054,7 +2235,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 20, 22, 18, 15, 711, DateTimeKind.Local).AddTicks(6702)
+                            Time = new DateTime(2023, 8, 22, 19, 55, 1, 227, DateTimeKind.Local).AddTicks(995)
                         },
                         new
                         {
@@ -2062,7 +2243,71 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 20, 22, 18, 15, 711, DateTimeKind.Local).AddTicks(6706)
+                            Time = new DateTime(2023, 8, 22, 19, 55, 1, 227, DateTimeKind.Local).AddTicks(1001)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.",
+                            EmployeeId = 3,
+                            TaskId = 1,
+                            Time = new DateTime(2023, 8, 22, 17, 55, 1, 227, DateTimeKind.Local).AddTicks(1004)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Content = "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.",
+                            EmployeeId = 1,
+                            TaskId = 1,
+                            Time = new DateTime(2023, 8, 22, 18, 55, 1, 227, DateTimeKind.Local).AddTicks(1008)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Content = "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.",
+                            EmployeeId = 4,
+                            TaskId = 2,
+                            Time = new DateTime(2023, 8, 22, 16, 55, 1, 227, DateTimeKind.Local).AddTicks(1011)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Content = "Super! Javite ako naiđete na bilo kakve prepreke.",
+                            EmployeeId = 2,
+                            TaskId = 2,
+                            Time = new DateTime(2023, 8, 22, 17, 55, 1, 227, DateTimeKind.Local).AddTicks(1014)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Content = "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.",
+                            EmployeeId = 5,
+                            TaskId = 3,
+                            Time = new DateTime(2023, 8, 22, 15, 55, 1, 227, DateTimeKind.Local).AddTicks(1016)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Content = "Izgleda odlično! Samo malo promijenite nijanse boja.",
+                            EmployeeId = 3,
+                            TaskId = 3,
+                            Time = new DateTime(2023, 8, 22, 16, 55, 1, 227, DateTimeKind.Local).AddTicks(1019)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Content = "Bug u footer-u uspješno riješen.",
+                            EmployeeId = 6,
+                            TaskId = 4,
+                            Time = new DateTime(2023, 8, 22, 14, 55, 1, 227, DateTimeKind.Local).AddTicks(1022)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Content = "Savršeno! Zatvaram task.",
+                            EmployeeId = 4,
+                            TaskId = 4,
+                            Time = new DateTime(2023, 8, 22, 15, 55, 1, 227, DateTimeKind.Local).AddTicks(1025)
                         });
                 });
 
@@ -2131,6 +2376,26 @@ namespace HRMS.Database.Migrations
                         {
                             Id = 2,
                             Name = "Feature"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Poboljšanje"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Održavanje"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Dokumentovanje"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Istraživanje"
                         });
                 });
 

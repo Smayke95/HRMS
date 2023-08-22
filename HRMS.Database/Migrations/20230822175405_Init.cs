@@ -750,16 +750,16 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6203) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 20, 23, 23, 47, 877, DateTimeKind.Local).AddTicks(6207) },
-                    { 3, "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.", 3, 1, new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6209) },
-                    { 4, "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.", 1, 1, new DateTime(2023, 8, 20, 22, 23, 47, 877, DateTimeKind.Local).AddTicks(6214) },
-                    { 5, "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.", 4, 2, new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6216) },
-                    { 6, "Super! Javite ako naiđete na bilo kakve prepreke.", 2, 2, new DateTime(2023, 8, 20, 21, 23, 47, 877, DateTimeKind.Local).AddTicks(6217) },
-                    { 7, "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.", 5, 3, new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6219) },
-                    { 8, "Izgleda odlično! Samo malo promijenite nijanse boja.", 3, 3, new DateTime(2023, 8, 20, 20, 23, 47, 877, DateTimeKind.Local).AddTicks(6221) },
-                    { 9, "Bug u footer-u uspješno riješen.", 6, 4, new DateTime(2023, 8, 20, 18, 23, 47, 877, DateTimeKind.Local).AddTicks(6223) },
-                    { 10, "Savršeno! Zatvaram task.", 4, 4, new DateTime(2023, 8, 20, 19, 23, 47, 877, DateTimeKind.Local).AddTicks(6225) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 22, 19, 54, 5, 0, DateTimeKind.Local).AddTicks(8492) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 22, 19, 54, 5, 0, DateTimeKind.Local).AddTicks(8498) },
+                    { 3, "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.", 3, 1, new DateTime(2023, 8, 22, 17, 54, 5, 0, DateTimeKind.Local).AddTicks(8501) },
+                    { 4, "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.", 1, 1, new DateTime(2023, 8, 22, 18, 54, 5, 0, DateTimeKind.Local).AddTicks(8506) },
+                    { 5, "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.", 4, 2, new DateTime(2023, 8, 22, 16, 54, 5, 0, DateTimeKind.Local).AddTicks(8509) },
+                    { 6, "Super! Javite ako naiđete na bilo kakve prepreke.", 2, 2, new DateTime(2023, 8, 22, 17, 54, 5, 0, DateTimeKind.Local).AddTicks(8511) },
+                    { 7, "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.", 5, 3, new DateTime(2023, 8, 22, 15, 54, 5, 0, DateTimeKind.Local).AddTicks(8514) },
+                    { 8, "Izgleda odlično! Samo malo promijenite nijanse boja.", 3, 3, new DateTime(2023, 8, 22, 16, 54, 5, 0, DateTimeKind.Local).AddTicks(8517) },
+                    { 9, "Bug u footer-u uspješno riješen.", 6, 4, new DateTime(2023, 8, 22, 14, 54, 5, 0, DateTimeKind.Local).AddTicks(8519) },
+                    { 10, "Savršeno! Zatvaram task.", 4, 4, new DateTime(2023, 8, 22, 15, 54, 5, 0, DateTimeKind.Local).AddTicks(8522) }
                 });
 
             migrationBuilder.CreateIndex(
