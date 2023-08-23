@@ -65,6 +65,7 @@ class _CountryListScreenState extends State<CountryListScreen> {
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
+            showHorizontalScrollbarAlways: Responsive.isMobile(context),
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: countryDataTableSource,

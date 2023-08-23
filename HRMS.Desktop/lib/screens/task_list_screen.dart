@@ -120,6 +120,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
+            showHorizontalScrollbarAlways: Responsive.isMobile(context),
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: taskDataTableSource,

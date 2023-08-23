@@ -55,11 +55,11 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
 
   void _openDialog(int? id) {
     if (Responsive.isMobile(context)) return;
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
-    
+
     _loadData(id).then((data) {
       showDialog(
         context: context,
@@ -77,6 +77,7 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
+            showHorizontalScrollbarAlways: Responsive.isMobile(context),
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: eventTypeDataTableSource,
@@ -97,211 +98,213 @@ class _EventTypeListScreenState extends State<EventTypeListScreen> {
 
     if (id == null) currentColor = Colors.white;
 
-    return AlertDialog(
-      title: Align(
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(id == null ? Icons.add : Icons.edit),
-            const SizedBox(width: 10),
-            Text(id == null ? "Dodaj tip" : "Uredi tip"),
-          ],
-        ),
-      ),
-      content: FormBuilder(
-        key: _formKey,
-        child: SizedBox(
-          height: 300,
-          child: Column(
+    return StatefulBuilder(builder: (context, setState) {
+      return AlertDialog(
+        title: Align(
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 500,
-                    child: FormBuilderTextField(
-                      name: "name",
-                      decoration: const InputDecoration(labelText: "Naziv *"),
-                      validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: Column(
-                      children: [
-                        FormBuilderTextField(
-                          name: "color",
-                          focusNode: _focusNode,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefix: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0, 2),
-                                        blurRadius: 4.0,
-                                        spreadRadius: 0.0,
-                                      ),
-                                    ],
-                                    color: currentColor,
+              Icon(id == null ? Icons.add : Icons.edit),
+              const SizedBox(width: 10),
+              Text(id == null ? "Dodaj tip" : "Uredi tip"),
+            ],
+          ),
+        ),
+        content: FormBuilder(
+          key: _formKey,
+          child: SizedBox(
+            height: 300,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 500,
+                      child: FormBuilderTextField(
+                        name: "name",
+                        decoration: const InputDecoration(labelText: "Naziv *"),
+                        validator: FormBuilderValidators.required(
+                            errorText: "Naziv je obavezan."),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 250,
+                      child: Column(
+                        children: [
+                          FormBuilderTextField(
+                            name: "color",
+                            focusNode: _focusNode,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              prefix: Align(
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 2),
+                                          blurRadius: 4.0,
+                                          spreadRadius: 0.0,
+                                        ),
+                                      ],
+                                      color: currentColor,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        OutlinedButton(
-                          style: const ButtonStyle(
-                            padding: MaterialStatePropertyAll(
-                              EdgeInsets.only(
-                                  left: 20, top: 15, right: 20, bottom: 15),
+                          ),                         
+                          const SizedBox(height: 10),
+                          OutlinedButton(
+                            style: const ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.only(
+                                    left: 20, top: 15, right: 20, bottom: 15),
+                              ),
                             ),
+                            child: const Text("Izaberi boju *"),
+                            onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                    title: const Text("Izaberi boju"),
+                                    content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ColorPicker(
+                                              pickerColor: currentColor,
+                                              enableAlpha: false,
+                                              labelTypes: const [],
+                                              onColorChanged: (newColor) => {
+                                                    setState(() {
+                                                      currentColor = newColor;
+                                                      _formKey.currentState!
+                                                          .patchValue({
+                                                        'color':
+                                                            '#${newColor.value.toRadixString(16).replaceAll("ff", "")}'
+                                                      });
+                                                    })
+                                                  }),
+                                          const SizedBox(height: 20),
+                                          TextButton(
+                                            child: const Text("IZABERI"),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          )
+                                        ]))),
                           ),
-                          child: const Text("Izaberi boju *"),
-                          onPressed: () => pickColor(context, currentColor),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 20),
-                  SizedBox(
-                    width: 250,
-                    child: FormBuilderCheckbox(
-                      name: "isApprovalRequired",
-                      title: const Text("Da li je potrebno odobrenje?"),
-                      initialValue: false,
+                    const SizedBox(width: 20),
+                    SizedBox(
+                      width: 250,
+                      child: FormBuilderCheckbox(
+                        name: "isApprovalRequired",
+                        title: const Text("Da li je potrebno odobrenje?"),
+                        initialValue: false,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      actionsPadding: const EdgeInsets.all(20),
-      buttonPadding: const EdgeInsets.all(20),
-      actions: [
-        if (id != null)
+        actionsPadding: const EdgeInsets.all(20),
+        buttonPadding: const EdgeInsets.all(20),
+        actions: [
+          if (id != null)
+            OutlinedButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.red),
+                padding: const MaterialStatePropertyAll(
+                  EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+                ),
+              ),
+              child: const Text("OBRIŠI"),
+              onPressed: () async {
+                try {
+                  await _eventTypeProvider.delete(id);
+                  eventTypeDataTableSource.filterData(null);
+                  if (context.mounted) Navigator.pop(context);
+                } catch (error) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          width: 400,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                "* Ne možete obrisati ovaj tip događaja.",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          const SizedBox(width: 185),
           OutlinedButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(Colors.red),
-              padding: const MaterialStatePropertyAll(
+            style: const ButtonStyle(
+              padding: MaterialStatePropertyAll(
                 EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
               ),
             ),
-            child: const Text("OBRIŠI"),
+            child: const Text("NAZAD"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          OutlinedButton(
+            style: const ButtonStyle(
+              padding: MaterialStatePropertyAll(
+                EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+              ),
+            ),
+            child: const Text("SPREMI"),
             onPressed: () async {
-              try {
-                await _eventTypeProvider.delete(id);
+              var isValid = _formKey.currentState?.saveAndValidate();
+
+              if (isValid!) {
+                var request = Map.from(_formKey.currentState!.value);
+
+                id == null
+                    ? await _eventTypeProvider.insert(request)
+                    : await _eventTypeProvider.update(id, request);
+
                 eventTypeDataTableSource.filterData(null);
                 if (context.mounted) Navigator.pop(context);
-              } catch (error) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content: SizedBox(
-                        width: 400,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "* Ne možete obrisati ovaj tip događaja.",
-                              style: TextStyle(
-                                color: Colors.red,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
               }
             },
           ),
-        const SizedBox(width: 185),
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
-          ),
-          child: const Text("NAZAD"),
-          onPressed: () => Navigator.pop(context),
-        ),
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
-          ),
-          child: const Text("SPREMI"),
-          onPressed: () async {
-            var isValid = _formKey.currentState?.saveAndValidate();
-
-            if (isValid!) {
-              var request = Map.from(_formKey.currentState!.value);
-
-              id == null
-                  ? await _eventTypeProvider.insert(request)
-                  : await _eventTypeProvider.update(id, request);
-
-              eventTypeDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
-            }
-          },
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
-
-  void pickColor(BuildContext context, Color currentColor) => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-          title: const Text("Izaberi boju"),
-          content: Column(mainAxisSize: MainAxisSize.min, children: [
-            buildColorPicker(currentColor),
-            const SizedBox(height: 20),
-            TextButton(
-              child: const Text("IZABERI"),
-              onPressed: () => Navigator.pop(context),
-            )
-          ])));
-
-  Widget buildColorPicker(Color color) => ColorPicker(
-      pickerColor: color,
-      enableAlpha: false,
-      labelTypes: const [],
-      onColorChanged: (newColor) => {
-            setState(() {             
-              currentColor = newColor;
-              _formKey.currentState!.patchValue({
-                'color':
-                    '#${newColor.value.toRadixString(16).replaceAll("ff", "")}'
-              });            
-            })
-          });
 }

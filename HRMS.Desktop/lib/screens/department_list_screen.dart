@@ -82,6 +82,7 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
+            showHorizontalScrollbarAlways: Responsive.isMobile(context),
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: departmentDataTableSource,

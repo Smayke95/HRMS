@@ -48,6 +48,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
+            showHorizontalScrollbarAlways: Responsive.isMobile(context),
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: employeeDataTableSource,

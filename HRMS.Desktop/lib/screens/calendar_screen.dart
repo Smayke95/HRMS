@@ -86,7 +86,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     var eventSearch = EventSearch();
-    eventSearch.employeeId = User.id;
+
+    if (!User.roles.contains("Admin") || !User.roles.contains("Manager")) {
+      eventSearch.employeeId = User.id;
+    }
+
     eventSearch.includeEventType = true;
 
     return FutureBuilder<PagedResult<Event>>(
@@ -111,211 +115,227 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   snapshotEventTypes.data?.result == null) {
                 return const Text("Podaci nisu dostupni");
               } else {
-                bool isMobile = Responsive.isMobile(context);
+                if (Responsive.isMobile(context)) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 900,
+                          height: 500,
+                          child: SfCalendar(
+                            view: CalendarView.month,
+                            firstDayOfWeek: 1,
+                            dataSource:
+                                EventDataTableSource(snapshot.data!.result),
+                            monthViewSettings: const MonthViewSettings(
+                              appointmentDisplayMode:
+                                  MonthAppointmentDisplayMode.appointment,
+                            ),
+                            onTap: (CalendarTapDetails details) {
+                              if (details.targetElement ==
+                                  CalendarElement.calendarCell) {
+                                var selectedDate = details.date!;
+                                _openDialog(null, selectedDate);
+                              }
 
-                if (isMobile) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        width: 900,
-                        height: 500,
-                        child: SfCalendar(
-                          view: CalendarView.month,
-                          firstDayOfWeek: 1,
-                          dataSource:
-                              EventDataTableSource(snapshot.data!.result),
-                          monthViewSettings: const MonthViewSettings(
-                            appointmentDisplayMode:
-                                MonthAppointmentDisplayMode.appointment,
+                              if (details.targetElement ==
+                                  CalendarElement.appointment) {
+                                int id = details.appointments?[0].id;
+                                _openDialog(id, null);
+                              }
+                            },
                           ),
-                          onTap: (CalendarTapDetails details) {
-                            if (details.targetElement ==
-                                CalendarElement.calendarCell) {
-                              var selectedDate = details.date!;
-                              _openDialog(null, selectedDate);
-                            }
-
-                            if (details.targetElement ==
-                                CalendarElement.appointment) {
-                              int id = details.appointments?[0].id;
-                              _openDialog(id, null);
-                            }
-                          },
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 185, 185, 185)),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ElevatedButton.icon(
-                              icon: const Icon(Icons.add),
-                              style: const ButtonStyle(
-                                padding: MaterialStatePropertyAll(
-                                    EdgeInsets.only(
-                                        left: 15,
-                                        top: 15,
-                                        right: 20,
-                                        bottom: 15)),
+                        const SizedBox(height: 30),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 185, 185, 185)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (!Responsive.isMobile(context))
+                                ElevatedButton.icon(
+                                  icon: const Icon(Icons.add),
+                                  style: const ButtonStyle(
+                                    padding: MaterialStatePropertyAll(
+                                        EdgeInsets.only(
+                                            left: 15,
+                                            top: 15,
+                                            right: 20,
+                                            bottom: 15)),
+                                  ),
+                                  label: const Text("Dodaj događaj"),
+                                  onPressed: () => _openDialog(null, null),
+                                ),
+                              if (!Responsive.isMobile(context))
+                                const SizedBox(height: 50),
+                              const Text(
+                                'Legenda',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 95, 95, 95),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              label: const Text("Dodaj događaj"),
-                              onPressed: () => _openDialog(null, null),
-                            ),
-                            const SizedBox(height: 50),
-                            const Text(
-                              'Legenda',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 95, 95, 95),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:
-                                  snapshotEventTypes.data!.result.map((type) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.grey,
-                                                offset: Offset(0, 2),
-                                                blurRadius: 4.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: Color(int.parse(type.color
-                                                .replaceAll("#", "0xff"))),
+                              const SizedBox(height: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    snapshotEventTypes.data!.result.map((type) {
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0, 2),
+                                                  blurRadius: 4.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: Color(int.parse(type.color
+                                                  .replaceAll("#", "0xff"))),
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(type.name),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                  ],
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                                          const SizedBox(width: 8),
+                                          Text(type.name),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 } else {
                   return Row(
                     children: [
-                      SizedBox(
-                        width: 900,
-                        child: SfCalendar(
-                          view: CalendarView.month,
-                          firstDayOfWeek: 1,
-                          dataSource:
-                              EventDataTableSource(snapshot.data!.result),
-                          monthViewSettings: const MonthViewSettings(
-                            appointmentDisplayMode:
-                                MonthAppointmentDisplayMode.appointment,
-                          ),
-                          onTap: (CalendarTapDetails details) {
-                            if (details.targetElement ==
-                                CalendarElement.calendarCell) {
-                              var selectedDate = details.date!;
-                              _openDialog(null, selectedDate);
-                            }
+                      Expanded(
+                        flex: 4,
+                        child: SizedBox(
+                          width: 900,
+                          child: SfCalendar(
+                            view: CalendarView.month,
+                            firstDayOfWeek: 1,
+                            dataSource:
+                                EventDataTableSource(snapshot.data!.result),
+                            monthViewSettings: const MonthViewSettings(
+                              appointmentDisplayMode:
+                                  MonthAppointmentDisplayMode.appointment,
+                            ),
+                            onTap: (CalendarTapDetails details) {
+                              if (details.targetElement ==
+                                  CalendarElement.calendarCell) {
+                                var selectedDate = details.date!;
+                                _openDialog(null, selectedDate);
+                              }
 
-                            if (details.targetElement ==
-                                CalendarElement.appointment) {
-                              int id = details.appointments?[0].id;
-                              _openDialog(id, null);
-                            }
-                          },
+                              if (details.targetElement ==
+                                  CalendarElement.appointment) {
+                                int id = details.appointments?[0].id;
+                                _openDialog(id, null);
+                              }
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(width: 50),
-                      Container(
-                        width: 200,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 185, 185, 185)),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ElevatedButton.icon(
-                              icon: const Icon(Icons.add),
-                              style: const ButtonStyle(
-                                padding: MaterialStatePropertyAll(
-                                    EdgeInsets.only(
-                                        left: 15,
-                                        top: 15,
-                                        right: 20,
-                                        bottom: 15)),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          width: 200,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 185, 185, 185)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ElevatedButton.icon(
+                                icon: const Icon(Icons.add),
+                                style: const ButtonStyle(
+                                  padding: MaterialStatePropertyAll(
+                                      EdgeInsets.only(
+                                          left: 15,
+                                          top: 15,
+                                          right: 20,
+                                          bottom: 15)),
+                                ),
+                                label: const Text("Dodaj događaj"),
+                                onPressed: () => _openDialog(null, null),
                               ),
-                              label: const Text("Dodaj događaj"),
-                              onPressed: () => _openDialog(null, null),
-                            ),
-                            const SizedBox(height: 50),
-                            const Text(
-                              'Legenda',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 95, 95, 95),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                              const SizedBox(height: 50),
+                              const Text(
+                                'Legenda',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 95, 95, 95),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children:
-                                  snapshotEventTypes.data!.result.map((type) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.grey,
-                                                offset: Offset(0, 2),
-                                                blurRadius: 4.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: Color(int.parse(type.color
-                                                .replaceAll("#", "0xff"))),
+                              const SizedBox(height: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    snapshotEventTypes.data!.result.map((type) {
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0, 2),
+                                                  blurRadius: 4.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: Color(int.parse(type.color
+                                                  .replaceAll("#", "0xff"))),
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(type.name),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                  ],
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                              child: Text(
+                                            type.name,
+                                            style: const TextStyle(
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          )),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -409,7 +429,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               Row(
                 children: [
                   SizedBox(
-                    width: 300,
+                    width: 290,
                     child: FormBuilderDropdown(
                       name: "eventTypeId",
                       decoration: const InputDecoration(labelText: "Vrsta *"),
@@ -425,10 +445,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                   const SizedBox(width: 20),
                   SizedBox(
-                    width: 300,
+                    width: 290,
                     child: FormBuilderDropdown(
                       name: "employeeId",
-                      enabled: User.roles.contains("Admin"),
+                      enabled: User.roles.contains("Admin") ||
+                          User.roles.contains("Manager"),
                       decoration:
                           const InputDecoration(labelText: "Zaposlenik *"),
                       validator: FormBuilderValidators.required(
