@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230822175421_Position_Full_Text_Search")]
+    [Migration("20230824184719_Position_Full_Text_Search")]
     partial class Position_Full_Text_Search
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace HRMS.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -1149,6 +1149,9 @@ namespace HRMS.Database.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
@@ -1166,7 +1169,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Bolovanje",
-                            StartDate = new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1176,7 +1180,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 2,
                             Name = "Kurban Bajram",
-                            StartDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 0
                         },
                         new
                         {
@@ -1186,7 +1191,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Godišnji odmor",
-                            StartDate = new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 2
                         },
                         new
                         {
@@ -1196,7 +1202,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Stručna obuka",
-                            StartDate = new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 3
                         },
                         new
                         {
@@ -1206,7 +1213,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 5,
                             Name = "Sarajevski Film Festival",
-                            StartDate = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1216,7 +1224,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 2,
                             Name = "Poslovni put - Zagreb",
-                            StartDate = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1226,7 +1235,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Oproštajna večera za kolegu",
-                            StartDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1236,7 +1246,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Timski izlet na planinu",
-                            StartDate = new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1246,7 +1257,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Seminar o liderstvu",
-                            StartDate = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1256,7 +1268,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Sportski turnir - fudbal",
-                            StartDate = new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1266,7 +1279,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Prezentacija novog proizvoda",
-                            StartDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1276,7 +1290,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 5,
                             Name = "Radionica o stresu",
-                            StartDate = new DateTime(2023, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1286,7 +1301,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 2,
                             Name = "Praznična proslava",
-                            StartDate = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1296,7 +1312,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Timski sastanak",
-                            StartDate = new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1306,7 +1323,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 5,
                             Name = "Volonterska akcija - čišćenje parka",
-                            StartDate = new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1316,7 +1334,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Rad od kuće - Remote Week",
-                            StartDate = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1326,7 +1345,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Prezentacija poslovnih rezultata",
-                            StartDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1336,7 +1356,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Timski izlet na jezero",
-                            StartDate = new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1346,7 +1367,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Trening radionica - Upravljanje vremenom",
-                            StartDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1356,7 +1378,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 1,
                             Name = "Timski sastanak - Planiranje Q4 projekata",
-                            StartDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1366,7 +1389,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 4,
                             Name = "Seminar o komunikaciji",
-                            StartDate = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1376,7 +1400,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Poslovni ručak sa partnerima",
-                            StartDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         },
                         new
                         {
@@ -1386,7 +1411,8 @@ namespace HRMS.Database.Migrations
                             EndDate = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventTypeId = 3,
                             Name = "Sastanak sa klijentima",
-                            StartDate = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 1
                         });
                 });
 
@@ -2235,7 +2261,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task preuzet dana 19.8. i stavljen 'In progress'.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 22, 19, 54, 21, 188, DateTimeKind.Local).AddTicks(6172)
+                            Time = new DateTime(2023, 8, 24, 20, 47, 19, 484, DateTimeKind.Local).AddTicks(5888)
                         },
                         new
                         {
@@ -2243,7 +2269,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task zavrsen.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 22, 19, 54, 21, 188, DateTimeKind.Local).AddTicks(6178)
+                            Time = new DateTime(2023, 8, 24, 20, 47, 19, 484, DateTimeKind.Local).AddTicks(5893)
                         },
                         new
                         {
@@ -2251,7 +2277,7 @@ namespace HRMS.Database.Migrations
                             Content = "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.",
                             EmployeeId = 3,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 22, 17, 54, 21, 188, DateTimeKind.Local).AddTicks(6180)
+                            Time = new DateTime(2023, 8, 24, 18, 47, 19, 484, DateTimeKind.Local).AddTicks(5895)
                         },
                         new
                         {
@@ -2259,7 +2285,7 @@ namespace HRMS.Database.Migrations
                             Content = "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.",
                             EmployeeId = 1,
                             TaskId = 1,
-                            Time = new DateTime(2023, 8, 22, 18, 54, 21, 188, DateTimeKind.Local).AddTicks(6185)
+                            Time = new DateTime(2023, 8, 24, 19, 47, 19, 484, DateTimeKind.Local).AddTicks(5899)
                         },
                         new
                         {
@@ -2267,7 +2293,7 @@ namespace HRMS.Database.Migrations
                             Content = "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.",
                             EmployeeId = 4,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 22, 16, 54, 21, 188, DateTimeKind.Local).AddTicks(6187)
+                            Time = new DateTime(2023, 8, 24, 17, 47, 19, 484, DateTimeKind.Local).AddTicks(5902)
                         },
                         new
                         {
@@ -2275,7 +2301,7 @@ namespace HRMS.Database.Migrations
                             Content = "Super! Javite ako naiđete na bilo kakve prepreke.",
                             EmployeeId = 2,
                             TaskId = 2,
-                            Time = new DateTime(2023, 8, 22, 17, 54, 21, 188, DateTimeKind.Local).AddTicks(6190)
+                            Time = new DateTime(2023, 8, 24, 18, 47, 19, 484, DateTimeKind.Local).AddTicks(5905)
                         },
                         new
                         {
@@ -2283,7 +2309,7 @@ namespace HRMS.Database.Migrations
                             Content = "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.",
                             EmployeeId = 5,
                             TaskId = 3,
-                            Time = new DateTime(2023, 8, 22, 15, 54, 21, 188, DateTimeKind.Local).AddTicks(6193)
+                            Time = new DateTime(2023, 8, 24, 16, 47, 19, 484, DateTimeKind.Local).AddTicks(5907)
                         },
                         new
                         {
@@ -2291,7 +2317,7 @@ namespace HRMS.Database.Migrations
                             Content = "Izgleda odlično! Samo malo promijenite nijanse boja.",
                             EmployeeId = 3,
                             TaskId = 3,
-                            Time = new DateTime(2023, 8, 22, 16, 54, 21, 188, DateTimeKind.Local).AddTicks(6195)
+                            Time = new DateTime(2023, 8, 24, 17, 47, 19, 484, DateTimeKind.Local).AddTicks(5910)
                         },
                         new
                         {
@@ -2299,7 +2325,7 @@ namespace HRMS.Database.Migrations
                             Content = "Bug u footer-u uspješno riješen.",
                             EmployeeId = 6,
                             TaskId = 4,
-                            Time = new DateTime(2023, 8, 22, 14, 54, 21, 188, DateTimeKind.Local).AddTicks(6198)
+                            Time = new DateTime(2023, 8, 24, 15, 47, 19, 484, DateTimeKind.Local).AddTicks(5912)
                         },
                         new
                         {
@@ -2307,7 +2333,7 @@ namespace HRMS.Database.Migrations
                             Content = "Savršeno! Zatvaram task.",
                             EmployeeId = 4,
                             TaskId = 4,
-                            Time = new DateTime(2023, 8, 22, 15, 54, 21, 188, DateTimeKind.Local).AddTicks(6201)
+                            Time = new DateTime(2023, 8, 24, 16, 47, 19, 484, DateTimeKind.Local).AddTicks(5915)
                         });
                 });
 

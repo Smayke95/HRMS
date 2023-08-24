@@ -250,6 +250,7 @@ namespace HRMS.Database.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -639,32 +640,32 @@ namespace HRMS.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "Id", "Description", "EmployeeId", "EndDate", "EventTypeId", "Name", "StartDate" },
+                columns: new[] { "Id", "Description", "EmployeeId", "EndDate", "EventTypeId", "Name", "StartDate", "Status" },
                 values: new object[,]
                 {
-                    { 1, "", 1, new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Bolovanje", new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "", 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Kurban Bajram", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "", 3, new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Godišnji odmor", new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "", 1, new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Stručna obuka", new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "", 5, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Sarajevski Film Festival", new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, "", 6, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Poslovni put - Zagreb", new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, "", 7, new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Oproštajna večera za kolegu", new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, "", 1, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Timski izlet na planinu", new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, "", 9, new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Seminar o liderstvu", new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, "", 10, new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Sportski turnir - fudbal", new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, "", 1, new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Prezentacija novog proizvoda", new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, "", 2, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Radionica o stresu", new DateTime(2023, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, "", 1, new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Praznična proslava", new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, "", 1, new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Timski sastanak", new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, "", 5, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Volonterska akcija - čišćenje parka", new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 16, "", 6, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Rad od kuće - Remote Week", new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 17, "", 7, new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Prezentacija poslovnih rezultata", new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 18, "", 1, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Timski izlet na jezero", new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 19, "", 2, new DateTime(2023, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Trening radionica - Upravljanje vremenom", new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 20, "", 2, new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Timski sastanak - Planiranje Q4 projekata", new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 21, "", 2, new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Seminar o komunikaciji", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 22, "", 2, new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Poslovni ručak sa partnerima", new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 23, "", 2, new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Sastanak sa klijentima", new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, "", 1, new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Bolovanje", new DateTime(2023, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, "", 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Kurban Bajram", new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { 3, "", 3, new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Godišnji odmor", new DateTime(2023, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 4, "", 1, new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Stručna obuka", new DateTime(2023, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 5, "", 5, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Sarajevski Film Festival", new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, "", 6, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Poslovni put - Zagreb", new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 7, "", 7, new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Oproštajna večera za kolegu", new DateTime(2023, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 8, "", 1, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Timski izlet na planinu", new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 9, "", 9, new DateTime(2023, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Seminar o liderstvu", new DateTime(2023, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 10, "", 10, new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Sportski turnir - fudbal", new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 11, "", 1, new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Prezentacija novog proizvoda", new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 12, "", 2, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Radionica o stresu", new DateTime(2023, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 13, "", 1, new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Praznična proslava", new DateTime(2023, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 14, "", 1, new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Timski sastanak", new DateTime(2023, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 15, "", 5, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Volonterska akcija - čišćenje parka", new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 16, "", 6, new DateTime(2023, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Rad od kuće - Remote Week", new DateTime(2023, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 17, "", 7, new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Prezentacija poslovnih rezultata", new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 18, "", 1, new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Timski izlet na jezero", new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 19, "", 2, new DateTime(2023, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Trening radionica - Upravljanje vremenom", new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 20, "", 2, new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Timski sastanak - Planiranje Q4 projekata", new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 21, "", 2, new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Seminar o komunikaciji", new DateTime(2023, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 22, "", 2, new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Poslovni ručak sa partnerima", new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 23, "", 2, new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Sastanak sa klijentima", new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -750,16 +751,16 @@ namespace HRMS.Database.Migrations
                 columns: new[] { "Id", "Content", "EmployeeId", "TaskId", "Time" },
                 values: new object[,]
                 {
-                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 22, 19, 54, 5, 0, DateTimeKind.Local).AddTicks(8492) },
-                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 22, 19, 54, 5, 0, DateTimeKind.Local).AddTicks(8498) },
-                    { 3, "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.", 3, 1, new DateTime(2023, 8, 22, 17, 54, 5, 0, DateTimeKind.Local).AddTicks(8501) },
-                    { 4, "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.", 1, 1, new DateTime(2023, 8, 22, 18, 54, 5, 0, DateTimeKind.Local).AddTicks(8506) },
-                    { 5, "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.", 4, 2, new DateTime(2023, 8, 22, 16, 54, 5, 0, DateTimeKind.Local).AddTicks(8509) },
-                    { 6, "Super! Javite ako naiđete na bilo kakve prepreke.", 2, 2, new DateTime(2023, 8, 22, 17, 54, 5, 0, DateTimeKind.Local).AddTicks(8511) },
-                    { 7, "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.", 5, 3, new DateTime(2023, 8, 22, 15, 54, 5, 0, DateTimeKind.Local).AddTicks(8514) },
-                    { 8, "Izgleda odlično! Samo malo promijenite nijanse boja.", 3, 3, new DateTime(2023, 8, 22, 16, 54, 5, 0, DateTimeKind.Local).AddTicks(8517) },
-                    { 9, "Bug u footer-u uspješno riješen.", 6, 4, new DateTime(2023, 8, 22, 14, 54, 5, 0, DateTimeKind.Local).AddTicks(8519) },
-                    { 10, "Savršeno! Zatvaram task.", 4, 4, new DateTime(2023, 8, 22, 15, 54, 5, 0, DateTimeKind.Local).AddTicks(8522) }
+                    { 1, "Task preuzet dana 19.8. i stavljen 'In progress'.", 1, 1, new DateTime(2023, 8, 24, 20, 46, 54, 496, DateTimeKind.Local).AddTicks(6711) },
+                    { 2, "Task zavrsen.", 2, 2, new DateTime(2023, 8, 24, 20, 46, 54, 496, DateTimeKind.Local).AddTicks(6717) },
+                    { 3, "Hvala na preuzimanju zadatka. Pogledat ću dizajn i krenuti s markup-om.", 3, 1, new DateTime(2023, 8, 24, 18, 46, 54, 496, DateTimeKind.Local).AddTicks(6720) },
+                    { 4, "Nema na čemu! Ako imate bilo kakvih pitanja, slobodno pitajte.", 1, 1, new DateTime(2023, 8, 24, 19, 46, 54, 496, DateTimeKind.Local).AddTicks(6723) },
+                    { 5, "Task označen kao 'In progress'. Radim na integraciji s Mailchimp-om.", 4, 2, new DateTime(2023, 8, 24, 17, 46, 54, 496, DateTimeKind.Local).AddTicks(6726) },
+                    { 6, "Super! Javite ako naiđete na bilo kakve prepreke.", 2, 2, new DateTime(2023, 8, 24, 18, 46, 54, 496, DateTimeKind.Local).AddTicks(6728) },
+                    { 7, "Banner komponenta uspješno dodana projektu. Čeka se vaš feedback.", 5, 3, new DateTime(2023, 8, 24, 16, 46, 54, 496, DateTimeKind.Local).AddTicks(6731) },
+                    { 8, "Izgleda odlično! Samo malo promijenite nijanse boja.", 3, 3, new DateTime(2023, 8, 24, 17, 46, 54, 496, DateTimeKind.Local).AddTicks(6734) },
+                    { 9, "Bug u footer-u uspješno riješen.", 6, 4, new DateTime(2023, 8, 24, 15, 46, 54, 496, DateTimeKind.Local).AddTicks(6736) },
+                    { 10, "Savršeno! Zatvaram task.", 4, 4, new DateTime(2023, 8, 24, 16, 46, 54, 496, DateTimeKind.Local).AddTicks(6739) }
                 });
 
             migrationBuilder.CreateIndex(
