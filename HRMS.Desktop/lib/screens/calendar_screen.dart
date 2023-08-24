@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../data_table_sources/event_data_table_source.dart';
 import '../models/employee.dart';
+import '../models/enums/event_status.dart';
 import '../models/event.dart';
 import '../models/event_type.dart';
 import '../models/paged_result.dart';
@@ -35,6 +36,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
   var _employees = PagedResult<Employee>();
   var _eventTypes = PagedResult<EventType>();
 
+  var _eventStatus = EventStatus.initial;
+  List<EventStatus> _allowedActions = [];
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +65,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
         "eventTypeId": event.eventType?.id.toString() ?? "0",
         "employeeId": event.employee?.id.toString() ?? "0",
       });
+
+      _eventStatus = event.status;
+      _allowedActions = await _eventProvider.allowedActions(id);
     } else {
       _formKey.currentState?.patchValue({
         "startDate": selectedDate,
@@ -68,7 +75,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       });
     }
 
-    if (!User.roles.contains("Admin")) {
+    if (!User.roles.contains("Manager")) {
       _formKey.currentState?.patchValue({"employeeId": User.id.toString()});
     }
   }
@@ -76,22 +83,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void _openDialog(int? id, DateTime? selectedDate) {
     if (Responsive.isMobile(context)) return;
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) =>
-          _buildDialog(context, id, selectedDate),
-    );
+    _loadData(id, selectedDate).then((data) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            _buildDialog(context, id, selectedDate),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var eventSearch = EventSearch();
 
-    if (!User.roles.contains("Admin") || !User.roles.contains("Manager")) {
+    if (!User.roles.contains("Manager")) {
       eventSearch.employeeId = User.id;
     }
 
     eventSearch.includeEventType = true;
+    eventSearch.pageSize = 50;
 
     return FutureBuilder<PagedResult<Event>>(
       future: _eventProvider.getAll(search: eventSearch),
@@ -448,8 +458,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     width: 290,
                     child: FormBuilderDropdown(
                       name: "employeeId",
-                      enabled: User.roles.contains("Admin") ||
-                          User.roles.contains("Manager"),
+                      enabled: User.roles.contains("Manager"),
                       decoration:
                           const InputDecoration(labelText: "Zaposlenik *"),
                       validator: FormBuilderValidators.required(
@@ -472,57 +481,109 @@ class _CalendarScreenState extends State<CalendarScreen> {
       actionsPadding: const EdgeInsets.all(20),
       buttonPadding: const EdgeInsets.all(20),
       actions: [
-        if (id != null)
-          OutlinedButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(Colors.red),
-              padding: const MaterialStatePropertyAll(
-                EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (_allowedActions.contains(EventStatus.deleted) && id != null)
+              OutlinedButton(
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.red),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.only(
+                        left: 40, top: 20, right: 40, bottom: 20),
+                  ),
+                ),
+                child: const Text("OBRIŠI"),
+                onPressed: () async {
+                  await _eventProvider.delete(id);
+                  await _loadData(null, null);
+                  setState(() {});
+                  if (context.mounted) Navigator.pop(context);
+                },
               ),
+            if (_allowedActions.contains(EventStatus.deleted) && id != null)
+              const SizedBox(width: 10),
+            OutlinedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.only(
+                      left: 40, top: 20, right: 40, bottom: 20),
+                ),
+              ),
+              child: const Text("NAZAD"),
+              onPressed: () => Navigator.pop(context),
             ),
-            child: const Text("OBRIŠI"),
-            onPressed: () async {
-              await _eventProvider.delete(id);
+            if (_allowedActions.contains(EventStatus.initial) || id == null)
+              const SizedBox(width: 10),
+            if (_allowedActions.contains(EventStatus.initial) || id == null)
+              OutlinedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.only(
+                        left: 40, top: 20, right: 40, bottom: 20),
+                  ),
+                ),
+                child: const Text("SPREMI"),
+                onPressed: () async {
+                  var isValid = _formKey.currentState?.saveAndValidate();
 
-              await _loadData(null, null);
-              setState(() {});
+                  if (isValid!) {
+                    var request = Map.from(_formKey.currentState!.value);
 
-              if (context.mounted) Navigator.pop(context);
-            },
-          ),
-        const SizedBox(width: 185),
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
-          ),
-          child: const Text("NAZAD"),
-          onPressed: () => Navigator.pop(context),
+                    id == null
+                        ? await _eventProvider.insert(request)
+                        : await _eventProvider.update(id, request);
+
+                    await _loadData(null, null);
+                    setState(() {});
+                    if (context.mounted) Navigator.pop(context);
+                  }
+                },
+              ),
+          ],
         ),
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
+        const SizedBox(height: 10),
+        if (User.roles.contains("Manager"))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (_allowedActions.contains(EventStatus.declined) && id != null)
+                OutlinedButton(
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.red),
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.only(
+                          left: 40, top: 20, right: 40, bottom: 20),
+                    ),
+                  ),
+                  child: const Text("ODBACI"),
+                  onPressed: () async {
+                    await _eventProvider.decline(id);
+                    await _loadData(null, null);
+                    setState(() {});
+                    if (context.mounted) Navigator.pop(context);
+                  },
+                ),
+              if (_allowedActions.contains(EventStatus.approved) && id != null)
+                const SizedBox(width: 10),
+              if (_allowedActions.contains(EventStatus.approved) && id != null)
+                OutlinedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.only(
+                          left: 40, top: 20, right: 40, bottom: 20),
+                    ),
+                  ),
+                  child: const Text("ODOBRI"),
+                  onPressed: () async {
+                    await _eventProvider.approve(id);
+                    await _loadData(null, null);
+                    setState(() {});
+                    if (context.mounted) Navigator.pop(context);
+                  },
+                ),
+            ],
           ),
-          child: const Text("SPREMI"),
-          onPressed: () async {
-            var isValid = _formKey.currentState?.saveAndValidate();
-
-            if (isValid!) {
-              var request = Map.from(_formKey.currentState!.value);
-
-              id == null
-                  ? await _eventProvider.insert(request)
-                  : await _eventProvider.update(id, request);
-
-              await _loadData(null, null);
-              setState(() {});
-              if (context.mounted) Navigator.pop(context);
-            }
-          },
-        ),
       ],
     );
   }

@@ -1,4 +1,6 @@
-﻿namespace HRMS.Core.Models;
+﻿using HRMS.Core.Models.Enums;
+
+namespace HRMS.Core.Models;
 
 public class Event : Base
 {
@@ -13,4 +15,6 @@ public class Event : Base
     public string Description { get; set; } = string.Empty;
 
     public Employee Employee { get; set; } = new();
+
+    public EventStatus Status { get; set; }
 }

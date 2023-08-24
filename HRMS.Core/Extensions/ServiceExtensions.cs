@@ -2,6 +2,7 @@
 using HRMS.Core.Models.Enums;
 using HRMS.Core.Services;
 using HRMS.Core.States.EmployeePositionStates;
+using HRMS.Core.States.EventStates;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -60,6 +61,21 @@ public static class ServiceExtensions
                     return services.GetService<EmployeePositionActiveState>();
                 default:
                     return services.GetService<EmployeePositionBaseState>();
+            }
+        });
+
+        serviceCollection.AddScoped<EventStateResolver>(services => eventStatus =>
+        {
+            switch (eventStatus)
+            {
+                case EventStatus.Initial:
+                    return services.GetService<EventInitialState>();
+                case EventStatus.Declined:
+                    return services.GetService<EventDeclinedState>();
+                case EventStatus.Approved:
+                    return services.GetService<EventApprovedState>();
+                default:
+                    return services.GetService<EventBaseState>();
             }
         });
     }

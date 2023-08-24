@@ -18,6 +18,7 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       json['employee'] == null
           ? null
           : Employee.fromJson(json['employee'] as Map<String, dynamic>),
+      $enumDecode(_$EventStatusEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
@@ -28,4 +29,12 @@ Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
       'endDate': instance.endDate.toIso8601String(),
       'eventType': instance.eventType,
       'employee': instance.employee,
+      'status': _$EventStatusEnumMap[instance.status]!,
     };
+
+const _$EventStatusEnumMap = {
+  EventStatus.initial: 0,
+  EventStatus.approved: 1,
+  EventStatus.declined: 2,
+  EventStatus.deleted: 3,
+};

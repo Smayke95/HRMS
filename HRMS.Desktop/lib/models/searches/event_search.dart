@@ -8,6 +8,7 @@ part 'event_search.g.dart';
 class EventSearch extends BaseSearch {
   String? name;
   int? employeeId;
+  bool includeDeleted = false;
   bool includeEventType = false;
   bool includeEmployee = false;  
 

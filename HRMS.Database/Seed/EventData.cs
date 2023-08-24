@@ -1,4 +1,5 @@
-﻿using HRMS.Database.Models;
+﻿using HRMS.Core.Models.Enums;
+using HRMS.Database.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HRMS.Database.Seed;
@@ -15,6 +16,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 8, 16),
                 EndDate = new DateTime(2023, 8, 28),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -24,6 +26,7 @@ public static class EventData
                 EventTypeId = 2,
                 StartDate = new DateTime(2023, 9, 1),
                 EndDate = new DateTime(2023, 9, 3),
+                Status = EventStatus.Initial,
                 EmployeeId = 1
             },
             new Event
@@ -33,6 +36,7 @@ public static class EventData
                 EventTypeId = 1,
                 StartDate = new DateTime(2023, 8, 30),
                 EndDate = new DateTime(2023, 9, 13),
+                Status = EventStatus.Declined,
                 EmployeeId = 3
             },
             new Event
@@ -42,6 +46,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 8, 21),
                 EndDate = new DateTime(2023, 8, 25),
+                Status = EventStatus.Deleted,
                 EmployeeId = 1
             },
             new Event
@@ -51,6 +56,7 @@ public static class EventData
                 EventTypeId = 5,
                 StartDate = new DateTime(2023, 9, 10),
                 EndDate = new DateTime(2023, 9, 18),
+                Status = EventStatus.Approved,
                 EmployeeId = 5
             },
             new Event
@@ -60,6 +66,7 @@ public static class EventData
                 EventTypeId = 2,
                 StartDate = new DateTime(2023, 9, 5),
                 EndDate = new DateTime(2023, 9, 8),
+                Status = EventStatus.Approved,
                 EmployeeId = 6
             },
             new Event
@@ -69,6 +76,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 8, 28),
                 EndDate = new DateTime(2023, 8, 28),
+                Status = EventStatus.Approved,
                 EmployeeId = 7
             },
             new Event
@@ -78,6 +86,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 9, 16),
                 EndDate = new DateTime(2023, 9, 18),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -87,6 +96,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 10, 2),
                 EndDate = new DateTime(2023, 10, 4),
+                Status = EventStatus.Approved,
                 EmployeeId = 9
             },
             new Event
@@ -96,6 +106,7 @@ public static class EventData
                 EventTypeId = 1,
                 StartDate = new DateTime(2023, 9, 23),
                 EndDate = new DateTime(2023, 9, 24),
+                Status = EventStatus.Approved,
                 EmployeeId = 10
             },
             new Event
@@ -105,6 +116,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 9, 15),
                 EndDate = new DateTime(2023, 9, 15),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -114,6 +126,7 @@ public static class EventData
                 EventTypeId = 5,
                 StartDate = new DateTime(2023, 10, 12),
                 EndDate = new DateTime(2023, 10, 13),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             },
             new Event
@@ -123,6 +136,7 @@ public static class EventData
                 EventTypeId = 2,
                 StartDate = new DateTime(2023, 12, 22),
                 EndDate = new DateTime(2023, 12, 22),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -132,6 +146,7 @@ public static class EventData
                 EventTypeId = 1,
                 StartDate = new DateTime(2023, 8, 17),
                 EndDate = new DateTime(2023, 8, 17),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -141,6 +156,7 @@ public static class EventData
                 EventTypeId = 5,
                 StartDate = new DateTime(2023, 9, 9),
                 EndDate = new DateTime(2023, 9, 9),
+                Status = EventStatus.Approved,
                 EmployeeId = 5
             },
             new Event
@@ -150,6 +166,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 10, 9),
                 EndDate = new DateTime(2023, 10, 13),
+                Status = EventStatus.Approved,
                 EmployeeId = 6
             },
             new Event
@@ -159,6 +176,7 @@ public static class EventData
                 EventTypeId = 1,
                 StartDate = new DateTime(2023, 11, 5),
                 EndDate = new DateTime(2023, 11, 5),
+                Status = EventStatus.Approved,
                 EmployeeId = 7
             },
             new Event
@@ -168,6 +186,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 9, 29),
                 EndDate = new DateTime(2023, 10, 1),
+                Status = EventStatus.Approved,
                 EmployeeId = 1
             },
             new Event
@@ -177,6 +196,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 10, 20),
                 EndDate = new DateTime(2023, 10, 21),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             },
             new Event
@@ -186,6 +206,7 @@ public static class EventData
                 EventTypeId = 1,
                 StartDate = new DateTime(2023, 11, 10),
                 EndDate = new DateTime(2023, 11, 10),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             },
             new Event
@@ -195,6 +216,7 @@ public static class EventData
                 EventTypeId = 4,
                 StartDate = new DateTime(2023, 10, 5),
                 EndDate = new DateTime(2023, 10, 6),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             },
             new Event
@@ -204,6 +226,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 11, 18),
                 EndDate = new DateTime(2023, 11, 18),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             },
             new Event
@@ -213,6 +236,7 @@ public static class EventData
                 EventTypeId = 3,
                 StartDate = new DateTime(2023, 12, 7),
                 EndDate = new DateTime(2023, 12, 7),
+                Status = EventStatus.Approved,
                 EmployeeId = 2
             }
         );

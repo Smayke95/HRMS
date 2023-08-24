@@ -9,6 +9,5 @@ public class EventTypeInsertUpdate
 
     public bool IsApprovalRequired { get; set; } = true;
 
-    [Required]
-    public string Color { get; set; } = string.Empty;
+    public string? Color { get; set; } = string.Empty;
 }

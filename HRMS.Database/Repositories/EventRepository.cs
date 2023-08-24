@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRMS.Core.Interfaces.Repositories;
+using HRMS.Core.Models.Enums;
 using HRMS.Core.Models.Searches;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,9 @@ public class EventRepository : BaseRepository<Models.Event, Core.Models.Event, E
 
         if (search.EmployeeId > 0)
             query = query.Where(x => x.Employee!.Id == search.EmployeeId);
+
+        if (!search.IncludeDeleted)
+            query = query.Where(x => x.Status != EventStatus.Deleted);
 
         if (search.IncludeEventType)
             query = query.Include(x => x.EventType);

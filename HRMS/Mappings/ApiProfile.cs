@@ -36,7 +36,8 @@ public class ApiProfile : Profile
             .ForMember(x => x.EventType, opt => opt.MapFrom(y => y.EventTypeId == null ? null : new EventType { Id = y.EventTypeId ?? 0 }))
             .ForMember(x => x.Description, opt => opt.MapFrom(y => y.Description ?? ""));
 
-        CreateMap<EventTypeInsertUpdate, EventType>();
+        CreateMap<EventTypeInsertUpdate, EventType>()
+            .ForMember(x => x.Color, opt => opt.MapFrom(y => y.Color ?? "#ffffff"));
 
         CreateMap<MessageInsert, Message>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId }));

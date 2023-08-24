@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HRMS.Core.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HRMS.Database.Models;
@@ -20,6 +21,8 @@ public class Event
     public DateTime EndDate { get; set; }
 
     public string Description { get; set; } = string.Empty;
+
+    public EventStatus Status { get; set; }
 
     [ForeignKey("Employee")]
     public int EmployeeId { get; set; }

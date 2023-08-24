@@ -6,6 +6,8 @@ public class EventSearch : BaseSearch
 
     public int? EmployeeId { get; set; }
 
+    public bool IncludeDeleted { get; set; }
+
     public bool IncludeEventType { get; set; }
 
     public bool IncludeEmployee { get; set; }
