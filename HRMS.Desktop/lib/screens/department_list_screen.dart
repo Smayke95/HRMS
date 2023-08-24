@@ -136,6 +136,7 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
                       validator: FormBuilderValidators.required(
                           errorText: "Bazni odjel je obavezan."),
                       items: _departments.result
+                          .where((x) => x.id != (id ?? 0))
                           .map((department) => DropdownMenuItem(
                                 value: department.id,
                                 child: Text(department.name),
@@ -180,9 +181,40 @@ class _DepartmentListScreenState extends State<DepartmentListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _departmentProvider.delete(id);
-              departmentDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              try {
+                await _departmentProvider.delete(id);
+                departmentDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ovaj odjel sadrži pozicije ili pododjele te zbog toga ne može biti obrisan. Molimo prvo obrišite stavke koji referenciraju ovaj odjel.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),

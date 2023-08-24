@@ -7,11 +7,13 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/position_data_table_source.dart';
 import '../models/department.dart';
 import '../models/education.dart';
+import '../models/employee_position.dart';
 import '../models/paged_result.dart';
 import '../models/pay_grade.dart';
 import '../models/requests/position_insert_update.dart';
 import '../providers/department_provider.dart';
 import '../providers/education_provider.dart';
+import '../providers/employee_position_provider.dart';
 import '../providers/pay_grade_provider.dart';
 import '../providers/position_provider.dart';
 import '../widgets/responsive.dart';
@@ -29,6 +31,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
   late DepartmentProvider _departmentProvider;
   late PayGradeProvider _payGradeProvider;
   late EducationProvider _educationProvider;
+  late EmployeePositionProvider _employeePositionProvider;
 
   late PositionDataTableSource positionDataTableSource;
 
@@ -36,6 +39,8 @@ class _PositionListScreenState extends State<PositionListScreen> {
   var _departments = PagedResult<Department>();
   var _payGrades = PagedResult<PayGrade>();
   var _educations = PagedResult<Education>();
+  var _employeePositions = PagedResult<EmployeePosition>();
+  var canDelete = true;
 
   @override
   void initState() {
@@ -45,6 +50,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
     _departmentProvider = context.read<DepartmentProvider>();
     _payGradeProvider = context.read<PayGradeProvider>();
     _educationProvider = context.read<EducationProvider>();
+    _employeePositionProvider = context.read<EmployeePositionProvider>();
 
     positionDataTableSource =
         PositionDataTableSource(_positionProvider, _openDialog);
@@ -56,6 +62,7 @@ class _PositionListScreenState extends State<PositionListScreen> {
     _departments = await _departmentProvider.getAll();
     _payGrades = await _payGradeProvider.getAll();
     _educations = await _educationProvider.getAll();
+    _employeePositions = await _employeePositionProvider.getAll();
 
     if (id != null) {
       var position = await _positionProvider.get(id);
@@ -69,6 +76,8 @@ class _PositionListScreenState extends State<PositionListScreen> {
       ).toJson();
 
       _formKey.currentState?.patchValue(positionInsertUpdate);
+
+      canDelete = !_employeePositions.result.any((x) => x.position?.id == id);
     }
   }
 
@@ -221,9 +230,40 @@ class _PositionListScreenState extends State<PositionListScreen> {
             ),
             child: const Text("OBRIŠI"),
             onPressed: () async {
-              await _positionProvider.delete(id);
-              positionDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              if (canDelete) {
+                await _positionProvider.delete(id);
+                positionDataTableSource.filterData(null);
+                if (context.mounted) Navigator.pop(context);
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: SizedBox(
+                        width: 400,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "* Ova pozicija sadrži zaposlenika, te zbog toga ne može biti obrisana.",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             },
           ),
         const SizedBox(width: 185),

@@ -8,6 +8,8 @@ import '../models/employee.dart';
 import '../models/enums/employment_status.dart';
 import '../models/paged_result.dart';
 import '../models/position.dart';
+import '../models/searches/employee_search.dart';
+import '../models/searches/position_search.dart';
 import '../providers/employee_position_provider.dart';
 import '../providers/employee_provider.dart';
 import '../providers/position_provider.dart';
@@ -51,8 +53,14 @@ class _EmployeePositionDetailsScreenState
   }
 
   Future _loadData(int? id) async {
-    _employees = await _employeeProvider.getAll();
-    _positions = await _positionProvider.getAll();
+    var employeeSearch = EmployeeSearch();
+    employeeSearch.pageSize = 50;
+
+    var positionSearch = PositionSearch();
+    positionSearch.pageSize = 50;
+
+    _employees = await _employeeProvider.getAll(search: employeeSearch);
+    _positions = await _positionProvider.getAll(search: positionSearch);
 
     if (id != null) {
       var employeePosition = await _employeePositionProvider.get(id);
@@ -70,6 +78,10 @@ class _EmployeePositionDetailsScreenState
 
       _employeePositionStatus = employeePosition.status;
       _allowedActions = await _employeePositionProvider.allowedActions(id);
+    } else {
+      _initialValue = {
+        "workingHours": "",
+      };
     }
 
     setState(() {

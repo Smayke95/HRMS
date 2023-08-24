@@ -36,7 +36,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   var _employees = PagedResult<Employee>();
   var _eventTypes = PagedResult<EventType>();
 
-  var _eventStatus = EventStatus.initial;
   List<EventStatus> _allowedActions = [];
 
   @override
@@ -66,7 +65,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
         "employeeId": event.employee?.id.toString() ?? "0",
       });
 
-      _eventStatus = event.status;
       _allowedActions = await _eventProvider.allowedActions(id);
     } else {
       _formKey.currentState?.patchValue({
