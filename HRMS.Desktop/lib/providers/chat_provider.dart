@@ -12,7 +12,7 @@ class ChatProvider extends BaseProvider<Message, MessageSearch> {
   ChatProvider() : super(altEndpoint: "chat") {
     _baseUrl = "${const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "https://localhost:44300/",
+      defaultValue: "https://localhost:50443/",
     )}chatHub";
   }
 
