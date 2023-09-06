@@ -1,7 +1,9 @@
 ﻿using HRMS.Core.Interfaces.Services;
 using HRMS.Core.Models;
+using HRMS.Core.Models.Configurations;
 using HRMS.Core.Models.Enums;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -9,10 +11,14 @@ namespace HRMS.RabbitMQ;
 
 public class NotificationService : INotificationService
 {
+    private readonly RabbitMQConfiguration RabbitMQConfiguration;
     private readonly ILogger<NotificationService> Logger;
 
-    public NotificationService(ILogger<NotificationService> logger)
+    public NotificationService(
+        IOptions<RabbitMQConfiguration> rabbitMQConfiguration,
+        ILogger<NotificationService> logger)
     {
+        RabbitMQConfiguration = rabbitMQConfiguration.Value;
         Logger = logger;
     }
 
@@ -22,7 +28,10 @@ public class NotificationService : INotificationService
         {
             var factory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = RabbitMQConfiguration.Host,
+                Port = RabbitMQConfiguration.Port,
+                UserName = RabbitMQConfiguration.User,
+                Password = RabbitMQConfiguration.Password
             };
 
             using var connection = factory.CreateConnection();

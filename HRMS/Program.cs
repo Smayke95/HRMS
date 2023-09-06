@@ -11,6 +11,7 @@ builder.Services.AddAutoMapper();
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("HRMS_Database")!);
 builder.Services.AddHangfire(builder.Configuration.GetConnectionString("HRMS_Database")!);
 builder.Services.Configure<SmtpConfiguration>(builder.Configuration.GetSection("SmtpConfiguration"));
+builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
 
 builder.UseSerilog();
 builder.Services.AddMemoryCache();

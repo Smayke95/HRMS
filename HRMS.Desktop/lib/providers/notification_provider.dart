@@ -8,7 +8,30 @@ import '../models/user.dart';
 
 class NotificationProvider with ChangeNotifier {
   Future listen(Function(hrms.Notification) add) async {
-    var client = Client();
+    var connectionSettings = ConnectionSettings(
+      host: const String.fromEnvironment(
+        "RabbitMQ:Host",
+        defaultValue: "localhost",
+      ),
+      port: int.parse(
+        const String.fromEnvironment(
+          "RabbitMQ:Port",
+          defaultValue: "5672",
+        ),
+      ),
+      authProvider: const PlainAuthenticator(
+        String.fromEnvironment(
+          "RabbitMQ:User",
+          defaultValue: "admin",
+        ),
+        String.fromEnvironment(
+          "RabbitMQ:Password",
+          defaultValue: "admin",
+        ),
+      ),
+    );
+
+    var client = Client(settings: connectionSettings);
 
     var channel = await client.channel();
     var queue = await channel.queue(User.name ?? "");

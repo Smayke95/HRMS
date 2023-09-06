@@ -59,7 +59,8 @@ flutter pub run build_runner build --delete-conflicting-outputs
 [IdentityServer4](https://identityserver4.readthedocs.io/en/latest) is used for user authentication.
 
 ### HRMS.RabbitMQ - Infrastructure
-Integration with [RabbitMQ](https://www.rabbitmq.com/) which is used for notification system.
+Integration with [RabbitMQ](https://www.rabbitmq.com/) which is used for notification system. </br>
+Use credentials ```admin``` / ```admin``` to access administration module.
 
 </br>
 
