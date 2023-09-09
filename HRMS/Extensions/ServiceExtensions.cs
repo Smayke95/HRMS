@@ -2,7 +2,6 @@
 using HRMS.Mappings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Serilog;
 using System.Text;
 
 namespace HRMS.Extensions;
@@ -32,15 +31,5 @@ public static class ServiceExtensions
     {
         serviceCollection.AddAutoMapper(typeof(ApiProfile));
         serviceCollection.AddAutoMapper(typeof(RepositoryProfile));
-    }
-
-    public static void UseSerilog(this WebApplicationBuilder builder)
-    {
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom
-            .Configuration(builder.Configuration)
-            .CreateLogger();
-
-        builder.Host.UseSerilog();
     }
 }

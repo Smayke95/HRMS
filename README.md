@@ -62,6 +62,10 @@ flutter pub run build_runner build --delete-conflicting-outputs
 Integration with [RabbitMQ](https://www.rabbitmq.com/) which is used for notification system. </br>
 Use credentials ```admin``` / ```admin``` to access administration module.
 
+### HRMS.SMTP - Web
+Integration with [MailSlurp](https://www.mailslurp.com/) which is used for sending emails. </br>
+This web application connects to RabbitMQ and listens for any requests for sending emails.
+
 </br>
 
 ## Development
@@ -104,9 +108,13 @@ Use credentials ```admin``` / ```admin``` to access administration module.
 [Hangfire HTTP](http://localhost:40300/hangfire) &emsp; &emsp; [Hangfire HTTPS](https://localhost:44300/hangfire) </br>
 [Identity HTTP](http://localhost:40301/) &emsp; &emsp; &nbsp; [Identity HTTPS](https://localhost:44301/) </br>
 [RabitMQ HTTP](http://localhost:15672/)&emsp; &emsp; &nbsp;[RabitMQ HTTPS](https://localhost:15672/) </br>
+[SMTP HTTP](http://localhost:40302/)&emsp; &emsp; &nbsp; &nbsp; &nbsp; [SMTP HTTPS](https://localhost:44302/) </br>
 
 To test HRMS.IdentityServer use: </br>
 [https://localhost:44301/login?email=anes@hrms.com&password=admin](https://localhost:44301/login?email=anes@hrms.com&password=admin)
+
+To test HRMS.SMTP use: </br>
+[https://localhost:44302/test?message=This%20is%20test%20message](https://localhost:44302/test?message=This%20is%20test%20message)
 
 To test mobile application on real device use Dev Tunnels.
 
@@ -116,9 +124,13 @@ To test mobile application on real device use Dev Tunnels.
 [Hangfire HTTP](http://localhost:50080/hangfire) &emsp; &emsp; [Hangfire HTTPS](https://localhost:50443/hangfire) </br>
 [Identity HTTP](http://localhost:51080/) &emsp; &emsp; &nbsp; [Identity HTTPS](https://localhost:51443/) </br>
 [RabitMQ HTTP](http://localhost:15672/)&emsp; &emsp; &nbsp;[RabitMQ HTTPS](https://localhost:15672/) </br>
+[SMTP HTTP](http://localhost:52080/)&emsp; &emsp; &nbsp; &nbsp; &nbsp; [SMTP HTTPS](https://localhost:52443/) </br>
 
 To test HRMS.IdentityServer use: </br>
 [https://localhost:51443/login?email=anes@hrms.com&password=admin](https://localhost:51443/login?email=anes@hrms.com&password=admin)
+
+To test HRMS.SMTP use: </br>
+[https://localhost:52443/test?message=This%20is%20test%20message](https://localhost:52443/test?message=This%20is%20test%20message)
 
 </br>
 

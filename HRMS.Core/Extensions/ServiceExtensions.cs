@@ -12,8 +12,6 @@ public static class ServiceExtensions
 {
     public static void AddScopedServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddTransient<IEmailService, EmailService>();
-
         var services = Assembly
             .GetExecutingAssembly()
             .GetTypes()

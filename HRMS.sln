@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Database", "HRMS.Datab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.IdentityServer", "HRMS.IdentityServer\HRMS.IdentityServer.csproj", "{4A97076D-389F-4B1F-A167-A678CAD090D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.RabbitMQ", "HRMS.RabbitMQ\HRMS.RabbitMQ.csproj", "{97936AC0-FCAA-4D75-86C2-00DC9723A50B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.RabbitMQ", "HRMS.RabbitMQ\HRMS.RabbitMQ.csproj", "{97936AC0-FCAA-4D75-86C2-00DC9723A50B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.SMTP", "HRMS.SMTP\HRMS.SMTP.csproj", "{931BACB1-9E06-45DF-8AA0-7D7B17C7ED57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{97936AC0-FCAA-4D75-86C2-00DC9723A50B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97936AC0-FCAA-4D75-86C2-00DC9723A50B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97936AC0-FCAA-4D75-86C2-00DC9723A50B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{931BACB1-9E06-45DF-8AA0-7D7B17C7ED57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931BACB1-9E06-45DF-8AA0-7D7B17C7ED57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931BACB1-9E06-45DF-8AA0-7D7B17C7ED57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931BACB1-9E06-45DF-8AA0-7D7B17C7ED57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
