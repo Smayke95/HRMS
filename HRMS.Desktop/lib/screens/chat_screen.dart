@@ -54,6 +54,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Future _loadData() async {
+    final BuildContext currentContext = context;
+
     var employeeSearch = EmployeeSearch();
     _employees = await _employeeProvider.getAll(search: employeeSearch);
     _employees.result.removeWhere((x) => x.id == User.id);
@@ -78,8 +80,8 @@ class _ChatScreenState extends State<ChatScreen> {
             Text("Failed to connect to SignalR. Chat will not work properly."),
       );
 
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      if (currentContext.mounted) {
+        ScaffoldMessenger.of(currentContext).showSnackBar(snackBar);
       }
     }
 

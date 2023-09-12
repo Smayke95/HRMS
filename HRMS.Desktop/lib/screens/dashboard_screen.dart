@@ -135,8 +135,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       barChartData
           .add(ChartData("${employee.firstName} ${employee.lastName}", count));
     }
-
-    setState(() {});
+    
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

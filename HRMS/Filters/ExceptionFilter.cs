@@ -1,9 +1,10 @@
 ﻿using Hangfire;
 using HRMS.Core.Interfaces.Services;
+using HRMS.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Serilog;
 using System.Net;
-using HRMS.Extensions;
 
 namespace HRMS.Filters;
 
@@ -36,6 +37,8 @@ public class ExceptionFilter : ExceptionFilterAttribute
         var status = context.HttpContext.Response.StatusCode;
 
         context.Result = new JsonResult(new { status, errors = list });
+
+        Log.Logger.Error(context.Exception, "Server side error");
 
         BackgroundJob.Enqueue<IEmailService>(x => x.SendErrorMailAsync(context.Exception.ToEmailString(context.HttpContext.Request)));
     }

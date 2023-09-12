@@ -34,6 +34,8 @@ class _HeaderState extends State<Header> {
   }
 
   Future _loadData() async {
+    final BuildContext currentContext = context;
+
     try {
       await _notificationProvider.listen(_addNotification);
     } on Exception catch (e) {
@@ -44,8 +46,8 @@ class _HeaderState extends State<Header> {
             "Failed to connect to RabbitMQ. Notifications will not work properly."),
       );
 
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      if (currentContext.mounted) {
+        ScaffoldMessenger.of(currentContext).showSnackBar(snackBar);
       }
     }
   }
