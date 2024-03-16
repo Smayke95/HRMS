@@ -26,6 +26,8 @@ Defines all API endpoints, also security and error handling for that endpoints. 
 
 [Swagger](https://swagger.io/) is used for documenting and testing API endpoints. To open Swagger UI go to /swagger. </br>
 
+[RateLimiter](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-8.0) is used to limit API calls to prevent abusive actions on service. </br>
+
 [Hangfire](https://www.hangfire.io/) is used as worker and handles _Recurring Jobs_ and _Fire-and-Forget Jobs_. </br>
 To open Hangfire Dashboard go to /hangfire.
 

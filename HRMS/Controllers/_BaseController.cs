@@ -5,6 +5,7 @@ using HRMS.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HRMS.Controllers;
 
@@ -12,6 +13,7 @@ namespace HRMS.Controllers;
 [ApiController]
 [ExceptionFilter]
 [Route("[controller]")]
+[EnableRateLimiting("FixedPolicy")]
 public abstract class BaseController<T, TSearch> : ControllerBase
     where T : Base
     where TSearch : BaseSearch

@@ -25,14 +25,20 @@ builder.Services.AddControllers();
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddRateLimiter();
 
 var app = builder.Build();
 
 app.Services.DatabaseMigrate();
-app.UseHangfireDashboard(builder.Configuration);
-app.UseSwaggerUI();
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+app.UseHsts();
 app.UseHttpsRedirection();
+
+app.UseSwaggerUI();
+app.UseHangfireDashboard();
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();

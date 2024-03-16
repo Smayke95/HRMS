@@ -30,13 +30,19 @@ public static class HangfireExtensions
         services.AddHangfireServer();
     }
 
-    public static void UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration)
+    public static void UseHangfireDashboard(this IApplicationBuilder app)
     {
+        var apiKey = app
+            .ApplicationServices
+            .GetRequiredService<IConfiguration>()
+            .GetSection("HangfireKey")
+            .Value!;
+
         var options = new DashboardOptions
         {
             AppPath = "/swagger",
             DashboardTitle = "HRMS Hangfire",
-            Authorization = new[] { new HangfireAuthorizationFilter { ApiKey = configuration.GetSection("HangfireKey").Value! } }
+            Authorization = new[] { new HangfireAuthorizationFilter { ApiKey = apiKey } }
         };
 
         app.UseHangfireDashboard("/hangfire", options);
