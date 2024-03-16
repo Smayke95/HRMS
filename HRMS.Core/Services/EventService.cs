@@ -6,21 +6,15 @@ using HRMS.Core.States.EventStates;
 
 namespace HRMS.Core.Services;
 
-public class EventService : IEventService
+public class EventService(
+    EventStateResolver eventStateResolver,
+    IEventRepository eventRepository,
+    INotificationService notificationService)
+    : IEventService
 {
-    private readonly EventStateResolver EventStateResolver;
-    private readonly IEventRepository EventRepository;
-    private readonly INotificationService NotificationService;
-
-    public EventService(
-        EventStateResolver eventStateResolver,
-        IEventRepository eventRepository,
-        INotificationService notificationService)
-    {
-        EventStateResolver = eventStateResolver;
-        EventRepository = eventRepository;
-        NotificationService = notificationService;
-    }
+    private readonly EventStateResolver EventStateResolver = eventStateResolver;
+    private readonly IEventRepository EventRepository = eventRepository;
+    private readonly INotificationService NotificationService = notificationService;
 
     public async Task<Event> InsertAsync(Event calendarEvent)
     {

@@ -5,10 +5,8 @@ using HRMS.Database.Models;
 
 namespace HRMS.Database.Repositories;
 
-public class CountryRepository : BaseRepository<Country, Core.Models.Country, CountrySearch>, ICountryRepository
+public class CountryRepository(Context context, IMapper mapper) : BaseRepository<Country, Core.Models.Country, CountrySearch>(context, mapper), ICountryRepository
 {
-    public CountryRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     protected override IQueryable<Country> AddInclude(IQueryable<Country> query, CountrySearch? search = null)
     {
         if (search is null)

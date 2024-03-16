@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class EmployeePositionRepository : BaseRepository<EmployeePosition, Core.Models.EmployeePosition, EmployeePositionSearch>, IEmployeePositionRepository
+public class EmployeePositionRepository(Context context, IMapper mapper) : BaseRepository<EmployeePosition, Core.Models.EmployeePosition, EmployeePositionSearch>(context, mapper), IEmployeePositionRepository
 {
-    public EmployeePositionRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.EmployeePosition> GetAsync(int id)
     {
         var isNew = id == 0;

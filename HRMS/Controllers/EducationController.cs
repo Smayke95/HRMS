@@ -4,7 +4,4 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Controllers;
 
-public class EducationController : BaseController<Education, BaseSearch>
-{
-    public EducationController(IEducationRepository educationRepository) : base(educationRepository) { }
-}
+public class EducationController(IEducationRepository educationRepository) : BaseController<Education, BaseSearch>(educationRepository) { }

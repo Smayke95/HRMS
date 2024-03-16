@@ -8,17 +8,12 @@ using Task = HRMS.Core.Models.Task;
 
 namespace HRMS.Controllers;
 
-public class TaskController : BaseCrudController<Task, TaskSearch, TaskInsertUpdate, TaskInsertUpdate>
+public class TaskController(
+    IMapper mapper,
+    ITaskRepository taskRepository)
+    : BaseCrudController<Task, TaskSearch, TaskInsertUpdate, TaskInsertUpdate>(mapper, taskRepository)
 {
-    private readonly ITaskRepository TaskRepository;
-
-    public TaskController(
-        IMapper mapper,
-        ITaskRepository taskRepository)
-        : base(mapper, taskRepository)
-    {
-        TaskRepository = taskRepository;
-    }
+    private readonly ITaskRepository TaskRepository = taskRepository;
 
     /// <remarks>Get list of objects using full text search</remarks>
     [HttpGet("search")]

@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class EventRepository : BaseRepository<Models.Event, Core.Models.Event, EventSearch>, IEventRepository
+public class EventRepository(Context context, IMapper mapper) : BaseRepository<Models.Event, Core.Models.Event, EventSearch>(context, mapper), IEventRepository
 {
-    public EventRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.Event> GetAsync(int id)
     {
         var isNew = id == 0;

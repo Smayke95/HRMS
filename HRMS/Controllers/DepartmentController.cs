@@ -6,7 +6,4 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class DepartmentController : BaseCrudController<Department, DepartmentSearch, DepartmentInsertUpdate, DepartmentInsertUpdate>
-{
-    public DepartmentController(IMapper mapper, IDepartmentRepository departmentRepository) : base(mapper, departmentRepository) { }
-}
+public class DepartmentController(IMapper mapper, IDepartmentRepository departmentRepository) : BaseCrudController<Department, DepartmentSearch, DepartmentInsertUpdate, DepartmentInsertUpdate>(mapper, departmentRepository) { }

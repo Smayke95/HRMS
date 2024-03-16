@@ -6,7 +6,4 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class ProjectController : BaseCrudController<Project, ProjectSearch, ProjectInsertUpdate, ProjectInsertUpdate>
-{
-    public ProjectController(IMapper mapper, IProjectRepository projectRepository) : base(mapper, projectRepository) { }
-}
+public class ProjectController(IMapper mapper, IProjectRepository projectRepository) : BaseCrudController<Project, ProjectSearch, ProjectInsertUpdate, ProjectInsertUpdate>(mapper, projectRepository) { }

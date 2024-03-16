@@ -6,14 +6,9 @@ namespace HRMS.Core.States.EmployeePositionStates;
 
 public delegate EmployeePositionBaseState? EmployeePositionStateResolver(EmploymentStatus employmentStatus);
 
-public class EmployeePositionBaseState
+public class EmployeePositionBaseState(IEmployeePositionRepository employeePositionRepository)
 {
-    protected readonly IEmployeePositionRepository EmployeePositionRepository;
-
-    public EmployeePositionBaseState(IEmployeePositionRepository employeePositionRepository)
-    {
-        EmployeePositionRepository = employeePositionRepository;
-    }
+    protected readonly IEmployeePositionRepository EmployeePositionRepository = employeePositionRepository;
 
     public virtual List<EmploymentStatus> AllowedActions { get; set; } = new();
 

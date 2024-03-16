@@ -11,13 +11,13 @@ public class Department
 
     public string Name { get; set; } = string.Empty;
 
-    [ForeignKey("ParentDepartment")]
+    [ForeignKey(nameof(ParentDepartment))]
     public int? ParentDepartmentId { get; set; }
     public virtual Department? ParentDepartment { get; set; }
 
     public int Level { get; set; }
 
-    [ForeignKey("Supervisor")]
+    [ForeignKey(nameof(Supervisor))]
     public int? SupervisorId { get; set; }
     public virtual Employee? Supervisor { get; set; }
 

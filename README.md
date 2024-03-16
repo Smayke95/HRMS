@@ -18,7 +18,7 @@ Clean Architecture approach is used. </br>
 Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.com/watch?v=lkmvnjypENw)
 
 ### HRMS - Web
-Defines all API endpoints, also security and error handling for that endpoints. It uses .NET 7.</br>
+Defines all API endpoints, also security and error handling for that endpoints. It uses .NET 8.</br>
 
 [Serilog](https://serilog.net) is used for logging. Logs are saved in folder Logs separated for each day. </br>
 

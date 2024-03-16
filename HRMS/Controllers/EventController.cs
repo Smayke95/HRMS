@@ -9,18 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class EventController : BaseCrudController<Event, EventSearch, EventInsertUpdate, EventInsertUpdate>
+public class EventController(
+    IMapper mapper,
+    IEventRepository eventRepository,
+    IEventService eventService)
+    : BaseCrudController<Event, EventSearch, EventInsertUpdate, EventInsertUpdate>(mapper, eventRepository)
 {
-    private readonly IEventService EventService;
-
-    public EventController(
-        IMapper mapper,
-        IEventRepository eventRepository,
-        IEventService eventService)
-        : base(mapper, eventRepository)
-    {
-        EventService = eventService;
-    }
+    private readonly IEventService EventService = eventService;
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]

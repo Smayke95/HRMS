@@ -13,19 +13,19 @@ public class Task
 
     public string Description { get; set; } = string.Empty;
 
-    [ForeignKey("Project")]
+    [ForeignKey(nameof(Project))]
     public int? ProjectId { get; set; }
     public virtual Project? Project { get; set; }
 
-    [ForeignKey("TaskStatus")]
+    [ForeignKey(nameof(Status))]
     public int? TaskStatusId { get; set; }
     public virtual TaskStatus? Status { get; set; }
 
-    [ForeignKey("TaskType")]
+    [ForeignKey(nameof(Type))]
     public int? TaskTypeId { get; set; }
     public virtual TaskType? Type { get; set; }
 
-    [ForeignKey("Employee")]
+    [ForeignKey(nameof(Employee))]
     public int? EmployeeId { get; set; }
     public virtual Employee? Employee { get; set; }
 

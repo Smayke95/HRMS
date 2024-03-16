@@ -11,15 +11,15 @@ public class Position
 
     public string Name { get; set; } = string.Empty;
 
-    [ForeignKey("Department")]
+    [ForeignKey(nameof(Department))]
     public int DepartmentId { get; set; }
     public virtual Department? Department { get; set; }
 
-    [ForeignKey("PayGrade")]
+    [ForeignKey(nameof(PayGrade))]
     public int PayGradeId { get; set; }
     public virtual PayGrade? PayGrade { get; set; }
 
-    [ForeignKey("RequiredEducation")]
+    [ForeignKey(nameof(RequiredEducation))]
     public int RequiredEducationId { get; set; }
     public virtual Education? RequiredEducation { get; set; }
 

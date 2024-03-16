@@ -7,17 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class PositionController : BaseCrudController<Position, PositionSearch, PositionInsertUpdate, PositionInsertUpdate>
+public class PositionController(
+    IMapper mapper,
+    IPositionRepository positionRepository)
+    : BaseCrudController<Position, PositionSearch, PositionInsertUpdate, PositionInsertUpdate>(mapper, positionRepository)
 {
-    private readonly IPositionRepository PositionRepository;
-
-    public PositionController(
-        IMapper mapper,
-        IPositionRepository positionRepository)
-        : base(mapper, positionRepository)
-    {
-        PositionRepository = positionRepository;
-    }
+    private readonly IPositionRepository PositionRepository = positionRepository;
 
     /// <remarks>Get list of objects using full text search</remarks>
     [HttpGet("search")]

@@ -5,18 +5,13 @@ using HRMS.Core.Models.Enums;
 
 namespace HRMS.Core.Services;
 
-public class EmployeeService : IEmployeeService
+public class EmployeeService(
+    IEmployeeRepository employeeRepository,
+    INotificationService notificationService)
+    : IEmployeeService
 {
-    private readonly IEmployeeRepository EmployeeRepository;
-    private readonly INotificationService NotificationService;
-
-    public EmployeeService(
-        IEmployeeRepository employeeRepository,
-        INotificationService notificationService)
-    {
-        EmployeeRepository = employeeRepository;
-        NotificationService = notificationService;
-    }
+    private readonly IEmployeeRepository EmployeeRepository = employeeRepository;
+    private readonly INotificationService NotificationService = notificationService;
 
     public async Task<Employee> InsertAsync(Employee employee)
     {

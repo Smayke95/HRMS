@@ -9,18 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class EmployeePositionController : BaseCrudController<EmployeePosition, EmployeePositionSearch, EmployeePositionInsertUpdate, EmployeePositionInsertUpdate>
+public class EmployeePositionController(
+    IMapper mapper,
+    IEmployeePositionRepository employeePositionRepository,
+    IEmployeePositionService employeePositionService)
+    : BaseCrudController<EmployeePosition, EmployeePositionSearch, EmployeePositionInsertUpdate, EmployeePositionInsertUpdate>(mapper, employeePositionRepository)
 {
-    private readonly IEmployeePositionService EmployeePositionService;
-
-    public EmployeePositionController(
-        IMapper mapper,
-        IEmployeePositionRepository employeePositionRepository,
-        IEmployeePositionService employeePositionService)
-        : base(mapper, employeePositionRepository)
-    {
-        EmployeePositionService = employeePositionService;
-    }
+    private readonly IEmployeePositionService EmployeePositionService = employeePositionService;
 
     /// <remarks>Get allowed actions by Id</remarks>
     [HttpGet("{id}/AllowedActions")]

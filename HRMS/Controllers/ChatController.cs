@@ -4,7 +4,4 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Controllers;
 
-public class ChatController : BaseController<Message, MessageSearch>
-{
-    public ChatController(IMessageRepository messageRepository) : base(messageRepository) { }
-}
+public class ChatController(IMessageRepository messageRepository) : BaseController<Message, MessageSearch>(messageRepository) { }

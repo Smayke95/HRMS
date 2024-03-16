@@ -10,11 +10,11 @@ public class EmployeePosition
     [Key]
     public int Id { get; set; }
 
-    [ForeignKey("Employee")]
+    [ForeignKey(nameof(Employee))]
     public int EmployeeId { get; set; }
     public virtual Employee? Employee { get; set; }
 
-    [ForeignKey("Position")]
+    [ForeignKey(nameof(Position))]
     public int PositionId { get; set; }
     public virtual Position? Position { get; set; }
 

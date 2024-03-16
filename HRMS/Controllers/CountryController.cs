@@ -6,7 +6,4 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class CountryController : BaseCrudController<Country, CountrySearch, CountryInsertUpdate, CountryInsertUpdate>
-{
-    public CountryController(IMapper mapper, ICountryRepository countryRepository) : base(mapper, countryRepository) { }
-}
+public class CountryController(IMapper mapper, ICountryRepository countryRepository) : BaseCrudController<Country, CountrySearch, CountryInsertUpdate, CountryInsertUpdate>(mapper, countryRepository) { }

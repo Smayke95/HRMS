@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class CityRepository : BaseRepository<Models.City, Core.Models.City, CitySearch>, ICityRepository
+public class CityRepository(Context context, IMapper mapper) : BaseRepository<Models.City, Core.Models.City, CitySearch>(context, mapper), ICityRepository
 {
-    public CityRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.City> GetAsync(int id)
     {
         var isNew = id == 0;

@@ -10,18 +10,13 @@ namespace HRMS.IdentityServer.Controllers;
 
 [ApiController]
 [Route("[action]")]
-public class AuthController : ControllerBase
+public class AuthController(
+    IConfiguration configuration,
+    IEmployeeRepository employeeRepository)
+    : ControllerBase
 {
-    private readonly IConfiguration Configuration;
-    private readonly IEmployeeRepository EmployeeRepository;
-
-    public AuthController(
-        IConfiguration configuration,
-        IEmployeeRepository employeeRepository)
-    {
-        Configuration = configuration;
-        EmployeeRepository = employeeRepository;
-    }
+    private readonly IConfiguration Configuration = configuration;
+    private readonly IEmployeeRepository EmployeeRepository = employeeRepository;
 
     [HttpGet]
     public async Task<string> Login(string email, string password)

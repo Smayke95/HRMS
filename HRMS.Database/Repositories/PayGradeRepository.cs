@@ -5,7 +5,4 @@ using HRMS.Database.Models;
 
 namespace HRMS.Database.Repositories;
 
-public class PayGradeRepository : BaseRepository<PayGrade, Core.Models.PayGrade, BaseSearch>, IPayGradeRepository
-{
-    public PayGradeRepository(Context context, IMapper mapper) : base(context, mapper) { }
-}
+public class PayGradeRepository(Context context, IMapper mapper) : BaseRepository<PayGrade, Core.Models.PayGrade, BaseSearch>(context, mapper), IPayGradeRepository { }

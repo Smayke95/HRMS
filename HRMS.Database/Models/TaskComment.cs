@@ -13,11 +13,11 @@ public class TaskComment
 
     public string Content { get; set; } = string.Empty;
 
-    [ForeignKey("Task")]
+    [ForeignKey(nameof(Task))]
     public int TaskId { get; set; }
     public virtual Task? Task { get; set; }
 
-    [ForeignKey("Employee")]
+    [ForeignKey(nameof(Employee))]
     public int EmployeeId { get; set; }
     public virtual Employee? Employee { get; set; }
 }

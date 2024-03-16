@@ -8,18 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controllers;
 
-public class EmployeeController : BaseCrudController<Employee, EmployeeSearch, EmployeeInsertUpdate, EmployeeInsertUpdate>
+public class EmployeeController(
+    IMapper mapper,
+    IEmployeeRepository employeeRepository,
+    IEmployeeService employeeService)
+    : BaseCrudController<Employee, EmployeeSearch, EmployeeInsertUpdate, EmployeeInsertUpdate>(mapper, employeeRepository)
 {
-    private readonly IEmployeeService EmployeeService;
-
-    public EmployeeController(
-        IMapper mapper,
-        IEmployeeRepository employeeRepository,
-        IEmployeeService employeeService)
-        : base(mapper, employeeRepository)
-    {
-        EmployeeService = employeeService;
-    }
+    private readonly IEmployeeService EmployeeService = employeeService;
 
     /// <remarks>Insert new object</remarks>
     [HttpPost]

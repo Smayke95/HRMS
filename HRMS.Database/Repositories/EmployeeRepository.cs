@@ -7,10 +7,8 @@ using Employee = HRMS.Database.Models.Employee;
 
 namespace HRMS.Database.Repositories;
 
-public class EmployeeRepository : BaseRepository<Employee, Core.Models.Employee, EmployeeSearch>, IEmployeeRepository
+public class EmployeeRepository(Context context, IMapper mapper) : BaseRepository<Employee, Core.Models.Employee, EmployeeSearch>(context, mapper), IEmployeeRepository
 {
-    public EmployeeRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.Employee> GetAsync(int id)
     {
         var isNew = id == 0;

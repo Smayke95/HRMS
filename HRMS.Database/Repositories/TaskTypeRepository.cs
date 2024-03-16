@@ -5,10 +5,8 @@ using HRMS.Database.Models;
 
 namespace HRMS.Database.Repositories;
 
-public class TaskTypeRepository : BaseRepository<TaskType, Core.Models.TaskType, TaskTypeSearch>, ITaskTypeRepository
+public class TaskTypeRepository(Context context, IMapper mapper) : BaseRepository<TaskType, Core.Models.TaskType, TaskTypeSearch>(context, mapper), ITaskTypeRepository
 {
-    public TaskTypeRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     protected override IQueryable<TaskType> AddInclude(IQueryable<TaskType> query, TaskTypeSearch? search = null)
     {
         if (search is null)

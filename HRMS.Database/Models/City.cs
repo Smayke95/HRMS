@@ -13,7 +13,7 @@ public class City
 
     public string ZipCode { get; set; } = string.Empty;
 
-    [ForeignKey("Country")]
+    [ForeignKey(nameof(Country))]
     public int CountryId { get; set; }
     public virtual Country? Country { get; set; }
 }

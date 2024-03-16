@@ -4,14 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace HRMS.SMTP.Controllers;
 
 [ApiController]
-public class EmailController : ControllerBase
+public class EmailController(IEmailService emailService) : ControllerBase
 {
-    private readonly IEmailService EmailService;
-
-    public EmailController(IEmailService emailService)
-    {
-        EmailService = emailService;
-    }
+    private readonly IEmailService EmailService = emailService;
 
     [HttpGet("Test")]
     public async Task Test(string message)

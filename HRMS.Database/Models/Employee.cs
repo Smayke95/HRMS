@@ -28,17 +28,17 @@ public class Employee
 
     public DateTime BirthDate { get; set; }
 
-    [ForeignKey("BirthPlace")]
+    [ForeignKey(nameof(BirthPlace))]
     public int? BirthPlaceId { get; set; }
     public virtual City? BirthPlace { get; set; }
 
     public string Address { get; set; } = string.Empty;
 
-    [ForeignKey("City")]
+    [ForeignKey(nameof(City))]
     public int? CityId { get; set; }
     public virtual City? City { get; set; }
 
-    [ForeignKey("Citizenship")]
+    [ForeignKey(nameof(Citizenship))]
     public int? CitizenshipId { get; set; }
     public virtual Country? Citizenship { get; set; }
 
@@ -56,7 +56,7 @@ public class Employee
 
     public string Profession { get; set; } = string.Empty;
 
-    [ForeignKey("Education")]
+    [ForeignKey(nameof(Education))]
     public int? EducationId { get; set; }
     public virtual Education? Education { get; set; }
 

@@ -6,7 +6,4 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class TaskCommentController : BaseCrudController<TaskComment, TaskCommentSearch, TaskCommentInsertUpdate, TaskCommentInsertUpdate>
-{
-    public TaskCommentController(IMapper mapper, ITaskCommentRepository taskCommentRepository) : base(mapper, taskCommentRepository) { }
-}
+public class TaskCommentController(IMapper mapper, ITaskCommentRepository taskCommentRepository) : BaseCrudController<TaskComment, TaskCommentSearch, TaskCommentInsertUpdate, TaskCommentInsertUpdate>(mapper, taskCommentRepository) { }

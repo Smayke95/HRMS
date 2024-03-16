@@ -4,10 +4,8 @@ using HRMS.Core.Models.Enums;
 
 namespace HRMS.Core.States.EmployeePositionStates;
 
-public class EmployeePositionInitialState : EmployeePositionBaseState
+public class EmployeePositionInitialState(IEmployeePositionRepository employeePositionRepository) : EmployeePositionBaseState(employeePositionRepository)
 {
-    public EmployeePositionInitialState(IEmployeePositionRepository employeePositionRepository) : base(employeePositionRepository) { }
-
     public override List<EmploymentStatus> AllowedActions { get; set; } = new List<EmploymentStatus>() { EmploymentStatus.Inactive };
 
     public override async Task<EmployeePosition> InsertAsync(EmployeePosition employeePosition)

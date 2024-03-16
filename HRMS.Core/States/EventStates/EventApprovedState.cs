@@ -4,10 +4,8 @@ using HRMS.Core.Models.Enums;
 
 namespace HRMS.Core.States.EventStates;
 
-public class EventApprovedState : EventBaseState
+public class EventApprovedState(IEventRepository eventRepository) : EventBaseState(eventRepository)
 {
-    public EventApprovedState(IEventRepository eventRepository) : base(eventRepository) { }
-
     public override List<EventStatus> AllowedActions { get; set; } = new() { EventStatus.Declined, EventStatus.Deleted };
 
     public override async Task<Event> UpdateAsync(Event calendarEvent)

@@ -9,18 +9,13 @@ using System.Text;
 
 namespace HRMS.RabbitMQ;
 
-public class NotificationService : INotificationService
+public class NotificationService(
+    IOptions<RabbitMQConfiguration> rabbitMQConfiguration,
+    ILogger<NotificationService> logger)
+    : INotificationService
 {
-    private readonly RabbitMQConfiguration RabbitMQConfiguration;
-    private readonly ILogger<NotificationService> Logger;
-
-    public NotificationService(
-        IOptions<RabbitMQConfiguration> rabbitMQConfiguration,
-        ILogger<NotificationService> logger)
-    {
-        RabbitMQConfiguration = rabbitMQConfiguration.Value;
-        Logger = logger;
-    }
+    private readonly RabbitMQConfiguration RabbitMQConfiguration = rabbitMQConfiguration.Value;
+    private readonly ILogger<NotificationService> Logger = logger;
 
     public void SendNotification(Notification notification)
     {

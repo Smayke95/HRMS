@@ -8,18 +8,13 @@ using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.RabbitMQ;
 
-public class EmailService : IEmailService
+public class EmailService(
+    IOptions<RabbitMQConfiguration> rabbitMQConfiguration,
+    ILogger<EmailService> logger)
+    : IEmailService
 {
-    private readonly RabbitMQConfiguration RabbitMQConfiguration;
-    private readonly ILogger<EmailService> Logger;
-
-    public EmailService(
-        IOptions<RabbitMQConfiguration> rabbitMQConfiguration,
-        ILogger<EmailService> logger)
-    {
-        RabbitMQConfiguration = rabbitMQConfiguration.Value;
-        Logger = logger;
-    }
+    private readonly RabbitMQConfiguration RabbitMQConfiguration = rabbitMQConfiguration.Value;
+    private readonly ILogger<EmailService> Logger = logger;
 
     public Task SendErrorMailAsync(string message)
     {

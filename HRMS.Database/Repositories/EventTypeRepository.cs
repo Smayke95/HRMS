@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class EventTypeRepository : BaseRepository<Models.EventType, Core.Models.EventType, EventTypeSearch>, IEventTypeRepository
+public class EventTypeRepository(Context context, IMapper mapper) : BaseRepository<Models.EventType, Core.Models.EventType, EventTypeSearch>(context, mapper), IEventTypeRepository
 {
-    public EventTypeRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.EventType> GetAsync(int id)
     {
         var isNew = id == 0;
@@ -16,7 +14,7 @@ public class EventTypeRepository : BaseRepository<Models.EventType, Core.Models.
         if (!isNew)
         {
             var entity = await Context
-                .EventTypes              
+                .EventTypes
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             return Mapper.Map<Core.Models.EventType>(entity);

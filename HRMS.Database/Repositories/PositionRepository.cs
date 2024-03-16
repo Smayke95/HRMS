@@ -7,10 +7,8 @@ using Position = HRMS.Database.Models.Position;
 
 namespace HRMS.Database.Repositories;
 
-public class PositionRepository : BaseRepository<Position, Core.Models.Position, PositionSearch>, IPositionRepository
+public class PositionRepository(Context context, IMapper mapper) : BaseRepository<Position, Core.Models.Position, PositionSearch>(context, mapper), IPositionRepository
 {
-    public PositionRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.Position> GetAsync(int id)
     {
         var isNew = id == 0;

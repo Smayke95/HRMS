@@ -6,14 +6,9 @@ namespace HRMS.Core.States.EventStates;
 
 public delegate EventBaseState? EventStateResolver(EventStatus eventStatus);
 
-public class EventBaseState
+public class EventBaseState(IEventRepository eventRepository)
 {
-    protected readonly IEventRepository EventRepository;
-
-    public EventBaseState(IEventRepository eventRepository)
-    {
-        EventRepository = eventRepository;
-    }
+    protected readonly IEventRepository EventRepository = eventRepository;
 
     public virtual List<EventStatus> AllowedActions { get; set; } = new();
 

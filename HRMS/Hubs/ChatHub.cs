@@ -7,18 +7,13 @@ using Task = System.Threading.Tasks.Task;
 
 namespace HRMS.Hubs;
 
-public class ChatHub : Hub
+public class ChatHub(
+    IMapper mapper,
+    IMessageRepository messageRepository)
+    : Hub
 {
-    private readonly IMapper Mapper;
-    private readonly IMessageRepository MessageRepository;
-
-    public ChatHub(
-        IMapper mapper,
-        IMessageRepository messageRepository)
-    {
-        Mapper = mapper;
-        MessageRepository = messageRepository;
-    }
+    private readonly IMapper Mapper = mapper;
+    private readonly IMessageRepository MessageRepository = messageRepository;
 
     public async Task JoinRoom(string room)
         => await Groups.AddToGroupAsync(Context.ConnectionId, room);

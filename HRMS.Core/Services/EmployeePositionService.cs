@@ -6,18 +6,13 @@ using HRMS.Core.States.EmployeePositionStates;
 
 namespace HRMS.Core.Services;
 
-public class EmployeePositionService : IEmployeePositionService
+public class EmployeePositionService(
+    EmployeePositionStateResolver employeePositionStateResolver,
+    IEmployeePositionRepository employeePositionRepository)
+    : IEmployeePositionService
 {
-    private readonly EmployeePositionStateResolver EmployeePositionStateResolver;
-    private readonly IEmployeePositionRepository EmployeePositionRepository;
-
-    public EmployeePositionService(
-        EmployeePositionStateResolver employeePositionStateResolver,
-        IEmployeePositionRepository employeePositionRepository)
-    {
-        EmployeePositionStateResolver = employeePositionStateResolver;
-        EmployeePositionRepository = employeePositionRepository;
-    }
+    private readonly EmployeePositionStateResolver EmployeePositionStateResolver = employeePositionStateResolver;
+    private readonly IEmployeePositionRepository EmployeePositionRepository = employeePositionRepository;
 
     public async Task<IEnumerable<EmploymentStatus>> AllowedActionsAsync(int id)
     {

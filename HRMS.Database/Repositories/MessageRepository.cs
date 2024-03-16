@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class MessageRepository : BaseRepository<Message, Core.Models.Message, MessageSearch>, IMessageRepository
+public class MessageRepository(Context context, IMapper mapper) : BaseRepository<Message, Core.Models.Message, MessageSearch>(context, mapper), IMessageRepository
 {
-    public MessageRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.Message> GetAsync(int id)
     {
         var isNew = id == 0;

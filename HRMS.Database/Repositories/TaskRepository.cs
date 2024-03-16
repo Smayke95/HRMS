@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Database.Repositories;
 
-public class TaskRepository : BaseRepository<Models.Task, Core.Models.Task, TaskSearch>, ITaskRepository
+public class TaskRepository(Context context, IMapper mapper) : BaseRepository<Models.Task, Core.Models.Task, TaskSearch>(context, mapper), ITaskRepository
 {
-    public TaskRepository(Context context, IMapper mapper) : base(context, mapper) { }
-
     public override async Task<Core.Models.Task> GetAsync(int id)
     {
         var isNew = id == 0;

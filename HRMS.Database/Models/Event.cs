@@ -12,7 +12,7 @@ public class Event
 
     public string Name { get; set; } = string.Empty;
 
-    [ForeignKey("EventType")]
+    [ForeignKey(nameof(EventType))]
     public int EventTypeId { get; set; }
     public virtual EventType? EventType { get; set; }
 
@@ -24,7 +24,7 @@ public class Event
 
     public EventStatus Status { get; set; }
 
-    [ForeignKey("Employee")]
+    [ForeignKey(nameof(Employee))]
     public int EmployeeId { get; set; }
     public virtual Employee? Employee { get; set; }
 }

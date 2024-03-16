@@ -6,7 +6,4 @@ using HRMS.Models;
 
 namespace HRMS.Controllers;
 
-public class CityController : BaseCrudController<City, CitySearch, CityInsertUpdate, CityInsertUpdate>
-{
-    public CityController(IMapper mapper, ICityRepository cityRepository) : base(mapper, cityRepository) { }
-}
+public class CityController(IMapper mapper, ICityRepository cityRepository) : BaseCrudController<City, CitySearch, CityInsertUpdate, CityInsertUpdate>(mapper, cityRepository) { }

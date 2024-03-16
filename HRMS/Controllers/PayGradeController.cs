@@ -4,7 +4,4 @@ using HRMS.Core.Models.Searches;
 
 namespace HRMS.Controllers;
 
-public class PayGradeController : BaseController<PayGrade, BaseSearch>
-{
-    public PayGradeController(IPayGradeRepository payGradeRepository) : base(payGradeRepository) { }
-}
+public class PayGradeController(IPayGradeRepository payGradeRepository) : BaseController<PayGrade, BaseSearch>(payGradeRepository) { }
