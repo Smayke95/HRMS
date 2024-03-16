@@ -20,7 +20,7 @@ public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
             return false;
         }
 
-        var authValues = AuthenticationHeaderValue.Parse(header);
+        var authValues = AuthenticationHeaderValue.Parse(header!);
 
         if (!authValues.Scheme.Equals("Basic", StringComparison.InvariantCultureIgnoreCase))
         {
