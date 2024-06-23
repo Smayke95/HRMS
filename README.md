@@ -15,7 +15,7 @@ It uses .NET Api for backend and Flutter for frontend.
 ## Architecture
 
 Clean Architecture approach is used. </br>
-Please refer to: [Clean Architecture with ASP.NET Core 6](https://www.youtube.com/watch?v=lkmvnjypENw)
+Please refer to: [Clean Architecture with ASP.NET Core 8](https://www.youtube.com/watch?v=yF9SwL0p0Y0)
 
 ### HRMS - Web
 Defines all API endpoints, also security and error handling for that endpoints. It uses .NET 8.</br>
